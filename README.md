@@ -64,5 +64,5 @@ Pri implementaciji softverskog rješenja za praćenje rada dječjeg vrtića kori
 
 Svi korišteni alati i tehnologije su javno dostupni i imaju odgovarajuće licence kako bi se osigurala legalnost i usklađenost s pravilima i propisima. Za tehnologije koje nisu standardno dostupne (npr. Entity Framework) u dokumentaciji će biti navedeni načini instalacije i korištenja.
 
-## Naglasak
+## Napomena
 Želim naglasiti da ovo nije konačna verzija rada, već samo predložak! Rad je podložan izmjenama, a način realiziranja završnog rada bit će inkrementalan!
