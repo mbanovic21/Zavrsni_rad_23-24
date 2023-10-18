@@ -1,6 +1,6 @@
 # Preschool Management Software in C#
 
-## Matej Banović
+## Osobni podaci
 
 Ime i prezime | E-mail adresa (FOI) | JMBAG | Github korisničko ime
 ------------  | ------------------- | ----- | ---------------------
