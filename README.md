@@ -1,4 +1,4 @@
-# Preschool Management Software in C#
+# Preschool Management Software
 
 ## Osobni podaci
 
@@ -8,18 +8,10 @@ Matej Banović | mbanovic21@student.foi.hr | 0016154542 | mbanovic21
 
 ## Opis domene
 Domena razvoja softvera za praćenje rada dječjeg vrtića obuhvaća sve ključne aspekte organizacije i upravljanja dječjim vrtićem. Ovaj softver ima za cilj olakšati praćenje prisutnosti djece, izradu rasporeda aktivnosti, administraciju, evidenciju zaposlenika i komunikaciju s roditeljima. Administratorski aspekt uključuje praćenje i evidentiranje podataka o djeci, upis te praćenje i evidentiranje zaposlenika. Evidencija i praćenje djece obuhvaća ocjenjivanje napretka, generiranje izvještaja o razvoju, medicinske podatke i alergije. Također, softver omogućuje dvosmjernu komunikaciju između vrtića i roditelja putem e-pošte, dijeleći informacije o djetetovom napretku, događanjima i posebnim zahtjevima. Kroz siguran pristup podacima i definiranje pristupa različitim korisničkim ulogama, osigurava se povjerljivost i integritet informacija. Integracijom s online bazom podataka putem ADO.NET-a i .NET Framework-a omogućava se pouzdana pohrana i upravljanje podacima, čime se olakšava svakodnevno upravljanje i očuvanje povijesti o dječjem vrtiću. Sve navedene komponente zajedno čine važnu domenu za razvoj softverskog rješenja koje će unaprijediti kvalitetu pružanja usluga i zadovoljstvo svih dionika, uključujući djecu, roditelje i zaposlenike vrtića.
-<br>
-<br>
-![Rpp use case](https://github.com/foivz/rpp23-project-mkovac21-kkulier21-mbanovic21-vdimoti21/assets/126497546/a97d4bee-38ba-4e29-a3fe-7591c1b1d522)
-
-
-<p align="center">
-<strong>Slika 1:</strong> Dijagram slučajeva korištenja
-</p>
 
 ## Specifikacija projekta
 Oznaka | Naziv | Kratki opis
------- | ----- | -----------
+------ | ----- | ----------- 
 F01 | Prijavljivanje i registriranje zaposlenika u sustav | Prijavljivanje i registriranje u sustavu dječjeg vrtića ključne su funkcionalnosti koje osiguravaju siguran pristup softverskom rješenju za praćenje rada vrtića. Ova funkcionalnost omogućuje korisnicima, uključujući administratore i zaposlenike, da unesu svoje pristupne podatke dodijeljene prilikom zapošljavanja. <br> Administratori imaju poseban proces prve prijave u sustav kako bi osigurali sigurnost i jednostavnost stvaranja vlastitog korisničkog računa. Prilikom prve prijave, koriste privremene pristupne podatke: korisničko ime "admin" i lozinku "1234". Ovi podaci su privremeni, hardkodirani i koriste se isključivo za inicijalnu prijavu kako bi omogućili stvaranje vlastitog korisničkog računa. Nakon toga, administratori mogu promijeniti svoje pristupne podatke putem funkcionalnosti "Administriranje zaposlenika". <br> Uobičajeni pristupni podaci uključuju korisničko ime i lozinku, a sustav osigurava temeljitu verifikaciju kako bi zaštitio sigurnost i spriječio neovlaštene pristupe. Nakon uspješne prijave, korisnici dobivaju pristup svojim osobnim podacima i funkcionalnostima prilagođenima njihovoj ulozi u vrtiću. Ova sveobuhvatna funkcionalnost omogućuje povjerljivost podataka i pruža personalizirano iskustvo, čime se osigurava siguran i intuitivan pristup softveru za praćenje rada dječjeg vrtića.
 F02 | Upisivanje djece | Funkcionalnost upisa djece omogućuje administratorima jednostavno i sigurno upisivanje djece u vrtić, pružajući podatke o djeci, kontakt informacije, medicinske informacije i druge relevantne podatke. Tijekom procesa upisa, sustav automatski dodjeljuje svakom djetetu jedinstveni identifikacijski broj i pohranjuje te informacije u online bazu podataka. Ova funkcionalnost također omogućava pregled i ažuriranje podataka o upisanoj djeci te osigurava dostupnost tih informacija kako bi ih osoblje vrtića moglo učinkovito upravljati. Uz to, pruža siguran i praktičan način za roditelje da prate status upisa svoje djece i prate komunikaciju s vrtićem tijekom tog procesa na način da će biti obaviješteni putem e-pošte.
 F03 | Administriranje zaposlenika i djece | Ova ključna funkcionalnost omogućuje administratorima potpunu kontrolu nad korisnicima u sustavu, uključujući zaposlenike i upisanu djecu u vrtiću. Administratori imaju ovlasti za stvaranje, uređivanje i brisanje korisničkih računa zaposlenika i djece, pridruživanje osoblju vrtića, te definiranje njihovih prava pristupa. <br> Osim toga, ova funkcionalnost omogućuje administratorima pregled cijelog "dosjea" zaposlenika, pružajući informacije poput povijesti zaposlenika u vrtiću, u kojoj godini su radili, u kojoj vrtićkoj skupini su bili, te druge relevantne informacije. Također, omogućuje precizno upravljanje pravima pristupa za sve korisnike, praćenje prisutnosti i aktivnosti zaposlenika, te brigu o točnosti i ažuriranosti podataka o djeci. <br> Ova sveobuhvatna funkcionalnost pridonosi sigurnosti i transparentnosti rada vrtića te postaje ključnim alatom za organizaciju i upravljanje radom dječjeg vrtića. Omogućuje cjelovit pregled i kontrolu nad djecom i zaposlenicima, čime se osigurava učinkovito upravljanje korisnicima u sustavu.
@@ -34,13 +26,13 @@ F11 | Upravljanje opremom i resursima | Ova funkcionalnost omogućuje administra
 F12 | Grafički prikaz statističkih podataka | Ova funkcionalnost omogućuje sustavu da generira i prikaže grafičke prikaze statističkih podataka povezanih s radom dječjeg vrtića. Grafički prikazi, kao što su grafikoni, dijagrame i tablice, koriste se kako bi se informacije prezentirale na vizualno privlačan način. Sustav će omogućiti korisnicima, posebice administratorima, da lako interpretiraju složene statističke podatke, identificiraju trendove, analiziraju ključne pokazatelje i donose informirane odluke. <br> Grafički prikazi mogu obuhvaćati različite aspekte rada vrtića, kao što su prisutnost djece, financijski pokazatelji, stanje resursa ili učinkovitost osoblja. <br> Ova funkcionalnost pridonosi boljem razumijevanju i praćenju ključnih informacija, olakšava donošenje odluka i pruža vizualno privlačan način prezentacije podataka. Grafički prikazi statističkih podataka čine upravljanje dječjim vrtićem učinkovitijim i transparentnijim, potičući kontinuirano unapređenje rada.
 
 ## Tehnologije i oprema
-Pri implementaciji softverskog rješenja za praćenje rada dječjeg vrtića koristit ću niz tehnologija, alata i opreme kako bih osigurao kvalitetu, funkcionalnost i sigurnost rješenja. Ovdje je popis tih elemenata:
+Pri implementaciji softverskog rješenja za praćenje rada dječjeg vrtića koristit ćemo niz tehnologija, alata i opreme kako bismo osigurali kvalitetu, funkcionalnost i sigurnost rješenja. Ovdje je popis tih elemenata:
 
 * [**Programski jezik C#**](https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/?view=vs-2022): Korišten za razvoj glavnog softverskog rješenja.
 
-* [**Windows Presentation Foundation (WPF)**](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-7.0): Korišten za razvoj grafičkog korisničkog sučelja, pružajući bogat i interaktivan dizajn.
+* [**Windows Forms .NET**](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/?view=netdesktop-7.0): Korišten za razvoj grafičkog korisničkog sučelja, pružajući bogat, stabilan i interaktivan dizajn.
 
-* [**Visual Studio**](https://visualstudio.microsoft.com/): Kao integrirano razvojno okruženje za programiranje u C# i WPF.
+* [**Visual Studio**](https://visualstudio.microsoft.com/): Kao integrirano razvojno okruženje za programiranje u C# i Windows Presentation Foundation (WPF) .NET.
 
 * [**SQLite, MySQL**](https://sqlitebrowser.org/): Za pohranu podataka o djeci, osoblju, rasporedu, aktivnostima i administrativnim informacijama.
 
@@ -61,6 +53,3 @@ Pri implementaciji softverskog rješenja za praćenje rada dječjeg vrtića kori
 * [**Dokumentacijski alati (Microsoft Office Education)**](https://www.microsoft.com/en-us/education/products/microsoft-365): Za izradu tehničke dokumentacije, uputa za korištenje i dokumentacije korisnika.
 
 Svi korišteni alati i tehnologije su javno dostupni i imaju odgovarajuće licence kako bi se osigurala legalnost i usklađenost s pravilima i propisima. Za tehnologije koje nisu standardno dostupne (npr. Entity Framework) u dokumentaciji će biti navedeni načini instalacije i korištenja.
-
-## Napomena
-Želim naglasiti da ovo nije konačna verzija rada, već samo predložak! Rad je podložan izmjenama, a način realiziranja završnog rada bit će inkrementalan!
