@@ -9,6 +9,10 @@ Matej Banović | mbanovic21@student.foi.hr | 0016154542 | mbanovic21
 ## Opis domene
 Domena razvoja softvera za praćenje rada dječjeg vrtića obuhvaća sve ključne aspekte organizacije i upravljanja dječjim vrtićem. Ovaj softver ima za cilj olakšati praćenje prisutnosti djece, izradu rasporeda aktivnosti, administraciju, evidenciju zaposlenika i komunikaciju s roditeljima. Administratorski aspekt uključuje praćenje i evidentiranje podataka o djeci, upis te praćenje i evidentiranje zaposlenika. Evidencija i praćenje djece obuhvaća ocjenjivanje napretka, generiranje izvještaja o razvoju, medicinske podatke i alergije. Također, softver omogućuje dvosmjernu komunikaciju između vrtića i roditelja putem e-pošte, dijeleći informacije o djetetovom napretku, događanjima i posebnim zahtjevima. Kroz siguran pristup podacima i definiranje pristupa različitim korisničkim ulogama, osigurava se povjerljivost i integritet informacija. Integracijom s online bazom podataka putem ADO.NET-a i .NET Framework-a omogućava se pouzdana pohrana i upravljanje podacima, čime se olakšava svakodnevno upravljanje i očuvanje povijesti o dječjem vrtiću. Sve navedene komponente zajedno čine važnu domenu za razvoj softverskog rješenja koje će unaprijediti kvalitetu pružanja usluga i zadovoljstvo svih dionika, uključujući djecu, roditelje i zaposlenike vrtića.
 
+## ERA model
+
+
+
 ## Specifikacija projekta
 Oznaka | Naziv | Kratki opis
 ------ | ----- | ----------- 
@@ -30,7 +34,7 @@ Pri implementaciji softverskog rješenja za praćenje rada dječjeg vrtića kori
 
 * [**Programski jezik C#**](https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/?view=vs-2022): Korišten za razvoj glavnog softverskog rješenja.
 
-* [**Windows Forms .NET**](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/?view=netdesktop-7.0): Korišten za razvoj grafičkog korisničkog sučelja, pružajući bogat, stabilan i interaktivan dizajn.
+* [**WPF Application .NET**](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/overview/?view=netdesktop-7.0): Korišten za razvoj grafičkog korisničkog sučelja, pružajući bogat, stabilan i interaktivan dizajn.
 
 * [**Visual Studio**](https://visualstudio.microsoft.com/): Kao integrirano razvojno okruženje za programiranje u C# i Windows Presentation Foundation (WPF) .NET.
 
