@@ -9,6 +9,32 @@ Matej Banović | mbanovic21@student.foi.hr | 0016154542 | mbanovic21 | +385 99 2
 ## Opis domene
 Domena razvoja softvera za praćenje rada dječjeg vrtića obuhvaća sve ključne aspekte organizacije i upravljanja dječjim vrtićem. Ovaj softver ima za cilj olakšati praćenje prisutnosti djece, izradu rasporeda aktivnosti, administraciju, evidenciju zaposlenika i komunikaciju s roditeljima. Administratorski aspekt uključuje praćenje i evidentiranje podataka o djeci, upis te praćenje i evidentiranje zaposlenika. Evidencija i praćenje djece obuhvaća ocjenjivanje napretka, generiranje izvještaja o razvoju, medicinske podatke i alergije. Također, softver omogućuje dvosmjernu komunikaciju između vrtića i roditelja putem e-pošte, dijeleći informacije o djetetovom napretku, događanjima i posebnim zahtjevima. Kroz siguran pristup podacima i definiranje pristupa različitim korisničkim ulogama, osigurava se povjerljivost i integritet informacija. Integracijom s online bazom podataka putem ADO.NET-a i .NET Framework-a omogućava se pouzdana pohrana i upravljanje podacima, čime se olakšava svakodnevno upravljanje i očuvanje povijesti o dječjem vrtiću. Sve navedene komponente zajedno čine važnu domenu za razvoj softverskog rješenja koje će unaprijediti kvalitetu pružanja usluga i zadovoljstvo svih dionika, uključujući djecu, roditelje i zaposlenike vrtića.
 
+## ERA model
+
+<p align="center">
+  <a href="https://github.com/mbanovic21/Zavrsni_rad_23-24/blob/master-docs/Documentation/ERA_Model.png">
+    <img src="https://github.com/mbanovic21/Zavrsni_rad_23-24/blob/master-docs/Documentation/ERA_Model.png" alt="ERA model">
+  </a>
+</p>
+
+<p align="center">
+<strong>Slika 1:</strong> ERA model
+</p>
+
+Sustav za praćenje rada dječjeg vrtića temelji se na pažljivo strukturiranom modelu entiteta i veza, pružajući sveobuhvatan okvir za učinkovito upravljanje svim relevantnim aspektima vrtićkog okruženja. Ključna komponenta sustava je _vrtićka godina_ (_PreschoolYear_), koja predstavlja osnovnu jedinicu vremena i organizacije. Ova godina je povezana s entitetima _Child_PreschoolYear_, _Group_PreschoolYear_ i _User_PreschoolYear_, pružajući strukturu koja omogućuje praćenje djece, grupa i korisnika u specifičnom vremenskom razdoblju.
+
+Entitet _Child_PreschoolYear_ djeluje kao spona između svakog _djeteta_ (_Child_) i određene vrtićke godine, omogućujući precizno praćenje prisustva djece tijekom različitih godina vrtića. S druge strane, _Group_PreschoolYear_ omogućuje organizaciju djece u skupine, čime se olakšava bolje upravljanje odnosima unutar vrtića. _User_PreschoolYear_ povezuje _korisnike_ (_User_) s vrtićkim godinama, dodjeljujući im specifične uloge u skladu s njihovim odgovornostima i zadacima unutar sustava.
+
+Sustav dodatno obuhvaća aspekte _evidencije prisutnosti_ putem entiteta _Attendance_, koji bilježi informacije o prisutnosti kako za djecu tako i za zaposlenike vrtića. Ovaj entitet pridonosi cjelovitom pregledu prisutnosti, ključnom elementu u sigurnom i organiziranom radu vrtića.
+
+_Roditelji_ (_Parent_) su integrirani u sustav putem veze s djecom, omogućujući transparentno praćenje odnosa između roditelja i djece unutar vrtića. _Bilješke_ (_Note_) čine bitan alat za praćenje napretka i ponašanja djece, pružajući osoblju vrtića duboki uvid u individualne potrebe svakog djeteta.
+
+Organizacija vremena i aktivnosti postignuta je kroz entitete _Day_ i _WeeklySchedule_. _Dnevne aktivnosti_ (_DailyActivity_) čine srž pedagoškog plana, a njihova povezanost s danima i resursima omogućuje precizno planiranje i praćenje svakodnevnih događanja u vrtiću.
+
+Sustav također obuhvaća funkcionalnost praćenja opreme i resursa putem entiteta _Resurs_ i _Resurs_DailyActivity_. Ovaj aspekt pridonosi transparentnosti i učinkovitosti u upravljanju opremom, knjigama, igračkama i drugim ključnim resursima vrtića.
+
+Grafički prikazi statističkih podataka predstavljaju vizualno privlačan način prezentacije ključnih informacija, omogućujući administratorima lakše interpretiranje statističkih podataka, identifikaciju trendova i donošenje informiranih odluka za daljnje unapređenje rada dječjeg vrtića. Sve navedene komponente čine ovaj sustav sveobuhvatnim rješenjem za kvalitetno vođenje vrtića i pružanje najbolje skrbi za djecu.
+
 ## Specifikacija projekta
 Oznaka | Naziv | Kratki opis
 ------ | ----- | ----------- 
