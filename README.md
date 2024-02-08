@@ -11,7 +11,15 @@ Domena razvoja softvera za praćenje rada dječjeg vrtića obuhvaća sve ključn
 
 ## ERA model
 
+<p align="center">
+  <a href="https://github.com/mbanovic21/Zavrsni_rad_23-24/blob/master-docs/Documentation/ERA_Model.png">
+    <img src="https://github.com/mbanovic21/Zavrsni_rad_23-24/blob/master-docs/Documentation/ERA_Model.png" alt="ERA model">
+  </a>
+</p>
 
+<p align="center">
+<strong>Slika 1:</strong> ERA model
+</p>
 
 ## Specifikacija projekta
 Oznaka | Naziv | Kratki opis
