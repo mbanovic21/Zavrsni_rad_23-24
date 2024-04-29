@@ -13,6 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <Image Source="/Images/close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" />
+        <TextBlock Text="v1.0.0" Style="{StaticResource version}"/>
 
         <Border >
             <Border.Background>
@@ -36,6 +37,11 @@
                         <TextBlock Text="Preschool Management Software" Style="{StaticResource titleText}"/>
                         <TextBlock Text="Manage your preschool effortlessly with my intuitive software" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
                     </StackPanel>
+                    <TextBlock Style="{StaticResource copyright}">
+                        <Run Text="Copyright"/>
+                        <Run Text="&#xA9;"/>
+                        <Run Text="Matej Banović 2024" />   
+                    </TextBlock>
                 </Grid>
             </ScrollViewer>
         </Border>
@@ -43,7 +49,7 @@
         <Border Background="#ffffff" Grid.Column="1" MouseDown="Border_MouseDown">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Welcome!" Style="{StaticResource titleText}" Foreground="#4EB1B6"/>
-                <TextBlock Text="Enter your credentials and find out how Preschool Managment Software can help you save time, reduce paperwork, and improve organization in your preschool." Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Margin="20 30"/>
+                <TextBlock Text="Enter your credentials and find out how Preschool Managment Software can help you save time, reduce paperwork, and improve organization in your preschool institution." Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Margin="20 30"/>
 
                 <TextBlock Text="Login" Style="{StaticResource titleText}" Foreground="#4EB1B6" FontSize="25" Margin="0,0,0,10"/>
 
