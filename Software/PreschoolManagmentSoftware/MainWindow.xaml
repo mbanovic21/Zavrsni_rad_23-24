@@ -23,35 +23,33 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <Grid>
-                    <Canvas>
-                        <Polygon Points="0,20 230,140 0,270" Fill="#4EB1B6"/>
-                        <Polygon Points="100,400 200,370 180,470" Fill="#4EB1B6"/>
-                        <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#4EB1B6"/>
-                        <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#4EB1B6"/>
-                    </Canvas>
+            <Grid>
+                <Canvas>
+                    <Polygon Points="0,20 230,140 0,270" Fill="#4EB1B6"/>
+                    <Polygon Points="100,400 200,370 180,470" Fill="#4EB1B6"/>
+                    <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#4EB1B6"/>
+                    <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#4EB1B6"/>
+                </Canvas>
 
-                    <!-- podaci za firmu kao...-->
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Preschool Management Software" Style="{StaticResource titleText}"/>
-                        <TextBlock Text="Manage your preschool effortlessly with my intuitive software" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
-                    </StackPanel>
-                    <TextBlock Style="{StaticResource copyright}">
+                <!-- podaci za firmu kao...-->
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Preschool Management Software" Style="{StaticResource titleText}"/>
+                    <TextBlock Text="Manage your preschool effortlessly with my intuitive software" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
+                </StackPanel>
+                <TextBlock Style="{StaticResource copyright}">
                         <Run Text="Copyright"/>
                         <Run Text="&#xA9;"/>
-                        <Run Text="Matej Banović 2024" />   
-                    </TextBlock>
-                </Grid>
-            </ScrollViewer>
+                        <Run Text="Matej Banović 2024" />
+                </TextBlock>
+            </Grid>
         </Border>
 
         <Border Background="#ffffff" Grid.Column="1" MouseDown="Border_MouseDown">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="Welcome!" Style="{StaticResource titleText}" Foreground="#4EB1B6"/>
-                <TextBlock Text="Enter your credentials and find out how Preschool Managment Software can help you save time, reduce paperwork, and improve organization in your preschool institution." Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Margin="20 30"/>
+                <TextBlock Text="Enter your credentials and find out how Preschool Managment Software can help you save time, reduce paperwork, and improve organization in your preschool." Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Margin="20 30"/>
 
-                <TextBlock Text="Login" Style="{StaticResource titleText}" Foreground="#4EB1B6" FontSize="25" Margin="0,0,0,10"/>
+                <TextBlock Text="Login" Style="{StaticResource titleText}" Foreground="#4EB1B6" FontSize="25" Margin="0,-20,0,10"/>
 
                 <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
