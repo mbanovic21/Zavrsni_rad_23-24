@@ -24,30 +24,94 @@ namespace PreschoolManagmentSoftware.Windows
             InitializeComponent();
         }
 
-        private void SubmitRequest_Click(object sender, RoutedEventArgs e)
+        private void textID_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Your request has been submitted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            this.Close();
+            txtID.Focus();
         }
 
-        private void textDateOfBirth_MouseDown(object sender, MouseButtonEventArgs e)
+        private void txtID_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-        }
-
-        private void textLastname_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
+            if (!string.IsNullOrEmpty(txtID.Text) && txtID.Text.Length > 0)
+            {
+                textID.Visibility = Visibility.Collapsed;
+            } else
+            {
+                textID.Visibility = Visibility.Visible;
+            }
         }
 
         private void textFirstname_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            txtFirstname.Focus();
         }
 
-        private void textID_MouseDown(object sender, MouseButtonEventArgs e)
+        private void txtFirstname_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(txtFirstname.Text) && txtFirstname.Text.Length > 0)
+            {
+                textFirstname.Visibility = Visibility.Collapsed;
+            } else
+            {
+                textFirstname.Visibility = Visibility.Visible;
+            }
+        }
 
+        private void textLastname_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtLastname.Focus();
+        }
+
+        private void txtLastname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtLastname.Text) && txtLastname.Text.Length > 0)
+            {
+                textLastname.Visibility = Visibility.Collapsed;
+            } else
+            {
+                textLastname.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textDateOfBirth_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtDateOfBirth.Focus();
+        }
+
+        private void txtDateOfBirth_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtDateOfBirth.Text) && txtDateOfBirth.Text.Length > 0)
+            {
+                textDateOfBirth.Visibility = Visibility.Collapsed;
+            } else
+            {
+                textDateOfBirth.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textDescription_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            rtxtDescription.Focus();
+        }
+
+        private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (rtxtDescription.Document.Blocks.Count > 0 && rtxtDescription.Document.Blocks.FirstBlock != null)
+            {
+                // Provjerava je li sadržaj RichTextBox-a prazan
+                textDescription.Visibility = rtxtDescription.Document.Blocks.FirstBlock.GetType() == typeof(Paragraph) &&
+                                              ((Paragraph)rtxtDescription.Document.Blocks.FirstBlock).Inlines.Count == 0
+                    ? Visibility.Visible : Visibility.Collapsed;
+            } else
+            {
+                // Ako je RichTextBox prazan, prikaži tekst upozorenja
+                textDescription.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void SubmitRequest_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Your request has been submitted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
     }
 }
