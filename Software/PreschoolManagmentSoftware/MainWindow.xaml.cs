@@ -65,11 +65,17 @@ namespace PreschoolManagmentSoftware
             }
         }
 
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var forgotCredentialsWindow = new Windows.ForgotCredentialsWindow();
+            forgotCredentialsWindow.ShowDialog();
+        }
+
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                this.DragMove();
+                DragMove();
             }
         }
 
