@@ -77,6 +77,8 @@
                     </Grid>
                 </Border>
 
+                <TextBlock Text="Forgot password? Click here!" Style="{StaticResource link}"/>
+
                 <Button Content="Login" Click="Button_Click" Style="{StaticResource loginButton}" />
             </StackPanel>
         </Border>
