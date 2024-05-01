@@ -71,5 +71,17 @@ namespace PreschoolManagmentSoftware.UserControls
         public static readonly DependencyProperty UploadSpeedProperty =
             DependencyProperty.Register("UploadSpeed", typeof(int), typeof(ucUpload));
 
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var parentItemsControl = ItemsControl.ItemsControlFromItemContainer(this);
+            if (parentItemsControl != null)
+            {
+                var item = parentItemsControl.ItemContainerGenerator.ItemFromContainer(this);
+                parentItemsControl.Items.Remove(item);
+            } else
+            {
+                MessageBox.Show("Error occured! Please select a photo to remove!");
+            }
+        }
     }
 }

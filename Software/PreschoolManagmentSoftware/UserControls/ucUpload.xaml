@@ -30,12 +30,12 @@
                 </Grid.ColumnDefinitions>
 
                 <!--file name-->
-                <TextBlock TextTrimming="CharacterEllipsis" MaxHeight="20" FontWeight="Bold" Text="{Binding FileName, ElementName=this, FallbackValue=FileName, TargetNullValue=FileName}"/>
+                <TextBlock TextTrimming="CharacterEllipsis" MaxWidth="100" FontWeight="Bold" Text="{Binding FileName, ElementName=this, FallbackValue=FileName, TargetNullValue=FileName}"/>
                 <!--file size-->
                 <TextBlock Grid.Column="1" Padding="5,0" Text="{Binding FileSize, ElementName=this, FallbackValue=FileSize, TargetNullValue=FileSize}"/>
 
                 <!--Cancel button-->
-                <Image Grid.Column="2" Source="/Images/remove-doc.png" Style="{StaticResource imgClose}" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-2,-5,0" />
+                <Image Grid.Column="2" Source="/Images/remove-doc.png" Style="{StaticResource imgClose}" MouseUp="Image_MouseUp" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-2,-5,0" />
 
             </Grid>
             
