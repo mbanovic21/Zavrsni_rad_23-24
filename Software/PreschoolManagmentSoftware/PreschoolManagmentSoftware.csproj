@@ -151,5 +151,8 @@
   <ItemGroup>
     <Resource Include="Images\remove-doc.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\email.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

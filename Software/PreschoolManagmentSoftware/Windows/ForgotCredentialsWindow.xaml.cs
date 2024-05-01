@@ -26,22 +26,6 @@ namespace PreschoolManagmentSoftware.Windows
             InitializeComponent();
         }
 
-        private void textID_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            txtID.Focus();
-        }
-
-        private void txtID_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtID.Text) && txtID.Text.Length > 0)
-            {
-                textID.Visibility = Visibility.Collapsed;
-            } else
-            {
-                textID.Visibility = Visibility.Visible;
-            }
-        }
-
         private void textFirstname_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtFirstname.Focus();
@@ -74,19 +58,35 @@ namespace PreschoolManagmentSoftware.Windows
             }
         }
 
-        private void textDateOfBirth_MouseDown(object sender, MouseButtonEventArgs e)
+        private void textID_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtDateOfBirth.Focus();
+            txtID.Focus();
         }
 
-        private void txtDateOfBirth_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtID_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtDateOfBirth.Text) && txtDateOfBirth.Text.Length > 0)
+            if (!string.IsNullOrEmpty(txtID.Text) && txtID.Text.Length > 0)
             {
-                textDateOfBirth.Visibility = Visibility.Collapsed;
+                textID.Visibility = Visibility.Collapsed;
             } else
             {
-                textDateOfBirth.Visibility = Visibility.Visible;
+                textID.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtEmail.Focus();
+        }
+
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
+            {
+                textEmail.Visibility = Visibility.Collapsed;
+            } else
+            {
+                textEmail.Visibility = Visibility.Visible;
             }
         }
 
