@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using BusinessLogicLayer;
+using Microsoft.Win32;
+using PreschoolManagmentSoftware.UserControls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +23,8 @@ namespace PreschoolManagmentSoftware.Windows
     /// </summary>
     public partial class ForgotCredentialsWindow : Window
     {
+        List<string> filePaths = new List<string>();
+
         public ForgotCredentialsWindow()
         {
             InitializeComponent();
@@ -110,38 +114,68 @@ namespace PreschoolManagmentSoftware.Windows
             }
         }
 
-        private void SubmitRequest_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Your request has been submitted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            Close();
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog() { Multiselect = true };
             bool? response = openFileDialog.ShowDialog();
-            if(response == true) 
+            if (response == true)
             {
                 imgUpload.Visibility = Visibility.Collapsed;
                 textImageDescription.Visibility = Visibility.Collapsed;
                 var files = openFileDialog.FileNames;
-                foreach ( var file in files)
+                // Čuvanje putanja do datoteka u globalnu listu
+                filePaths.AddRange(files);
+                foreach (var file in files)
                 {
                     var filename = System.IO.Path.GetFileName(file);
                     var fileInfo = new FileInfo(file);
-                    UploadingFileList.Items.Add(new UserControls.ucUpload() 
-                    { 
+                    var ucUpload = new UserControls.ucUpload()
+                    {
                         FileName = filename,
-                        //b -> Kb
-                        FileSize = string.Format("{0} {1}", ((fileInfo.Length / 1024)+1).ToString("0.0"), "Kb"),
-                        UploadProgress = 100
-                    });
+                        FileSize = string.Format("{0} {1}", ((fileInfo.Length / 1024) + 1).ToString("0.0"), "Kb"),
+                        UploadProgress = 100,
+                        FilePath = file // Postavljanje putanje datoteke
+                    };
+                    UploadingFileList.Items.Add(ucUpload);
                 }
-                if (files.Length == 0)
-                {
-                    textImageDescription.Visibility = Visibility.Visible;
-                }
+                //MessageBox.Show("File paths: " + string.Join(", ", filePaths));
             }
+        }
+
+        public void RemoveItemFromList(string filePath)
+        {
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                if (filePaths.Contains(filePath))
+                {
+                    filePaths.Remove(filePath);
+                    if (filePaths.Count == 0)
+                    {
+                        textImageDescription.Visibility = Visibility.Visible;
+                        imgUpload.Visibility = Visibility.Visible;
+                    }
+                    //MessageBox.Show("Remaining files: " + filePaths.Count.ToString());
+                } else
+                {
+                    MessageBox.Show("File path not found in the list.");
+                }
+            } else
+            {
+                MessageBox.Show("File path is empty or null.");
+            }
+        }
+
+
+        private void SubmitRequest_Click(object sender, RoutedEventArgs e)
+        {
+            var firstName = txtFirstname.Text;
+            var lastName = txtLastname.Text;
+            var ID = txtID.Text;
+            var email = txtEmail.Text;
+            var description = new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text;
+            var subject = "Credential Retrieval Request: Your Assistance Needed";
+
+            var service = new EmailService(firstName, lastName, email, description, subject, filePaths);
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PreschoolManagmentSoftware.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,8 +72,18 @@ namespace PreschoolManagmentSoftware.UserControls
         public static readonly DependencyProperty UploadSpeedProperty =
             DependencyProperty.Register("UploadSpeed", typeof(int), typeof(ucUpload));
 
+        public string FilePath
+        {
+            get { return (string)GetValue(FilePathProperty); }
+            set { SetValue(FilePathProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FilePath. This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FilePathProperty =
+            DependencyProperty.Register("FilePath", typeof(string), typeof(ucUpload));
 
 
+        // Image_MouseUp metoda sada proslijeđuje putanju datoteke u RemoveItemFromList
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             var parentItemsControl = ItemsControl.ItemsControlFromItemContainer(this);
@@ -80,9 +91,21 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 var item = parentItemsControl.ItemContainerGenerator.ItemFromContainer(this);
                 parentItemsControl.Items.Remove(item);
+
+                var forgotCredentialsWindow = Application.Current.Windows.OfType<ForgotCredentialsWindow>().FirstOrDefault();
+                if (forgotCredentialsWindow != null)
+                {
+                    if (item is ucUpload ucUploadItem)
+                    {
+                        // Dobij putanju datoteke iz ucUpload kontrola
+                        string filePath = ucUploadItem.FilePath;
+                        // Proslijedi putanju datoteke u RemoveItemFromList metodu
+                        forgotCredentialsWindow.RemoveItemFromList(filePath);
+                    }
+                }
             } else
             {
-                MessageBox.Show("Error occured! Please select a photo to remove!");
+                MessageBox.Show("Error occurred! Please select a photo to remove!");
             }
         }
     }
