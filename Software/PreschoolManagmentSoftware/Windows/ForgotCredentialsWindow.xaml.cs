@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,6 +114,31 @@ namespace PreschoolManagmentSoftware.Windows
         {
             MessageBox.Show("Your request has been submitted successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog() { Multiselect = true };
+            bool? response = openFileDialog.ShowDialog();
+            if(response == true) 
+            {
+                imgUpload.Visibility = Visibility.Collapsed;
+                textImageDescription.Visibility = Visibility.Collapsed;
+                var files = openFileDialog.FileNames;
+                foreach ( var file in files)
+                {
+                    var filename = System.IO.Path.GetFileName(file);
+                    var fileInfo = new FileInfo(file);
+                    UploadingFileList.Items.Add(new UserControls.ucUpload() 
+                    { 
+                        FileName = filename,
+                        //b -> Kb
+                        FileSize = string.Format("{0} {1}", ((fileInfo.Length / 1024)+1).ToString("0.0"), "Kb"),
+                        UploadProgress =100
+                    });
+                }
+            }
+
         }
     }
 }

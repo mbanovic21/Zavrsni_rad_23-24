@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\ucUpload.xaml.cs">
+      <DependentUpon>ucUpload.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ForgotCredentialsWindow.xaml.cs">
       <DependentUpon>ForgotCredentialsWindow.xaml</DependentUpon>
     </Compile>
@@ -70,6 +73,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\ucUpload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ForgotCredentialsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,7 +128,7 @@
     <Resource Include="Images\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UserControls\" />
+    <Resource Include="Images\write.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\id-card.png" />
@@ -131,6 +138,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\calendar-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\write2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove-doc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
