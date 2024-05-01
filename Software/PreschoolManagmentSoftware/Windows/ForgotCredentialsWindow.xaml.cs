@@ -134,7 +134,7 @@ namespace PreschoolManagmentSoftware.Windows
                         FileName = filename,
                         //b -> Kb
                         FileSize = string.Format("{0} {1}", ((fileInfo.Length / 1024)+1).ToString("0.0"), "Kb"),
-                        UploadProgress =100
+                        UploadProgress = 100
                     });
                 }
             }

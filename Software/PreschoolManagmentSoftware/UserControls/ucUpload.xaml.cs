@@ -26,7 +26,6 @@ namespace PreschoolManagmentSoftware.UserControls
         }
 
 
-
         public string FileName
         {
             get { return (string)GetValue(FileNameProperty); }
@@ -36,6 +35,7 @@ namespace PreschoolManagmentSoftware.UserControls
         // Using a DependencyProperty as the backing store for FileName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FileNameProperty =
             DependencyProperty.Register("FileName", typeof(string), typeof(ucUpload));
+
 
         public string FileSize
         {
@@ -70,6 +70,8 @@ namespace PreschoolManagmentSoftware.UserControls
         // Using a DependencyProperty as the backing store for UploadSpeed.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty UploadSpeedProperty =
             DependencyProperty.Register("UploadSpeed", typeof(int), typeof(ucUpload));
+
+
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
