@@ -37,7 +37,7 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtFirstname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFirstname.Text) && txtFirstname.Text.Length > 0)
+            if (!string.IsNullOrEmpty(txtFirstname.Text) && txtFirstname.Text.Length >= 0)
             {
                 textFirstname.Visibility = Visibility.Collapsed;
             } else
@@ -53,7 +53,7 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtLastname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtLastname.Text) && txtLastname.Text.Length > 0)
+            if (!string.IsNullOrEmpty(txtLastname.Text) && txtLastname.Text.Length >= 0)
             {
                 textLastname.Visibility = Visibility.Collapsed;
             } else
@@ -69,7 +69,7 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtID_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtID.Text) && txtID.Text.Length > 0)
+            if (!string.IsNullOrEmpty(txtID.Text) && txtID.Text.Length >= 0)
             {
                 textID.Visibility = Visibility.Collapsed;
             } else
@@ -85,7 +85,7 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length > 0)
+            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length >= 0)
             {
                 textEmail.Visibility = Visibility.Collapsed;
             } else
@@ -99,22 +99,21 @@ namespace PreschoolManagmentSoftware.Windows
             rtxtDescription.Focus();
         }
 
-        private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+         private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (rtxtDescription.Document.Blocks.Count > 0 && rtxtDescription.Document.Blocks.FirstBlock != null)
+            // Provjera je li RichTextBox prazan
+            if (string.IsNullOrWhiteSpace(new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text))
             {
-                // Provjerava je li sadržaj RichTextBox-a prazan
-                textDescription.Visibility = rtxtDescription.Document.Blocks.FirstBlock.GetType() == typeof(Paragraph) &&
-                                              ((Paragraph)rtxtDescription.Document.Blocks.FirstBlock).Inlines.Count == 0
-                    ? Visibility.Visible : Visibility.Collapsed;
+                // Ako je prazan, prikaži textDescription
+                textDescription.Visibility = Visibility.Visible;
             } else
             {
-                // Ako je RichTextBox prazan, prikaži tekst upozorenja
-                textDescription.Visibility = Visibility.Visible;
+                // Inače, sakrij textDescription
+                textDescription.Visibility = Visibility.Collapsed;
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog() { Multiselect = true };
             bool? response = openFileDialog.ShowDialog();
@@ -173,10 +172,60 @@ namespace PreschoolManagmentSoftware.Windows
             var ID = txtID.Text;
             var email = txtEmail.Text;
             var description = new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text;
-            var subject = "Credential Retrieval Request: Your Assistance Needed";
+            var subject = "Credential Retrieval Request Your Assistance Needed";
 
-            var service = new EmailService(firstName, lastName, email, description, subject, filePaths);
+            // Provjeri je li prvi name ispravan
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                MessageBox.Show("Please enter your first name.");
+                return;
+            }
+
+            // Provjeri je li prezime ispravno
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                MessageBox.Show("Please enter your last name.");
+                return;
+            }
+
+            // Provjeri je li ID ispravan
+            if (string.IsNullOrWhiteSpace(ID))
+            {
+                MessageBox.Show("Please enter your ID.");
+                return;
+            }
+
+            // Provjeri je li e-mail adresa ispravna
+            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address.");
+                return;
+            }
+
+            // Provjeri je li opis ispravan
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                MessageBox.Show("Please enter a description.");
+                return;
+            }
+
+            // Pozovi EmailService samo ako su svi podaci ispravni
+            new ExternalEmailService(firstName, lastName, email, subject, description, filePaths);
         }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            } catch
+            {
+                return false;
+            }
+        }
+
+
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -184,6 +233,11 @@ namespace PreschoolManagmentSoftware.Windows
             {
                 DragMove();
             }
+        }
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Close();
         }
     }
 }

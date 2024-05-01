@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer
 {
-    public class EmailService
+    public class ExternalEmailService
     {
-        private string fromMail = "thesnackalchemist2023@gmail.com";
-        private string fromPassword = "dxtylhsnamqyjfex";
+        private string toMail = "thesnackalchemist2023@gmail.com";
+        private string toPassword = "dxtylhsnamqyjfex";
         MailMessage Message = new MailMessage();
 
-        public EmailService(string firstName, string lastName, string email, string subject, string body, List<string> attachmentPaths)
+        public ExternalEmailService(string firstName, string lastName, string email, string subject, string body, List<string> attachmentPaths)
         {
-            Message.From = new MailAddress(fromMail);
+            Message.From = new MailAddress(email);
             Message.Subject = subject;
-            Message.To.Add(new MailAddress(email));
+            Message.To.Add(new MailAddress(toMail));
 
-            // Svi podaci u tijelu e-pošte
+            // Svi podaci u tijelu meilao
             var fullBody = $"First Name: {firstName}<br/>Last Name: {lastName}<br/>{body}";
             Message.Body = "<html><body>" + fullBody + "</body></html>";
             Message.IsBodyHtml = true;
@@ -35,7 +35,7 @@ namespace BusinessLogicLayer
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
                 Port = 587,
-                Credentials = new NetworkCredential(fromMail, fromPassword),
+                Credentials = new NetworkCredential(toMail, toPassword),
                 EnableSsl = true
             };
 
