@@ -137,6 +137,18 @@ namespace PreschoolManagmentSoftware.Windows
                         UploadProgress = 100
                     });
                 }
+                if (files.Length == 0)
+                {
+                    textImageDescription.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
             }
         }
     }
