@@ -101,14 +101,11 @@ namespace PreschoolManagmentSoftware.Windows
 
          private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Provjera je li RichTextBox prazan
             if (string.IsNullOrWhiteSpace(new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text))
             {
-                // Ako je prazan, prikaži textDescription
                 textDescription.Visibility = Visibility.Visible;
             } else
             {
-                // Inače, sakrij textDescription
                 textDescription.Visibility = Visibility.Collapsed;
             }
         }
@@ -174,42 +171,36 @@ namespace PreschoolManagmentSoftware.Windows
             var description = new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text;
             var subject = "Credential Retrieval Request Your Assistance Needed";
 
-            // Provjeri je li prvi name ispravan
             if (string.IsNullOrWhiteSpace(firstName))
             {
                 MessageBox.Show("Please enter your first name.");
                 return;
             }
 
-            // Provjeri je li prezime ispravno
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 MessageBox.Show("Please enter your last name.");
                 return;
             }
 
-            // Provjeri je li ID ispravan
             if (string.IsNullOrWhiteSpace(ID))
             {
                 MessageBox.Show("Please enter your ID.");
                 return;
             }
 
-            // Provjeri je li e-mail adresa ispravna
             if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
             {
                 MessageBox.Show("Please enter a valid email address.");
                 return;
             }
 
-            // Provjeri je li opis ispravan
             if (string.IsNullOrWhiteSpace(description))
             {
                 MessageBox.Show("Please enter a description.");
                 return;
             }
 
-            // Pozovi EmailService samo ako su svi podaci ispravni
             new ExternalEmailService(firstName, lastName, email, subject, description, filePaths);
         }
 
@@ -224,8 +215,6 @@ namespace PreschoolManagmentSoftware.Windows
                 return false;
             }
         }
-
-
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
