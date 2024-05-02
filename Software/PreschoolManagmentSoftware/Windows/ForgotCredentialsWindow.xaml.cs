@@ -213,7 +213,6 @@ namespace PreschoolManagmentSoftware.Windows
                 return;
             }
 
-
             await Task.Run(() => new ExternalEmailService(firstName, lastName, email, subject, description, filePaths));
             MessageBox.Show("Notification successfully sent.");
         }

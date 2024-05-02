@@ -12,7 +12,7 @@
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="/Images/close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" />
+        <Image Source="/Media/Images/close.png" Grid.Column="1" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}" />
         <TextBlock Text="v1.0.0" Style="{StaticResource version}"/>
 
         <Border Grid.Column="0" MouseDown="Border_MouseDown">

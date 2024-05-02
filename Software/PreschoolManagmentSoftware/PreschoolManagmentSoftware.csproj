@@ -119,40 +119,47 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\user.png" />
+    <Resource Include="Media\Images\user.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\password.png" />
+    <Resource Include="Media\Images\password.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close.png" />
+    <Resource Include="Media\Images\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\write.png" />
+    <Resource Include="Media\Images\write.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\id-card.png" />
+    <Resource Include="Media\Images\id-card.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\calendar.png" />
+    <Resource Include="Media\Images\calendar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\calendar-white.png" />
+    <Resource Include="Media\Images\calendar-white.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\write2.png" />
+    <Resource Include="Media\Images\write2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\photo.png" />
+    <Resource Include="Media\Images\photo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\document.png" />
+    <Resource Include="Media\Images\document.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\remove-doc.png" />
+    <Resource Include="Media\Images\remove-doc.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\email.png" />
+    <Resource Include="Media\Images\email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Media\Animations\loading_animation.wmv" />
+    <Resource Include="Media\Animations\giphy.gif" />
+    <Content Include="Media\Animations\loading_animation.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
