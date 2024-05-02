@@ -156,7 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Media\Animations\loading_animation.wmv" />
-    <Resource Include="Media\Animations\giphy.gif" />
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
