@@ -162,7 +162,7 @@ namespace PreschoolManagmentSoftware.Windows
         }
 
 
-        private void SubmitRequest_Click(object sender, RoutedEventArgs e)
+        private async void AsyncSubmitRequest_Click(object sender, RoutedEventArgs e)
         {
             var firstName = txtFirstname.Text;
             var lastName = txtLastname.Text;
@@ -177,15 +177,27 @@ namespace PreschoolManagmentSoftware.Windows
                 return;
             }
 
+            if (!IsLettersOnly(firstName))
+            {
+                MessageBox.Show("First name can only contain letters.");
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 MessageBox.Show("Please enter your last name.");
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(ID))
+            if (!IsLettersOnly(lastName))
             {
-                MessageBox.Show("Please enter your ID.");
+                MessageBox.Show("Last name can only contain letters.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(ID) || ID.Length != 11 || !AreAllDigits(ID))
+            {
+                MessageBox.Show("ID must be 11 digits.");
                 return;
             }
 
@@ -201,7 +213,24 @@ namespace PreschoolManagmentSoftware.Windows
                 return;
             }
 
-            new ExternalEmailService(firstName, lastName, email, subject, description, filePaths);
+
+            await Task.Run(() => new ExternalEmailService(firstName, lastName, email, subject, description, filePaths));
+            MessageBox.Show("Notification successfully sent.");
+        }
+
+        private bool IsLettersOnly(string value)
+        {
+            return !string.IsNullOrWhiteSpace(value) && value.All(char.IsLetter);
+        }
+
+        private bool AreAllDigits(string value)
+        {
+            foreach (char digit in value)
+            {
+                if (!char.IsDigit(digit))
+                    return false;
+            }
+            return true;
         }
 
         private bool IsValidEmail(string email)

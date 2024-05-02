@@ -10,8 +10,8 @@ namespace BusinessLogicLayer
 {
     public class ExternalEmailService
     {
-        private string toMail = "thesnackalchemist2023@gmail.com";
-        private string toPassword = "dxtylhsnamqyjfex";
+        private string toMail = "mbanovicb@gmail.com";
+        private string toPassword = "dubgsjqxuuiffbzs";
         MailMessage Message = new MailMessage();
 
         public ExternalEmailService(string firstName, string lastName, string email, string subject, string body, List<string> attachmentPaths)
