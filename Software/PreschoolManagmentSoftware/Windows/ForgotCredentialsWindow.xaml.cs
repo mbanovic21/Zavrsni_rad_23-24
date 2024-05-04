@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer;
+using BusinessLogicLayer.DBServices;
 using Microsoft.Win32;
 using PreschoolManagmentSoftware.UserControls;
 using System;
@@ -24,6 +25,10 @@ namespace PreschoolManagmentSoftware.Windows
     public partial class ForgotCredentialsWindow : Window
     {
         List<string> filePaths = new List<string>();
+
+        private UserServices userServices = new UserServices();
+
+        public object MessageBoxButtons { get; private set; }
 
         public ForgotCredentialsWindow()
         {
@@ -213,8 +218,15 @@ namespace PreschoolManagmentSoftware.Windows
                 return;
             }
 
-            await Task.Run(() => new ExternalEmailService(firstName, lastName, email, subject, description, filePaths));
-            MessageBox.Show("Notification successfully sent.");
+            var isIDVaild = userServices.IsIDVaild(ID);
+            if (isIDVaild)
+            {
+                await Task.Run(() => new ExternalEmailService(firstName, lastName, email, subject, description, filePaths));
+                MessageBox.Show("Notification successfully sent.");
+            } else
+            {
+                MessageBox.Show("Your ID is not valid. Please ensure it is entered correctly.");
+            }
         }
 
         private bool IsLettersOnly(string value)

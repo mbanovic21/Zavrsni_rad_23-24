@@ -16,7 +16,8 @@ namespace EntityLayer.Entities
 
         public int Id { get; set; }
 
-        public int? OIB { get; set; }
+        [StringLength(11)]
+        public string OIB { get; set; }
 
         [StringLength(50)]
         public string FirstName { get; set; }
