@@ -35,6 +35,7 @@ namespace PreschoolManagmentSoftware.Windows
             InitializeComponent();
         }
 
+        //FirstName
         private void textFirstname_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtFirstname.Focus();
@@ -42,15 +43,27 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtFirstname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFirstname.Text) && txtFirstname.Text.Length >= 0)
+            var firstName = txtFirstname.Text;
+            var placeholderFirstName = textFirstname;
+
+            if (!string.IsNullOrEmpty(firstName) && firstName.Length >= 0)
             {
-                textFirstname.Visibility = Visibility.Collapsed;
+                placeholderFirstName.Visibility = Visibility.Collapsed;
             } else
             {
-                textFirstname.Visibility = Visibility.Visible;
+                placeholderFirstName.Visibility = Visibility.Visible;
+            }
+
+            if (!IsLettersOnly(firstName))
+            {
+                if (string.IsNullOrWhiteSpace(firstName)) return;
+                txtFirstname.Clear();
+                MessageBox.Show("First name can only contain letters.");
+                return;
             }
         }
 
+        //LastName
         private void textLastname_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtLastname.Focus();
@@ -58,15 +71,27 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtLastname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtLastname.Text) && txtLastname.Text.Length >= 0)
+            var lastName = txtLastname.Text;
+            var placeholderLastName = textLastname;
+
+            if (!string.IsNullOrEmpty(lastName) && lastName.Length >= 0)
             {
-                textLastname.Visibility = Visibility.Collapsed;
+                placeholderLastName.Visibility = Visibility.Collapsed;
             } else
             {
-                textLastname.Visibility = Visibility.Visible;
+                placeholderLastName.Visibility = Visibility.Visible;
+            }
+
+            if (!IsLettersOnly(lastName))
+            {
+                if (string.IsNullOrEmpty(lastName)) return;
+                txtLastname.Clear();
+                MessageBox.Show("Last name can only contain letters.");
+                return;
             }
         }
 
+        //ID
         private void textID_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtID.Focus();
@@ -74,15 +99,26 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtID_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtID.Text) && txtID.Text.Length >= 0)
+            var ID = txtID.Text;
+            var placeholderID = textID;
+
+            if (!string.IsNullOrEmpty(ID) && ID.Length >= 0)
             {
-                textID.Visibility = Visibility.Collapsed;
+                placeholderID.Visibility = Visibility.Collapsed;
             } else
             {
-                textID.Visibility = Visibility.Visible;
+                placeholderID.Visibility = Visibility.Visible;
+            }
+
+            if (!AreAllDigits(ID))
+            {
+                if (string.IsNullOrWhiteSpace(ID)) return;
+                MessageBox.Show("ID must be only digits.");
+                return;
             }
         }
 
+        //Email
         private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtEmail.Focus();
@@ -90,15 +126,19 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtEmail.Text) && txtEmail.Text.Length >= 0)
+            var email = txtEmail.Text;
+            var placeholderEmail = textEmail;
+
+            if (!string.IsNullOrEmpty(email) && email.Length >= 0)
             {
-                textEmail.Visibility = Visibility.Collapsed;
+                placeholderEmail.Visibility = Visibility.Collapsed;
             } else
             {
-                textEmail.Visibility = Visibility.Visible;
+                placeholderEmail.Visibility = Visibility.Visible;
             }
         }
 
+        //Description
         private void textDescription_MouseDown(object sender, MouseButtonEventArgs e)
         {
             rtxtDescription.Focus();
@@ -106,15 +146,19 @@ namespace PreschoolManagmentSoftware.Windows
 
         private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text))
+            var description = new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text;
+            var placeholderDescription = textDescription;
+
+            if (string.IsNullOrWhiteSpace(description))
             {
-                textDescription.Visibility = Visibility.Visible;
+                placeholderDescription.Visibility = Visibility.Visible;
             } else
             {
-                textDescription.Visibility = Visibility.Collapsed;
+                placeholderDescription.Visibility = Visibility.Collapsed;
             }
         }
 
+        //Files to upload
         private void btnUpload_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog() { Multiselect = true };
@@ -166,7 +210,7 @@ namespace PreschoolManagmentSoftware.Windows
             }
         }
 
-
+        //Sumbit button
         private async void AsyncSubmitRequest_Click(object sender, RoutedEventArgs e)
         {
             var firstName = txtFirstname.Text;
@@ -179,42 +223,41 @@ namespace PreschoolManagmentSoftware.Windows
             if (string.IsNullOrWhiteSpace(firstName))
             {
                 MessageBox.Show("Please enter your first name.");
-                return;
-            }
-
-            if (!IsLettersOnly(firstName))
-            {
-                MessageBox.Show("First name can only contain letters.");
+                txtFirstname.Clear();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 MessageBox.Show("Please enter your last name.");
+                txtLastname.Clear();
                 return;
             }
 
-            if (!IsLettersOnly(lastName))
+            if (string.IsNullOrWhiteSpace(ID) || ID.Length < 11 || ID.Length > 11)
             {
-                MessageBox.Show("Last name can only contain letters.");
+                MessageBox.Show("Please eneter your ID. It must be 11 digits.");
+                txtID.Clear();
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(ID) || ID.Length != 11 || !AreAllDigits(ID))
+            if (string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("ID must be 11 digits.");
+                MessageBox.Show("Please enter your email.");
                 return;
             }
-
-            if (string.IsNullOrWhiteSpace(email) || !IsValidEmail(email))
+            
+            if (!IsValidEmail(email))
             {
                 MessageBox.Show("Please enter a valid email address.");
+                txtEmail.Clear();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(description))
             {
                 MessageBox.Show("Please enter a description.");
+                txtFirstname.Clear();
                 return;
             }
 
@@ -231,7 +274,7 @@ namespace PreschoolManagmentSoftware.Windows
 
         private bool IsLettersOnly(string value)
         {
-            return !string.IsNullOrWhiteSpace(value) && value.All(char.IsLetter);
+            return !string.IsNullOrEmpty(value) && value.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '-');
         }
 
         private bool AreAllDigits(string value)
