@@ -99,7 +99,7 @@ namespace PreschoolManagmentSoftware.Windows
             rtxtDescription.Focus();
         }
 
-         private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
+        private void rtxtDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text))
             {

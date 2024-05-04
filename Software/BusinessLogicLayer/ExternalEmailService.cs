@@ -21,7 +21,8 @@ namespace BusinessLogicLayer
             Message.To.Add(new MailAddress(myMail));
 
             // Svi podaci u tijelu meilao
-            var fullBody = $"<strong>First Name:</strong> {firstName}<br/><strong>Last Name:</strong> {lastName}<br/><strong>Email:</strong> {email}<br/><strong>Problem description:</strong><br/>{body}";
+            var fullBody = $"<strong>First Name:</strong> {firstName}<br/><strong>Last Name:</strong> " +
+                $"{lastName}<br/><strong>Email:</strong> {email}<br/><strong>Problem description:</strong><br/>{body}";
             Message.Body = "<html><body>" + fullBody + "</body></html>";
             Message.IsBodyHtml = true;
 
