@@ -203,6 +203,7 @@
 
         <Style x:Key="placeholder" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Grid.Column" Value="1" />
             <Setter Property="Panel.ZIndex" Value="1" />
             <Setter Property="Margin" Value="10 0 0 0" />
@@ -211,6 +212,7 @@
 
         <Style x:Key="textBox" TargetType="Control">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Grid.Column" Value="1" />
             <Setter Property="Margin" Value="10 0 0 0" />
             <Setter Property="Foreground" Value="#acb0af" />
@@ -264,6 +266,11 @@
                     <Setter Property="Cursor" Value="Hand" />
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <Style x:Key="info-required" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#d02c2c" />
+            <Setter Property="FontStyle" Value="Italic" />
         </Style>
 
 
