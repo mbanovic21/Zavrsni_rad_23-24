@@ -58,7 +58,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Images/user.png" Height="20"/>
+                        <Image Source="/Media/Images/user.png" Height="20"/>
                         <TextBlock x:Name="textUsername" MouseDown="textUsername_MouseDown" Text=" Username" Style="{StaticResource placeholder}"/>
                         <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" Style="{StaticResource textBox}" />
                     </Grid>
@@ -71,7 +71,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="/Images/password.png" Height="20" Margin="2,0,-2,0"/>
+                        <Image Source="/Media/Images/password.png" Height="20" Margin="2,0,-2,0"/>
                         <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Password" Style="{StaticResource placeholder}"/>
                         <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
                     </Grid>
