@@ -261,8 +261,9 @@ namespace PreschoolManagmentSoftware.Windows
                 return;
             }
 
-            var isIDVaild = userServices.IsIDVaild(ID);
-            if (isIDVaild)
+            var isIDValid = userServices.IsIDVaild(ID);
+
+            if (isIDValid)
             {
                 await Task.Run(() => new ExternalEmailService(firstName, lastName, email, subject, description, filePaths));
                 MessageBox.Show("Notification successfully sent.");

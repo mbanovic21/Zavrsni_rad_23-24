@@ -20,12 +20,10 @@ namespace DataAccessLayer.Repositories
 
         public string GetID(string id)
         {
-            var query = from user in Users
-                        where user.OIB == id
-                        select user.OIB;
-
-            return query.ToString();
+            var user = Users.FirstOrDefault(u => u.OIB == id);
+            return user?.OIB;
         }
+
 
         public void Dispose()
         {

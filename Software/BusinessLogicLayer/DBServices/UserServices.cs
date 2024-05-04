@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new UserRepository(new DataAccessLayer.PMSmodel()))
             {
                 var ID = repo.GetID(id);
-                if(ID == id.ToString())
+                if (ID == id.ToString())
                 {
                     return true;
                 } else
