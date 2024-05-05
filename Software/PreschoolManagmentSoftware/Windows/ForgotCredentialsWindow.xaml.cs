@@ -258,7 +258,6 @@ namespace PreschoolManagmentSoftware.Windows
             {
                 MessageBox.Show("Please enter a description.");
                 rtxtDescription.Document.Blocks.Clear();
-                // Postavljanje pozicije kursora na početak
                 rtxtDescription.Selection.Select(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentStart);
                 return;
             }
