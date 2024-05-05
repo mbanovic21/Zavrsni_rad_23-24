@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SecurityLayer
 {
-    public class EncryptionManager
+    internal class EncryptionManager
     {
         private const int SaltSize = 32; // Duljina soli u bajtovima
         private const int Iterations = 10000; // Broj iteracija za sporu hash funkciju
@@ -29,7 +29,7 @@ namespace SecurityLayer
             // Stvorite kriptografski providor s brojem iteracija
             using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations))
             {
-                // Izračunajte sažetak lozinke i soli
+                // Izračunajte sažetak lozinke i soli, Password-Based Key Derivation Function (pbkdf2)
                 byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bajta za SHA-256
 
                 // Pretvorite sažetak u heksadecimalni format
