@@ -33,7 +33,7 @@ namespace SecurityLayer
                 byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bajta za SHA-256
 
                 // Pretvorite sažetak u heksadecimalni format
-                string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", "");
+                string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
                 return (hashedPassword, salt);
             }
@@ -57,9 +57,10 @@ namespace SecurityLayer
                 byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bajta za SHA-256
 
                 // Pretvorite sažetak u heksadecimalni format
-                string hashedPasswordToCompare = BitConverter.ToString(hashBytes).Replace("-", "");
+                string hashedPasswordToCompare = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
                 // Usporedite sažetke
+                Console.WriteLine($"Password to compare: {hashedPasswordToCompare} vs. {hashedPassword}");
                 return hashedPasswordToCompare.Equals(hashedPassword);
             }
         }

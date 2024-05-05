@@ -25,7 +25,7 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
-        public bool AreCredentialsValid(string username, string password)
+        public string[] GetCredentialsByUsername(string username)
         {
             using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
@@ -33,13 +33,20 @@ namespace BusinessLogicLayer.DBServices
 
                 if (user != null)
                 {
-                    if (user.Username == username && user.Password == password)
+                    var hashedPasswordFromDatabase = user.Password;
+                    var saltFromDatabase = user.Salt;
+
+                    return new string[] 
                     {
-                        return true;
-                    }
+                        hashedPasswordFromDatabase,
+                        saltFromDatabase
+                    };
+                } else
+                {
+                    return null;
                 }
-                return false;
             }
         }
+
     }
 }

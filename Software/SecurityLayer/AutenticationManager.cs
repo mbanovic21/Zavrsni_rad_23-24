@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer.DBServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,17 +10,19 @@ namespace SecurityLayer
     public class AutenticationManager
     {
         private EncryptionManager EncryptionManager = new EncryptionManager();
+        private UserServices UserServices = new UserServices();
 
         public bool AuthenticateUser(string username, string password)
         {
-            // Dohvatite lozinku i sol iz baze podataka za korisnika s korisničkim imenom 'username'
-            string hashedPasswordFromDatabase = ""; // Dohvatite pohranjenu enkriptiranu lozinku iz baze
-            string saltFromDatabase = ""; // Dohvatite sol iz baze
+            var credentials = UserServices.GetCredentialsByUsername(username);
 
-            // Provjerite jesu li korisnički podaci ispravni
+            var hashedPasswordFromDatabase = credentials[0];
+            var saltFromDatabase = credentials[1];
+
+            Console.WriteLine($"Iz baze: {hashedPasswordFromDatabase}, {saltFromDatabase}");
+
             if (!string.IsNullOrEmpty(hashedPasswordFromDatabase) && !string.IsNullOrEmpty(saltFromDatabase))
             {
-                // Provjerite lozinku koristeći PasswordManager
                 return EncryptionManager.VerifyPassword(password, hashedPasswordFromDatabase, saltFromDatabase);
             }
 

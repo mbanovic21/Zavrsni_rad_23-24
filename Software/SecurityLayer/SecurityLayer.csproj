@@ -55,10 +55,6 @@
       <Project>{ff7ebd88-d7d3-4e43-a357-b3324d47f7eb}</Project>
       <Name>EntityLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PreschoolManagmentSoftware\PreschoolManagmentSoftware.csproj">
-      <Project>{7ee18fba-4a1e-4cdb-8a53-1384760b3fd4}</Project>
-      <Name>PreschoolManagmentSoftware</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
