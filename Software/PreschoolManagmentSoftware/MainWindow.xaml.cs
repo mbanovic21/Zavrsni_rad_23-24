@@ -83,10 +83,11 @@ namespace PreschoolManagmentSoftware
                 return;
             }
 
-            var isCredentialsVaild = await Task.Run(() => userServices.IsCredentialsVaild(username, password));
-            if(isCredentialsVaild)
+            var areCredentialsValid = await Task.Run(() => userServices.AreCredentialsValid(username, password));
+            if(areCredentialsValid)
             {
-                MessageBox.Show("Successfully logged in!");
+                MessageBox.Show("Successfully logged in!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
             } else
             {
                 MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

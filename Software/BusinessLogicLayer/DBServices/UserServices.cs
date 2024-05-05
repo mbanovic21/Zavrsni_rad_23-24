@@ -25,20 +25,23 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
-        public bool IsCredentialsVaild(string username, string password)
+        public bool AreCredentialsValid(string username, string password)
         {
             using (var repo = new UserRepository(new DataAccessLayer.PMSmodel()))
             {
                 var user = repo.GetUserByUsername(username);
 
-                if (user.Username == username && user.Password == password)
+                if (user != null)
                 {
-                    return true;
-                } else
-                {
-                    return false;
+                    if (user.Username == username && user.Password == password)
+                    {
+                        return true;
+                    }
                 }
+
+                return false;
             }
         }
+
     }
 }
