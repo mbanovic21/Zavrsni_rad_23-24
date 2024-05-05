@@ -38,10 +38,8 @@ namespace BusinessLogicLayer.DBServices
                         return true;
                     }
                 }
-
                 return false;
             }
         }
-
     }
 }
