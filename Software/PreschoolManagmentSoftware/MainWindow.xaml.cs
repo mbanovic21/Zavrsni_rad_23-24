@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer.DBServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace PreschoolManagmentSoftware
         {
             InitializeComponent();
         }
+
+        private UserServices userServices = new UserServices();
 
         private void textUsername_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -57,13 +60,39 @@ namespace PreschoolManagmentSoftware
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtUsername.Text) && !string.IsNullOrEmpty(txtPassword.Password))
+            var username = txtUsername.Text;
+            var password = txtPassword.Password;
+
+            if (string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please enter your credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Please enter a username.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Please enter a password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var isCredentialsVaild = await Task.Run(() => userServices.IsCredentialsVaild(username, password));
+            if(isCredentialsVaild)
             {
                 MessageBox.Show("Successfully logged in!");
+            } else
+            {
+                MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {

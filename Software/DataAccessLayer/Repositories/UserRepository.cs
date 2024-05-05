@@ -24,6 +24,16 @@ namespace DataAccessLayer.Repositories
             return user?.OIB;
         }
 
+        public User GetUserByUsername(string username) 
+        {
+            var user = Users.FirstOrDefault(u => u.Username == username);
+            return user;
+        }
+
+        private void SaveChanges()
+        {
+            Context.SaveChanges();
+        }
 
         public void Dispose()
         {

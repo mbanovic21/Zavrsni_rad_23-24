@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Repositories;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,22 @@ namespace BusinessLogicLayer.DBServices
             {
                 var ID = repo.GetID(id);
                 if (ID == id.ToString())
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public bool IsCredentialsVaild(string username, string password)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PMSmodel()))
+            {
+                var user = repo.GetUserByUsername(username);
+
+                if (user.Username == username && user.Password == password)
                 {
                     return true;
                 } else
