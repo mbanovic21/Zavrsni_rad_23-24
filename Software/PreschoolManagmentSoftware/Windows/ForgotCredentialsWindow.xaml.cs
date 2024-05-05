@@ -149,7 +149,7 @@ namespace PreschoolManagmentSoftware.Windows
             var description = new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text;
             var placeholderDescription = textDescription;
 
-            if (string.IsNullOrWhiteSpace(description))
+            if (string.IsNullOrEmpty(description))
             {
                 placeholderDescription.Visibility = Visibility.Visible;
             } else
@@ -257,11 +257,13 @@ namespace PreschoolManagmentSoftware.Windows
             if (string.IsNullOrWhiteSpace(description))
             {
                 MessageBox.Show("Please enter a description.");
-                txtFirstname.Clear();
+                rtxtDescription.Document.Blocks.Clear();
+                // Postavljanje pozicije kursora na početak
+                rtxtDescription.Selection.Select(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentStart);
                 return;
             }
 
-            var isIDValid = userServices.IsIDVaild(ID);
+            var isIDValid = await Task.Run(() => userServices.IsIDVaild(ID));
 
             if (isIDValid)
             {
