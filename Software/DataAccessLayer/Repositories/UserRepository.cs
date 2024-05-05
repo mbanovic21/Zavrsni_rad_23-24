@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IDisposable
     {
         private PreschoolManagmentModel Context { get; set; }
         private DbSet<User> Users { get; set; }
