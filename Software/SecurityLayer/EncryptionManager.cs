@@ -14,25 +14,25 @@ namespace SecurityLayer
 
         public (string hashedPassword, string salt) HashPassword(string password)
         {
-            // Generirajte nasumičnu sol
+            // Generira nasumičnu sol
             string salt = GenerateSalt();
 
-            // Konvertirajte lozinku i sol u niz bajtova
+            // Konvertira lozinku i sol u niz bajtova
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
             byte[] saltBytes = Encoding.UTF8.GetBytes(salt);
 
-            // Kombinirajte lozinku i sol
+            // Kombinira lozinku i sol
             byte[] combinedBytes = new byte[passwordBytes.Length + saltBytes.Length];
             Array.Copy(passwordBytes, 0, combinedBytes, 0, passwordBytes.Length);
             Array.Copy(saltBytes, 0, combinedBytes, passwordBytes.Length, saltBytes.Length);
 
-            // Stvorite kriptografski providor s brojem iteracija
+            // Stvori kriptografski providor s brojem iteracija
             using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations))
             {
-                // Izračunajte sažetak lozinke i soli, Password-Based Key Derivation Function (pbkdf2)
-                byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bajta za SHA-256
+                // Izračuna sažetak lozinke i soli, Password-Based Key Derivation Function (pbkdf2)
+                byte[] hashBytes = pbkdf2.GetBytes(SaltSize); // 32 bajta za SHA-256
 
-                // Pretvorite sažetak u heksadecimalni format
+                // Pretvori sažetak u heksadecimalni format
                 string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
                 return (hashedPassword, salt);
@@ -41,25 +41,25 @@ namespace SecurityLayer
 
         public bool VerifyPassword(string password, string hashedPassword, string salt)
         {
-            // Konvertirajte lozinku i sol u niz bajtova
+            // Konvertira lozinku i sol u niz bajtova
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
             byte[] saltBytes = Encoding.UTF8.GetBytes(salt);
 
-            // Kombinirajte lozinku i sol
+            // Kombinir lozinku i sol
             byte[] combinedBytes = new byte[passwordBytes.Length + saltBytes.Length];
             Array.Copy(passwordBytes, 0, combinedBytes, 0, passwordBytes.Length);
             Array.Copy(saltBytes, 0, combinedBytes, passwordBytes.Length, saltBytes.Length);
 
-            // Stvorite kriptografski providor s brojem iteracija
+            // Stvara kriptografski providor s brojem iteracija
             using (var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, Iterations))
             {
-                // Izračunajte sažetak lozinke i soli
+                // Izračuna sažetak lozinke i soli
                 byte[] hashBytes = pbkdf2.GetBytes(32); // 32 bajta za SHA-256
 
-                // Pretvorite sažetak u heksadecimalni format
+                // Pretvori sažetak u heksadecimalni format
                 string hashedPasswordToCompare = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
 
-                // Usporedite sažetke
+                // Usporedi sažetke
                 Console.WriteLine($"Password to compare: {hashedPasswordToCompare} vs. {hashedPassword}");
                 return hashedPasswordToCompare.Equals(hashedPassword);
             }
@@ -67,15 +67,15 @@ namespace SecurityLayer
 
         private string GenerateSalt()
         {
-            // Stvorite generator slučajnih brojeva
+            // Stvori generator slučajnih brojeva
             using (var rng = new RNGCryptoServiceProvider())
             {
                 byte[] saltBytes = new byte[SaltSize];
 
-                // Popunite niz bajtova s nasumičnim vrijednostima
+                // Popuni niz bajtova s nasumičnim vrijednostima
                 rng.GetBytes(saltBytes);
 
-                // Pretvorite niz bajtova u heksadecimalni format
+                // Pretvori niz bajtova u heksadecimalni format
                 string salt = BitConverter.ToString(saltBytes).Replace("-", "");
 
                 return salt;
