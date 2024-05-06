@@ -6,10 +6,10 @@ using System.Linq;
 
 namespace DataAccessLayer
 {
-    public partial class PMSmodel : DbContext
+    public partial class PreschoolManagmentModel : DbContext
     {
-        public PMSmodel()
-            : base("name=PMSmodel")
+        public PreschoolManagmentModel()
+            : base("name=PreschoolManagmentModel")
         {
         }
 
@@ -28,6 +28,10 @@ namespace DataAccessLayer
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Child>()
+                .Property(e => e.PIN)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Child>()
                 .Property(e => e.FirstName)
                 .IsFixedLength();
@@ -146,6 +150,10 @@ namespace DataAccessLayer
                 .IsFixedLength();
 
             modelBuilder.Entity<Parent>()
+                .Property(e => e.PIN)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Parent>()
                 .Property(e => e.FirstName)
                 .IsFixedLength();
 
@@ -179,16 +187,20 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Role>()
                 .Property(e => e.Name)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Role>()
                 .Property(e => e.Description)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.Users)
                 .WithOptional(e => e.Role)
                 .HasForeignKey(e => e.Id_role);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.PIN)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.FirstName)
@@ -216,6 +228,10 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Salt)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()

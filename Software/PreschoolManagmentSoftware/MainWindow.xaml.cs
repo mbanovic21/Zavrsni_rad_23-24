@@ -1,4 +1,4 @@
-﻿using BusinessLogicLayer.DBServices;
+﻿using SecurityLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace PreschoolManagmentSoftware
             InitializeComponent();
         }
 
-        private UserServices userServices = new UserServices();
+        private AutenticationManager autenticationManager = new AutenticationManager();
 
         private void textUsername_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -68,6 +68,7 @@ namespace PreschoolManagmentSoftware
             if (string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please enter your credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
                 return;
             }
             
@@ -83,7 +84,7 @@ namespace PreschoolManagmentSoftware
                 return;
             }
 
-            var areCredentialsValid = await Task.Run(() => userServices.AreCredentialsValid(username, password));
+            var areCredentialsValid = await Task.Run(() => autenticationManager.AuthenticateUser(username, password));
             if(areCredentialsValid)
             {
                 MessageBox.Show("Successfully logged in!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);

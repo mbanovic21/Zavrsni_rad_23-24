@@ -17,7 +17,7 @@ namespace EntityLayer.Entities
         public int Id { get; set; }
 
         [StringLength(11)]
-        public string OIB { get; set; }
+        public string PIN { get; set; }
 
         [StringLength(50)]
         public string FirstName { get; set; }
@@ -42,6 +42,9 @@ namespace EntityLayer.Entities
 
         [StringLength(50)]
         public string Password { get; set; }
+
+        [StringLength(50)]
+        public string Salt { get; set; }
 
         public int? Id_role { get; set; }
 

@@ -12,7 +12,7 @@ namespace BusinessLogicLayer.DBServices
     {
         public bool IsIDVaild(string id)
         {
-            using (var repo = new UserRepository(new DataAccessLayer.PMSmodel()))
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 var ID = repo.GetID(id);
                 if (ID == id.ToString())
@@ -25,21 +25,26 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
-        public bool AreCredentialsValid(string username, string password)
+        public string[] GetCredentialsByUsername(string username)
         {
-            using (var repo = new UserRepository(new DataAccessLayer.PMSmodel()))
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 var user = repo.GetUserByUsername(username);
 
                 if (user != null)
                 {
-                    if (user.Username == username && user.Password == password)
-                    {
-                        return true;
-                    }
-                }
+                    var hashedPasswordFromDatabase = user.Password;
+                    var saltFromDatabase = user.Salt;
 
-                return false;
+                    return new string[] 
+                    {
+                        hashedPasswordFromDatabase,
+                        saltFromDatabase
+                    };
+                } else
+                {
+                    return null;
+                }
             }
         }
 

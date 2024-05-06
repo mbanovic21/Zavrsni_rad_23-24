@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D1A98C7E-0F05-496B-ACE0-7D3F143397B2}</ProjectGuid>
+    <ProjectGuid>{C874A22A-B12B-44B4-BFF0-8236925E0747}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BusinessLogicLayer</RootNamespace>
-    <AssemblyName>BusinessLogicLayer</AssemblyName>
+    <RootNamespace>SecurityLayer</RootNamespace>
+    <AssemblyName>SecurityLayer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,14 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBServices\UserServices.cs" />
-    <Compile Include="ExternalEmailService.cs" />
+    <Compile Include="AutenticationManager.cs" />
+    <Compile Include="AuthorizationManager.cs" />
+    <Compile Include="EncryptionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{307f69de-aa15-4cca-a97e-fff73dd61145}</Project>
-      <Name>DataAccessLayer</Name>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
+      <Project>{d1a98c7e-0f05-496b-ace0-7d3f143397b2}</Project>
+      <Name>BusinessLogicLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\EntityLayer\EntityLayer.csproj">
       <Project>{ff7ebd88-d7d3-4e43-a357-b3324d47f7eb}</Project>

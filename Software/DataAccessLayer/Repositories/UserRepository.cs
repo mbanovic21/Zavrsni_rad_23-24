@@ -10,9 +10,9 @@ namespace DataAccessLayer.Repositories
 {
     public class UserRepository : IDisposable
     {
-        private PMSmodel Context { get; set; }
+        private PreschoolManagmentModel Context { get; set; }
         private DbSet<User> Users { get; set; }
-        public UserRepository(PMSmodel context)
+        public UserRepository(PreschoolManagmentModel context)
         {
             Context = context;
             Users = Context.Set<User>();
@@ -20,11 +20,11 @@ namespace DataAccessLayer.Repositories
 
         public string GetID(string id)
         {
-            var user = Users.FirstOrDefault(u => u.OIB == id);
-            return user?.OIB;
+            var user = Users.FirstOrDefault(u => u.PIN == id);
+            return user?.PIN;
         }
 
-        public User GetUserByUsername(string username) 
+        public User GetUserByUsername(string username)
         {
             var user = Users.FirstOrDefault(u => u.Username == username);
             return user;

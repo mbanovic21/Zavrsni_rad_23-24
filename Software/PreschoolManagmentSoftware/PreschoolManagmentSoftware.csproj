@@ -128,6 +128,10 @@
       <Project>{ff7ebd88-d7d3-4e43-a357-b3324d47f7eb}</Project>
       <Name>EntityLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SecurityLayer\SecurityLayer.csproj">
+      <Project>{c874a22a-b12b-44b4-bff0-8236925e0747}</Project>
+      <Name>SecurityLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Media\Images\user.png" />
