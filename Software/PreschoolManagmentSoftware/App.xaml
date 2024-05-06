@@ -235,7 +235,7 @@
 
         <Style x:Key="btnMRC" TargetType="Button">
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Height" Value="50" />
+            <Setter Property="Height" Value="40" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
