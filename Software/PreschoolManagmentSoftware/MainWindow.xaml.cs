@@ -40,5 +40,26 @@ namespace PreschoolManagmentSoftware
             /*var ucRegistration = new ucRegistration();
             contentControl.Content = ucRegistration;*/
         }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            } else
+            {
+                WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

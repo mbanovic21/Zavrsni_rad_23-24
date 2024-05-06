@@ -10,7 +10,7 @@
     <Grid MouseDown="Grid_MouseDown">
         <DockPanel>
             <!-- Navigation Bar -->
-            <Border Width="200" DockPanel.Dock="Left" Margin="0,50,0,0">
+            <Border Width="200" DockPanel.Dock="Left" Margin="0,40,0,0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Color="#3AA9AD" Offset="0"/>
@@ -35,26 +35,26 @@
                     </Canvas>
 
                     <StackPanel>
-                        <Button x:Name="btnRegistration" Content="Registration" Style="{StaticResource transparentButton}" Click="btnRegistration_Click" />
+                        <Button x:Name="btnRegistration" Content="Registration" Click="btnRegistration_Click" />
                     </StackPanel>
                 </Grid>
                 
             </Border>
 
             <!-- Header -->
-            <Border Background="#4EB1B6" Height="50" DockPanel.Dock="Top" Margin="-200,0,0,0">
+            <Border Background="#4EB1B6" Height="40" DockPanel.Dock="Top" Margin="-200,0,0,0">
                 <DockPanel VerticalAlignment="Center">
                     <!-- Naslov -->
-                    <TextBlock Text="Preschool Managment Software" VerticalAlignment="Center" DockPanel.Dock="Left" Style="{StaticResource normalText}" FontSize="25" Margin="15,0,0,0"/>
+                    <TextBlock Text="Preschool Managment Software" VerticalAlignment="Center" DockPanel.Dock="Left" Style="{StaticResource normalText}" FontSize="20" Margin="15,0,0,0"/>
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource btnMRC}">
+                        <Button x:Name="btnMinimize" Style="{StaticResource btnMRC}" Click="btnMinimize_Click">
                             <Image Source="/Media/Images/minimize3.png" Width="50" Height="30"/>
                         </Button>
-                        <Button Style="{StaticResource btnMRC}">
+                        <Button x:Name="btnRestore" Style="{StaticResource btnMRC}" Click="btnRestore_Click">
                              <Image Source="/Media/Images/restore2.png" Width="50" Height="30" />
                         </Button>
-                        <Button Style="{StaticResource btnMRC}">
+                        <Button x:Name="btnClose" Style="{StaticResource btnMRC}" Click="btnClose_Click">
                             <Image Source="/Media/Images/close2.png" Width="50" Height="30" />
                         </Button>
                     </StackPanel>
