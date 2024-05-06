@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Background="Transparent" 
              d:DesignHeight="728" d:DesignWidth="1166">
     <DockPanel>
         <Grid>
@@ -128,9 +128,8 @@
                                 </Grid>
                             </Border>
 
-
                             <!-- DateOfBirth -->
-                            <Border Grid.Column="0" Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff">
+                            <Border Grid.Column="0" Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff" MouseLeftButtonDown="Border_MouseLeftButtonDown">
                                 <Grid Margin="7 9">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -138,8 +137,8 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/calendar.png" Height="20"/>
-                                    <TextBlock x:Name="textDateOfBirth" Style="{StaticResource placeholder}"/>
-                                    <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource textBox}" Margin="5 0 0 0"/>
+                                    <TextBlock x:Name="textDateOfBirth" MouseLeftButtonUp="textDateOfBirth_MouseLeftButtonUp" Style="{StaticResource placeholder}" />
+                                    <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource textBox}" Margin="5 0 0 0" />
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
                                             <ToolTip>
@@ -154,6 +153,26 @@
                                     </Image>
                                 </Grid>
                             </Border>
+
+                            <!-- Gender -->
+                            <Border Grid.Column="0" Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff">
+                                <Grid Margin="7 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="/Media/Images/gender.png" Height="20"/>
+                                    <StackPanel Grid.Column="1" Margin="7">
+                                        <TextBlock x:Name="textGender" Text="Gender:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <RadioButton x:Name="rbMale" Content="Male" GroupName="Gender" Checked="rbGender_Checked"/>
+                                            <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" Checked="rbGender_Checked" Margin="10 0 0 0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
 
                             <!-- Email -->
                             <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff">
@@ -189,7 +208,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Media/Images/user.png" Height="20"/>
+                                    <Image Source="/Media/Images/telephone.png" Height="20"/>
                                     <TextBlock x:Name="textTelephone" MouseDown="textTelephone_MouseDown" Text="Telephone" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtTelephone" TextChanged="txtTelephone_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -208,7 +227,7 @@
                                 </Grid>
                             </Border>
 
-                            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5"  Background="#ffffff">
                                 <Grid Margin="7 9">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -221,7 +240,7 @@
                                 </Grid>
                             </Border>
 
-                            <Border BorderThickness="1" Grid.Column="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
+                            <Border BorderThickness="1" Grid.Column="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5"  Background="#ffffff">
                                 <Grid Margin="7 9">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -234,13 +253,28 @@
                                 </Grid>
                             </Border>
 
-
+                            <!-- Role -->
+                            <Border Grid.Column="1" Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff">
+                                <Grid Margin="7 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="/Media/Images/user-role.png" Height="20"/>
+                                    <StackPanel Grid.Column="1" Margin="7">
+                                        <TextBlock x:Name="textRole" Text="Role:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <RadioButton x:Name="rbAdmin" Content="Administrator" GroupName="Gender" Checked="rbRole_Checked"/>
+                                            <RadioButton x:Name="rbUser" Content="User" GroupName="Gender" Checked="rbRole_Checked" Margin="10 0 0 0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
                         </Grid>
                         
-                        
-
                         <!-- Gumb za slanje zahtjeva -->
-                        <Button x:Name="Register" Content="Register" Click="Register_Click" Style="{StaticResource loginButton}" />
+                        <Button x:Name="btnRegister" Content="Register" Click="btnRegister_Click" Style="{StaticResource loginButton}" />
                     </StackPanel>
                 </Grid>
             </Border>

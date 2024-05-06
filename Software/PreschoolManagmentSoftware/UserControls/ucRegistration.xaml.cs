@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLogicLayer.DBServices;
+using BusinessLogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace PreschoolManagmentSoftware.UserControls
 {
@@ -35,7 +38,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private void txtPIN_TextChanged(object sender, TextChangedEventArgs e)
         {
             var PIN = txtPIN.Text;
-            var placeholderPIN = txtPIN;
+            var placeholderPIN = textPIN;
 
             if (!string.IsNullOrEmpty(PIN) && PIN.Length >= 0)
             {
@@ -109,6 +112,29 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        //DateOfBirth
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            dpDateOfBirth.Focus();
+            e.Handled = true;
+        }
+
+        private void textDateOfBirth_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            dpDateOfBirth.IsDropDownOpen = !dpDateOfBirth.IsDropDownOpen;
+        }
+
+        //Gender
+        private void rbGender_Checked(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+            //var selectedRadio = radioButton.IsChecked;
+            if (radioButton != null)
+            {
+                textGender.Text = radioButton.Content.ToString();
+            }
+        }
+
         //Email
         private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -129,6 +155,34 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        //Telephone
+        private void textTelephone_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtTelephone.Focus();
+        }
+
+        private void txtTelephone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var telephone = txtTelephone.Text;
+            var placeholderTelephone = textTelephone;
+
+            if (!string.IsNullOrEmpty(telephone) && telephone.Length >= 0)
+            {
+                placeholderTelephone.Visibility = Visibility.Collapsed;
+            } else
+            {
+                placeholderTelephone.Visibility = Visibility.Visible;
+            }
+
+            if (!AreAllDigits(telephone))
+            {
+                if (string.IsNullOrWhiteSpace(telephone)) return;
+                MessageBox.Show("ID must be only digits.");
+                return;
+            }
+        }
+
+        //Username
         private void textUsername_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtUsername.Focus();
@@ -145,6 +199,7 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        //Password
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtPassword.Focus();
@@ -158,6 +213,60 @@ namespace PreschoolManagmentSoftware.UserControls
             } else
             {
                 textPassword.Visibility = Visibility.Visible;
+            }
+        }
+
+        //Role
+        private void rbRole_Checked(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+            //var selectedRadio = radioButton.IsChecked;
+            if (radioButton != null)
+            {
+                textRole.Text = radioButton.Content.ToString();
+            }
+        }
+
+        //btnRegister
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            var PIN = txtPIN.Text;
+            var firstName = txtFirstname.Text;
+            var lastName = txtLastname.Text;
+            var email = txtEmail.Text;
+
+            if (string.IsNullOrWhiteSpace(PIN) || PIN.Length < 11 || PIN.Length > 11)
+            {
+                MessageBox.Show("Please eneter your ID. It must be 11 digits.");
+                txtPIN.Clear();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                MessageBox.Show("Please enter your first name.");
+                txtFirstname.Clear();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                MessageBox.Show("Please enter your last name.");
+                txtLastname.Clear();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show("Please enter your email.");
+                return;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address.");
+                txtEmail.Clear();
+                return;
             }
         }
 
@@ -186,37 +295,6 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 return false;
             }
-        }
-
-        private void textTelephone_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            txtTelephone.Focus();
-        }
-
-        private void txtTelephone_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var telephone = txtTelephone.Text;
-            var placeholderTelephone = txtTelephone;
-
-            if (!string.IsNullOrEmpty(telephone) && telephone.Length >= 0)
-            {
-                txtTelephone.Visibility = Visibility.Collapsed;
-            } else
-            {
-                txtTelephone.Visibility = Visibility.Visible;
-            }
-
-            if (!AreAllDigits(telephone))
-            {
-                if (string.IsNullOrWhiteSpace(telephone)) return;
-                MessageBox.Show("ID must be only digits.");
-                return;
-            }
-        }
-
-        private void Register_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Successfully register!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
