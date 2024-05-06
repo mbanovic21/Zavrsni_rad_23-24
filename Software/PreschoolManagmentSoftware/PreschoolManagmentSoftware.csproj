@@ -181,6 +181,13 @@
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Media\Images\close2.png" />
+    <Resource Include="Media\Images\restore2.png" />
+    <Resource Include="Media\Images\minimize3.png" />
+    <Resource Include="Media\Images\minimize2.png" />
+    <Resource Include="Media\Images\minimize1.png" />
+    <Resource Include="Media\Images\minimize.png" />
+    <Resource Include="Media\Images\restore.png" />
     <Resource Include="Media\Images\information.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

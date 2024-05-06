@@ -87,7 +87,9 @@ namespace PreschoolManagmentSoftware.Windows
             if (areCredentialsValid)
             {
                 MessageBox.Show("Successfully logged in!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                var mainWindow = new MainWindow();
+                Close();
+                mainWindow.ShowDialog();
             } else
             {
                 MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
