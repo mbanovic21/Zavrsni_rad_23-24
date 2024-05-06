@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PreschoolManagmentSoftware"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        Title="MainWindow" Height="500" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="768" Width="1366">
+
+    <Grid MouseDown="Grid_MouseDown">
+        <DockPanel>
+            <!-- Navigation Bar -->
+            <Border Width="200" DockPanel.Dock="Left" Margin="0,50,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#3AA9AD" Offset="0"/>
+                        <GradientStop Color="#3AADA1" Offset="0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+                    <Canvas>
+                        <Polygon Points="0,20 200,140 0,270" Fill="#4EB1B6"/>
+                        <Polygon Points="100,400 200,370 180,470" Fill="#4EB1B6"/>
+                        <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#4EB1B6"/>
+                        <Ellipse Margin="0 500 0 200" Width="40" Height="40" Fill="#4EB1B6"/>
+                        <Rectangle Width="100" Height="100" Fill="#4EB1B6" Canvas.Left="50" Canvas.Top="570"/>
+                        <Rectangle Width="20" Height="20" Fill="#4EB1B6" Canvas.Left="510" Canvas.Top="490"/>
+                        <Line X1="100" Y1="100" X2="200" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="50" Y1="50" X2="150" Y2="150" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="500" X2="350" Y2="350" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="50" Y1="0" X2="200" Y2="718" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="100" Y1="100" X2="200" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="300" X2="200" Y2="300" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    </Canvas>
+
+                    <StackPanel>
+                        <Button x:Name="btnRegistration" Content="Registration" Style="{StaticResource transparentButton}" Click="btnRegistration_Click" />
+                    </StackPanel>
+                </Grid>
+                
+            </Border>
+
+            <!-- Header -->
+            <Border Background="#4EB1B6" Height="50" DockPanel.Dock="Top" Margin="-200,0,0,0">
+                <DockPanel VerticalAlignment="Center">
+                    <!-- Naslov -->
+                    <TextBlock Text="Preschool Managment Software" VerticalAlignment="Center" DockPanel.Dock="Left" Style="{StaticResource normalText}" FontSize="25" Margin="15,0,0,0"/>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource btnMRC}">
+                            <Image Source="/Media/Images/minimize3.png" Width="50" Height="30"/>
+                        </Button>
+                        <Button Style="{StaticResource btnMRC}">
+                             <Image Source="/Media/Images/restore2.png" Width="50" Height="30" />
+                        </Button>
+                        <Button Style="{StaticResource btnMRC}">
+                            <Image Source="/Media/Images/close2.png" Width="50" Height="30" />
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Prostor za sadržaj -->
+            <Border Background="#f5f5f5">
+                <ContentControl x:Name="contentControl" />
+            </Border>
+        </DockPanel>
     </Grid>
 </Window>
