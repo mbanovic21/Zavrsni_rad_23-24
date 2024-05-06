@@ -37,8 +37,8 @@ namespace PreschoolManagmentSoftware
 
         private void btnRegistration_Click(object sender, RoutedEventArgs e)
         {
-            /*var ucRegistration = new ucRegistration();
-            contentControl.Content = ucRegistration;*/
+            var ucRegistration = new ucRegistration();
+            contentControl.Content = ucRegistration;
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
