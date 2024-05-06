@@ -16,14 +16,19 @@ namespace SecurityLayer
         {
             var credentials = UserServices.GetCredentialsByUsername(username);
 
-            var hashedPasswordFromDatabase = credentials[0];
-            var saltFromDatabase = credentials[1];
-
-            Console.WriteLine($"Iz baze: {hashedPasswordFromDatabase}, {saltFromDatabase}");
-
-            if (!string.IsNullOrEmpty(hashedPasswordFromDatabase) && !string.IsNullOrEmpty(saltFromDatabase))
+            if(credentials != null)
             {
-                return EncryptionManager.VerifyPassword(password, hashedPasswordFromDatabase, saltFromDatabase);
+                var hashedPasswordFromDatabase = credentials[0];
+                var saltFromDatabase = credentials[1];
+
+                Console.WriteLine($"Iz baze: {hashedPasswordFromDatabase}, {saltFromDatabase}");
+
+                if (!string.IsNullOrEmpty(hashedPasswordFromDatabase) && !string.IsNullOrEmpty(saltFromDatabase))
+                {
+                    return EncryptionManager.VerifyPassword(password, hashedPasswordFromDatabase, saltFromDatabase);
+                }
+
+                return false;
             }
 
             return false;
