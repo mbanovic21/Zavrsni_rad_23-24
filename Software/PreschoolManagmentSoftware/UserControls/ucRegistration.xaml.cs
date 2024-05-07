@@ -300,6 +300,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 return;
             }
 
+            string imagePathForRegistration;
             var PIN = txtPIN.Text;
             var firstName = txtFirstname.Text;
             var lastName = txtLastname.Text;
@@ -312,8 +313,18 @@ namespace PreschoolManagmentSoftware.UserControls
             (string hashedPassword, string salt) = AutenticationManager.HashPasswordAndGetSalt(password);
             var role = GetSelectedRole();
 
+            if (!string.IsNullOrEmpty(selectedImagePath))
+            {
+                imagePathForRegistration = selectedImagePath;
+            } else
+            {
+                string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
+                imagePathForRegistration = "pack://application:,,,/Media/Images/" + imageName;
+            }
+
             var userForRegistration = new User()
             {
+                ProfileImage = imagePathForRegistration,
                 PIN = PIN,
                 FirstName = firstName,
                 LastName = lastName,
@@ -327,6 +338,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 Id_role = role,
                 Id_Group = null
             };
+
 
             var isRegistrated = await Task.Run(() => UserServices.RegistrateUser(userForRegistration));
             if(isRegistrated)
@@ -405,7 +417,6 @@ namespace PreschoolManagmentSoftware.UserControls
 
             return true;
         }
-
 
         private bool IsLettersOnly(string value)
         {

@@ -33,22 +33,23 @@
                         <TextBlock Text="Registration" Style="{StaticResource titleText}" Foreground="#4EB1B6" Margin="0 0 0 20"/>
 
                         <!-- Profile image -->
-                        <Border CornerRadius="100" BorderThickness="1" BorderBrush="#4EB1B6" HorizontalAlignment="Center" Padding="20" Margin="0,0,0,7" >
-                            <Grid>
-                                <Image x:Name="btnDeleteImage" Source="/Media/Images/close.png" Style="{StaticResource imgClose}" MouseDown="btnDeleteImage_MouseDown" Margin="0,-30,-30,0" Visibility="Collapsed" />
-                                <Image x:Name="profileImage" Stretch="Uniform" Height="100" Width="100" ClipToBounds="True">
-                                    <Image.Style>
-                                        <Style TargetType="Image">
-                                            <Setter Property="Margin" Value="5"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                            </Grid>
+                        <Border CornerRadius="100" BorderThickness="1" BorderBrush="#4EB1B6" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,7" >
+                            <Border CornerRadius="100" BorderThickness="1" BorderBrush="#4EB1B6" HorizontalAlignment="Center" Padding="20" >
+                                <Grid>
+                                    <Image x:Name="btnDeleteImage" Source="/Media/Images/close.png" Style="{StaticResource imgClose}" MouseDown="btnDeleteImage_MouseDown" Margin="0,-40,-40,0" Visibility="Collapsed" />
+                                    <Image x:Name="profileImage" Stretch="Uniform" Height="100" Width="100" ClipToBounds="True">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Margin" Value="5"/>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                            </Border>
                         </Border>
 
-
                         <!-- Add Profile Picture -->
-                        <TextBlock x:Name="txtAddProfilePicture" Text="Add Profile Picture" Style="{StaticResource link}" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" />
+                        <TextBlock x:Name="txtAddProfilePicture" Text="Add Profile Picture" Style="{StaticResource link}" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" Margin="0,5,0,10"  />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -305,7 +306,7 @@
 
                                         <Image Source="/Media/Images/password.png" Height="20" Margin="2,0,-2,0"/>
                                         <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Password" Style="{StaticResource placeholder}"/>
-                                        <TextBox x:Name="txtPassword" TextChanged="txtPassword_TextChanged" Style="{StaticResource textBox}" IsReadOnly="True"/>
+                                        <TextBox x:Name="txtPassword" TextChanged="txtPassword_TextChanged" Style="{StaticResource textBox}"/>
 
                                         <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                             <Image.ToolTip>
