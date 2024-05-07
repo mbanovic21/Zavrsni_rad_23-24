@@ -28,30 +28,48 @@ namespace PreschoolManagmentSoftware.UserControls
     /// </summary>
     public partial class ucRegistration : UserControl
     {
+
+        private AutenticationManager AutenticationManager = new AutenticationManager();
+        private UserServices UserServices = new UserServices();
+        private string selectedImagePath { get; set; }
+
         public ucRegistration()
         {
             InitializeComponent();
         }
 
-        private AutenticationManager AutenticationManager = new AutenticationManager();
-        private UserServices UserServices = new UserServices();
-
         //Profile image
-        private void ChooseImageButton_Click(object sender, RoutedEventArgs e)
+        private void ucRegistration_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetInitialProfileImage();
+        }
+
+        private void SetInitialProfileImage()
+        {
+            var gender = GetSelectedGender();
+            string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
+            string imagePath = "pack://application:,,,/Media/Images/" + imageName;
+            profileImage.Source = new BitmapImage(new Uri(imagePath));
+        }
+
+        private void btnDeleteImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SetInitialProfileImage();
+            btnDeleteImage.Visibility = Visibility.Collapsed;
+            selectedImagePath = null;
+        }
+
+        private void txtAddProfilePicture_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp|All files (*.*)|*.*";
 
             if (openFileDialog.ShowDialog() == true)
             {
-                string imagePath = openFileDialog.FileName;
-                profileImage.Source = new BitmapImage(new Uri(imagePath));
+                selectedImagePath = openFileDialog.FileName;
+                profileImage.Source = new BitmapImage(new Uri(selectedImagePath));
+                btnDeleteImage.Visibility = Visibility.Visible;
             }
-        }
-        private string GetSelectedGenderImagePath()
-        {
-            var gender = GetSelectedGender();
-            return gender == "Ženski" ? "/Media/Images/female-user.png" : "/Media/Images/male-user.png";
         }
 
         private void rbGender_Checked(object sender, RoutedEventArgs e)
@@ -59,10 +77,11 @@ namespace PreschoolManagmentSoftware.UserControls
             var radioButton = sender as RadioButton;
             if (radioButton != null)
             {
-                var gender = GetSelectedGender();
-                string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
-                string imagePath = "pack://application:,,,/Media/Images/" + imageName;
-                profileImage.Source = new BitmapImage(new Uri(imagePath));
+                if (selectedImagePath == null)
+                {
+                    SetInitialProfileImage();
+                }
+                return;
             }
         }
 

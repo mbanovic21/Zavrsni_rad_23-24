@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
-             mc:Ignorable="d" Background="Transparent" 
-             d:DesignHeight="728" d:DesignWidth="1166">
+             mc:Ignorable="d" Background="Transparent"
+             d:DesignHeight="728" d:DesignWidth="1166" Loaded="ucRegistration_Loaded">
     <DockPanel>
         <Grid>
             <Border>
@@ -28,11 +28,27 @@
                         <Line X1="528" Y1="728" X2="900" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
                     </Canvas>
 
+                    <!-- Profile -->
                     <StackPanel Margin="50,25,50,0">
                         <TextBlock Text="Registration" Style="{StaticResource titleText}" Foreground="#4EB1B6" Margin="0 0 0 20"/>
 
-                        <Image x:Name="profileImage" Stretch="Uniform" Height="100" Width="100"/>
-                        <Button Content="Dodaj sliku" Click="ChooseImageButton_Click"/>
+                        <!-- Profile image -->
+                        <Border CornerRadius="100" BorderThickness="1" BorderBrush="#4EB1B6" HorizontalAlignment="Center" Padding="20" Margin="0,0,0,7" >
+                            <Grid>
+                                <Image x:Name="btnDeleteImage" Source="/Media/Images/close.png" Style="{StaticResource imgClose}" MouseDown="btnDeleteImage_MouseDown" Margin="0,-30,-30,0" Visibility="Collapsed" />
+                                <Image x:Name="profileImage" Stretch="Uniform" Height="100" Width="100" ClipToBounds="True">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Setter Property="Margin" Value="5"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                            </Grid>
+                        </Border>
+
+
+                        <!-- Add Profile Picture -->
+                        <TextBlock x:Name="txtAddProfilePicture" Text="Add Profile Picture" Style="{StaticResource link}" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" />
 
                         <Grid>
                             <Grid.ColumnDefinitions>

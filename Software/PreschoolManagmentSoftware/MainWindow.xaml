@@ -7,7 +7,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         Title="MainWindow" Height="768" Width="1366">
 
-    <Grid MouseDown="Grid_MouseDown">
+    <Grid>
         <DockPanel>
             <!-- Navigation Bar -->
             <Border Width="200" DockPanel.Dock="Left" Margin="0,40,0,0">

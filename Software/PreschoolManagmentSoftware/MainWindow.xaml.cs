@@ -27,14 +27,6 @@ namespace PreschoolManagmentSoftware
             InitializeComponent();
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                DragMove();
-            }
-        }
-
         private void btnRegistration_Click(object sender, RoutedEventArgs e)
         {
             var ucRegistration = new ucRegistration();
