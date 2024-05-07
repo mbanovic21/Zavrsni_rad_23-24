@@ -33,5 +33,16 @@ namespace SecurityLayer
 
             return false;
         }
+
+        public string GeneratePassword()
+        {
+            return EncryptionManager.GeneratePassword();
+        }
+
+        public (string hashedPassword, string salt) HashPasswordAndGetSalt(string password)
+        {
+            (string hashedPassword, string salt) = EncryptionManager.HashPassword(password);
+            return (hashedPassword, salt);
+        }
     }
 }

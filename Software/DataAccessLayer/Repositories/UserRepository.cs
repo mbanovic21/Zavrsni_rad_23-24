@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +31,35 @@ namespace DataAccessLayer.Repositories
             return user;
         }
 
-        private void SaveChanges()
+        public bool RegistrateUser(User userForRegistration)
         {
-            Context.SaveChanges();
+            Users.Add(userForRegistration);
+            int affectedRows = 0;
+
+            try
+            {
+                affectedRows = Context.SaveChanges();
+            } catch (DbEntityValidationException ex)
+            {
+                // Iterirajte kroz sve entitete koji su imali valjanosne greške
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    // Iterirajte kroz sve greške valjanosti za svaki entitet
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+
+                // Vratite false jer je došlo do greške pri spremanju
+                return false;
+            }
+
+            // Vratite true ako je barem jedan red promijenjen u bazi podataka
+            return affectedRows > 0;
         }
+
+
 
         public void Dispose()
         {

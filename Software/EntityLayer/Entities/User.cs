@@ -25,10 +25,10 @@ namespace EntityLayer.Entities
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? DateOfBirth { get; set; }
+        [StringLength(12)]
+        public string DateOfBirth { get; set; }
 
-        [StringLength(1)]
+        [StringLength(10)]
         public string Sex { get; set; }
 
         [StringLength(50)]
@@ -40,10 +40,10 @@ namespace EntityLayer.Entities
         [StringLength(50)]
         public string Username { get; set; }
 
-        [StringLength(50)]
+        [StringLength(64)]
         public string Password { get; set; }
 
-        [StringLength(50)]
+        [StringLength(64)]
         public string Salt { get; set; }
 
         public int? Id_role { get; set; }

@@ -81,5 +81,45 @@ namespace SecurityLayer
                 return salt;
             }
         }
+
+        public string GeneratePassword()
+        {
+            const string upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+            const string digits = "0123456789";
+
+            var random = new Random();
+
+            var passwordBuilder = new StringBuilder();
+
+            // Dodaje slučajne velike i male znakove te brojeve u lozinku
+            for (int i = 0; i < 8; i++)
+            {
+                int categoryIndex = random.Next(3); // 0 za velika slova, 1 za mala slova, 2 za brojeve
+
+                switch (categoryIndex)
+                {
+                    case 0:
+                        passwordBuilder.Append(upperCaseChars[random.Next(upperCaseChars.Length)]);
+                        break;
+                    case 1:
+                        passwordBuilder.Append(lowerCaseChars[random.Next(lowerCaseChars.Length)]);
+                        break;
+                    case 2:
+                        passwordBuilder.Append(digits[random.Next(digits.Length)]);
+                        break;
+                }
+            }
+
+            // Miješa sve znakove u lozinki
+            var passwordChars = passwordBuilder.ToString().ToCharArray();
+            for (int i = passwordChars.Length - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                (passwordChars[i], passwordChars[j]) = (passwordChars[j], passwordChars[i]);
+            }
+
+            return new string(passwordChars);
+        }
     }
 }

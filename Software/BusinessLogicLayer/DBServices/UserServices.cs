@@ -48,5 +48,13 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
+        public bool RegistrateUser(User userForRegistration)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RegistrateUser(userForRegistration);
+            }
+        }
+
     }
 }

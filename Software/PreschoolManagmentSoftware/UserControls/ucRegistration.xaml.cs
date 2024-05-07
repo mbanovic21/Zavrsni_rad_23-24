@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
 using System.Text.RegularExpressions;
+using SecurityLayer;
+using EntityLayer.Entities;
 
 namespace PreschoolManagmentSoftware.UserControls
 {
@@ -29,6 +31,9 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             InitializeComponent();
         }
+
+        private AutenticationManager AutenticationManager = new AutenticationManager();
+        private UserServices UserServices = new UserServices();
 
         //PIN
         private void textPIN_MouseDown(object sender, MouseButtonEventArgs e)
@@ -126,6 +131,10 @@ namespace PreschoolManagmentSoftware.UserControls
         }
 
         //Gender
+        private string GetSelectedGender()
+        {
+            return rbFemale.IsChecked == true ? "Ženski" : "Muški";
+        }
 
         //Email
         private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
@@ -205,12 +214,12 @@ namespace PreschoolManagmentSoftware.UserControls
         //Password
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtPassword.Focus();
+            //
         }
 
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void txtPassword_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtPassword.Password) && txtPassword.Password.Length > 0)
+            if (!string.IsNullOrEmpty(txtPassword.Text) && txtPassword.Text.Length > 0)
             {
                 textPassword.Visibility = Visibility.Collapsed;
             } else
@@ -219,76 +228,134 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        //btnGeneratePassword
+        private void btnGeneratePassword_Click(object sender, RoutedEventArgs e)
+        {
+            var generatedPassword = AutenticationManager.GeneratePassword();
+            txtPassword.Clear();
+            txtPassword.Text = generatedPassword; 
+        }
+
         //Role
+        private int GetSelectedRole()
+        {
+            return rbUser.IsChecked == true ? 2 : 1;
+        }
 
         //btnRegister
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private async void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidateRegistration())
+            {
+                return;
+            }
+
+            var PIN = txtPIN.Text;
+            var firstName = txtFirstname.Text;
+            var lastName = txtLastname.Text;
+            var date = dpDateOfBirth.Text;
+            var gender = GetSelectedGender();
+            var email = txtEmail.Text;
+            var telephone = txtTelephone.Text;
+            var username = txtUsername.Text;
+            var password = txtPassword.Text;
+            (string hashedPassword, string salt) = AutenticationManager.HashPasswordAndGetSalt(password);
+            var role = GetSelectedRole();
+
+            var userForRegistration = new User()
+            {
+                PIN = PIN,
+                FirstName = firstName,
+                LastName = lastName,
+                DateOfBirth = date,
+                Sex = gender,
+                Email = email,
+                Telephone = telephone,
+                Username = username,
+                Password = hashedPassword,
+                Salt = salt,
+                Id_role = role,
+                Id_Group = null
+            };
+
+            var isRegistrated = await Task.Run(() => UserServices.RegistrateUser(userForRegistration));
+            if(isRegistrated)
+            {
+                MessageBox.Show("New user successfully registrated!");
+            } else
+            {
+                MessageBox.Show("Something went wrong!");
+            }
+        }
+
+        //Input validation
+        private bool ValidateRegistration()
         {
             var PIN = txtPIN.Text;
             var firstName = txtFirstname.Text;
             var lastName = txtLastname.Text;
             var date = dpDateOfBirth.Text;
-            //var gender = sender as RadioButton;
             var email = txtEmail.Text;
             var telephone = txtTelephone.Text;
             var username = txtUsername.Text;
-            var password = txtPassword.Password;
-            //var role = sender as RadioButton;
 
             if (string.IsNullOrWhiteSpace(PIN) || PIN.Length < 11 || PIN.Length > 11)
             {
                 MessageBox.Show("Please eneter your ID. It must be 11 digits.");
                 txtPIN.Clear();
-                return;
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(firstName))
             {
                 MessageBox.Show("Please enter your first name.");
                 txtFirstname.Clear();
-                return;
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 MessageBox.Show("Please enter your last name.");
                 txtLastname.Clear();
-                return;
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(date))
             {
                 MessageBox.Show("Molimo unesite datum rođenja.");
-                return;
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(email))
             {
                 MessageBox.Show("Please enter your email.");
-                return;
+                return false;
             }
 
             if (!IsValidEmail(email))
             {
                 MessageBox.Show("Please enter a valid email address.");
                 txtEmail.Clear();
-                return;
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(telephone))
             {
                 MessageBox.Show("Please enter a valid telephone number.");
                 txtTelephone.Clear();
-                return;
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(username))
             {
                 MessageBox.Show("Molimo unesite korisničko ime.");
                 txtUsername.Clear();
-                return;
+                return false;
             }
+
+            return true;
         }
+
 
         private bool IsLettersOnly(string value)
         {
