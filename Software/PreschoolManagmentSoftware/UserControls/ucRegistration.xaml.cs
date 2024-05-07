@@ -19,6 +19,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using SecurityLayer;
 using EntityLayer.Entities;
+using Microsoft.Win32;
 
 namespace PreschoolManagmentSoftware.UserControls
 {
@@ -34,6 +35,36 @@ namespace PreschoolManagmentSoftware.UserControls
 
         private AutenticationManager AutenticationManager = new AutenticationManager();
         private UserServices UserServices = new UserServices();
+
+        //Profile image
+        private void ChooseImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string imagePath = openFileDialog.FileName;
+                profileImage.Source = new BitmapImage(new Uri(imagePath));
+            }
+        }
+        private string GetSelectedGenderImagePath()
+        {
+            var gender = GetSelectedGender();
+            return gender == "Ženski" ? "/Media/Images/female-user.png" : "/Media/Images/male-user.png";
+        }
+
+        private void rbGender_Checked(object sender, RoutedEventArgs e)
+        {
+            var radioButton = sender as RadioButton;
+            if (radioButton != null)
+            {
+                var gender = GetSelectedGender();
+                string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
+                string imagePath = "pack://application:,,,/Media/Images/" + imageName;
+                profileImage.Source = new BitmapImage(new Uri(imagePath));
+            }
+        }
 
         //PIN
         private void textPIN_MouseDown(object sender, MouseButtonEventArgs e)

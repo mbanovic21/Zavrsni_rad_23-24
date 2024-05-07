@@ -31,6 +31,9 @@
                     <StackPanel Margin="50,25,50,0">
                         <TextBlock Text="Registration" Style="{StaticResource titleText}" Foreground="#4EB1B6" Margin="0 0 0 20"/>
 
+                        <Image x:Name="profileImage" Stretch="Uniform" Height="100" Width="100"/>
+                        <Button Content="Dodaj sliku" Click="ChooseImageButton_Click"/>
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -163,12 +166,12 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/gender.png" Height="20"/>
-                                    
+
                                     <StackPanel Grid.Column="1" Margin="7">
                                         <TextBlock x:Name="textGender" Text="Gender:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <RadioButton x:Name="rbMale" Content="Male" GroupName="Gender"/>
-                                            <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" IsChecked="True" Margin="10 0 0 0"/>
+                                            <RadioButton x:Name="rbMale" Content="Male" GroupName="Gender" Checked="rbGender_Checked"/>
+                                            <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" IsChecked="True" Checked="rbGender_Checked" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
 

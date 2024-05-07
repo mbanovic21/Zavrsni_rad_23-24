@@ -188,6 +188,8 @@
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Media\Images\male-user.png" />
+    <Resource Include="Media\Images\female-user.png" />
     <Resource Include="Media\Images\user-role.png" />
     <Resource Include="Media\Images\gender.png" />
     <Resource Include="Media\Images\telephone.png" />
