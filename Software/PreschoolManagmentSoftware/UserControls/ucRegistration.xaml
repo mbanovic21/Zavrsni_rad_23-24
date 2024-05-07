@@ -144,9 +144,9 @@
                                             <ToolTip>
                                                 <StackPanel>
                                                     <TextBlock Style="{StaticResource info-required}">This field is required!</TextBlock>
-                                                    <TextBlock>Enter your email address.</TextBlock>
+                                                    <TextBlock>Enter users date of birth.</TextBlock>
                                                     <TextBlock FontWeight="Bold">Rules:</TextBlock>
-                                                    <TextBlock>1. Make sure the email address is entered correctly.</TextBlock>
+                                                    <TextBlock>1. U can only write or select date in format d.m.yyyy.</TextBlock>
                                                 </StackPanel>
                                             </ToolTip>
                                         </Image.ToolTip>
@@ -163,6 +163,7 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/gender.png" Height="20"/>
+                                    
                                     <StackPanel Grid.Column="1" Margin="7">
                                         <TextBlock x:Name="textGender" Text="Gender:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
@@ -170,9 +171,21 @@
                                             <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" Checked="rbGender_Checked" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
+
+                                    <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
+                                        <Image.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource info-required}">This field is required!</TextBlock>
+                                                    <TextBlock>Odaberi spol korisnika.</TextBlock>
+                                                    <TextBlock FontWeight="Bold">Rules:</TextBlock>
+                                                    <TextBlock>1. Jedan spol mora biti odabran</TextBlock>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Image.ToolTip>
+                                    </Image>
                                 </Grid>
                             </Border>
-
 
                             <!-- Email -->
                             <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff">
@@ -190,7 +203,7 @@
                                             <ToolTip>
                                                 <StackPanel>
                                                     <TextBlock Style="{StaticResource info-required}">This field is required!</TextBlock>
-                                                    <TextBlock>Enter your email address.</TextBlock>
+                                                    <TextBlock>Enter email address.</TextBlock>
                                                     <TextBlock FontWeight="Bold">Rules:</TextBlock>
                                                     <TextBlock>1. Make sure the email address is entered correctly.</TextBlock>
                                                 </StackPanel>
@@ -227,32 +240,73 @@
                                 </Grid>
                             </Border>
 
+                            <!--Username-->
                             <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5"  Background="#ffffff">
                                 <Grid Margin="7 9">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
 
                                     <Image Source="/Media/Images/user.png" Height="20"/>
                                     <TextBlock x:Name="textUsername" MouseDown="textUsername_MouseDown" Text=" Username" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" Style="{StaticResource textBox}" />
+
+                                    <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
+                                        <Image.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource info-required}">Obavezno polje!</TextBlock>
+                                                    <TextBlock>Unesite korisničko ime za korisnika.</TextBlock>
+                                                    <TextBlock>Pravila:</TextBlock>
+                                                    <TextBlock>1. Korisničko ime sadržava mala slova i brojeve.</TextBlock>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Image.ToolTip>
+                                    </Image>
                                 </Grid>
                             </Border>
 
-                            <Border BorderThickness="1" Grid.Column="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5"  Background="#ffffff">
-                                <Grid Margin="7 9">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                            <!--Password-->
+                            <Grid Grid.Column="1" Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Border BorderThickness="1" Grid.Column="0" BorderBrush="#acb0af"  CornerRadius="5"  Background="#ffffff" Margin="70,7,7,7">
+                                    <Grid Margin="7 9">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <Image Source="/Media/Images/password.png" Height="20" Margin="2,0,-2,0"/>
-                                    <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Password" Style="{StaticResource placeholder}"/>
-                                    <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
-                                </Grid>
-                            </Border>
+                                        <Image Source="/Media/Images/password.png" Height="20" Margin="2,0,-2,0"/>
+                                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Password" Style="{StaticResource placeholder}"/>
+                                        <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
 
+                                        <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
+                                            <Image.ToolTip>
+                                                <ToolTip>
+                                                    <StackPanel>
+                                                        <TextBlock Style="{StaticResource info-required}">Obavezno polje!</TextBlock>
+                                                        <TextBlock>Ovdje će se prikazati generirana lozinka.</TextBlock>
+                                                        <TextBlock>Pravila:</TextBlock>
+                                                        <TextBlock>1. Pritisnite gumb generiraj lozinku.</TextBlock>
+                                                        <TextBlock>2. Lozinka će se prikazati u polju.</TextBlock>
+                                                    </StackPanel>
+                                                </ToolTip>
+                                            </Image.ToolTip>
+                                        </Image>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Gumb za slanje zahtjeva -->
+                                <Button x:Name="btnGeneratePassword" Grid.Column="1" Content="Generate password" Style="{StaticResource generatePasswordButton}" Margin="0,7,70,7" />
+                            </Grid>
+                            
                             <!-- Role -->
                             <Border Grid.Column="1" Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5" Background="#ffffff">
                                 <Grid Margin="7 0">
@@ -269,6 +323,19 @@
                                             <RadioButton x:Name="rbUser" Content="User" GroupName="Role" Checked="rbRole_Checked" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
+
+                                    <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
+                                        <Image.ToolTip>
+                                            <ToolTip>
+                                                <StackPanel>
+                                                    <TextBlock Style="{StaticResource info-required}">Obavezno polje!</TextBlock>
+                                                    <TextBlock>Odaberite ulogu korisnika.</TextBlock>
+                                                    <TextBlock>Pravila:</TextBlock>
+                                                    <TextBlock>1. Jedana uloga mora biti odabrana.</TextBlock>
+                                                </StackPanel>
+                                            </ToolTip>
+                                        </Image.ToolTip>
+                                    </Image>
                                 </Grid>
                             </Border>
                         </Grid>
