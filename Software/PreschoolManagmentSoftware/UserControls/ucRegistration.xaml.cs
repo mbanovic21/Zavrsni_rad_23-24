@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace PreschoolManagmentSoftware.UserControls
 {
@@ -125,15 +126,6 @@ namespace PreschoolManagmentSoftware.UserControls
         }
 
         //Gender
-        private void rbGender_Checked(object sender, RoutedEventArgs e)
-        {
-            var radioButton = sender as RadioButton;
-            //var selectedRadio = radioButton.IsChecked;
-            if (radioButton != null)
-            {
-                textGender.Text = radioButton.Content.ToString();
-            }
-        }
 
         //Email
         private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
@@ -174,10 +166,11 @@ namespace PreschoolManagmentSoftware.UserControls
                 placeholderTelephone.Visibility = Visibility.Visible;
             }
 
-            if (!AreAllDigits(telephone))
+            if (!IsValidTelephone(telephone))
             {
                 if (string.IsNullOrWhiteSpace(telephone)) return;
-                MessageBox.Show("ID must be only digits.");
+                txtTelephone.Clear();
+                MessageBox.Show("Unesite ispravan telefonski broj!");
                 return;
             }
         }
@@ -190,12 +183,22 @@ namespace PreschoolManagmentSoftware.UserControls
 
         private void txtUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtUsername.Text) && txtUsername.Text.Length > 0)
+            var username = txtUsername.Text;
+            var placeholderUsername = textUsername;
+
+            if (!string.IsNullOrEmpty(username) && username.Length > 0)
             {
-                textUsername.Visibility = Visibility.Collapsed;
+                placeholderUsername.Visibility = Visibility.Collapsed;
             } else
             {
-                textUsername.Visibility = Visibility.Visible;
+                placeholderUsername.Visibility = Visibility.Visible;
+            }
+
+            if (!string.IsNullOrWhiteSpace(username) && !IsValidUsername(username))
+            {
+                MessageBox.Show("Username can only contain lowercase letters and numbers.");
+                txtUsername.Clear();
+                return;
             }
         }
 
@@ -217,15 +220,6 @@ namespace PreschoolManagmentSoftware.UserControls
         }
 
         //Role
-        private void rbRole_Checked(object sender, RoutedEventArgs e)
-        {
-            var radioButton = sender as RadioButton;
-            //var selectedRadio = radioButton.IsChecked;
-            if (radioButton != null)
-            {
-                textRole.Text = radioButton.Content.ToString();
-            }
-        }
 
         //btnRegister
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -233,7 +227,13 @@ namespace PreschoolManagmentSoftware.UserControls
             var PIN = txtPIN.Text;
             var firstName = txtFirstname.Text;
             var lastName = txtLastname.Text;
+            var date = dpDateOfBirth.Text;
+            //var gender = sender as RadioButton;
             var email = txtEmail.Text;
+            var telephone = txtTelephone.Text;
+            var username = txtUsername.Text;
+            var password = txtPassword.Password;
+            //var role = sender as RadioButton;
 
             if (string.IsNullOrWhiteSpace(PIN) || PIN.Length < 11 || PIN.Length > 11)
             {
@@ -256,6 +256,12 @@ namespace PreschoolManagmentSoftware.UserControls
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(date))
+            {
+                MessageBox.Show("Molimo unesite datum rođenja.");
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(email))
             {
                 MessageBox.Show("Please enter your email.");
@@ -266,6 +272,20 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 MessageBox.Show("Please enter a valid email address.");
                 txtEmail.Clear();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(telephone))
+            {
+                MessageBox.Show("Please enter a valid telephone number.");
+                txtTelephone.Clear();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Molimo unesite korisničko ime.");
+                txtUsername.Clear();
                 return;
             }
         }
@@ -295,6 +315,16 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 return false;
             }
+        }
+
+        private bool IsValidTelephone(string telephone)
+        {
+            return Regex.IsMatch(telephone, @"^[\+0-9\s]+$");
+        }
+
+        private bool IsValidUsername(string username)
+        {
+            return Regex.IsMatch(username, @"^[a-z0-9]+$");
         }
     }
 }

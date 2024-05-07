@@ -167,8 +167,8 @@
                                     <StackPanel Grid.Column="1" Margin="7">
                                         <TextBlock x:Name="textGender" Text="Gender:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <RadioButton x:Name="rbMale" Content="Male" GroupName="Gender" Checked="rbGender_Checked"/>
-                                            <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" Checked="rbGender_Checked" Margin="10 0 0 0"/>
+                                            <RadioButton x:Name="rbMale" Content="Male" GroupName="Gender"/>
+                                            <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" IsChecked="True" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
 
@@ -180,6 +180,7 @@
                                                     <TextBlock>Odaberi spol korisnika.</TextBlock>
                                                     <TextBlock FontWeight="Bold">Rules:</TextBlock>
                                                     <TextBlock>1. Jedan spol mora biti odabran</TextBlock>
+                                                    <TextBlock>2. Primarna uloga je "Žena".</TextBlock>
                                                 </StackPanel>
                                             </ToolTip>
                                         </Image.ToolTip>
@@ -319,8 +320,8 @@
                                     <StackPanel Grid.Column="1" Margin="7">
                                         <TextBlock x:Name="textRole" Text="Role:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <RadioButton x:Name="rbAdmin" Content="Administrator" GroupName="Role" Checked="rbRole_Checked"/>
-                                            <RadioButton x:Name="rbUser" Content="User" GroupName="Role" Checked="rbRole_Checked" Margin="10 0 0 0"/>
+                                            <RadioButton x:Name="rbAdmin" Content="Administrator" GroupName="Role"/>
+                                            <RadioButton x:Name="rbUser" Content="User" GroupName="Role" IsChecked="True" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
 
@@ -332,6 +333,7 @@
                                                     <TextBlock>Odaberite ulogu korisnika.</TextBlock>
                                                     <TextBlock>Pravila:</TextBlock>
                                                     <TextBlock>1. Jedana uloga mora biti odabrana.</TextBlock>
+                                                    <TextBlock>2. Primarna uloga je "Običan".</TextBlock>
                                                 </StackPanel>
                                             </ToolTip>
                                         </Image.ToolTip>
