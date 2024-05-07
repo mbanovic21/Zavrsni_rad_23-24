@@ -265,8 +265,8 @@
                                     <StackPanel Grid.Column="1" Margin="7">
                                         <TextBlock x:Name="textRole" Text="Role:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <RadioButton x:Name="rbAdmin" Content="Administrator" GroupName="Gender" Checked="rbRole_Checked"/>
-                                            <RadioButton x:Name="rbUser" Content="User" GroupName="Gender" Checked="rbRole_Checked" Margin="10 0 0 0"/>
+                                            <RadioButton x:Name="rbAdmin" Content="Administrator" GroupName="Role" Checked="rbRole_Checked"/>
+                                            <RadioButton x:Name="rbUser" Content="User" GroupName="Role" Checked="rbRole_Checked" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
