@@ -30,39 +30,28 @@ namespace BusinessLogicLayer
 
             try
             {
-                // Pokušaj slanja e-pošte
                 smtpClient.Send(message);
-
-                // Ako uspije slanje, ispiši poruku o uspjehu i vrati 'true'
                 Console.WriteLine("Email sent successfully.");
                 return true;
             } catch (SmtpFailedRecipientsException ex)
             {
-                // Ako se dogodi iznimka SmtpFailedRecipientsException (koja može sadržavati više unutarnjih iznimki)
-                // provjeri svaku unutarnju iznimku
                 foreach (var innerException in ex.InnerExceptions)
                 {
-                    // Dobavi statusni kod iz unutarnje iznimke
                     SmtpStatusCode status = innerException.StatusCode;
 
-                    // Provjeri je li poštanski sandučić zauzet ili nedostupan
                     if (status == SmtpStatusCode.MailboxBusy || status == SmtpStatusCode.MailboxUnavailable)
                     {
-                        // Ako je poštanski sandučić zauzet ili nedostupan, ispiši poruku i vrati 'false'
                         Console.WriteLine("Delivery failed.");
                         return false;
                     } else
                     {
-                        // Ako je došlo do drugih problema pri isporuci, ispiši poruku o neuspjeloj isporuci i vrati 'false'
                         Console.WriteLine($"Failed to deliver message to {innerException.FailedRecipient}");
                         return false;
                     }
                 }
-                // Ako nije pronađena unutarnja iznimka koja odgovara, vrati 'false'
                 return false;
             } catch (Exception ex)
             {
-                // Ako se dogodi bilo koja druga iznimka, ispiši poruku o iznimci i vrati 'false'
                 Console.WriteLine($"Exception caught: {ex}");
                 return false;
             }
