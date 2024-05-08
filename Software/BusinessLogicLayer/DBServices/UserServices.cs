@@ -3,6 +3,7 @@ using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -65,6 +66,14 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.RemoveUser(username, pin);
+            }
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByUsername(username);
             }
         }
     }

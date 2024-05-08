@@ -53,6 +53,10 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        public User GetUserUsername(string username)
+        {
+            return Users.FirstOrDefault(u => u.Username == username);
+        }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
@@ -78,7 +82,6 @@ namespace DataAccessLayer.Repositories
             // Vratite true ako je barem jedan red promijenjen u bazi podataka
             return affectedRows > 0;
         }
-
 
         public void Dispose()
         {

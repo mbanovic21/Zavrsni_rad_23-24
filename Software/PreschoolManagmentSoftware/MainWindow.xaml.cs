@@ -27,10 +27,18 @@ namespace PreschoolManagmentSoftware
             InitializeComponent();
         }
 
+        //registration
         private void btnRegistration_Click(object sender, RoutedEventArgs e)
         {
             var ucRegistration = new ucRegistration();
             contentControl.Content = ucRegistration;
+        }
+
+        //profile
+        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        {
+            var ucProfile = new ucProfile();
+            contentControl.Content = ucProfile;
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
@@ -53,5 +61,7 @@ namespace PreschoolManagmentSoftware
         {
             Close();
         }
+
+        
     }
 }
