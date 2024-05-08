@@ -85,6 +85,18 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        // Metoda za pretvaranje slike u binarne podatke
+        private byte[] ConvertImageToByteArray(string imagePath)
+        {
+            byte[] imageData;
+            using (FileStream fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+            {
+                imageData = new byte[fileStream.Length];
+                fileStream.Read(imageData, 0, (int)fileStream.Length);
+            }
+            return imageData;
+        }
+
         //PIN
         private void textPIN_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -319,12 +331,13 @@ namespace PreschoolManagmentSoftware.UserControls
             } else
             {
                 string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
-                imagePathForRegistration = "pack://application:,,,/Media/Images/" + imageName;
+                //string projectPath = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\";
+                imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
             }
 
             var userForRegistration = new User()
             {
-                ProfileImage = imagePathForRegistration,
+                ProfileImage = ConvertImageToByteArray(imagePathForRegistration),
                 PIN = PIN,
                 FirstName = firstName,
                 LastName = lastName,
@@ -418,7 +431,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(telephone))
+            if (string.IsNullOrWhiteSpace(telephone) || telephone.Length < 10 || telephone.Length > 14)
             {
                 MessageBox.Show("Please enter a valid telephone number.");
                 txtTelephone.Clear();
@@ -452,14 +465,9 @@ namespace PreschoolManagmentSoftware.UserControls
 
         private bool IsValidEmail(string email)
         {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            } catch
-            {
-                return false;
-            }
+            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+
+            return Regex.IsMatch(email, pattern);
         }
 
         private bool IsValidTelephone(string telephone)

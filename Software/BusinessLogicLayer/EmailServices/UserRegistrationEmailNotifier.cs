@@ -23,7 +23,7 @@ namespace BusinessLogicLayer
 
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
-                Port = 465,
+                Port = 587,
                 Credentials = new NetworkCredential(myMail, myPassword),
                 EnableSsl = true
             };
@@ -33,23 +33,18 @@ namespace BusinessLogicLayer
                 smtpClient.Send(message);
                 Console.WriteLine("Email sent successfully.");
                 return true;
-            } catch (SmtpFailedRecipientsException ex)
+            } catch (SmtpFailedRecipientException ex)
             {
-                foreach (var innerException in ex.InnerExceptions)
+                SmtpStatusCode status = ex.StatusCode;
+                if (status == SmtpStatusCode.MailboxBusy || status == SmtpStatusCode.MailboxUnavailable)
                 {
-                    SmtpStatusCode status = innerException.StatusCode;
-
-                    if (status == SmtpStatusCode.MailboxBusy || status == SmtpStatusCode.MailboxUnavailable)
-                    {
-                        Console.WriteLine("Delivery failed.");
-                        return false;
-                    } else
-                    {
-                        Console.WriteLine($"Failed to deliver message to {innerException.FailedRecipient}");
-                        return false;
-                    }
+                    Console.WriteLine("Delivery failed.");
+                    return false;
+                } else
+                {
+                    Console.WriteLine($"Failed to deliver message to {ex.FailedRecipient}");
+                    return false;
                 }
-                return false;
             } catch (Exception ex)
             {
                 Console.WriteLine($"Exception caught: {ex}");
@@ -78,4 +73,3 @@ namespace BusinessLogicLayer
         }
     }
 }
-

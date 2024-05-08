@@ -16,8 +16,8 @@ namespace EntityLayer.Entities
 
         public int Id { get; set; }
 
-        [MaxLength]
-        public string ProfileImage { get; set; }
+        [Column(TypeName = "varbinary(MAX)")]
+        public byte[] ProfileImage { get; set; }
 
         [StringLength(11)]
         public string PIN { get; set; }
