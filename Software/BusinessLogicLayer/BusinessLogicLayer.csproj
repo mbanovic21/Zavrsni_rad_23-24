@@ -42,8 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBServices\UserServices.cs" />
-    <Compile Include="ExternalEmailService.cs" />
+    <Compile Include="EmailServices\ExternalEmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EmailServices\UserRegistrationEmailNotifier.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">

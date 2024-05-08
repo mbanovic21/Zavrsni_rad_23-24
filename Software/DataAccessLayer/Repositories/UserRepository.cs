@@ -36,9 +36,29 @@ namespace DataAccessLayer.Repositories
             Users.Add(userForRegistration);
             int affectedRows = 0;
 
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+
+        public bool RemoveUser(string username, string pin)
+        {
+            int affectedRows = 0;
+            var userForRemove = Users.FirstOrDefault(u => u.Username == username || u.PIN == pin);
+            Users.Remove(userForRemove);
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+
+        private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
+        {
             try
             {
-                affectedRows = Context.SaveChanges();
+                affectedRows = context.SaveChanges();
             } catch (DbEntityValidationException ex)
             {
                 // Iterirajte kroz sve entitete koji su imali valjanosne greške
@@ -58,7 +78,6 @@ namespace DataAccessLayer.Repositories
             // Vratite true ako je barem jedan red promijenjen u bazi podataka
             return affectedRows > 0;
         }
-
 
 
         public void Dispose()

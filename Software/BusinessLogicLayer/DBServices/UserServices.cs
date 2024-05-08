@@ -10,6 +10,7 @@ namespace BusinessLogicLayer.DBServices
 {
     public class UserServices
     {
+        //PIN Validation
         public bool IsIDVaild(string id)
         {
             using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
@@ -25,6 +26,7 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
+        //Getting Credentials
         public string[] GetCredentialsByUsername(string username)
         {
             using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
@@ -48,6 +50,7 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
+        //Add new user
         public bool RegistrateUser(User userForRegistration)
         {
             using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
@@ -56,5 +59,13 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
+        //Remove user
+        public bool RemoveUser(string username, string pin)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RemoveUser(username, pin);
+            }
+        }
     }
 }

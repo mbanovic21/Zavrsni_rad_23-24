@@ -341,12 +341,29 @@ namespace PreschoolManagmentSoftware.UserControls
 
 
             var isRegistrated = await Task.Run(() => UserServices.RegistrateUser(userForRegistration));
-            if(isRegistrated)
+
+            if (isRegistrated)
             {
-                MessageBox.Show("New user successfully registrated!");
+                var result = MessageBox.Show("Novi korisnik je uspješno registriran! Želite li obavijestiti korisnika putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Obavijesti korisnika putem e-pošte
+                    var subject = "Uspješno ste registrirani u sustav!";
+                    var emailNotifier = new UserRegistrationEmailNotifier();
+                    var isEmailSent = emailNotifier.SendRegistrationEmail(firstName, lastName, email, username, password, subject);
+                    if (!isEmailSent)
+                    {
+                        var isRemoved = await Task.Run(() => UserServices.RemoveUser(username, PIN));
+                        if (isRemoved)
+                        {
+                            MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }   
+                    }
+                }
             } else
             {
-                MessageBox.Show("Something went wrong!");
+                MessageBox.Show("Došlo je do pogreške!");
             }
         }
 
