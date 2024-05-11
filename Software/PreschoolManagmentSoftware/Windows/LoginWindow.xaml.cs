@@ -26,6 +26,7 @@ namespace PreschoolManagmentSoftware.Windows
         }
 
         private AutenticationManager autenticationManager = new AutenticationManager();
+        private AuthorizationManager authorizationManager = new AuthorizationManager();
 
         private void textUsername_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -87,9 +88,16 @@ namespace PreschoolManagmentSoftware.Windows
             if (areCredentialsValid)
             {
                 MessageBox.Show("Successfully logged in!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                var mainWindow = new MainWindow();
-                Close();
-                mainWindow.ShowDialog();
+                var role = authorizationManager.GetRole();
+                if(role)
+                {
+                    var mainWindow = new MainWindow();
+                    Close();
+                    mainWindow.ShowDialog();
+                } else 
+                {
+                    MessageBox.Show("nije admin!");
+                }     
             } else
             {
                 MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

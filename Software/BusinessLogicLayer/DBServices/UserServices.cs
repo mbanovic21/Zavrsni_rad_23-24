@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Repositories;
+using EntityLayer;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
+        //Getting user by username
         public User GetUserByUsername(string username)
         {
             using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))

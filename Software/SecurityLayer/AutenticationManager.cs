@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,12 @@ namespace SecurityLayer
 
                 if (!string.IsNullOrEmpty(hashedPasswordFromDatabase) && !string.IsNullOrEmpty(saltFromDatabase))
                 {
-                    return EncryptionManager.VerifyPassword(password, hashedPasswordFromDatabase, saltFromDatabase);
+                    var isCredentialsValid = EncryptionManager.VerifyPassword(password, hashedPasswordFromDatabase, saltFromDatabase);
+                    if(isCredentialsValid)
+                    {
+                        LoggedInUser.User = UserServices.GetUserByUsername(username);
+                    }
+                    return isCredentialsValid;
                 }
 
                 return false;
