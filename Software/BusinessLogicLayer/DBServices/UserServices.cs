@@ -78,5 +78,68 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetUserByUsername(username);
             }
         }
+
+        //Getting user by username pattern
+        public List<User> GetUserByUsernamePattern(string pattern)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByUsernamePattern(pattern).ToList();
+            }
+        }
+
+        //Getting user by PIN pattern
+        public List<User> GetUserByPINPattern(string pattern)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByPINPattern(pattern).ToList();
+            }
+        }
+
+        //Getting user by Firstname pattern
+        public List<User> GetUserByFirstNamePattern(string pattern)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByFirstNamePattern(pattern).ToList();
+            }
+        }
+
+        //Getting user by Lastname pattern
+        public List<User> GetUserByLastNamePattern(string pattern)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByLastNamePattern(pattern).ToList();
+            }
+        }
+
+        //Getting user by firstname and Lastname pattern
+        public List<User> GetUserByFirstNameAndLastNamePattern(string pattern)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByFirstNameAndLastNamePattern(pattern).ToList();
+            }
+        }
+
+        //Getting user by email pattern
+        public List<User> GetUserByEmailPattern(string pattern)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetUserByEmailPattern(pattern).ToList();
+            }
+        }
+
+        //Getting all users
+        public List<User> GetAllUsers()
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetAllUsers().ToList();
+            }
+        }
     }
 }

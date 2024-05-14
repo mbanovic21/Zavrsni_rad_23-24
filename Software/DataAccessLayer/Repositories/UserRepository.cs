@@ -1,6 +1,7 @@
 ﻿using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -19,18 +20,21 @@ namespace DataAccessLayer.Repositories
             Users = Context.Set<User>();
         }
 
+        //get users id
         public string GetID(string id)
         {
             var user = Users.FirstOrDefault(u => u.PIN == id);
             return user?.PIN;
         }
 
+        //get user by username
         public User GetUserByUsername(string username)
         {
             var user = Users.FirstOrDefault(u => u.Username == username);
             return user;
         }
 
+        //registrate new user
         public bool RegistrateUser(User userForRegistration)
         {
             Users.Add(userForRegistration);
@@ -41,7 +45,7 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
-
+        //remove user
         public bool RemoveUser(string username, string pin)
         {
             int affectedRows = 0;
@@ -53,9 +57,79 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        //get users username
         public User GetUserUsername(string username)
         {
             return Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        //pattern-username
+        public IQueryable<User> GetUserByUsernamePattern(string pattern)
+        {
+            var query = from u in Users
+                        where u.Username.Contains(pattern)
+                        select u;
+
+            return query;
+        }
+
+        //pattern-PIN
+        public IQueryable<User> GetUserByPINPattern(string pattern)
+        {
+            var query = from u in Users
+                        where u.PIN.Contains(pattern)
+                        select u;
+
+            return query;
+        }
+
+        //pattern-Firstname
+        public IQueryable<User> GetUserByFirstNamePattern(string pattern)
+        {
+            var query = from u in Users
+                        where u.FirstName.Contains(pattern)
+                        select u;
+
+            return query;
+        }
+
+        //pattent-Lastname
+        public IQueryable<User> GetUserByLastNamePattern(string pattern)
+        {
+            var query = from u in Users
+                        where u.LastName.Contains(pattern)
+                        select u;
+
+            return query;
+        }
+
+        //pattern-flname
+        public IQueryable<User> GetUserByFirstNameAndLastNamePattern(string pattern)
+        {
+            var query = from u in Users
+                        where u.FirstName.Contains(pattern) || u.LastName.Contains(pattern)
+                        select u;
+
+            return query;
+        }
+
+        //pattern-email
+        public IQueryable<User> GetUserByEmailPattern(string pattern)
+        {
+            var query = from u in Users
+                        where u.Email.Contains(pattern)
+                        select u;
+
+            return query;
+        }
+
+        //all users
+        public IQueryable<User> GetAllUsers()
+        {
+            var query = from u in Users
+                        select u;
+
+            return query;
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)

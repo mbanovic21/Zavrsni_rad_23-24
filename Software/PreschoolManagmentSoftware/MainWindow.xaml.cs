@@ -62,6 +62,10 @@ namespace PreschoolManagmentSoftware
             Close();
         }
 
-        
+        private void btnEmployeeAdministrating_Click(object sender, RoutedEventArgs e)
+        {
+            var ucEmployeeAdministrating = new ucEmployeeAdministrating();
+            contentControl.Content = ucEmployeeAdministrating;
+        }
     }
 }

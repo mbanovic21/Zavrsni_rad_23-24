@@ -37,6 +37,7 @@
                     <StackPanel>
                         <Button x:Name="btnRegistration" Content="Registration" Click="btnRegistration_Click" />
                         <Button x:Name="btnProfile" Content="Profile" Click="btnProfile_Click" />
+                        <Button x:Name="btnEmployeeAdministrating" Content="Employee Manager" Click="btnEmployeeAdministrating_Click" />
                     </StackPanel>
                 </Grid>
                 
