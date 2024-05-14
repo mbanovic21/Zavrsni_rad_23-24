@@ -44,7 +44,7 @@
             </Border>
 
             <!-- Header -->
-            <Border Background="#4EB1B6" Height="40" DockPanel.Dock="Top" Margin="-200,0,0,0">
+            <Border x:Name="borHeader" MouseDown="borHeader_MouseDown" Background="#4EB1B6" Height="40" DockPanel.Dock="Top" Margin="-200,0,0,0">
                 <DockPanel VerticalAlignment="Center">
                     <!-- Naslov -->
                     <TextBlock Text="Preschool Managment Software" VerticalAlignment="Center" DockPanel.Dock="Left" Style="{StaticResource normalText}" FontSize="20" Margin="15,0,0,0"/>

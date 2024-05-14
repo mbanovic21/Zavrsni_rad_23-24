@@ -6,6 +6,23 @@
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="728" d:DesignWidth="1166" Loaded="UserControl_Loaded">
+    
+    <UserControl.Resources>
+        <!-- Definicija animacije -->
+        <Storyboard x:Key="SlideInAnimation">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="400,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SlideOutAnimation">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="400,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
     <DockPanel>
         <Grid>
             <Border>
@@ -17,7 +34,8 @@
                 </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -26,6 +44,28 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
+
+                    <!-- Bočna traka -->
+                    <Border x:Name="sidebar" MaxWidth="450" Grid.RowSpan="4" Background="Green" Grid.Column="2" Visibility="Visible" Panel.ZIndex="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Close -->
+                            <Button x:Name="btnCloseSidebar" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebar_Click">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid>
+                                            <Image Source="/Media/Images/close.png" Width="25"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <ContentControl x:Name="contentSidebar" />
+                        </Grid>
+                    </Border>
 
                     <Canvas>
                         <Line X1="0" Y1="200" X2="528" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
@@ -39,8 +79,8 @@
                         <Line X1="528" Y1="728" X2="900" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
                     </Canvas>
 
-                    <TextBlock Text="Upravitelj zaposlenicima" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Foreground="#4EB1B6" Margin="10"/>
-                    <Border BorderThickness="1" Grid.Column="0" Grid.Row="1" Width="280" BorderBrush="#acb0af"  CornerRadius="5"  Background="#ffffff" Margin="70,7,7,7">
+                    <TextBlock Text="Upravitelj zaposlenicima" Style="{StaticResource titleText}" Grid.ColumnSpan="3" Foreground="#4EB1B6" Margin="10"/>
+                    <Border BorderThickness="1" Grid.Column="0" Grid.Row="1" BorderBrush="#acb0af"  CornerRadius="5"  Background="#ffffff" Margin="70,7,7,7">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -67,7 +107,7 @@
                         </Grid>
                     </Border>
                     <!-- cmb za odabir načina pretraživanja -->
-                    <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Width="185" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#0b69a1" Margin="10,0,0,0" HorizontalAlignment="Left">
+                    <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Width="185" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#0b69a1" Margin="7,0,0,0" HorizontalAlignment="Left">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -85,14 +125,14 @@
                             </Button>
                         </Grid>
                     </Border>
-                   
 
-                    <DataGrid x:Name="dgvEmployees"  Margin="70,7,70,7" Grid.Row="2" Grid.ColumnSpan="2"/>
 
-                    <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,20,70,20" >
-                        <Button Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
-                        <Button Content="Uredi" Width="100" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
-                        <Button Content="Obriši" Width="100" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
+                    <DataGrid x:Name="dgvEmployees"  Margin="70,7,70,7" Grid.Row="2" Grid.ColumnSpan="3"/>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="0,20,70,20" >
+                        <Button x:Name="btnAddNewEmployee" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
+                        <Button x:Name="btnEditEmployee" Click="btnEditEmployee_Click" Content="Uredi" Width="100" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
+                        <Button x:Name="btnDeleteEmployee" Content="Obriši" Width="100" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
                     </StackPanel>
                 </Grid>
             </Border>

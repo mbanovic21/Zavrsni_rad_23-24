@@ -67,5 +67,13 @@ namespace PreschoolManagmentSoftware
             var ucEmployeeAdministrating = new ucEmployeeAdministrating();
             contentControl.Content = ucEmployeeAdministrating;
         }
+
+        private void borHeader_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
     }
 }
