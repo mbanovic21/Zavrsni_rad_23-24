@@ -55,6 +55,25 @@ namespace PreschoolManagmentSoftware.UserControls
         private void cmbSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cmbSearch.IsDropDownOpen = true;
+            if (cmbSearch.SelectedIndex == 0)
+            {
+                textSearch.Text = "Pretraži po korisničkom imenu";
+            } else if (cmbSearch.SelectedIndex == 1)
+            {
+                textSearch.Text = "Pretraži po OIB-u";
+            } else if (cmbSearch.SelectedIndex == 2)
+            {
+                textSearch.Text = "Pretraži po imenu";
+            } else if (cmbSearch.SelectedIndex == 3)
+            {
+                textSearch.Text = "Pretraži po prezimenu";
+            } else if (cmbSearch.SelectedIndex == 4)
+            {
+                textSearch.Text = "Pretraži po imenu i prezimenu";
+            } else if (cmbSearch.SelectedIndex == 5)
+            {
+                textSearch.Text = "Pretraži po e-pošti";
+            }
             UpdateData();
         }
         //Searchbar
@@ -94,27 +113,21 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 case 0:
                     dgvEmployees.ItemsSource = userServices.GetUserByUsernamePattern(search);
-                    textSearch.Text = "Pretraži po korisničkom imenu";
                     break;
-                case 1:
+                case 1: 
                     dgvEmployees.ItemsSource = userServices.GetUserByPINPattern(search);
-                    textSearch.Text = "Pretraži po OIB-u";
                     break;
                 case 2:
                     dgvEmployees.ItemsSource = userServices.GetUserByFirstNamePattern(search);
-                    textSearch.Text = "Pretraži po imenu";
                     break;
                 case 3:
                     dgvEmployees.ItemsSource = userServices.GetUserByLastNamePattern(search);
-                    textSearch.Text = "Pretraži po prezimenu";
                     break;
                 case 4:
                     dgvEmployees.ItemsSource = userServices.GetUserByFirstNameAndLastNamePattern(search);
-                    textSearch.Text = "Pretraži po imenu i prezimenu";
                     break;
                 case 5:
                     dgvEmployees.ItemsSource = userServices.GetUserByEmailPattern(search);
-                    textSearch.Text = "Pretraži po e-pošti";
                     break;
                 default:
                     break;
