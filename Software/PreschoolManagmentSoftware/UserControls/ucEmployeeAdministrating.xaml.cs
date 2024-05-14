@@ -30,9 +30,6 @@ namespace PreschoolManagmentSoftware.UserControls
         //Loading users
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //loading users
-            dgvEmployees.ItemsSource = userServices.GetAllUsers();
-
             //cmb fill
             cmbSearch.Items.Add("Korisničko ime");
             cmbSearch.Items.Add("OIB");
@@ -43,6 +40,10 @@ namespace PreschoolManagmentSoftware.UserControls
 
             cmbSearch.SelectedIndex = 0;
             cmbSearch.IsDropDownOpen = false;
+
+            //loading users
+            dgvEmployees.ItemsSource = userServices.GetAllUsers();
+            HideColumns();
         }
 
         //dropdown
@@ -106,6 +107,7 @@ namespace PreschoolManagmentSoftware.UserControls
             if (string.IsNullOrEmpty(search))
             {
                 dgvEmployees.ItemsSource = userServices.GetAllUsers();
+                HideColumns();
                 return;
             }
 
@@ -113,24 +115,51 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 case 0:
                     dgvEmployees.ItemsSource = userServices.GetUserByUsernamePattern(search);
+                    HideColumns();
                     break;
                 case 1: 
                     dgvEmployees.ItemsSource = userServices.GetUserByPINPattern(search);
+                    HideColumns();
                     break;
                 case 2:
                     dgvEmployees.ItemsSource = userServices.GetUserByFirstNamePattern(search);
+                    HideColumns();
                     break;
                 case 3:
                     dgvEmployees.ItemsSource = userServices.GetUserByLastNamePattern(search);
+                    HideColumns();
                     break;
                 case 4:
                     dgvEmployees.ItemsSource = userServices.GetUserByFirstNameAndLastNamePattern(search);
+                    HideColumns();
                     break;
                 case 5:
                     dgvEmployees.ItemsSource = userServices.GetUserByEmailPattern(search);
+                    HideColumns();
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void HideColumns()
+        {
+            var columnsToHide = new List<string>
+            {
+                "ProfileImage",
+                "Attendances",
+                "Group",
+                "Role",
+                "Days",
+            };
+            
+            foreach (string columnName in columnsToHide)
+            {
+                var column = dgvEmployees.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                if (column != null)
+                {
+                    column.Visibility = Visibility.Collapsed;
+                }
             }
         }
     }
