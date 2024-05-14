@@ -107,7 +107,7 @@ namespace DataAccessLayer.Repositories
         public IQueryable<User> GetUserByFirstNameAndLastNamePattern(string pattern)
         {
             var query = from u in Users
-                        where u.FirstName.Contains(pattern) || u.LastName.Contains(pattern)
+                        where u.FirstName.Contains(pattern) && u.LastName.Contains(pattern)
                         select u;
 
             return query;
