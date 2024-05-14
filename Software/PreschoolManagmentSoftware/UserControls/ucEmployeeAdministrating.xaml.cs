@@ -97,6 +97,7 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 placeholderSearch.Visibility = Visibility.Visible;
                 dgvEmployees.ItemsSource = userServices.GetAllUsers();
+                HideColumns();
             }
         }
 
@@ -164,21 +165,6 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
-        private void btnEditEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            // Pronalaženje animacija
-            var slideInAnimation = FindResource("SlideInAnimation") as Storyboard;
-
-            var sidebar = (Border)FindName("sidebar");
-            
-            if (sidebar.Visibility == Visibility.Collapsed)
-            {
-                // Ako je bočna traka sakrivena, prikaži je uz animaciju slajdanja s desna na lijevo
-                sidebar.Visibility = Visibility.Visible;
-                slideInAnimation.Begin(sidebar);
-            }
-        }
-
         private void btnCloseSidebar_Click(object sender, RoutedEventArgs e)
         {
             var slideOutAnimation = FindResource("SlideOutAnimation") as Storyboard;
@@ -190,6 +176,21 @@ namespace PreschoolManagmentSoftware.UserControls
                 // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
                 slideOutAnimation.Completed += (s, _) => sidebar.Visibility = Visibility.Collapsed;
                 slideOutAnimation.Begin(sidebar);
+            }
+        }
+
+        private void btnShowProfile_Click(object sender, RoutedEventArgs e)
+        {
+            // Pronalaženje animacija
+            var slideInAnimation = FindResource("SlideInAnimation") as Storyboard;
+
+            var sidebar = (Border)FindName("sidebar");
+
+            if (sidebar.Visibility == Visibility.Collapsed)
+            {
+                // Ako je bočna traka sakrivena, prikaži je uz animaciju slajdanja s desna na lijevo
+                sidebar.Visibility = Visibility.Visible;
+                slideInAnimation.Begin(sidebar);
             }
         }
     }

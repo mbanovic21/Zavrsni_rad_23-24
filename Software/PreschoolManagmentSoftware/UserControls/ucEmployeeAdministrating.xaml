@@ -46,7 +46,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Bočna traka -->
-                    <Border x:Name="sidebar" MaxWidth="450" Grid.RowSpan="4" Background="Green" Grid.Column="2" Visibility="Visible" Panel.ZIndex="1">
+                    <Border x:Name="sidebar" MaxWidth="450" Grid.RowSpan="4" Background="#4EB1B6" Grid.Column="2" Visibility="Visible" Panel.ZIndex="1">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -54,7 +54,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- Close -->
-                            <Button x:Name="btnCloseSidebar" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebar_Click">
+                            <Button x:Name="btnCloseSidebar" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebar_Click">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Grid>
@@ -63,7 +63,7 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <ContentControl x:Name="contentSidebar" />
+                            <ContentControl x:Name="contentSidebar" Grid.Row="1"/>
                         </Grid>
                     </Border>
 
@@ -131,8 +131,7 @@
 
                     <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="0,20,70,20" >
                         <Button x:Name="btnAddNewEmployee" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
-                        <Button x:Name="btnEditEmployee" Click="btnEditEmployee_Click" Content="Uredi" Width="100" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
-                        <Button x:Name="btnDeleteEmployee" Content="Obriši" Width="100" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
+                        <Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
                     </StackPanel>
                 </Grid>
             </Border>
