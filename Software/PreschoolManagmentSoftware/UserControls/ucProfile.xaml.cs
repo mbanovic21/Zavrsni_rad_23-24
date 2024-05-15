@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -208,8 +209,7 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             var search = txtSearch.Text;
             var user = UserServices.GetUserByUsername(search);
-
-            var profileImage = ConvertByteArrayToBitmapImage(user.ProfileImage);
+            var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(user.ProfileImage);
             imgProfile.Source = profileImage;
             txtPIN.Text = user.PIN;
             txtFirstname.Text = user.FirstName;
@@ -222,23 +222,6 @@ namespace PreschoolManagmentSoftware.UserControls
             txtPassword.Text = user.Password;
             var role = user.Id_role == 1 ? "Administrator" : "Običan";
             txtRole.Text = role;   
-        }
-
-        //Convert byte picture to BitmapImage
-        private BitmapImage ConvertByteArrayToBitmapImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0)
-                return null;
-
-            BitmapImage bitmapImage = new BitmapImage();
-            using (MemoryStream memoryStream = new MemoryStream(imageData))
-            {
-                bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.StreamSource = memoryStream;
-                bitmapImage.EndInit();
-            }
-            return bitmapImage;
         }
     }
 }

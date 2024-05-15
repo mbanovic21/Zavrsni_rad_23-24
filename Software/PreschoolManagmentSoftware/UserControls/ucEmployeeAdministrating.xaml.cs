@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -188,11 +189,18 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebar.Visibility == Visibility.Collapsed)
             {
-                // Ako je bočna traka sakrivena, prikaži je uz animaciju slajdanja s desna na lijevo
-                var ucEmplyoeeSidebarProfile = new ucEmployeeSidebar();
-                contentSidebar.Content = ucEmplyoeeSidebarProfile;
-                sidebar.Visibility = Visibility.Visible;
-                slideInAnimation.Begin(sidebar);
+                var selectedUser = dgvEmployees.SelectedItem as User;
+
+                if (selectedUser != null)
+                {
+                    var ucEmplyoeeSidebarProfile = new ucEmployeeSidebar(selectedUser);
+                    contentSidebar.Content = ucEmplyoeeSidebarProfile;
+                    sidebar.Visibility = Visibility.Visible;
+                    slideInAnimation.Begin(sidebar);
+                } else
+                {
+                    MessageBox.Show("Molimo odaberite zaposlenika iz tablice.");
+                }
             }
         }
     }

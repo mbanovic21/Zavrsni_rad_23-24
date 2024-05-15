@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EntityLayer;
+using EntityLayer.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,27 @@ namespace PreschoolManagmentSoftware.UserControls
     /// </summary>
     public partial class ucEmployeeSidebar : UserControl
     {
-        public ucEmployeeSidebar()
+        public User User { get; set; }
+        public ucEmployeeSidebar(User user)
         {
             InitializeComponent();
+            User = user;
+        }
+
+        private void ucEmplyeeSidebarProfile_Loaded(object sender, RoutedEventArgs e)
+        {
+            var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(User.ProfileImage);
+            var firstname = User.FirstName;
+            var lastname = User.LastName;
+
+            imgProfile.Source = profileImage;
+            textFirstAndLastName.Text = $"{firstname} {lastname}";
+
+            textUsername.Text = User.Username;
+            textPIN.Text = User.PIN;
+            textDateOfBirth.Text = User.DateOfBirth;
+            textGender.Text = User.Sex;
+            textRole.Text = User.Id_role == 1 ? "Administrator" : "Običan";
         }
     }
 }
