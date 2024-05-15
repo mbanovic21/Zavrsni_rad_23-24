@@ -189,6 +189,8 @@ namespace PreschoolManagmentSoftware.UserControls
             if (sidebar.Visibility == Visibility.Collapsed)
             {
                 // Ako je bočna traka sakrivena, prikaži je uz animaciju slajdanja s desna na lijevo
+                var ucEmplyoeeSidebarProfile = new ucEmployeeSidebar();
+                contentSidebar.Content = ucEmplyoeeSidebarProfile;
                 sidebar.Visibility = Visibility.Visible;
                 slideInAnimation.Begin(sidebar);
             }

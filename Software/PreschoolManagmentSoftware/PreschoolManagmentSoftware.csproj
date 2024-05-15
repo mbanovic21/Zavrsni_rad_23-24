@@ -68,6 +68,9 @@
     <Compile Include="UserControls\ucEmployeeAdministrating.xaml.cs">
       <DependentUpon>ucEmployeeAdministrating.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucEmployeeSidebar.xaml.cs">
+      <DependentUpon>ucEmployeeSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucProfile.xaml.cs">
       <DependentUpon>ucProfile.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControls\ucEmployeeAdministrating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ucEmployeeSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
