@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
              mc:Ignorable="d" 
-             x:Name="ucEmployeeRegistrationSidebar"
-             d:DesignHeight="728" d:DesignWidth="800" Loaded="ucEmployeeRegistrationSidebar_Loaded">
+             x:Name="ucEmplyeeRegistrationSidebar"
+             d:DesignHeight="728" d:DesignWidth="800" >
     <Grid>
         <Border Background="Transparent">
             <Grid>
@@ -22,7 +22,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- naslov -->
-                <TextBlock Text="Registracija zaposlenika" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Margin="0 0 0 20"/>
+                <!-- <TextBlock Text="Registracija zaposlenika" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Margin="0 0 0 20"/>  -->
                 
                 <!-- profil stuff -->
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
@@ -43,7 +43,7 @@
                     </Border>
 
                     <!-- Add Profile Picture -->
-                    <TextBlock x:Name="txtAddProfilePicture" Text="Dodaj sliku profila" Style="{StaticResource link}" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" Margin="0,5,0,20"  />
+                    <TextBlock x:Name="txtAddProfilePicture" Text="Dodaj sliku profila" Style="{StaticResource link}" Foreground="#f5f5f5" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" Margin="0,5,0,20"  />
                 </StackPanel>
                 
                 <!-- information col 0 -->
@@ -336,7 +336,7 @@
                         </Border>
 
                         <!-- Gumb za slanje zahtjeva -->
-                        <Button x:Name="btnGeneratePassword" Grid.Column="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButton}" Margin="0,7,70,7" Click="btnGeneratePassword_Click" />
+                        <Button x:Name="btnGeneratePassword" Grid.Column="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,70,7" Click="btnGeneratePassword_Click" />
                     </Grid>
 
                     <!-- Role -->

@@ -167,39 +167,39 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
-        // Hide sidebar
-        private void btnCloseSidebar_Click(object sender, RoutedEventArgs e)
+        // Hide sidebarProfile
+        private void btnCloseSidebarProfile_Click(object sender, RoutedEventArgs e)
         {
-            var slideOutAnimation = FindResource("SlideOutAnimation") as Storyboard;
+            var slideOutAnimation = FindResource("SlideOutAnimationProfile") as Storyboard;
 
-            var sidebar = (Border)FindName("sidebar");
+            var sidebarProfile = (Border)FindName("sidebarProfile");
 
-            if (sidebar.Visibility == Visibility.Visible)
+            if (sidebarProfile.Visibility == Visibility.Visible)
             {
                 // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
-                slideOutAnimation.Completed += (s, _) => sidebar.Visibility = Visibility.Collapsed;
-                slideOutAnimation.Begin(sidebar);
+                slideOutAnimation.Completed += (s, _) => sidebarProfile.Visibility = Visibility.Collapsed;
+                slideOutAnimation.Begin(sidebarProfile);
             }
         }
 
-        // Show sidebar and selected emplyee
+        // Show sidebarProfile and selected emplyee
         private void btnShowProfile_Click(object sender, RoutedEventArgs e)
         {
             // Pronalaženje animacija
-            var slideInAnimation = FindResource("SlideInAnimation") as Storyboard;
+            var slideInAnimation = FindResource("SlideInAnimationProfile") as Storyboard;
 
-            var sidebar = (Border)FindName("sidebar");
+            var sidebarProfile = (Border)FindName("sidebarProfile");
 
-            if (sidebar.Visibility == Visibility.Collapsed)
+            if (sidebarProfile.Visibility == Visibility.Collapsed)
             {
                 var selectedUser = dgvEmployees.SelectedItem as User;
 
                 if (selectedUser != null)
                 {
                     var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser);
-                    contentSidebar.Content = ucEmplyoeeSidebarProfile;
-                    sidebar.Visibility = Visibility.Visible;
-                    slideInAnimation.Begin(sidebar);
+                    contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;
+                    sidebarProfile.Visibility = Visibility.Visible;
+                    slideInAnimation.Begin(sidebarProfile);
                 } else
                 {
                     MessageBox.Show("Molimo odaberite zaposlenika iz tablice.");
@@ -207,28 +207,56 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
-        // Refresh sidebar content when choose another employee
+        // Refresh sidebarProfile content when choose another employee
         private void dgvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var sidebar = (Border)FindName("sidebar");
+            var sidebarProfile = (Border)FindName("sidebarProfile");
 
-            if (sidebar.Visibility == Visibility.Visible)
+            if (sidebarProfile.Visibility == Visibility.Visible)
             {
                 var selectedUser = dgvEmployees.SelectedItem as User;
 
                 if (selectedUser != null)
                 {
                     var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser);
-                    contentSidebar.Content = ucEmplyoeeSidebarProfile;
+                    contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;
                 }
             }
         }
 
-        // Add new emplyee
+        // Hide registration sideabr
+        private void btnCloseSidebarRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            var slideOutAnimation = FindResource("SlideOutAnimationRegistration") as Storyboard;
+
+            var sidebarRegistration = (Border)FindName("sidebarRegistration");
+
+            if (sidebarRegistration.Visibility == Visibility.Visible)
+            {
+                // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
+                slideOutAnimation.Completed += (s, _) => sidebarRegistration.Visibility = Visibility.Collapsed;
+                slideOutAnimation.Begin(sidebarRegistration);
+            }
+        }
+
+        // Show registration sidebar
         private void btnAddNewEmployee_Click(object sender, RoutedEventArgs e)
         {
-            var ucRegistration = new ucRegistration();
-            GuiManager.OpenContent(ucRegistration);
+            // Pronalaženje animacija
+            var slideInAnimation = FindResource("SlideInAnimationRegistration") as Storyboard;
+
+            var sidebarRegistration = (Border)FindName("sidebarRegistration");
+
+            if (sidebarRegistration.Visibility == Visibility.Collapsed)
+            {
+                var selectedUser = dgvEmployees.SelectedItem as User;
+
+                var ucEmployeeRegistrationSidebar = new ucEmployeeRegistrationSidebar();
+                contentSidebarRegistration.Content = ucEmployeeRegistrationSidebar;
+                
+                sidebarRegistration.Visibility = Visibility.Visible;
+                slideInAnimation.Begin(sidebarRegistration);
+            }
         }
     }
 }
