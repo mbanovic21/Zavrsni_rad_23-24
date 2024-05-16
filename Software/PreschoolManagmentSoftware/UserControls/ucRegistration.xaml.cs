@@ -47,7 +47,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private void SetInitialProfileImage()
         {
             var gender = GetSelectedGender();
-            string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
+            string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
             string imagePath = "pack://application:,,,/Media/Images/" + imageName;
             profileImage.Source = new BitmapImage(new Uri(imagePath));
         }
@@ -330,7 +330,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 imagePathForRegistration = selectedImagePath;
             } else
             {
-                string imageName = gender == "Ženski" ? "female-user.png" : "male-user.png";
+                string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
                 //string projectPath = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\";
                 imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
             }

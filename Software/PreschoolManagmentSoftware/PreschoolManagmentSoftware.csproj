@@ -217,6 +217,8 @@
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Media\Images\female-user-white.png" />
+    <Resource Include="Media\Images\male-user-white.png" />
     <Resource Include="Media\Images\search.png" />
     <Resource Include="Media\Images\dropdown-arrow.png" />
     <Resource Include="Media\Images\male-user.png" />
