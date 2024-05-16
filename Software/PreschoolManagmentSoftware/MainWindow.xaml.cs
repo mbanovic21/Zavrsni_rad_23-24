@@ -1,4 +1,5 @@
-﻿using PreschoolManagmentSoftware.UserControls;
+﻿using PreschoolManagmentSoftware.Static_Classes;
+using PreschoolManagmentSoftware.UserControls;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace PreschoolManagmentSoftware
         public MainWindow()
         {
             InitializeComponent();
+            GuiManager.MainWindow = this;
         }
 
         //registration

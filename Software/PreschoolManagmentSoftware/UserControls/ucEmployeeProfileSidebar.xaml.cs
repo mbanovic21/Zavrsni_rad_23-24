@@ -1,7 +1,8 @@
-﻿using EntityLayer;
-using EntityLayer.Entities;
+﻿using EntityLayer.Entities;
+using EntityLayer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,12 @@ using System.Windows.Shapes;
 namespace PreschoolManagmentSoftware.UserControls
 {
     /// <summary>
-    /// Interaction logic for ucEmployeeSidebar.xaml
+    /// Interaction logic for ucEmployeeProfileSidebar.xaml
     /// </summary>
-    public partial class ucEmployeeSidebar : UserControl
+    public partial class ucEmployeeProfileSidebar : UserControl
     {
         public User User { get; set; }
-        public ucEmployeeSidebar(User user)
+        public ucEmployeeProfileSidebar(User user)
         {
             InitializeComponent();
             User = user;

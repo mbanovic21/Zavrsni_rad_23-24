@@ -44,7 +44,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapImageConverter.cs" />
+    <Compile Include="Static Classes\BitmapImageConverter.cs" />
     <Compile Include="Entities\Attendance.cs" />
     <Compile Include="Entities\Child.cs" />
     <Compile Include="Entities\DailyActivity.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\WeeklySchedule.cs" />
-    <Compile Include="LoggedInUser.cs" />
+    <Compile Include="Static Classes\LoggedInUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

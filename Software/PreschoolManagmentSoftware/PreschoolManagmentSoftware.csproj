@@ -65,11 +65,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Static Classes\GuiManager.cs" />
     <Compile Include="UserControls\ucEmployeeAdministrating.xaml.cs">
       <DependentUpon>ucEmployeeAdministrating.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucEmployeeSidebar.xaml.cs">
-      <DependentUpon>ucEmployeeSidebar.xaml</DependentUpon>
+    <Compile Include="UserControls\ucEmployeeProfileSidebar.xaml.cs">
+      <DependentUpon>ucEmployeeProfileSidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucEmployeeRegistrationSidebar.xaml.cs">
+      <DependentUpon>ucEmployeeRegistrationSidebar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucProfile.xaml.cs">
       <DependentUpon>ucProfile.xaml</DependentUpon>
@@ -102,7 +106,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucEmployeeSidebar.xaml">
+    <Page Include="UserControls\ucEmployeeProfileSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ucEmployeeRegistrationSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

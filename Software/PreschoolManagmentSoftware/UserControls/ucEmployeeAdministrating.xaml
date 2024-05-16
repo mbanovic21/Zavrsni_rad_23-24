@@ -45,8 +45,8 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Bočna traka -->
-                    <Border x:Name="sidebar" MaxWidth="450" Grid.RowSpan="4" Grid.Column="2" Visibility="Visible" Panel.ZIndex="1">
+                    <!-- Sidebar -->
+                    <Border x:Name="sidebar" MaxWidth="450" Grid.RowSpan="4" Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="1">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#3AA9AD" Offset="0"/>
@@ -155,7 +155,7 @@
                     <DataGrid x:Name="dgvEmployees" SelectionChanged="dgvEmployees_SelectionChanged" Margin="70,7,70,7" Grid.Row="2" Grid.ColumnSpan="3"/>
 
                     <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="0,20,70,20" >
-                        <Button x:Name="btnAddNewEmployee" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
+                        <Button x:Name="btnAddNewEmployee" Click="btnAddNewEmployee_Click" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
                         <Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
                     </StackPanel>
                 </Grid>

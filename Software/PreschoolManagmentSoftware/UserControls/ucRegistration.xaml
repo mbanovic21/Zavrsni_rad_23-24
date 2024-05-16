@@ -16,6 +16,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <Grid>
+
                     <Canvas>
                         <Line X1="0" Y1="200" X2="528" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
                         <Line X1="0" Y1="300" X2="1166" Y2="300" Stroke="#e9ecef" StrokeThickness="2"/>
@@ -29,8 +30,8 @@
                     </Canvas>
 
                     <!-- Profile -->
-                    <StackPanel Margin="50,25,50,0">
-                        <TextBlock Text="Registration" Style="{StaticResource titleText}" Foreground="#4EB1B6" Margin="0 0 0 20"/>
+                    <StackPanel Margin="50,10,50,0">
+                        <TextBlock Text="Registracija zaposlenika" Style="{StaticResource titleText}" Foreground="#4EB1B6" Margin="0 0 0 20"/>
 
                         <!-- Profile image -->
                         <Border CornerRadius="100" BorderThickness="1" BorderBrush="#4EB1B6" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,7" >
@@ -49,7 +50,7 @@
                         </Border>
 
                         <!-- Add Profile Picture -->
-                        <TextBlock x:Name="txtAddProfilePicture" Text="Add Profile Picture" Style="{StaticResource link}" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" Margin="0,5,0,10"  />
+                        <TextBlock x:Name="txtAddProfilePicture" Text="Dodaj sliku profila" Style="{StaticResource link}" FontSize="18" MouseDown="txtAddProfilePicture_MouseDown" Margin="0,5,0,20"  />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -79,7 +80,7 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/id-card.png" Height="20"/>
-                                    <TextBlock x:Name="textPIN" MouseDown="textPIN_MouseDown" Text="PIN" Style="{StaticResource placeholder}"/>
+                                    <TextBlock x:Name="textPIN" MouseDown="textPIN_MouseDown" Text="OIB" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtPIN" TextChanged="txtPIN_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
@@ -105,7 +106,7 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/user.png" Height="20"/>
-                                    <TextBlock x:Name="textFirstname" MouseDown="textFirstname_MouseDown" Text="Firstname" Style="{StaticResource placeholder}"/>
+                                    <TextBlock x:Name="textFirstname" MouseDown="textFirstname_MouseDown" Text="Ime" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtFirstname" TextChanged="txtFirstname_TextChanged" Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
@@ -131,7 +132,7 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/user.png" Height="20"/>
-                                    <TextBlock x:Name="textLastname" MouseDown="textLastname_MouseDown" Text="Lastname" Style="{StaticResource placeholder}"/>
+                                    <TextBlock x:Name="textLastname" MouseDown="textLastname_MouseDown" Text="Prezime" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtLastname" TextChanged="txtLastname_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
@@ -158,7 +159,13 @@
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/calendar.png" Height="20"/>
                                     <TextBlock x:Name="textDateOfBirth" MouseLeftButtonUp="textDateOfBirth_MouseLeftButtonUp" Style="{StaticResource placeholder}" />
-                                    <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource textBox}" Margin="5 0 0 0" />
+                                    <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource textBox}" Margin="5 0 0 0" >
+                                        <DatePicker.Resources>
+                                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                                <Setter Property="Text" Value="Datum rođenja"/>
+                                            </Style>
+                                        </DatePicker.Resources>
+                                    </DatePicker>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
                                             <ToolTip>
@@ -185,10 +192,10 @@
                                     <Image Source="/Media/Images/gender.png" Height="20"/>
 
                                     <StackPanel Grid.Column="1" Margin="7">
-                                        <TextBlock x:Name="textGender" Text="Gender:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
+                                        <TextBlock x:Name="textGender" Text="Spol:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <RadioButton x:Name="rbMale" Content="Male" GroupName="Gender" Checked="rbGender_Checked"/>
-                                            <RadioButton x:Name="rbFemale" Content="Female" GroupName="Gender" IsChecked="True" Checked="rbGender_Checked" Margin="10 0 0 0"/>
+                                            <RadioButton x:Name="rbMale" Content="Muški" GroupName="Gender" Checked="rbGender_Checked"/>
+                                            <RadioButton x:Name="rbFemale" Content="Ženski" GroupName="Gender" IsChecked="True" Checked="rbGender_Checked" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
 
@@ -217,7 +224,7 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/email.png" Height="20"/>
-                                    <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource placeholder}"/>
+                                    <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="E-pošta" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
@@ -243,7 +250,7 @@
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/telephone.png" Height="20"/>
-                                    <TextBlock x:Name="textTelephone" MouseDown="textTelephone_MouseDown" Text="Telephone" Style="{StaticResource placeholder}"/>
+                                    <TextBlock x:Name="textTelephone" MouseDown="textTelephone_MouseDown" Text="Telefonski broj" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtTelephone" TextChanged="txtTelephone_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
                                         <Image.ToolTip>
@@ -271,7 +278,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image Source="/Media/Images/user.png" Height="20"/>
-                                    <TextBlock x:Name="textUsername" MouseDown="textUsername_MouseDown" Text=" Username" Style="{StaticResource placeholder}"/>
+                                    <TextBlock x:Name="textUsername" MouseDown="textUsername_MouseDown" Text=" Korisničko ime" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" Style="{StaticResource textBox}" />
 
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -305,7 +312,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Image Source="/Media/Images/password.png" Height="20" Margin="2,0,-2,0"/>
-                                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Password" Style="{StaticResource placeholder}"/>
+                                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Lozinka" Style="{StaticResource placeholder}"/>
                                         <TextBox x:Name="txtPassword" TextChanged="txtPassword_TextChanged" Style="{StaticResource textBox}"/>
 
                                         <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -325,7 +332,7 @@
                                 </Border>
 
                                 <!-- Gumb za slanje zahtjeva -->
-                                <Button x:Name="btnGeneratePassword" Grid.Column="1" Content="Generate password" Style="{StaticResource generatePasswordButton}" Margin="0,7,70,7" Click="btnGeneratePassword_Click" />
+                                <Button x:Name="btnGeneratePassword" Grid.Column="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButton}" Margin="0,7,70,7" Click="btnGeneratePassword_Click" />
                             </Grid>
                             
                             <!-- Role -->
@@ -338,10 +345,10 @@
                                     </Grid.ColumnDefinitions>
                                     <Image Source="/Media/Images/user-role.png" Height="20"/>
                                     <StackPanel Grid.Column="1" Margin="7">
-                                        <TextBlock x:Name="textRole" Text="Role:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
+                                        <TextBlock x:Name="textRole" Text="Uloga:" Style="{StaticResource placeholder}" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal">
                                             <RadioButton x:Name="rbAdmin" Content="Administrator" GroupName="Role"/>
-                                            <RadioButton x:Name="rbUser" Content="User" GroupName="Role" IsChecked="True" Margin="10 0 0 0"/>
+                                            <RadioButton x:Name="rbUser" Content="Običan" GroupName="Role" IsChecked="True" Margin="10 0 0 0"/>
                                         </StackPanel>
                                     </StackPanel>
 
@@ -363,7 +370,7 @@
                         </Grid>
                         
                         <!-- Gumb za slanje zahtjeva -->
-                        <Button x:Name="btnRegister" Content="Register" Click="btnRegister_Click" Style="{StaticResource loginButton}" />
+                        <Button x:Name="btnRegister" Content="Registriraj" Click="btnRegister_Click" Style="{StaticResource loginButton}" Margin="0,40,0,0" />
                     </StackPanel>
                 </Grid>
             </Border>

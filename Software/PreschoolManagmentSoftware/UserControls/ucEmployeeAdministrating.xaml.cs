@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer.Entities;
+using PreschoolManagmentSoftware.Static_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -195,7 +196,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (selectedUser != null)
                 {
-                    var ucEmplyoeeSidebarProfile = new ucEmployeeSidebar(selectedUser);
+                    var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser);
                     contentSidebar.Content = ucEmplyoeeSidebarProfile;
                     sidebar.Visibility = Visibility.Visible;
                     slideInAnimation.Begin(sidebar);
@@ -217,10 +218,17 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (selectedUser != null)
                 {
-                    var ucEmplyoeeSidebarProfile = new ucEmployeeSidebar(selectedUser);
+                    var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser);
                     contentSidebar.Content = ucEmplyoeeSidebarProfile;
                 }
             }
+        }
+
+        // Add new emplyee
+        private void btnAddNewEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var ucRegistration = new ucRegistration();
+            GuiManager.OpenContent(ucRegistration);
         }
     }
 }
