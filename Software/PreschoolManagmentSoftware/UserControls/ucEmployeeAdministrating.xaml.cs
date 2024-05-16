@@ -166,6 +166,7 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        // Hide sidebar
         private void btnCloseSidebar_Click(object sender, RoutedEventArgs e)
         {
             var slideOutAnimation = FindResource("SlideOutAnimation") as Storyboard;
@@ -180,6 +181,7 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        // Show sidebar and selected emplyee
         private void btnShowProfile_Click(object sender, RoutedEventArgs e)
         {
             // Pronalaženje animacija
@@ -200,6 +202,23 @@ namespace PreschoolManagmentSoftware.UserControls
                 } else
                 {
                     MessageBox.Show("Molimo odaberite zaposlenika iz tablice.");
+                }
+            }
+        }
+
+        // Refresh sidebar content when choose another employee
+        private void dgvEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var sidebar = (Border)FindName("sidebar");
+
+            if (sidebar.Visibility == Visibility.Visible)
+            {
+                var selectedUser = dgvEmployees.SelectedItem as User;
+
+                if (selectedUser != null)
+                {
+                    var ucEmplyoeeSidebarProfile = new ucEmployeeSidebar(selectedUser);
+                    contentSidebar.Content = ucEmplyoeeSidebarProfile;
                 }
             }
         }
