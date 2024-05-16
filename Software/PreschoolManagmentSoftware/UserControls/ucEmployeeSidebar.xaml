@@ -17,9 +17,9 @@
                 </Grid.RowDefinitions>
                 
                 <!-- Profile conrtainer -->
-                <StackPanel Margin="0,20,0,0" Grid.Row="0">
+                <StackPanel Margin="0,0,0,20" Grid.Row="0">
                     <!-- Profile image -->
-                    <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,20" VerticalAlignment="Center" >
+                    <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,10" VerticalAlignment="Center" >
                         <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="20" VerticalAlignment="Center" >
                             <Grid>
                                 <Image x:Name="imgProfile" Stretch="Uniform" Height="100" Width="100" ClipToBounds="True">
@@ -46,22 +46,26 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Korisničko ime: " Grid.Column="0" Grid.Row="0" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                    <TextBlock x:Name="textUsername" Grid.Column="1" Grid.Row="0" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                    <TextBlock Text="Korisničko ime: " Grid.Column="0" Grid.Row="0" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textUsername" Grid.Column="1" Grid.Row="0" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="OIB: " Grid.Column="0" Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                    <TextBlock x:Name="textPIN" Grid.Column="1" Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                    <TextBlock Text="OIB: " Grid.Column="0" Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textPIN" Grid.Column="1" Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="Datum rođenja: " Grid.Column="0" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                    <TextBlock x:Name="textDateOfBirth" Grid.Column="1" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                    <TextBlock Text="E-pošta: " Grid.Column="0" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textEmail" Grid.Column="1" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" TextAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="Spol: " Grid.Column="0" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                    <TextBlock x:Name="textGender" Grid.Column="1" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                    <TextBlock Text="Datum rođenja: " Grid.Column="0" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textDateOfBirth" Grid.Column="1" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="Uloga: " Grid.Column="0" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,10,0" />
-                    <TextBlock x:Name="textRole" Grid.Column="1" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="10,0,0,0" />
+                    <TextBlock Text="Spol: " Grid.Column="0" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textGender" Grid.Column="1" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
+
+                    <TextBlock Text="Uloga: " Grid.Column="0" Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textRole" Grid.Column="1" Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
                 </Grid>
             </Grid>
         </Border>

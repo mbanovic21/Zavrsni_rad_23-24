@@ -32,14 +32,17 @@ namespace PreschoolManagmentSoftware.UserControls
         private void ucEmplyeeSidebarProfile_Loaded(object sender, RoutedEventArgs e)
         {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(User.ProfileImage);
-            var firstname = User.FirstName;
-            var lastname = User.LastName;
+            var email = User.Email;
+            var atIndex = email.IndexOf('@');
+            var emailUsername = email.Substring(0, atIndex);
+            var emailDomain = email.Substring(atIndex);
 
             imgProfile.Source = profileImage;
-            textFirstAndLastName.Text = $"{firstname} {lastname}";
+            textFirstAndLastName.Text = $"{User.FirstName} {User.LastName}";
 
             textUsername.Text = User.Username;
             textPIN.Text = User.PIN;
+            textEmail.Text = $"{emailUsername}\n{emailDomain}";
             textDateOfBirth.Text = User.DateOfBirth;
             textGender.Text = User.Sex;
             textRole.Text = User.Id_role == 1 ? "Administrator" : "Običan";
