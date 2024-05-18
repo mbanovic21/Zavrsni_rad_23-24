@@ -28,13 +28,15 @@ namespace PreschoolManagmentSoftware.UserControls
     public partial class ucEmployeeRegistrationSidebar : UserControl
     {
 
-        private AutenticationManager AutenticationManager = new AutenticationManager();
-        private UserServices UserServices = new UserServices();
-        private string selectedImagePath { get; set; }
+        private AutenticationManager _autenticationManager = new AutenticationManager();
+        private UserServices _userServices = new UserServices();
+        private ucEmployeeAdministrating _ucEmployeeAdministrating { get; set; }
+        private string _selectedImagePath { get; set; }
 
-        public ucEmployeeRegistrationSidebar()
+        public ucEmployeeRegistrationSidebar(ucEmployeeAdministrating ucEmployeeAdministrating)
         {
             InitializeComponent();
+            _ucEmployeeAdministrating = ucEmployeeAdministrating;
         }   
 
         //Profile image
@@ -55,7 +57,7 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             SetInitialProfileImage();
             btnDeleteImage.Visibility = Visibility.Collapsed;
-            selectedImagePath = null;
+            _selectedImagePath = null;
         }
 
         private void txtAddProfilePicture_MouseDown(object sender, MouseButtonEventArgs e)
@@ -65,8 +67,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (openFileDialog.ShowDialog() == true)
             {
-                selectedImagePath = openFileDialog.FileName;
-                profileImage.Source = new BitmapImage(new Uri(selectedImagePath));
+                _selectedImagePath = openFileDialog.FileName;
+                profileImage.Source = new BitmapImage(new Uri(_selectedImagePath));
                 btnDeleteImage.Visibility = Visibility.Visible;
             }
         }
@@ -76,7 +78,7 @@ namespace PreschoolManagmentSoftware.UserControls
             var radioButton = sender as RadioButton;
             if (radioButton != null)
             {
-                if (selectedImagePath == null)
+                if (_selectedImagePath == null)
                 {
                     SetInitialProfileImage();
                 }
@@ -292,7 +294,7 @@ namespace PreschoolManagmentSoftware.UserControls
         //btnGeneratePassword
         private void btnGeneratePassword_Click(object sender, RoutedEventArgs e)
         {
-            var generatedPassword = AutenticationManager.GeneratePassword();
+            var generatedPassword = _autenticationManager.GeneratePassword();
             txtPassword.Clear();
             txtPassword.Text = generatedPassword;
         }
@@ -321,12 +323,12 @@ namespace PreschoolManagmentSoftware.UserControls
             var telephone = txtTelephone.Text;
             var username = txtUsername.Text;
             var password = txtPassword.Text;
-            (string hashedPassword, string salt) = AutenticationManager.HashPasswordAndGetSalt(password);
+            (string hashedPassword, string salt) = _autenticationManager.HashPasswordAndGetSalt(password);
             var role = GetSelectedRole();
 
-            if (!string.IsNullOrEmpty(selectedImagePath))
+            if (!string.IsNullOrEmpty(_selectedImagePath))
             {
-                imagePathForRegistration = selectedImagePath;
+                imagePathForRegistration = _selectedImagePath;
             } else
             {
                 string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
@@ -352,10 +354,13 @@ namespace PreschoolManagmentSoftware.UserControls
             };
 
 
-            var isRegistrated = await Task.Run(() => UserServices.RegistrateUser(userForRegistration));
+            var isRegistrated = await Task.Run(() => _userServices.RegistrateUser(userForRegistration));
 
             if (isRegistrated)
             {
+                // refresha u pozadini čim se doda
+                _ucEmployeeAdministrating.RefreshGUI();
+
                 var result = MessageBox.Show("Novi korisnik je uspješno registriran! Želite li obavijestiti korisnika putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.Yes)
@@ -366,7 +371,7 @@ namespace PreschoolManagmentSoftware.UserControls
                     var isEmailSent = emailNotifier.SendRegistrationEmail(firstName, lastName, email, username, password, subject);
                     if (!isEmailSent)
                     {
-                        var isRemoved = await Task.Run(() => UserServices.RemoveUser(username, PIN));
+                        var isRemoved = await Task.Run(() => _userServices.RemoveUser(username, PIN));
                         if (isRemoved)
                         {
                             MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);

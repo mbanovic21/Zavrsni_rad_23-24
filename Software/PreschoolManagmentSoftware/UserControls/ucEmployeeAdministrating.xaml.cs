@@ -28,6 +28,7 @@ namespace PreschoolManagmentSoftware.UserControls
         public ucEmployeeAdministrating()
         {
             InitializeComponent();
+            
         }
 
         //Loading users
@@ -45,8 +46,7 @@ namespace PreschoolManagmentSoftware.UserControls
             cmbSearch.IsDropDownOpen = false;
 
             //loading users
-            dgvEmployees.ItemsSource = userServices.GetAllUsers();
-            HideColumns();
+            RefreshGUI();
         }
 
         //dropdown
@@ -251,12 +251,19 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 var selectedUser = dgvEmployees.SelectedItem as User;
 
-                var ucEmployeeRegistrationSidebar = new ucEmployeeRegistrationSidebar();
+                var ucEmployeeRegistrationSidebar = new ucEmployeeRegistrationSidebar(this);
                 contentSidebarRegistration.Content = ucEmployeeRegistrationSidebar;
                 
                 sidebarRegistration.Visibility = Visibility.Visible;
                 slideInAnimation.Begin(sidebarRegistration);
             }
+        }
+
+        // Refresh GUI
+        public async void RefreshGUI()
+        {
+            dgvEmployees.ItemsSource = await Task.Run(() => userServices.GetAllUsers());
+            HideColumns();
         }
     }
 }
