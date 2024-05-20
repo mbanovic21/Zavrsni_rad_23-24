@@ -24,7 +24,7 @@ namespace PreschoolManagmentSoftware.UserControls
     /// </summary>
     public partial class ucEmployeeAdministrating : UserControl
     {
-        private UserServices userServices = new UserServices();
+        private UserServices _userServices = new UserServices();
         public ucEmployeeAdministrating()
         {
             InitializeComponent();
@@ -98,7 +98,7 @@ namespace PreschoolManagmentSoftware.UserControls
             } else
             {
                 placeholderSearch.Visibility = Visibility.Visible;
-                dgvEmployees.ItemsSource = userServices.GetAllUsers();
+                dgvEmployees.ItemsSource = _userServices.GetAllUsers();
                 HideColumns();
             }
         }
@@ -110,7 +110,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (string.IsNullOrEmpty(search))
             {
-                dgvEmployees.ItemsSource = userServices.GetAllUsers();
+                dgvEmployees.ItemsSource = _userServices.GetAllUsers();
                 HideColumns();
                 return;
             }
@@ -118,27 +118,27 @@ namespace PreschoolManagmentSoftware.UserControls
             switch (selectedItem)
             {
                 case 0:
-                    dgvEmployees.ItemsSource = userServices.GetUserByUsernamePattern(search);
+                    dgvEmployees.ItemsSource = _userServices.GetUserByUsernamePattern(search);
                     HideColumns();
                     break;
                 case 1: 
-                    dgvEmployees.ItemsSource = userServices.GetUserByPINPattern(search);
+                    dgvEmployees.ItemsSource = _userServices.GetUserByPINPattern(search);
                     HideColumns();
                     break;
                 case 2:
-                    dgvEmployees.ItemsSource = userServices.GetUserByFirstNamePattern(search);
+                    dgvEmployees.ItemsSource = _userServices.GetUserByFirstNamePattern(search);
                     HideColumns();
                     break;
                 case 3:
-                    dgvEmployees.ItemsSource = userServices.GetUserByLastNamePattern(search);
+                    dgvEmployees.ItemsSource = _userServices.GetUserByLastNamePattern(search);
                     HideColumns();
                     break;
                 case 4:
-                    dgvEmployees.ItemsSource = userServices.GetUserByFirstNameAndLastNamePattern(search);
+                    dgvEmployees.ItemsSource = _userServices.GetUserByFirstNameAndLastNamePattern(search);
                     HideColumns();
                     break;
                 case 5:
-                    dgvEmployees.ItemsSource = userServices.GetUserByEmailPattern(search);
+                    dgvEmployees.ItemsSource = _userServices.GetUserByEmailPattern(search);
                     HideColumns();
                     break;
                 default:
@@ -262,7 +262,7 @@ namespace PreschoolManagmentSoftware.UserControls
         // Refresh GUI
         public async void RefreshGUI()
         {
-            dgvEmployees.ItemsSource = await Task.Run(() => userServices.GetAllUsers());
+            dgvEmployees.ItemsSource = await Task.Run(() => _userServices.GetAllUsers());
             HideColumns();
         }
     }

@@ -60,7 +60,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Sidebar profile -->
-                    <Border x:Name="sidebarProfile" MaxWidth="450" Grid.RowSpan="4" Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="1">
+                    <Border x:Name="sidebarProfile" MaxWidth="450" Grid.RowSpan="4" Grid.Column="2" Visibility="Visible" Panel.ZIndex="1">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#3AA9AD" Offset="0"/>
