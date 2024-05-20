@@ -323,7 +323,7 @@ namespace PreschoolManagmentSoftware.UserControls
             }
 
             // Tenarni operator za odabir nove ili stare slike
-            //string newImage = _selectedImagePath ? _user.ProfileImage : _selectedImagePath;
+            string newImage;
             var firstname = string.IsNullOrWhiteSpace(txtFirstname.Text) ? _user.FirstName : txtFirstname.Text;
             string lastName = string.IsNullOrWhiteSpace(txtLastname.Text) ? _user.LastName : txtLastname.Text;
             string username = string.IsNullOrWhiteSpace(txtUsername.Text) ? _user.Username : txtUsername.Text;
