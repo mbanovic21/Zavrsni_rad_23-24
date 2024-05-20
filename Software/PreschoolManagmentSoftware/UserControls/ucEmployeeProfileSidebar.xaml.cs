@@ -44,6 +44,7 @@ namespace PreschoolManagmentSoftware.UserControls
             textUsername.Text = User.Username;
             textPIN.Text = User.PIN;
             textEmail.Text = $"{emailUsername}\n{emailDomain}";
+            textTelephone.Text = User.Telephone;
             textDateOfBirth.Text = User.DateOfBirth;
             textGender.Text = User.Sex;
             textRole.Text = User.Id_role == 1 ? "Administrator" : "Običan";

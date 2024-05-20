@@ -35,12 +35,14 @@
                     <!--ime i prezime-->
                     <TextBlock x:Name="textFirstAndLastName" Style="{StaticResource titleText}"/>
                 </StackPanel>
+                
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -58,15 +60,23 @@
                     <TextBlock Text="E-pošta: " Grid.Column="0" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
                     <TextBlock x:Name="textEmail" Grid.Column="1" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" TextAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="Datum rođenja: " Grid.Column="0" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
-                    <TextBlock x:Name="textDateOfBirth" Grid.Column="1" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
+                    <TextBlock Text="Telefonski broj: " Grid.Column="0" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textTelephone" Grid.Column="1" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="Spol: " Grid.Column="0" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
-                    <TextBlock x:Name="textGender" Grid.Column="1" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
+                    <TextBlock Text="Datum rođenja: " Grid.Column="0" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textDateOfBirth" Grid.Column="1" Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
 
-                    <TextBlock Text="Uloga: " Grid.Column="0" Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
-                    <TextBlock x:Name="textRole" Grid.Column="1" Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
+                    <TextBlock Text="Spol: " Grid.Column="0" Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textGender" Grid.Column="1" Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
+
+                    <TextBlock Text="Uloga: " Grid.Column="0" Grid.Row="6" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                    <TextBlock x:Name="textRole" Grid.Column="1" Grid.Row="6" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
                 </Grid>
+
+                <StackPanel Orientation="Vertical" Grid.Row="2">
+                    <Button x:Name="btnEditProfile" Content="Uredi profil" Style="{StaticResource transparentButton}" />
+                    <Button x:Name="btnGeneratePDF" Content="Spremi profil kao PDF" Style="{StaticResource transparentButton}" Margin="0,10,0,30"/>
+                </StackPanel>
             </Grid>
         </Border>
 
