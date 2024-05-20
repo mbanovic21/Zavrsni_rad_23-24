@@ -4,6 +4,7 @@ using BusinessLogicLayer.EmailServices;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Win32;
+using PreschoolManagmentSoftware.Static_Classes;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,8 @@ namespace PreschoolManagmentSoftware.UserControls
     {
         private string _selectedImagePath { get; set; }
         private User _user { get; set; }
+
+        private User _updatedUser { get; set; }
         private ucEmployeeAdministrating _ucEmployeeAdministrating { get ; set; }
         private AutenticationManager _autenticationManager = new AutenticationManager();
         private UserServices _userServices = new UserServices();
@@ -60,10 +63,27 @@ namespace PreschoolManagmentSoftware.UserControls
             textEmail.Text = $"{emailUsername}\n{emailDomain}";
             textTelephone.Text = _user.Telephone;
             dpDateOfBirth.SelectedDate = DateTime.Parse(_user.DateOfBirth);
-            rbMale.IsChecked = _user.Sex == "Muški     " ? true : false;
-            rbFemale.IsChecked = _user.Sex == "Ženski    " ? true : false;
-            rbAdmin.IsChecked = _user.Id_role == 1 ? true : false;
-            rbUser.IsChecked = _user.Id_role == 2 ? true : false;
+            if (_user.Sex == "Muški     ")
+            {
+                rbMale.IsChecked = true;
+                rbFemale.IsChecked = false;
+            } else if (_user.Sex == "Ženski    ")
+            {
+                rbMale.IsChecked = false;
+                rbFemale.IsChecked = true;
+            }
+
+            if (_user.Id_role == 1)
+            {
+                rbAdmin.IsChecked = true;
+                rbUser.IsChecked = false;
+            } else if (_user.Id_role == 2)
+            {
+                rbAdmin.IsChecked = false;
+                rbUser.IsChecked = true;
+            }
+
+            _updatedUser = _user;
         }
 
         //Profile picture
@@ -348,7 +368,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 newImage = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
             }
 
-            var editedUser = new User()
+            _updatedUser = new User()
             {
                 Id = _user.Id,
                 ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(newImage),
@@ -366,7 +386,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 Id_Group = null
             };
 
-            var isUpdated  = await Task.Run(() => _userServices.isUpdated(editedUser));
+            var isUpdated  = await Task.Run(() => _userServices.isUpdated(_updatedUser));
 
             if (isUpdated)
             {
@@ -374,6 +394,8 @@ namespace PreschoolManagmentSoftware.UserControls
                 _ucEmployeeAdministrating.RefreshGUI();
 
                 var result = MessageBox.Show($"Korisnik {firstname} {lastName} je uspješno ažuriran! Želite li obavijestiti ažuriranog korisnika putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
+
+                _user = _updatedUser;
 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -461,6 +483,14 @@ namespace PreschoolManagmentSoftware.UserControls
         private bool IsValidUsername(string username)
         {
             return Regex.IsMatch(username, @"^[a-z0-9]+$");
+        }
+
+        //back to profile
+        private void btnBackToProfile_Click(object sender, RoutedEventArgs e)
+        {
+            var ucProfileSidebar = new ucEmployeeProfileSidebar(_user, _ucEmployeeAdministrating);
+            ucProfileSidebar.refreshData();
+            _ucEmployeeAdministrating.contentSidebarProfile.Content = ucProfileSidebar;
         }
     }
 }

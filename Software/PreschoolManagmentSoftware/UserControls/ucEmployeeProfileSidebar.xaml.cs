@@ -35,6 +35,17 @@ namespace PreschoolManagmentSoftware.UserControls
 
         private void ucEmplyeeSidebarProfile_Loaded(object sender, RoutedEventArgs e)
         {
+            refreshData();
+        }
+
+        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
+        {
+            var ucEmployeeEditProfile = new ucEmployeeEditProfile(_user, _ucEmployeeAdministrating);
+            _ucEmployeeAdministrating.contentSidebarProfile.Content = ucEmployeeEditProfile;
+        }
+
+        public void refreshData()
+        {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_user.ProfileImage);
             var email = _user.Email;
             var atIndex = email.IndexOf('@');
@@ -51,12 +62,6 @@ namespace PreschoolManagmentSoftware.UserControls
             textDateOfBirth.Text = _user.DateOfBirth;
             textGender.Text = _user.Sex;
             textRole.Text = _user.Id_role == 1 ? "Administrator" : "Običan";
-        }
-
-        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
-        {
-            var ucEmployeeEditProfile = new ucEmployeeEditProfile(_user, _ucEmployeeAdministrating);
-            _ucEmployeeAdministrating.contentSidebarProfile.Content = ucEmployeeEditProfile;
         }
     }
 }
