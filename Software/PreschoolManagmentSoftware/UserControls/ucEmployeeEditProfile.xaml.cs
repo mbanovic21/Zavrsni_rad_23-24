@@ -322,7 +322,6 @@ namespace PreschoolManagmentSoftware.UserControls
                 return;
             }
 
-            // Tenarni operator za odabir nove ili stare slike
             string newImage;
             var firstname = string.IsNullOrWhiteSpace(txtFirstname.Text) ? _user.FirstName : txtFirstname.Text;
             string lastName = string.IsNullOrWhiteSpace(txtLastname.Text) ? _user.LastName : txtLastname.Text;
@@ -332,32 +331,12 @@ namespace PreschoolManagmentSoftware.UserControls
             string telephone = string.IsNullOrWhiteSpace(txtTelephone.Text) ? _user.Telephone : txtTelephone.Text;
             string date = dpDateOfBirth.Text ?? _user.DateOfBirth;
             string gender = GetSelectedGender();
-            // Uzmi novu lozinku samo ako je promijenjena pri spremanju
             var password = string.IsNullOrWhiteSpace(txtPassword.Text) ? _user.Password : txtPassword.Text;
             var oldSalt = string.IsNullOrWhiteSpace(txtPassword.Text) ? _user.Salt : null;
 
-            // Izračunaj hash i sol samo ako je lozinka promijenjena
             (string hashedPassword, string salt) = !string.IsNullOrWhiteSpace(txtPassword.Text) ?_autenticationManager.HashPasswordAndGetSalt(txtPassword.Text) : (password, oldSalt);
 
             var role = GetSelectedRole();
-
-         /* 
-            string message = $"First Name: {firstName}\n" +
-            $"Last Name: {lastName}\n" +
-            $"Username: {username}\n" +
-            $"PIN: {PIN}\n" +
-            $"Email: {email}\n" +
-            $"Telephone: {telephone}\n" +
-            $"Date of Birth: {date}\n" +
-            $"Gender: {gender}\n" +
-            $"Role: {role}\n" +
-            $"Old Password: {password}\n" +
-            $"Old Salt: {oldSalt}\n" +
-            $"New Password: {hashedPassword}\n" +
-            $"New Salt: {salt}\n";
-
-            Console.WriteLine(message);
-        */
 
             if (!string.IsNullOrEmpty(_selectedImagePath))
             {
@@ -398,7 +377,6 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    // Obavijesti korisnika putem e-pošte
                     var subject = "Vaši podaci su uspješno ažurirani!";
                     var emailNotifier = new UserUpdateEmailNotifier();
                     var isEmailSent = emailNotifier.SendUploadEmail(PIN, firstname, lastName, date, gender, email, telephone, username, password, subject);
