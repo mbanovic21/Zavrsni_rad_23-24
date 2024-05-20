@@ -196,7 +196,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (selectedUser != null)
                 {
-                    var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser);
+                    var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser, this);
                     contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;
                     sidebarProfile.Visibility = Visibility.Visible;
                     slideInAnimation.Begin(sidebarProfile);
@@ -218,7 +218,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (selectedUser != null)
                 {
-                    var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser);
+                    var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser, this);
                     contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;
                 }
             }

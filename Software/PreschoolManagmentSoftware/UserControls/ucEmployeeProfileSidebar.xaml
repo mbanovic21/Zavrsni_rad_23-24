@@ -74,7 +74,7 @@
                 </Grid>
 
                 <StackPanel Orientation="Vertical" Grid.Row="2">
-                    <Button x:Name="btnEditProfile" Content="Uredi profil" Style="{StaticResource transparentButton}" />
+                    <Button x:Name="btnEditProfile" Click="btnEditProfile_Click" Content="Uredi profil" Style="{StaticResource transparentButton}" />
                     <Button x:Name="btnGeneratePDF" Content="Spremi profil kao PDF" Style="{StaticResource transparentButton}" Margin="0,10,0,30"/>
                 </StackPanel>
             </Grid>

@@ -141,5 +141,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetAllUsers().ToList();
             }
         }
+
+        //Update user
+        public bool isUpdated(User user)
+        {
+            using (var repo = new UserRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.updateUser(user);
+            }
+        }
     }
 }

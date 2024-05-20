@@ -23,31 +23,40 @@ namespace PreschoolManagmentSoftware.UserControls
     /// </summary>
     public partial class ucEmployeeProfileSidebar : UserControl
     {
-        public User User { get; set; }
-        public ucEmployeeProfileSidebar(User user)
+        private User _user { get; set; }
+        private ucEmployeeAdministrating _ucEmployeeAdministrating { get; set; }
+
+        public ucEmployeeProfileSidebar(User user, ucEmployeeAdministrating ucEmployeeAdministrating)
         {
             InitializeComponent();
-            User = user;
+            _user = user;
+            _ucEmployeeAdministrating = ucEmployeeAdministrating;
         }
 
         private void ucEmplyeeSidebarProfile_Loaded(object sender, RoutedEventArgs e)
         {
-            var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(User.ProfileImage);
-            var email = User.Email;
+            var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_user.ProfileImage);
+            var email = _user.Email;
             var atIndex = email.IndexOf('@');
             var emailUsername = email.Substring(0, atIndex);
             var emailDomain = email.Substring(atIndex);
 
             imgProfile.Source = profileImage;
-            textFirstAndLastName.Text = $"{User.FirstName} {User.LastName}";
+            textFirstAndLastName.Text = $"{_user.FirstName} {_user.LastName}";
 
-            textUsername.Text = User.Username;
-            textPIN.Text = User.PIN;
+            textUsername.Text = _user.Username;
+            textPIN.Text = _user.PIN;
             textEmail.Text = $"{emailUsername}\n{emailDomain}";
-            textTelephone.Text = User.Telephone;
-            textDateOfBirth.Text = User.DateOfBirth;
-            textGender.Text = User.Sex;
-            textRole.Text = User.Id_role == 1 ? "Administrator" : "Običan";
+            textTelephone.Text = _user.Telephone;
+            textDateOfBirth.Text = _user.DateOfBirth;
+            textGender.Text = _user.Sex;
+            textRole.Text = _user.Id_role == 1 ? "Administrator" : "Običan";
+        }
+
+        private void btnEditProfile_Click(object sender, RoutedEventArgs e)
+        {
+            var ucEmployeeEditProfile = new ucEmployeeEditProfile(_user, _ucEmployeeAdministrating);
+            _ucEmployeeAdministrating.contentSidebarProfile.Content = ucEmployeeEditProfile;
         }
     }
 }

@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -130,6 +132,33 @@ namespace DataAccessLayer.Repositories
                         select u;
 
             return query;
+        }
+
+        //update user
+        public bool updateUser(User user)
+        {
+            var selectedUser = Context.Users.FirstOrDefault(u => u.Id == user.Id);
+            if (selectedUser != null)
+            {
+                selectedUser.ProfileImage = user.ProfileImage;
+                selectedUser.FirstName = user.FirstName;
+                selectedUser.LastName = user.LastName;
+                selectedUser.Username = user.Username;
+                selectedUser.PIN = user.PIN;
+                selectedUser.Email = user.Email;
+                selectedUser.Telephone = user.Telephone;
+                selectedUser.DateOfBirth = user.DateOfBirth;
+                selectedUser.Sex = user.Sex;
+                selectedUser.Id_role = user.Id_role;
+                selectedUser.Password = user.Password;
+                selectedUser.Salt = user.Salt;
+
+                Context.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)

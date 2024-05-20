@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EntityLayer;
 
 namespace PreschoolManagmentSoftware.UserControls
 {
@@ -86,18 +87,6 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
-        // Metoda za pretvaranje slike u binarne podatke
-        private byte[] ConvertImageToByteArray(string imagePath)
-        {
-            byte[] imageData;
-            using (FileStream fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
-            {
-                imageData = new byte[fileStream.Length];
-                fileStream.Read(imageData, 0, (int)fileStream.Length);
-            }
-            return imageData;
-        }
-
         //PIN
         private void textPIN_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -120,7 +109,7 @@ namespace PreschoolManagmentSoftware.UserControls
             if (!AreAllDigits(PIN))
             {
                 if (string.IsNullOrWhiteSpace(PIN)) return;
-                MessageBox.Show("ID must be only digits.");
+                MessageBox.Show("OIB mora sadržavati samo znamenke.");
                 return;
             }
         }
@@ -146,9 +135,9 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (!IsLettersOnly(firstName))
             {
-                if (string.IsNullOrWhiteSpace(firstName)) return;
-                txtFirstname.Clear();
-                MessageBox.Show("First name can only contain letters.");
+                if (string.IsNullOrEmpty(firstName)) return;
+                txtLastname.Clear();
+                MessageBox.Show("Ime može sadržavati samo slova.");
                 return;
             }
         }
@@ -176,7 +165,7 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 if (string.IsNullOrEmpty(lastName)) return;
                 txtLastname.Clear();
-                MessageBox.Show("Last name can only contain letters.");
+                MessageBox.Show("Prezime može sadržavati samo slova.");
                 return;
             }
         }
@@ -268,7 +257,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (!string.IsNullOrWhiteSpace(username) && !IsValidUsername(username))
             {
-                MessageBox.Show("Username can only contain lowercase letters and numbers.");
+                MessageBox.Show("Korisničko ime može sadržavati samo mala slova i brojeve.");
                 txtUsername.Clear();
                 return;
             }
@@ -338,7 +327,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
             var userForRegistration = new User()
             {
-                ProfileImage = ConvertImageToByteArray(imagePathForRegistration),
+                ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
                 PIN = PIN,
                 FirstName = firstName,
                 LastName = lastName,
@@ -397,21 +386,21 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (string.IsNullOrWhiteSpace(PIN) || PIN.Length < 11 || PIN.Length > 11)
             {
-                MessageBox.Show("Please eneter your ID. It must be 11 digits.");
+                MessageBox.Show("Molimo unesite svoj OIB. Mora imati 11 znamenki.");
                 txtPIN.Clear();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(firstName))
             {
-                MessageBox.Show("Please enter your first name.");
+                MessageBox.Show("Molimo unesite svoje ime.");
                 txtFirstname.Clear();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(lastName))
             {
-                MessageBox.Show("Please enter your last name.");
+                MessageBox.Show("Molimo unesite svoje prezime.");
                 txtLastname.Clear();
                 return false;
             }
@@ -424,20 +413,20 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Please enter your email.");
+                MessageBox.Show("Molimo unesite svoju email adresu.");
                 return false;
             }
 
             if (!IsValidEmail(email))
             {
-                MessageBox.Show("Please enter a valid email address.");
+                MessageBox.Show("Molimo unesite valjanu email adresu.");
                 txtEmail.Clear();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(telephone) || telephone.Length < 10 || telephone.Length > 14)
             {
-                MessageBox.Show("Please enter a valid telephone number.");
+                MessageBox.Show("Molimo unesite valjani broj telefona.");
                 txtTelephone.Clear();
                 return false;
             }

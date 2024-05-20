@@ -26,5 +26,17 @@ namespace EntityLayer
             }
             return bitmapImage;
         }
+
+        // Convert BitmapImage to byte picture
+        public static byte[] ConvertBitmapImageToByteArray(string imagePath)
+        {
+            byte[] imageData;
+            using (FileStream fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+            {
+                imageData = new byte[fileStream.Length];
+                fileStream.Read(imageData, 0, (int)fileStream.Length);
+            }
+            return imageData;
+        }
     }
 }
