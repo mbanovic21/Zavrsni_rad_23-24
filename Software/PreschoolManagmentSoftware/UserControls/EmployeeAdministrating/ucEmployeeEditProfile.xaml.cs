@@ -54,8 +54,6 @@ namespace PreschoolManagmentSoftware.UserControls
             var emailUsername = email.Substring(0, atIndex);
             var emailDomain = email.Substring(atIndex);
 
-            imgProfile.Source = _selectedImagePath;
-
             textFirstname.Text = _user.FirstName;
             textLastname.Text = _user.LastName;
             textUsername.Text = _user.Username;
@@ -85,6 +83,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 rbUser.IsChecked = true;
             }
 
+            imgProfile.Source = _selectedImagePath;
             _updatedUser = _user;
         }
 
