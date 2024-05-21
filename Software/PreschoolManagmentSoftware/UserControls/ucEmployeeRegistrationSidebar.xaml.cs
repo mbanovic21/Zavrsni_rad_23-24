@@ -352,6 +352,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 var result = MessageBox.Show("Novi korisnik je uspješno registriran! Želite li obavijestiti korisnika putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
 
+                ClearFields();
+
                 if (result == MessageBoxResult.Yes)
                 {
                     // Obavijesti korisnika putem e-pošte
@@ -371,6 +373,21 @@ namespace PreschoolManagmentSoftware.UserControls
             {
                 MessageBox.Show("Došlo je do pogreške!");
             }
+        }
+
+        private void ClearFields()
+        {
+            _selectedImagePath = null;
+            txtPIN.Clear();
+            txtFirstname.Clear();
+            txtLastname.Clear();
+            dpDateOfBirth.SelectedDate = null;
+            rbFemale.IsChecked = true;
+            txtEmail.Clear();
+            txtTelephone.Clear();
+            txtUsername.Clear();
+            txtPassword.Clear();
+            rbUser.IsChecked = true;
         }
 
         //Input validation

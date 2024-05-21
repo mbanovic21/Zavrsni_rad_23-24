@@ -170,6 +170,11 @@ namespace PreschoolManagmentSoftware.UserControls
         // Hide sidebarProfile
         private void btnCloseSidebarProfile_Click(object sender, RoutedEventArgs e)
         {
+            HideSidebarProfile();
+        }
+
+        public void HideSidebarProfile()
+        {
             var slideOutAnimation = FindResource("SlideOutAnimationProfile") as Storyboard;
 
             var sidebarProfile = (Border)FindName("sidebarProfile");
