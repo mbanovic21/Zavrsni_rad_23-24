@@ -63,11 +63,13 @@ namespace PreschoolManagmentSoftware.UserControls
             textEmail.Text = $"{emailUsername}\n{emailDomain}";
             textTelephone.Text = _user.Telephone;
             dpDateOfBirth.SelectedDate = DateTime.Parse(_user.DateOfBirth);
-            if (_user.Sex == "Muški     ")
+            string UserGenderWithoutSpaces = _user.Sex.Trim().Replace(" ", "");
+            Console.WriteLine(UserGenderWithoutSpaces);
+            if (UserGenderWithoutSpaces == "Muški")
             {
                 rbMale.IsChecked = true;
                 rbFemale.IsChecked = false;
-            } else if (_user.Sex == "Ženski    ")
+            } else if (UserGenderWithoutSpaces == "Ženski")
             {
                 rbMale.IsChecked = false;
                 rbFemale.IsChecked = true;
@@ -351,12 +353,10 @@ namespace PreschoolManagmentSoftware.UserControls
             string telephone = string.IsNullOrWhiteSpace(txtTelephone.Text) ? _user.Telephone : txtTelephone.Text;
             string date = dpDateOfBirth.Text ?? _user.DateOfBirth;
             string gender = GetSelectedGender();
+            var role = GetSelectedRole();
             var password = string.IsNullOrWhiteSpace(txtPassword.Text) ? _user.Password : txtPassword.Text;
             var oldSalt = string.IsNullOrWhiteSpace(txtPassword.Text) ? _user.Salt : null;
-
-            (string hashedPassword, string salt) = !string.IsNullOrWhiteSpace(txtPassword.Text) ?_autenticationManager.HashPasswordAndGetSalt(txtPassword.Text) : (password, oldSalt);
-
-            var role = GetSelectedRole();
+            (string hashedPassword, string salt) = !string.IsNullOrWhiteSpace(txtPassword.Text) ?_autenticationManager.HashPasswordAndGetSalt(txtPassword.Text) : (password, oldSalt);  
 
             if (!string.IsNullOrEmpty(_selectedImagePath))
             {
@@ -404,13 +404,10 @@ namespace PreschoolManagmentSoftware.UserControls
                     var isEmailSent = emailNotifier.SendUploadEmail(PIN, firstname, lastName, date, gender, email, telephone, username, password, subject);
                     if (!isEmailSent)
                     {
-                        var isRemoved = await Task.Run(() => _userServices.RemoveUser(username, PIN));
-                        if (isRemoved)
-                        {
-                            MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                        MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                BackToProfile();
             } else
             {
                 MessageBox.Show("Došlo je do pogreške!");
@@ -487,6 +484,11 @@ namespace PreschoolManagmentSoftware.UserControls
 
         //back to profile
         private void btnBackToProfile_Click(object sender, RoutedEventArgs e)
+        {
+            BackToProfile();
+        }
+
+        private void BackToProfile()
         {
             var ucProfileSidebar = new ucEmployeeProfileSidebar(_user, _ucEmployeeAdministrating);
             ucProfileSidebar.refreshData();
