@@ -276,5 +276,12 @@ namespace PreschoolManagmentSoftware.UserControls
                 slideInAnimation.Begin(sidebarRegistration);
             }
         }
+
+        // Refresh GUI
+        public async void RefreshGUI()
+        {
+            dgvChildren.ItemsSource = await Task.Run(() => _childServices.GetAllChildren());
+            HideColumns();
+        }
     }
 }

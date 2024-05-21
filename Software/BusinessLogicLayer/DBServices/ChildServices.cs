@@ -90,5 +90,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetChildByBirthPlacePattern(pattern).ToList();
             }
         }
+
+        //Remove child
+        public bool RemoveChild(int id)
+        {
+            using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RemoveChild(id);
+            }
+        }
     }
 }

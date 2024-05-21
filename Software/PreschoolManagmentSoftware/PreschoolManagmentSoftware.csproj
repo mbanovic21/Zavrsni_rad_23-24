@@ -66,6 +66,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Static Classes\GuiManager.cs" />
+    <Compile Include="UserControls\ChildrenAdministrating\ucChildEditProfileSidebar.xaml.cs">
+      <DependentUpon>ucChildEditProfileSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\EmployeeAdministrating\ucEmployeeAdministrating.xaml.cs">
       <DependentUpon>ucEmployeeAdministrating.xaml</DependentUpon>
     </Compile>
@@ -81,7 +84,7 @@
     <Compile Include="UserControls\ChildrenAdministrating\ucChildrenAdministrating.xaml.cs">
       <DependentUpon>ucChildrenAdministrating.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucChildProfileSidebar.xaml.cs">
+    <Compile Include="UserControls\ChildrenAdministrating\ucChildProfileSidebar.xaml.cs">
       <DependentUpon>ucChildProfileSidebar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucProfile.xaml.cs">
@@ -111,6 +114,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\ChildrenAdministrating\ucChildEditProfileSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\EmployeeAdministrating\ucEmployeeAdministrating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucChildProfileSidebar.xaml">
+    <Page Include="UserControls\ChildrenAdministrating\ucChildProfileSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

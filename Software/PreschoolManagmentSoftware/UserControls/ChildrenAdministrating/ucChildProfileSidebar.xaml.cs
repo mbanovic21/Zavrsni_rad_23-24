@@ -43,9 +43,24 @@ namespace PreschoolManagmentSoftware.UserControls
 
         }
 
-        private void btnDeleteProfile_Click(object sender, RoutedEventArgs e)
+        private async void btnDeleteProfile_Click(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show($"Jeste li sigurni da želite iz sustava obrisati dijete '{_child.FirstName} {_child.LastName}'?", "Obavijest", MessageBoxButton.YesNo);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                var isRemoved = await Task.Run(() => _childServices.RemoveChild(_child.Id));
+
+                if (isRemoved)
+                {
+                    _ucChildrenAdministrating.HideSidebarProfile();
+                    _ucChildrenAdministrating.RefreshGUI();
+                    MessageBox.Show("Dijete je uspješno obrisano iz sustava!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                } else
+                {
+                    MessageBox.Show("Došlo je do greške prilikom brisanja djeteta iz sustava.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         public void refreshData()
