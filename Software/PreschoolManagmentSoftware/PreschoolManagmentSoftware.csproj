@@ -81,6 +81,9 @@
     <Compile Include="UserControls\ChildrenAdministrating\ucChildrenAdministrating.xaml.cs">
       <DependentUpon>ucChildrenAdministrating.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucChildProfileSidebar.xaml.cs">
+      <DependentUpon>ucChildProfileSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucProfile.xaml.cs">
       <DependentUpon>ucProfile.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ChildrenAdministrating\ucChildrenAdministrating.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ucChildProfileSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

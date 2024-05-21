@@ -213,8 +213,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (selectedChild != null)
                 {
-                    /*var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedChild, this);
-                    contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;*/
+                    var ucChildSidebarProfile = new ucChildProfileSidebar(selectedChild, this);
+                    contentSidebarProfile.Content = ucChildSidebarProfile;
                     sidebarProfile.Visibility = Visibility.Visible;
                     slideInAnimation.Begin(sidebarProfile);
                 } else
