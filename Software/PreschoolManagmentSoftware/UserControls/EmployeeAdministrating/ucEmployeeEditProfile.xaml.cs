@@ -33,7 +33,6 @@ namespace PreschoolManagmentSoftware.UserControls
     {
         private string _selectedImagePath { get; set; }
         private User _user { get; set; }
-
         private User _updatedUser { get; set; }
         private ucEmployeeAdministrating _ucEmployeeAdministrating { get ; set; }
         private AutenticationManager _autenticationManager = new AutenticationManager();
@@ -418,12 +417,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private bool ValidateRegistration()
         {
             var PIN = txtPIN.Text;
-            var firstName = txtFirstname.Text;
-            var lastName = txtLastname.Text;
-            var date = dpDateOfBirth.Text;
-            var email = txtEmail.Text;
             var telephone = txtTelephone.Text;
-            var username = txtUsername.Text;
 
             if (!string.IsNullOrWhiteSpace(PIN))
             {

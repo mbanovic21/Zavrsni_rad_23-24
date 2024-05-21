@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer;
 using EntityLayer.Entities;
+using PreschoolManagmentSoftware.UserControls.ChildrenAdministrating;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
         private void btnEditProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            var ucChildeEditProfile = new ucChildEditProfileSidebar(_child, _ucChildrenAdministrating);
+            _ucChildrenAdministrating.contentSidebarProfile.Content = ucChildeEditProfile;
         }
 
         private async void btnDeleteProfile_Click(object sender, RoutedEventArgs e)

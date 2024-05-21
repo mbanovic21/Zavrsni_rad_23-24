@@ -10,8 +10,8 @@ namespace EntityLayer.Entities
     {
         public int Id { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? Date { get; set; }
+        [StringLength(12)]
+        public string Date { get; set; }
 
         public bool? isPresent { get; set; }
 
@@ -20,7 +20,5 @@ namespace EntityLayer.Entities
         public int? Id_User { get; set; }
 
         public virtual Child Child { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

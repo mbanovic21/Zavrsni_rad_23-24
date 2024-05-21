@@ -14,9 +14,12 @@ namespace DataAccessLayer
         }
 
         public virtual DbSet<Attendance> Attendances { get; set; }
+        public virtual DbSet<BuildVersion> BuildVersions { get; set; }
         public virtual DbSet<Child> Children { get; set; }
         public virtual DbSet<DailyActivity> DailyActivities { get; set; }
         public virtual DbSet<Day> Days { get; set; }
+        public virtual DbSet<Days_Users> Days_Users { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Note> Notes { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
@@ -28,41 +31,49 @@ namespace DataAccessLayer
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Attendance>()
+                .Property(e => e.Date)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Child>()
                 .Property(e => e.PIN)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.FirstName)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.LastName)
-                .IsFixedLength();
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Child>()
+                .Property(e => e.DateOfBirth)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.Sex)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.Adress)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.Nationality)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.DevelopmentStatus)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.MedicalInformation)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .Property(e => e.BirthPlace)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Child>()
                 .HasMany(e => e.Attendances)
@@ -105,22 +116,26 @@ namespace DataAccessLayer
                 .Map(m => m.ToTable("Resources_DailyActivities").MapLeftKey("Id_DailyActivity").MapRightKey("Id_Resource"));
 
             modelBuilder.Entity<Day>()
+                .Property(e => e.Date)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Day>()
                 .Property(e => e.Name)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Day>()
+                .HasMany(e => e.Days_Users)
+                .WithRequired(e => e.Day)
+                .HasForeignKey(e => e.Id_Day);
 
             modelBuilder.Entity<Day>()
                 .HasMany(e => e.DailyActivities)
                 .WithMany(e => e.Days)
                 .Map(m => m.ToTable("DailyActivities_Days").MapLeftKey("Id_Day").MapRightKey("Id_DailyActivity"));
 
-            modelBuilder.Entity<Day>()
-                .HasMany(e => e.Users)
-                .WithMany(e => e.Days)
-                .Map(m => m.ToTable("Days_Users").MapLeftKey("Id_Day").MapRightKey("Id_User"));
-
             modelBuilder.Entity<Group>()
                 .Property(e => e.Name)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Group>()
                 .Property(e => e.Age)
@@ -143,11 +158,11 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Note>()
                 .Property(e => e.Description)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Note>()
                 .Property(e => e.Behaviour)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Parent>()
                 .Property(e => e.PIN)
@@ -155,23 +170,27 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Parent>()
                 .Property(e => e.FirstName)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Parent>()
                 .Property(e => e.LastName)
-                .IsFixedLength();
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Parent>()
+                .Property(e => e.DateOfBirth)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Parent>()
                 .Property(e => e.Sex)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Parent>()
                 .Property(e => e.Email)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Parent>()
                 .Property(e => e.Telephone)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<PreeschoolYear>()
                 .Property(e => e.Year)
@@ -179,11 +198,11 @@ namespace DataAccessLayer
 
             modelBuilder.Entity<Resource>()
                 .Property(e => e.Name)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Resource>()
                 .Property(e => e.Description)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<Role>()
                 .Property(e => e.Name)
@@ -192,11 +211,6 @@ namespace DataAccessLayer
             modelBuilder.Entity<Role>()
                 .Property(e => e.Description)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Role>()
-                .HasMany(e => e.Users)
-                .WithOptional(e => e.Role)
-                .HasForeignKey(e => e.Id_role);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.PIN)
@@ -211,8 +225,12 @@ namespace DataAccessLayer
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .Property(e => e.DateOfBirth)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
                 .Property(e => e.Sex)
-                .IsFixedLength();
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Email)
@@ -234,10 +252,13 @@ namespace DataAccessLayer
                 .Property(e => e.Salt)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Attendances)
-                .WithOptional(e => e.User)
-                .HasForeignKey(e => e.Id_User);
+            modelBuilder.Entity<WeeklySchedule>()
+                .Property(e => e.StartDate)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<WeeklySchedule>()
+                .Property(e => e.EndDate)
+                .IsUnicode(false);
 
             modelBuilder.Entity<WeeklySchedule>()
                 .HasMany(e => e.Days)

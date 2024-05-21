@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using BusinessLogicLayer.EmailServices;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Win32;
@@ -27,12 +28,9 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
     public partial class ucChildEditProfileSidebar : UserControl
     {
         private string _selectedImagePath { get; set; }
-
         private Child _child { get; set; }
-
         private Child _updatedChild { get; set; }
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
-        private AutenticationManager _autenticationManager = new AutenticationManager();
         private ChildServices _childServices = new ChildServices();
         public ucChildEditProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
@@ -42,17 +40,17 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         }
 
         //OnInit
-        private void ucEditProfile_Loaded(object sender, RoutedEventArgs e)
+        private void ucEditChildProfile_Loaded(object sender, RoutedEventArgs e)
         {
             var _selectedImagePath = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
 
-            textFirstname.Text = _child.FirstName;
-            textLastname.Text = _child.LastName;
-            textPIN.Text = _child.PIN;
+            textFirstname.Text = _child.FirstName.Trim().Replace(" ", "");
+            textLastname.Text = _child.LastName.Trim().Replace(" ", "");
+            textPIN.Text = _child.PIN.Trim().Replace(" ", "");
             dpDateOfBirth.SelectedDate = DateTime.Parse(_child.DateOfBirth);
-            textAddress.Text = _child.Adress;
-            textBirthPlace.Text = _child.BirthPlace;
-            textNationality.Text = _child.Nationality;
+            textAddress.Text = _child.Adress.Trim().Replace(" ", "");
+            textBirthPlace.Text = _child.BirthPlace.Trim().Replace(" ", "");
+            textNationality.Text = _child.Nationality.Trim().Replace(" ", "");
 
             string UserGenderWithoutSpaces = _child.Sex.Trim().Replace(" ", "");
             Console.WriteLine(UserGenderWithoutSpaces);
@@ -66,8 +64,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 rbFemale.IsChecked = true;
             }
 
-            textDevelopmentStatus.Text = _child.DevelopmentStatus;
-            textMedicalInformations.Text = _child.MedicalInformation; 
+            textDevelopmentStatus.Text = _child.DevelopmentStatus.Trim().Replace(" ", "");
+            textMedicalInformations.Text = _child.MedicalInformation.Trim().Replace(" ", ""); 
 
             imgProfile.Source = _selectedImagePath;
             _updatedChild = _child;
@@ -97,7 +95,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private void SetInitialProfileImage()
         {
             var gender = GetSelectedGender();
-            string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
+            string imageName = gender == "Ženski" ? "girl.png" : "boy.png";
             string imagePath = "pack://application:,,,/Media/Images/" + imageName;
             imgProfile.Source = new BitmapImage(new Uri(imagePath));
         }
@@ -365,24 +363,89 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             return rbFemale.IsChecked == true ? "Ženski" : "Muški";
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        //Save
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!ValidateRegistration())
             {
                 return;
             }
 
+            string newImage;
+            var firstname = string.IsNullOrWhiteSpace(txtFirstname.Text) ? _child.FirstName : txtFirstname.Text;
+            string lastName = string.IsNullOrWhiteSpace(txtLastname.Text) ? _child.LastName : txtLastname.Text;
+            string PIN = string.IsNullOrWhiteSpace(txtPIN.Text) ? _child.PIN : txtPIN.Text;
+            string date = dpDateOfBirth.Text ?? _child.DateOfBirth;
+            string address = string.IsNullOrWhiteSpace(txtAddress.Text) ? _child.Adress : txtAddress.Text;
+            string birthPlace = string.IsNullOrWhiteSpace(txtBirthPlace.Text) ? _child.BirthPlace : txtBirthPlace.Text;
+            string nationality = string.IsNullOrWhiteSpace(txtNationality.Text) ? _child.Nationality : txtNationality.Text;
+            string gender = GetSelectedGender();
+            string developmentStatus = string.IsNullOrWhiteSpace(txtDevelopmentStatus.Text) ? _child.DevelopmentStatus : txtDevelopmentStatus.Text;
+            string medicalInformations = string.IsNullOrWhiteSpace(txtMedicalInformations.Text) ? _child.MedicalInformation : txtMedicalInformations.Text;
 
+            if (!string.IsNullOrEmpty(_selectedImagePath))
+            {
+                newImage = _selectedImagePath;
+            } else
+            {
+                string imageName = gender == "Ženski" ? "girl.png" : "boy.png";
+                //string projectPath = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\";
+                newImage = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
+            }
 
+            _updatedChild = new Child()
+            {
+                Id = _child.Id,
+                ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(newImage),
+                PIN = PIN,
+                FirstName = firstname,
+                LastName = lastName,
+                DateOfBirth = date,
+                Adress = address,
+                BirthPlace = birthPlace,
+                Nationality = nationality,
+                Sex = gender,
+                DevelopmentStatus = developmentStatus,
+                MedicalInformation = medicalInformations,
+                Id_Group = null
+            };
+
+            var isUpdated = await Task.Run(() => _childServices.isUpdated(_updatedChild));
+
+            if (isUpdated)
+            {
+                // refresh dgv in backgorund when upload
+                _ucChildrenAdministrating.RefreshGUI();
+
+                MessageBox.Show($"Podaci djeteta {firstname} {lastName} su uspješno ažurirani", "Obavijest", MessageBoxButton.OK);
+
+                _child = _updatedChild;
+
+                /*var result = MessageBox.Show($"Korisnik {firstname} {lastName} je uspješno ažuriran! Želite li obavijestiti ažuriranog korisnika putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
+
+                _child = _updatedChild;
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    var subject = "Vaši podaci su uspješno ažurirani!";
+                    var emailNotifier = new UserUpdateEmailNotifier();
+                    var isEmailSent = emailNotifier.SendUploadEmail(PIN, firstname, lastName, date, gender, email, telephone, username, password, subject);
+                    if (!isEmailSent)
+                    {
+                        MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }*/
+                BackToProfile();
+            } else
+            {
+                MessageBox.Show("Došlo je do pogreške!");
+            }
         }
 
         //validation
         private bool ValidateRegistration()
         {
             var PIN = txtPIN.Text;
-            var firstName = txtFirstname.Text;
-            var lastName = txtLastname.Text;
-            var date = dpDateOfBirth.Text;
 
             if (!string.IsNullOrWhiteSpace(PIN))
             {

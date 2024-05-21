@@ -226,9 +226,6 @@ namespace PreschoolManagmentSoftware.UserControls
                 {
                     var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser, this);
                     contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;
-                } else
-                {
-                    MessageBox.Show("Molimo odaberite zaposlenika iz tablice.");
                 }
             }
         }

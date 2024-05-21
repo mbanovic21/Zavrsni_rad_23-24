@@ -235,11 +235,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
                 if (selectedChild != null)
                 {
-                    /*var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser, this);
-                    contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;*/
-                } else
-                {
-                    MessageBox.Show("Molimo odaberite dijete iz tablice.");
+                    var ucChildSidebarProfile = new ucChildProfileSidebar(selectedChild, this);
+                    contentSidebarProfile.Content = ucChildSidebarProfile;
                 }
             }
         }

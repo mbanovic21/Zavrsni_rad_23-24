@@ -112,8 +112,8 @@ namespace DataAccessLayer.Repositories
         public bool RemoveChild(int id)
         {
             int affectedRows = 0;
-            var userForRemove = Children.FirstOrDefault(u => u.Id == id);
-            Children.Remove(userForRemove);
+            var childForRemove = Children.FirstOrDefault(u => u.Id == id);
+            Children.Remove(childForRemove);
 
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
 
@@ -143,6 +143,33 @@ namespace DataAccessLayer.Repositories
 
             // Vratite true ako je barem jedan red promijenjen u bazi podataka
             return affectedRows > 0;
+        }
+
+        //update child
+        public bool updateChild(Child child)
+        {
+            var selectedChild = Context.Children.FirstOrDefault(u => u.Id == child.Id);
+            if (selectedChild != null)
+            {
+                selectedChild.ProfileImage = child.ProfileImage;
+                selectedChild.PIN = child.PIN;
+                selectedChild.FirstName = child.FirstName;
+                selectedChild.LastName = child.LastName;
+                selectedChild.DateOfBirth = child.DateOfBirth;
+                selectedChild.Sex = child.Sex;
+                selectedChild.Adress = child.Adress;
+                selectedChild.Nationality = child.Nationality;
+                selectedChild.DevelopmentStatus = child.DevelopmentStatus;
+                selectedChild.MedicalInformation = child.MedicalInformation;
+                selectedChild.BirthPlace = child.BirthPlace;
+                selectedChild.Id_Group = child.Id_Group;
+
+                Context.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         public void Dispose()

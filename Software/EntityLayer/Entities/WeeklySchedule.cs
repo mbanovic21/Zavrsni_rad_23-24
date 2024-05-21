@@ -16,11 +16,11 @@ namespace EntityLayer.Entities
 
         public int Id { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? StartDate { get; set; }
+        [StringLength(12)]
+        public string StartDate { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? EndDate { get; set; }
+        [StringLength(12)]
+        public string EndDate { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Day> Days { get; set; }

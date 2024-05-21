@@ -24,10 +24,10 @@ namespace EntityLayer.Entities
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? DateOfBirth { get; set; }
+        [StringLength(12)]
+        public string DateOfBirth { get; set; }
 
-        [StringLength(1)]
+        [StringLength(10)]
         public string Sex { get; set; }
 
         [StringLength(30)]
