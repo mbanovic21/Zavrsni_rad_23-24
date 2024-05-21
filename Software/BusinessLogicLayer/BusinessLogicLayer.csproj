@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBServices\ChildServices.cs" />
     <Compile Include="DBServices\UserServices.cs" />
     <Compile Include="EmailServices\ExternalEmailService.cs" />
     <Compile Include="EmailServices\UserUpdateEmailNotifier.cs" />

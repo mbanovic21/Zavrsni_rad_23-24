@@ -39,13 +39,7 @@
 
     <DockPanel>
         <Grid>
-            <Border>
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#f4f4f4" Offset="0"/>
-                        <GradientStop Color="#f5f5f5" Offset="0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+            <Border Background="Transparent">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -118,10 +112,10 @@
                         <Grid>
                             <Canvas>
                                 <Line X1="150" Y1="728" X2="1566" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
-                                
+
                                 <Line X1="380" Y1="131" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
-                                
-                                                                
+
+
                                 <Line X1="650" Y1="1666" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
                                 <Line X1="450" Y1="0" X2="1070" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
                                 <Polygon Points="650,0 800,0 800,100" Fill="#4EB1B6"/>
@@ -138,7 +132,7 @@
                                 <Line X1="40" Y1="640" X2="456" Y2="434" Stroke="#3AADA1" StrokeThickness="2"/>
                                 <Line X1="489" Y1="417" X2="528" Y2="397" Stroke="#3AADA1" StrokeThickness="2"/>
                                 <Line X1="560" Y1="380" X2="910" Y2="200" Stroke="#3AADA1" StrokeThickness="2"/>
-                                
+
                                 <Line X1="0" Y1="230" X2="800" Y2="728" Stroke="#4EB1B6" StrokeThickness="2"/>
                                 <Line X1="0" Y1="230" X2="466" Y2="520" Stroke="#3AADA1" StrokeThickness="2"/>
                                 <Line X1="491" Y1="536" X2="660" Y2="641" Stroke="#3AADA1" StrokeThickness="2"/>
@@ -166,19 +160,6 @@
                             </Grid>
                         </Grid>
                     </Border>
-
-                    <!-- stil background -->
-                    <Canvas>
-                        <Line X1="0" Y1="200" X2="528" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="300" X2="1166" Y2="300" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="415" X2="1081" Y2="1" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="0" X2="1166" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="528" Y1="728" X2="1166" Y2="600" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="728" X2="1166" Y2="460" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="250" Y1="728" X2="1166" Y2="260" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="396" Y1="0" X2="440" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="528" Y1="728" X2="900" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
-                    </Canvas>
 
                     <TextBlock Text="Upravitelj zaposlenicima" Style="{StaticResource titleText}" Grid.ColumnSpan="3" Foreground="#4EB1B6" Margin="10"/>
                     <Border BorderThickness="1" Grid.Column="0" Grid.Row="1" BorderBrush="#acb0af"  CornerRadius="5"  Background="#ffffff" Margin="70,7,7,7">

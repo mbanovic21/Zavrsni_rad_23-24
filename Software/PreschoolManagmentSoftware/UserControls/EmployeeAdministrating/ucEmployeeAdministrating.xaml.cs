@@ -80,6 +80,7 @@ namespace PreschoolManagmentSoftware.UserControls
             }
             UpdateData();
         }
+
         //Searchbar
         private void textSearch_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -225,6 +226,9 @@ namespace PreschoolManagmentSoftware.UserControls
                 {
                     var ucEmplyoeeSidebarProfile = new ucEmployeeProfileSidebar(selectedUser, this);
                     contentSidebarProfile.Content = ucEmplyoeeSidebarProfile;
+                } else
+                {
+                    MessageBox.Show("Molimo odaberite zaposlenika iz tablice.");
                 }
             }
         }
@@ -254,8 +258,6 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebarRegistration.Visibility == Visibility.Collapsed)
             {
-                var selectedUser = dgvEmployees.SelectedItem as User;
-
                 var ucEmployeeRegistrationSidebar = new ucEmployeeRegistrationSidebar(this);
                 contentSidebarRegistration.Content = ucEmployeeRegistrationSidebar;
                 

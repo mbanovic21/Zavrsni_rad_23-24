@@ -5,8 +5,219 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             x:Name="ucChildren"
+             d:DesignHeight="728" d:DesignWidth="1166" Loaded="ucChildren_Loaded">
+    <UserControl.Resources>
+        <!-- Definicija animacije Profile-->
+        <Storyboard x:Key="SlideInAnimationProfile">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="400,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SlideOutAnimationProfile">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="400,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <!-- Definicija animacije Registration-->
+        <Storyboard x:Key="SlideInAnimationRegistration">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="800,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SlideOutAnimationRegistration">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="800,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <Grid>
+            <Border Background="Transparent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="400"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Sidebar profile -->
+                    <Border x:Name="sidebarProfile" MaxWidth="450" Grid.RowSpan="4" Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="1">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#3AA9AD" Offset="0"/>
+                                <GradientStop Color="#3AADA1" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <Grid>
+                            <Canvas>
+                                <Line X1="0" Y1="680" X2="1166" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Line X1="0" Y1="121" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Line X1="250" Y1="1666" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Line X1="50" Y1="0" X2="670" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Polygon Points="250,0 400,0 400,100" Fill="#4EB1B6"/>
+                                <Polygon Points="0,129 0,641 330,129" Fill="#4EB1B6"/>
+                                <Polygon Points="0,641 330,641 330,129" Fill="#4EB1B6"/>
+                                <Line X1="99" Y1="130" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="202" Y1="640" X2="329" Y2="616" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="283" Y1="640" X2="299" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="0" Y1="153.5" X2="1096" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                                <Polygon Points="50,550 200,500 150,350" Fill="#3AADA1"/>
+                                <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
+                            </Canvas>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Close -->
+                                <Button x:Name="btnCloseSidebarProfile" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebarProfile_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Image Source="/Media/Images/close.png" Width="25"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <ContentControl x:Name="contentSidebarProfile" Grid.Row="1"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!-- Sidebar registration -->
+                    <Border x:Name="sidebarRegistration" MaxWidth="800" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Right">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#3AA9AD" Offset="0"/>
+                                <GradientStop Color="#3AADA1" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <Grid>
+                            <Canvas>
+                                <Line X1="150" Y1="728" X2="1566" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+
+                                <Line X1="380" Y1="131" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+
+
+                                <Line X1="650" Y1="1666" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Line X1="450" Y1="0" X2="1070" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Polygon Points="650,0 800,0 800,100" Fill="#4EB1B6"/>
+                                <Polygon Points="0,129 0,641 730,129" Fill="#4EB1B6"/>
+                                <Polygon Points="0,641 730,641 730,129" Fill="#4EB1B6"/>
+                                <Line X1="499" Y1="130" X2="688" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="602" Y1="640" X2="730" Y2="615" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="683" Y1="640" X2="699" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="0" Y1="153.5" X2="1496" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                                <Polygon Points="450,550 600,500 550,350" Fill="#3AADA1"/>
+                                <Ellipse Margin="450 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
+
+                                <Line X1="0" Y1="660" X2="910" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Line X1="40" Y1="640" X2="456" Y2="434" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="489" Y1="417" X2="528" Y2="397" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="560" Y1="380" X2="910" Y2="200" Stroke="#3AADA1" StrokeThickness="2"/>
+
+                                <Line X1="0" Y1="230" X2="800" Y2="728" Stroke="#4EB1B6" StrokeThickness="2"/>
+                                <Line X1="0" Y1="230" X2="466" Y2="520" Stroke="#3AADA1" StrokeThickness="2"/>
+                                <Line X1="491" Y1="536" X2="660" Y2="641" Stroke="#3AADA1" StrokeThickness="2"/>
+
+                                <Line X1="380" Y1="131" X2="0" Y2="300" Stroke="#3AADA1" StrokeThickness="2"/>
+                            </Canvas>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Close -->
+                                <Button x:Name="btnCloseSidebarRegistration" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebarRegistration_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Image Source="/Media/Images/close.png" Width="25"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <ContentControl x:Name="contentSidebarRegistration" Grid.Row="1"/>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <TextBlock Text="Upravitelj djecom" Style="{StaticResource titleText}" Grid.ColumnSpan="3" Foreground="#4EB1B6" Margin="10"/>
+                    <Border BorderThickness="1" Grid.Column="0" Grid.Row="1" BorderBrush="#acb0af"  CornerRadius="5"  Background="#ffffff" Margin="70,7,7,7">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="/Media/Images/search.png" Height="20" Margin="2,0,-2,0"/>
+                            <TextBlock x:Name="textSearch" MouseDown="textSearch_MouseDown" Text=" Pretraži po imenu i prezimenu" Style="{StaticResource placeholder}"/>
+                            <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" Style="{StaticResource textBox}"/>
+                            <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
+                                <Image.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource info-required}">Obavezno polje!</TextBlock>
+                                            <TextBlock>Ovdje će se prikazati generirana lozinka.</TextBlock>
+                                            <TextBlock>Pravila:</TextBlock>
+                                            <TextBlock>1. Pritisnite gumb generiraj lozinku.</TextBlock>
+                                            <TextBlock>2. Lozinka će se prikazati u polju.</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Image.ToolTip>
+                            </Image>
+                        </Grid>
+                    </Border>
+                    
+                    <!-- cmb za odabir načina pretraživanja -->
+                    <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Width="210" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#0b69a1" Margin="7,0,0,0" HorizontalAlignment="Left">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="cmbSearch" Grid.Column="0" Width="170" SelectionChanged="cmbSearch_SelectionChanged" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" VerticalAlignment="Center" />
+                            <Button x:Name="btnDropdown" Grid.Column="1" Click="btnDropdown_Click">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid>
+                                            <Image Source="/Media/Images/dropdown-arrow.png" Width="20"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+
+                    <DataGrid x:Name="dgvChildren" SelectionChanged="dgvChildren_SelectionChanged" Margin="70,7,70,7" Grid.Row="2" Grid.ColumnSpan="3"/>
+
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="0,20,70,20" >
+                        <Button x:Name="btnAddNewChild" Click="btnAddNewChild_Click" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
+                        <Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </DockPanel>
 </UserControl>

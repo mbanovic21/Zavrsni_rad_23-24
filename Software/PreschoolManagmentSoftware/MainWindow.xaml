@@ -63,8 +63,28 @@
             </Border>
 
             <!-- Prostor za sadržaj -->
-            <Border Background="#f5f5f5">
-                <ContentControl x:Name="contentControl" />
+            <Border>
+                <!-- stil background -->
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#f4f4f4" Offset="0"/>
+                        <GradientStop Color="#f5f5f5" Offset="0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Canvas>
+                        <Line X1="0" Y1="200" X2="528" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="300" X2="1166" Y2="300" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="415" X2="1081" Y2="1" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="0" X2="1166" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="528" Y1="728" X2="1166" Y2="600" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="728" X2="1166" Y2="460" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="250" Y1="728" X2="1166" Y2="260" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="396" Y1="0" X2="440" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="528" Y1="728" X2="900" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
+                    </Canvas>
+                    <ContentControl x:Name="contentControl" />
+                </Grid>
             </Border>
         </DockPanel>
     </Grid>
