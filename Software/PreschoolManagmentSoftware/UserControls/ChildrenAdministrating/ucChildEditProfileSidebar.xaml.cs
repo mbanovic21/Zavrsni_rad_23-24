@@ -44,15 +44,15 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         {
             var _selectedImagePath = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
 
-            textFirstname.Text = _child.FirstName.Trim().Replace(" ", "");
-            textLastname.Text = _child.LastName.Trim().Replace(" ", "");
-            textPIN.Text = _child.PIN.Trim().Replace(" ", "");
+            textFirstname.Text = _child.FirstName;
+            textLastname.Text = _child.LastName;
+            textPIN.Text = _child.PIN;
             dpDateOfBirth.SelectedDate = DateTime.Parse(_child.DateOfBirth);
-            textAddress.Text = _child.Adress.Trim().Replace(" ", "");
-            textBirthPlace.Text = _child.BirthPlace.Trim().Replace(" ", "");
-            textNationality.Text = _child.Nationality.Trim().Replace(" ", "");
+            textAddress.Text = _child.Adress;
+            textBirthPlace.Text = _child.BirthPlace;
+            textNationality.Text = _child.Nationality;
 
-            string UserGenderWithoutSpaces = _child.Sex.Trim().Replace(" ", "");
+            string UserGenderWithoutSpaces = _child.Sex;
             Console.WriteLine(UserGenderWithoutSpaces);
             if (UserGenderWithoutSpaces == "Muški")
             {
@@ -64,8 +64,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 rbFemale.IsChecked = true;
             }
 
-            textDevelopmentStatus.Text = _child.DevelopmentStatus.Trim().Replace(" ", "");
-            textMedicalInformations.Text = _child.MedicalInformation.Trim().Replace(" ", ""); 
+            textDevelopmentStatus.Text = _child.DevelopmentStatus;
+            textMedicalInformations.Text = _child.MedicalInformation; 
 
             imgProfile.Source = _selectedImagePath;
             _updatedChild = _child;
