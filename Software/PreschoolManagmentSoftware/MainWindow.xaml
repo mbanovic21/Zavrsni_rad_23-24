@@ -35,9 +35,8 @@
                     </Canvas>
 
                     <StackPanel>
-                        <Button x:Name="btnRegistration" Content="Registration" Click="btnRegistration_Click" />
-                        <Button x:Name="btnProfile" Content="Profile" Click="btnProfile_Click" />
-                        <Button x:Name="btnEmployeeAdministrating" Content="Employee Manager" Click="btnEmployeeAdministrating_Click" />
+                        <Button x:Name="btnEmployeeAdministrating" Content="Upravitelj zaposlenicima" Click="btnEmployeeAdministrating_Click" />
+                        <Button x:Name="btnChildrenAdministrating" Content="Upravitelj djecom" Click="btnChildrenAdministrating_Click" />
                     </StackPanel>
                 </Grid>
                 

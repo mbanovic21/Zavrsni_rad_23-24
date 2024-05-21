@@ -66,17 +66,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Static Classes\GuiManager.cs" />
-    <Compile Include="UserControls\ucEmployeeAdministrating.xaml.cs">
+    <Compile Include="UserControls\EmployeeAdministrating\ucEmployeeAdministrating.xaml.cs">
       <DependentUpon>ucEmployeeAdministrating.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucEmployeeEditProfile.xaml.cs">
+    <Compile Include="UserControls\EmployeeAdministrating\ucEmployeeEditProfile.xaml.cs">
       <DependentUpon>ucEmployeeEditProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucEmployeeProfileSidebar.xaml.cs">
+    <Compile Include="UserControls\EmployeeAdministrating\ucEmployeeProfileSidebar.xaml.cs">
       <DependentUpon>ucEmployeeProfileSidebar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucEmployeeRegistrationSidebar.xaml.cs">
+    <Compile Include="UserControls\EmployeeAdministrating\ucEmployeeRegistrationSidebar.xaml.cs">
       <DependentUpon>ucEmployeeRegistrationSidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ChildrenAdministrating\ucChildrenAdministrating.xaml.cs">
+      <DependentUpon>ucChildrenAdministrating.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucProfile.xaml.cs">
       <DependentUpon>ucProfile.xaml</DependentUpon>
@@ -105,19 +108,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\ucEmployeeAdministrating.xaml">
+    <Page Include="UserControls\EmployeeAdministrating\ucEmployeeAdministrating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucEmployeeEditProfile.xaml">
+    <Page Include="UserControls\EmployeeAdministrating\ucEmployeeEditProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucEmployeeProfileSidebar.xaml">
+    <Page Include="UserControls\EmployeeAdministrating\ucEmployeeProfileSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucEmployeeRegistrationSidebar.xaml">
+    <Page Include="UserControls\EmployeeAdministrating\ucEmployeeRegistrationSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ChildrenAdministrating\ucChildrenAdministrating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,6 +250,7 @@
     <Resource Include="Media\Images\restore.png" />
     <Resource Include="Media\Images\information.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

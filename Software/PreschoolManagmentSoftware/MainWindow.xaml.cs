@@ -29,20 +29,6 @@ namespace PreschoolManagmentSoftware
             GuiManager.MainWindow = this;
         }
 
-        //registration
-        private void btnRegistration_Click(object sender, RoutedEventArgs e)
-        {
-            var ucRegistration = new ucRegistration();
-            contentControl.Content = ucRegistration;
-        }
-
-        //profile
-        private void btnProfile_Click(object sender, RoutedEventArgs e)
-        {
-            var ucProfile = new ucProfile();
-            contentControl.Content = ucProfile;
-        }
-
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -64,10 +50,18 @@ namespace PreschoolManagmentSoftware
             Close();
         }
 
+        //Employee administrating
         private void btnEmployeeAdministrating_Click(object sender, RoutedEventArgs e)
         {
             var ucEmployeeAdministrating = new ucEmployeeAdministrating();
             contentControl.Content = ucEmployeeAdministrating;
+        }
+
+        //Children administrating
+        private void btnChildrenAdministrating_Click(object sender, RoutedEventArgs e)
+        {
+            var ucChildrenAdministrating = new ucChildrenAdministrating();
+            contentControl.Content = ucChildrenAdministrating;
         }
 
         private void borHeader_MouseDown(object sender, MouseButtonEventArgs e)
@@ -77,5 +71,6 @@ namespace PreschoolManagmentSoftware
                 DragMove();
             }
         }
+        
     }
 }
