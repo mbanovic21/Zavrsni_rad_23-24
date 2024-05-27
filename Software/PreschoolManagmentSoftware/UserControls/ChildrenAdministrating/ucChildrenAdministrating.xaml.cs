@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer.Entities;
 using PreschoolManagmentSoftware.UserControls.ChildrenAdministrating;
+using PreschoolManagmentSoftware.UserControls.ParentAdministrating;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -267,8 +268,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebarRegistration.Visibility == Visibility.Collapsed)
             {
-                var ucChildrenRegistrationSidebar = new ucChildRegistrationSidebar(this, null);
-                contentSidebarRegistration.Content = ucChildrenRegistrationSidebar;
+                var ucParentRegistration = new ucParentRegistration(null, null, this);
+                contentSidebarRegistration.Content = ucParentRegistration;
 
                 sidebarRegistration.Visibility = Visibility.Visible;
                 slideInAnimation.Begin(sidebarRegistration);

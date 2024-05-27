@@ -29,11 +29,13 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private AutenticationManager _autenticationManager = new AutenticationManager();
         private UserServices _userServices = new UserServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
+        private List<Parent> _parents { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, Parent parent)
+        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, List<Parent> parents)
         {
             InitializeComponent();
             _ucChildrenAdministrating = ucChildrenAdministrating;
+            _parents = parents;
         }
 
         //Profile image
@@ -45,7 +47,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private void SetInitialProfileImage()
         {
             var gender = GetSelectedGender();
-            string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
+            string imageName = gender == "Ženski" ? "girl.png" : "boy.png";
             string imagePath = "pack://application:,,,/Media/Images/" + imageName;
             profileImage.Source = new BitmapImage(new Uri(imagePath));
         }
@@ -184,53 +186,122 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             return rbFemale.IsChecked == true ? "Ženski" : "Muški";
         }
 
-        //Email
-        private void textEmail_MouseDown(object sender, MouseButtonEventArgs e)
+        //Address
+        private void textAddress_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtEmail.Focus();
+            txtAddress.Focus();
         }
 
-        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtAddress_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var email = txtEmail.Text;
-            var placeholderEmail = textEmail;
+            var address = txtAddress.Text;
+            var placeholderAddresse = textAddress;
 
-            if (!string.IsNullOrEmpty(email) && email.Length >= 0)
+            if (!string.IsNullOrEmpty(address) && address.Length >= 0)
             {
-                placeholderEmail.Visibility = Visibility.Collapsed;
+                placeholderAddresse.Visibility = Visibility.Collapsed;
             } else
             {
-                placeholderEmail.Visibility = Visibility.Visible;
+                placeholderAddresse.Visibility = Visibility.Visible;
             }
         }
 
-        //Telephone
-        private void textTelephone_MouseDown(object sender, MouseButtonEventArgs e)
+        //BirthPlace
+        private void textBirthPlace_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            txtTelephone.Focus();
+            txtBirthPlace.Focus();
         }
 
-        private void txtTelephone_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtBirthPlace_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var telephone = txtTelephone.Text;
-            var placeholderTelephone = textTelephone;
+            var birthPlace = txtBirthPlace.Text;
+            var placeholderBirthPlace = textBirthPlace;
 
-            if (!string.IsNullOrEmpty(telephone) && telephone.Length >= 0)
+            if (!string.IsNullOrEmpty(birthPlace) && birthPlace.Length >= 0)
             {
-                placeholderTelephone.Visibility = Visibility.Collapsed;
+                placeholderBirthPlace.Visibility = Visibility.Collapsed;
             } else
             {
-                placeholderTelephone.Visibility = Visibility.Visible;
+                placeholderBirthPlace.Visibility = Visibility.Visible;
             }
 
-            if (!IsValidTelephone(telephone))
+            if (!IsLettersOnly(birthPlace))
             {
-                if (string.IsNullOrWhiteSpace(telephone)) return;
-                txtTelephone.Clear();
-                MessageBox.Show("Unesite ispravan telefonski broj!");
+                if (string.IsNullOrEmpty(birthPlace)) return;
+                txtBirthPlace.Clear();
+                MessageBox.Show("Mjesto rođenja može sadržavati samo slova.");
                 return;
             }
         }
+
+        //Nationality
+        private void textNationality_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtNationality.Focus();
+        }
+
+        private void txtNationality_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var nationality = txtNationality.Text;
+            var placeholderNationality = textNationality;
+
+            if (!string.IsNullOrEmpty(nationality) && nationality.Length >= 0)
+            {
+                placeholderNationality.Visibility = Visibility.Collapsed;
+            } else
+            {
+                placeholderNationality.Visibility = Visibility.Visible;
+            }
+
+            if (!IsLettersOnly(nationality))
+            {
+                if (string.IsNullOrEmpty(nationality)) return;
+                txtBirthPlace.Clear();
+                MessageBox.Show("Nacionalnost može sadržavati samo slova.");
+                return;
+            }
+        }
+
+        //DevelopmentStatus
+        private void textDevelopmentStatus_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtDevelopmentStatus.Focus();
+        }
+
+        private void txtDevelopmentStatus_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var developmentStatus = txtDevelopmentStatus.Text;
+            var placeholderDevelopmentStatus = textDevelopmentStatus;
+
+            if (!string.IsNullOrEmpty(developmentStatus) && developmentStatus.Length >= 0)
+            {
+                placeholderDevelopmentStatus.Visibility = Visibility.Collapsed;
+            } else
+            {
+                placeholderDevelopmentStatus.Visibility = Visibility.Visible;
+            }
+        }
+
+        //Medical information
+        private void textMedicalInformation_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtMedicalInformation.Focus();
+        }
+
+        private void txtMedicalInformation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var medicalInformation = txtMedicalInformation.Text;
+            var placeholderMedicalInformation = textMedicalInformation;
+
+            if (!string.IsNullOrEmpty(medicalInformation) && medicalInformation.Length >= 0)
+            {
+                placeholderMedicalInformation.Visibility = Visibility.Collapsed;
+            } else
+            {
+                placeholderMedicalInformation.Visibility = Visibility.Visible;
+            }
+        }
+
 
         //btnRegister
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -246,20 +317,23 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             var lastName = txtLastname.Text;
             var date = dpDateOfBirth.Text;
             var gender = GetSelectedGender();
-            var email = txtEmail.Text;
-            var telephone = txtTelephone.Text;
+            var address = txtAddress.Text;
+            var birthPlace = txtBirthPlace.Text;
+            var nationality = txtNationality.Text;
+            var developmentStatus = txtDevelopmentStatus.Text;
+            var medicalInformation = txtMedicalInformation.Text;
 
             if (!string.IsNullOrEmpty(_selectedImagePath))
             {
                 imagePathForRegistration = _selectedImagePath;
             } else
             {
-                string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
+                string imageName = gender == "Ženski" ? "girl.png" : "boy.png";
                 //string projectPath = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\";
                 imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
             }
 
-            var parentForRegistration1 = new Parent()
+            var child = new Child()
             {
                 ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
                 PIN = PIN,
@@ -267,15 +341,18 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 LastName = lastName,
                 DateOfBirth = date,
                 Sex = gender,
-                Email = email,
-                Telephone = telephone
+                Adress = address,
+                BirthPlace = birthPlace,
+                Nationality = nationality,
+                DevelopmentStatus = developmentStatus,
+                MedicalInformation = medicalInformation,
+                Parents = _parents
             };
 
-            var parentControl2 = new ucChildRegistrationSidebar(_ucChildrenAdministrating, parentForRegistration1);
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = parentControl2;
+            //sad busines logic layer...
         }
 
-            private void ClearFields()
+        private void ClearFields()
         {
             _selectedImagePath = null;
             txtPIN.Clear();
@@ -283,8 +360,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             txtLastname.Clear();
             dpDateOfBirth.SelectedDate = null;
             rbFemale.IsChecked = true;
-            txtEmail.Clear();
-            txtTelephone.Clear();
         }
 
         //Input validation
@@ -294,8 +369,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             var firstName = txtFirstname.Text;
             var lastName = txtLastname.Text;
             var date = dpDateOfBirth.Text;
-            var email = txtEmail.Text;
-            var telephone = txtTelephone.Text;
 
             if (string.IsNullOrWhiteSpace(PIN) || PIN.Length < 11 || PIN.Length > 11)
             {
@@ -324,26 +397,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                MessageBox.Show("Molimo unesite svoju email adresu.");
-                return false;
-            }
-
-            if (!IsValidEmail(email))
-            {
-                MessageBox.Show("Molimo unesite valjanu email adresu.");
-                txtEmail.Clear();
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(telephone) || telephone.Length < 10 || telephone.Length > 14)
-            {
-                MessageBox.Show("Molimo unesite valjani broj telefona.");
-                txtTelephone.Clear();
-                return false;
-            }
-
             return true;
         }
 
@@ -360,18 +413,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                     return false;
             }
             return true;
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
-
-            return Regex.IsMatch(email, pattern);
-        }
-
-        private bool IsValidTelephone(string telephone)
-        {
-            return Regex.IsMatch(telephone, @"^[\+0-9\s]+$");
         }
     }
 }

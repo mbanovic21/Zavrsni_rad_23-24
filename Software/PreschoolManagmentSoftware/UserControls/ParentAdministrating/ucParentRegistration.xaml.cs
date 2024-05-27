@@ -260,25 +260,44 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
                 imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
             }
 
-            var parentForRegistration1 = new Parent()
-            {
-                ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
-                PIN = PIN,
-                FirstName = firstName,
-                LastName = lastName,
-                DateOfBirth = date,
-                Sex = gender,
-                Email = email,
-                Telephone = telephone
-            };
-
             if(_forwardedParent == null)
             {
-                var ucParentRegistration2 = new ucParentRegistration(parentForRegistration1, _ucParentRegistration, _ucChildrenAdministrating);
+                _forwardedParent = new Parent()
+                {
+                    ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
+                    PIN = PIN,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    DateOfBirth = date,
+                    Sex = gender,
+                    Email = email,
+                    Telephone = telephone
+                };
+
+                var ucParentRegistration2 = new ucParentRegistration(_forwardedParent, _ucParentRegistration, _ucChildrenAdministrating);
                 _ucChildrenAdministrating.contentSidebarRegistration.Content = ucParentRegistration2;
             } else
             {
+                var nextParent = new Parent()
+                {
+                    ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
+                    PIN = PIN,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    DateOfBirth = date,
+                    Sex = gender,
+                    Email = email,
+                    Telephone = telephone
+                };
 
+                var parents = new List<Parent>() { _forwardedParent, nextParent};
+                var ucChildrenRegistration = new ucChildRegistrationSidebar(_ucChildrenAdministrating, parents);
+                _ucChildrenAdministrating.contentSidebarRegistration.Content = ucChildrenRegistration;
+
+                foreach (var parent in parents)
+                {
+                    Console.WriteLine(parent.FirstName);
+                }
             }
         }
 
