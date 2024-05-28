@@ -27,5 +27,13 @@ namespace BusinessLogicLayer.DBServices
                 return repo.RemoveParents(parents);
             }
         }
+
+        public bool RemoveParentsByChild(Child child)
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RemoveParentsByChild(child);
+            }
+        }
     }
 }

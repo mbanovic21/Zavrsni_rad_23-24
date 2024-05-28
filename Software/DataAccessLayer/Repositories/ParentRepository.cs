@@ -48,6 +48,26 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        // remove parents by child
+        public bool RemoveParentsByChild(Child child)
+        {
+            int affectedRows = 0;
+
+            var parents = from p in Parents
+                        where p.Children.Any(c => c.Id == child.Id)
+                        select p;
+
+            foreach (var parent in parents.ToList())
+            {
+                Parents.Remove(parent);
+            }
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

@@ -27,6 +27,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private Child _child { get; set; }
         private ucChildrenAdministrating _ucChildrenAdministrating{ get; set; }
         private ChildServices _childServices = new ChildServices();
+        private ParentServices _parentServices = new ParentServices();
         public ucChildProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
@@ -51,16 +52,33 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (result == MessageBoxResult.Yes)
             {
-                var isRemoved = await Task.Run(() => _childServices.RemoveChild(_child.Id));
+                var message = MessageBox.Show($"Želite li iz sustava obrisati i roditelje za dijete '{_child.FirstName} {_child.LastName}'?", "Obavijest", MessageBoxButton.YesNo);
 
-                if (isRemoved)
+                if (message == MessageBoxResult.Yes)
                 {
-                    _ucChildrenAdministrating.HideSidebarProfile();
-                    _ucChildrenAdministrating.RefreshGUI();
-                    MessageBox.Show("Dijete je uspješno obrisano iz sustava!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    var isParentRemoved = await Task.Run(() => _parentServices.RemoveParentsByChild(_child));
+                    var isChildRemoved = await Task.Run(() => _childServices.RemoveChild(_child.Id));
+                    if (isParentRemoved && isChildRemoved)
+                    {
+                        _ucChildrenAdministrating.HideSidebarProfile();
+                        _ucChildrenAdministrating.RefreshGUI();
+                        MessageBox.Show("Dijete i njegovi roditelji su uspješno izbrisani iz sustava!", "Obavijest", MessageBoxButton.OK, MessageBoxImage.Information);
+                    } else
+                    {
+                        MessageBox.Show("Došlo je do greške prilikom brisanja roditelja ili dijeteta iz sustava.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 } else
                 {
-                    MessageBox.Show("Došlo je do greške prilikom brisanja djeteta iz sustava.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    var isChildRemoved = await Task.Run(() => _childServices.RemoveChild(_child.Id));
+                    if (isChildRemoved)
+                    {
+                        _ucChildrenAdministrating.HideSidebarProfile();
+                        _ucChildrenAdministrating.RefreshGUI();
+                        MessageBox.Show("Dijete je uspješno obrisano iz sustava!", "Obavijest", MessageBoxButton.OK, MessageBoxImage.Information);
+                    } else
+                    {
+                        MessageBox.Show("Došlo je do greške prilikom brisanja djeteta iz sustava.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }
