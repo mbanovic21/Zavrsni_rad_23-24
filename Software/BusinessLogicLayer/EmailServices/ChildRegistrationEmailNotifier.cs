@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using EntityLayer.Entities;
 using EntityLayer;
 using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace BusinessLogicLayer.EmailServices
 {
@@ -18,13 +19,12 @@ namespace BusinessLogicLayer.EmailServices
 
         public bool SendRegistrationEmail(string subject, Parent parent, Child child)
         {
-            var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(child.ProfileImage);
             var message = new MailMessage
             {
                 From = new MailAddress(myMail),
                 Subject = subject,
                 IsBodyHtml = true,
-                Body = GenerateEmailBody(parent.FirstName, parent.LastName, profileImage, child.PIN, child.FirstName, child.LastName, child.DateOfBirth, child.Sex, child.Adress, child.Nationality, child.DevelopmentStatus, child.MedicalInformation, child.BirthPlace)
+                Body = GenerateEmailBody(parent.FirstName, parent.LastName, child.ProfileImage, child.PIN, child.FirstName, child.LastName, child.DateOfBirth, child.Sex, child.Adress, child.Nationality, child.DevelopmentStatus, child.MedicalInformation, child.BirthPlace)
             };
 
             message.To.Add(new MailAddress(parent.Email));
@@ -61,10 +61,10 @@ namespace BusinessLogicLayer.EmailServices
         }
 
 
-        private string GenerateEmailBody(string parentFirstName, string parentLastName, BitmapImage profileImage, string pin, string firstName, string lastName, string dateOfBirth, string gender, string address, string nationality, string developmentStatus, string medicalInformation, string birthPlace)
+        private string GenerateEmailBody(string parentFirstName, string parentLastName, byte[] profileImage, string pin, string firstName, string lastName, string dateOfBirth, string gender, string address, string nationality, string developmentStatus, string medicalInformation, string birthPlace)
         {
-            //string base64Image = Convert.ToBase64String(profileImage);
-            //string imgSrc = $"data:image/png;base64,{base64Image}";
+            string imageBase64 = Convert.ToBase64String(profileImage);
+            string imageSource = $"data:image/png;base64,{imageBase64}";
 
             return $@"
             <html>
@@ -73,7 +73,7 @@ namespace BusinessLogicLayer.EmailServices
                 <p>Vaše dijete {firstName} {lastName} je uspješno registrirano u naš sustav.</p>
                 <p>Ovdje su detalji registracije:</p>
                 <p>Profilna slika:</p>
-                <img src='{profileImage}' alt='Profilna slika' />
+                <img src='{imageSource}' alt='Profilna slika' />
                 <ul>
                     <li><strong>Ime i prezime:</strong> {firstName} {lastName}</li>
                     <li><strong>OIB:</strong> {pin}</li>

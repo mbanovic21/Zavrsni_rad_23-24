@@ -358,47 +358,34 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             {
                 var caughtChild = await Task.Run(() => _childServices.GetChildByPIN(PIN));
 
-                foreach (var parent in _parents)
+                _ucChildrenAdministrating.RefreshGUI();
+
+                var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
+
+                ClearFields();
+                
+                if (result == MessageBoxResult.Yes)
                 {
-                    parent.Children.Add(caughtChild);
-                }
-
-                var isParentAdded = await Task.Run(() => _parentServices.RegistrateParents(_parents));
-
-                if (isParentAdded)
-                {
-                    _ucChildrenAdministrating.RefreshGUI();
-
-                    var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
-
-                    ClearFields();
-
-                    if (result == MessageBoxResult.Yes)
+                    // Obavijesti korisnika putem e-pošte
+                    var subject = "Uspješno ste registrirani u sustav!";
+                    var emailNotifier = new ChildRegistrationEmailNotifier();
+                    foreach (var parent in _parents)
                     {
-                        // Obavijesti korisnika putem e-pošte
-                        var subject = "Uspješno ste registrirani u sustav!";
-                        var emailNotifier = new ChildRegistrationEmailNotifier();
-                        foreach (var parent in _parents)
+                        var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
+                        if (!isEmailSent)
                         {
-                            var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
-                            if (!isEmailSent)
+                            var isRemoved = await Task.Run(() => _childServices.RemoveChild(caughtChild.Id));
+                            //var isParentRemoved = await Task.Run(() => _parentServices.RemoveParents(_parents));
+                            if (isRemoved)
                             {
-                                var isRemoved = await Task.Run(() => _childServices.RemoveChild(caughtChild.Id));
-                                var isParentRemoved = await Task.Run(() => _parentServices.RemoveParents(_parents));
-                                if (isRemoved && isParentRemoved)
-                                {
-                                    MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-                                }
+                                MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     }
-                } else
-                {
-                    MessageBox.Show("Pogreška kod registracije roditelja");
                 }
             } else
             {
-                MessageBox.Show("Pogreška kod registracije djeteta");
+                MessageBox.Show("Pogreška kod registracije roditelja");
             }
         }
 
@@ -410,6 +397,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             txtLastname.Clear();
             dpDateOfBirth.SelectedDate = null;
             rbFemale.IsChecked = true;
+            txtAddress.Clear();
+            txtNationality.Clear();
+            txtBirthPlace.Clear();
+            txtDevelopmentStatus.Clear();
+            txtMedicalInformation.Clear();
         }
 
         //Input validation
