@@ -2,6 +2,7 @@
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,6 +107,24 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.updateChild(child);
+            }
+        }
+        
+        //Add child
+        public bool RegistrateChild(Child child)
+        {
+            using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.addChild(child);
+            }
+        }
+
+        //Get Child by PIN
+        public Child GetChildByPIN(string pin)
+        {
+            using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.getChildByPIN(pin);
             }
         }
     }

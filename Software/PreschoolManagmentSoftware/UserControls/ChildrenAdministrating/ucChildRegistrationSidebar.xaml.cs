@@ -1,4 +1,6 @@
-﻿using BusinessLogicLayer.DBServices;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.DBServices;
+using BusinessLogicLayer.EmailServices;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Win32;
@@ -27,7 +29,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
     public partial class ucChildRegistrationSidebar : UserControl
     {
         private AutenticationManager _autenticationManager = new AutenticationManager();
-        private UserServices _userServices = new UserServices();
+        private ChildServices _childServices = new ChildServices();
+        private ParentServices _parentServices = new ParentServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
         private List<Parent> _parents { get; set; }
         private string _selectedImagePath { get; set; }
@@ -304,7 +307,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
 
 
         //btnRegister
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private async void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (!ValidateRegistration())
             {
@@ -349,7 +352,54 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 Parents = _parents
             };
 
-            //sad busines logic layer...
+            var isAdded = await Task.Run(() => _childServices.RegistrateChild(child));
+
+            if (isAdded)
+            {
+                var caughtChild = await Task.Run(() => _childServices.GetChildByPIN(PIN));
+
+                foreach (var parent in _parents)
+                {
+                    parent.Children.Add(caughtChild);
+                }
+
+                var isParentAdded = await Task.Run(() => _parentServices.RegistrateParents(_parents));
+
+                if (isParentAdded)
+                {
+                    _ucChildrenAdministrating.RefreshGUI();
+
+                    var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
+
+                    ClearFields();
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Obavijesti korisnika putem e-pošte
+                        var subject = "Uspješno ste registrirani u sustav!";
+                        var emailNotifier = new ChildRegistrationEmailNotifier();
+                        foreach (var parent in _parents)
+                        {
+                            var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
+                            if (!isEmailSent)
+                            {
+                                var isRemoved = await Task.Run(() => _childServices.RemoveChild(caughtChild.Id));
+                                var isParentRemoved = await Task.Run(() => _parentServices.RemoveParents(_parents));
+                                if (isRemoved && isParentRemoved)
+                                {
+                                    MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                            }
+                        }
+                    }
+                } else
+                {
+                    MessageBox.Show("Pogreška kod registracije roditelja");
+                }
+            } else
+            {
+                MessageBox.Show("Pogreška kod registracije djeteta");
+            }
         }
 
         private void ClearFields()

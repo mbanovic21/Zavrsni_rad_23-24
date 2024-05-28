@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBServices\ChildServices.cs" />
+    <Compile Include="DBServices\ParentServices.cs" />
     <Compile Include="DBServices\UserServices.cs" />
+    <Compile Include="EmailServices\ChildRegistrationEmailNotifier.cs" />
     <Compile Include="EmailServices\ExternalEmailService.cs" />
     <Compile Include="EmailServices\UserUpdateEmailNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

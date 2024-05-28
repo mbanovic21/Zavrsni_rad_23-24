@@ -120,31 +120,6 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
-        private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
-        {
-            try
-            {
-                affectedRows = context.SaveChanges();
-            } catch (DbEntityValidationException ex)
-            {
-                // Iterirajte kroz sve entitete koji su imali valjanosne greške
-                foreach (var validationErrors in ex.EntityValidationErrors)
-                {
-                    // Iterirajte kroz sve greške valjanosti za svaki entitet
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
-                    }
-                }
-
-                // Vratite false jer je došlo do greške pri spremanju
-                return false;
-            }
-
-            // Vratite true ako je barem jedan red promijenjen u bazi podataka
-            return affectedRows > 0;
-        }
-
         //update child
         public bool updateChild(Child child)
         {
@@ -170,6 +145,48 @@ namespace DataAccessLayer.Repositories
             {
                 return false;
             }
+        }
+
+        //add child
+        public bool addChild(Child child)
+        {
+            Children.Add(child);
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+        //get child by PIN
+        public Child getChildByPIN(string pin)
+        {
+            return Children.FirstOrDefault(c => c.PIN == pin);
+        }
+
+        private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
+        {
+            try
+            {
+                affectedRows = context.SaveChanges();
+            } catch (DbEntityValidationException ex)
+            {
+                // Iterirajte kroz sve entitete koji su imali valjanosne greške
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    // Iterirajte kroz sve greške valjanosti za svaki entitet
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+
+                // Vratite false jer je došlo do greške pri spremanju
+                return false;
+            }
+
+            // Vratite true ako je barem jedan red promijenjen u bazi podataka
+            return affectedRows > 0;
         }
 
         public void Dispose()
