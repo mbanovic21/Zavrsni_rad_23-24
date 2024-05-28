@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
+             xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls" 
              mc:Ignorable="d" 
              x:Name="ucChildren"
              d:DesignHeight="728" d:DesignWidth="1166" Loaded="ucChildren_Loaded">
@@ -35,6 +35,7 @@
                 <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="800,0,0,0"/>
             </ThicknessAnimationUsingKeyFrames>
         </Storyboard>
+
     </UserControl.Resources>
 
     <DockPanel>
@@ -208,7 +209,6 @@
                             </Button>
                         </Grid>
                     </Border>
-
 
                     <DataGrid x:Name="dgvChildren" SelectionChanged="dgvChildren_SelectionChanged" Margin="70,7,70,7" Grid.Row="2" Grid.ColumnSpan="3"/>
 
