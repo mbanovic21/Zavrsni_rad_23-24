@@ -35,7 +35,6 @@
                 <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="800,0,0,0"/>
             </ThicknessAnimationUsingKeyFrames>
         </Storyboard>
-
     </UserControl.Resources>
 
     <DockPanel>

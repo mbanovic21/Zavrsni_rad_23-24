@@ -367,7 +367,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 if (result == MessageBoxResult.Yes)
                 {
                     // Obavijesti korisnika putem e-pošte
-                    var subject = "Uspješno ste registrirani u sustav!";
+                    var subject = "Poruka potvrde za uspješan upis djeteta u vrtić!";
                     var emailNotifier = new ChildRegistrationEmailNotifier();
                     foreach (var parent in _parents)
                     {

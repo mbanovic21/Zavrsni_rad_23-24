@@ -1,6 +1,7 @@
 ﻿using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
@@ -65,6 +66,16 @@ namespace DataAccessLayer.Repositories
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
 
             return isSaveSuccessful;
+        }
+
+        // get parents by child
+        public List<Parent> GetParentsByChild(Child child)
+        {
+            var parents = from p in Parents
+                          where p.Children.Any(c => c.Id == child.Id)
+                          select p;
+
+            return parents.ToList();
         }
 
 

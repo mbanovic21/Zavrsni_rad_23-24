@@ -86,6 +86,7 @@ namespace PreschoolManagmentSoftware.UserControls
         public void refreshData()
         {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
+            var parents = _parentServices.GetParentsByChild(_child);
 
             imgProfile.Source = profileImage;
             textFirstAndLastName.Text = $"{_child.FirstName} {_child.LastName}";
@@ -98,6 +99,30 @@ namespace PreschoolManagmentSoftware.UserControls
             textGender.Text = _child.Sex;
             textDevelopmentStatus.Text = _child.DevelopmentStatus;
             textMedicalInformation.Text = _child.MedicalInformation;
+            textParents.Text = GetParentsNames(parents);
+        }
+
+        public string GetParentsNames(List<Parent> parents)
+        {
+            if (parents == null || parents.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            StringBuilder parentsBuilder = new StringBuilder();
+
+            foreach (var parent in parents)
+            {
+                parentsBuilder.Append($"{parent.FirstName} {parent.LastName}, ");
+            }
+
+            // Ukloni zadnji zarez i razmak
+            if (parentsBuilder.Length > 0)
+            {
+                parentsBuilder.Length -= 2; // ukloni zadnja dva znaka ", "
+            }
+
+            return parentsBuilder.ToString();
         }
     }
 }

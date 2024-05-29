@@ -24,7 +24,7 @@ namespace BusinessLogicLayer.EmailServices
                 From = new MailAddress(myMail),
                 Subject = subject,
                 IsBodyHtml = true,
-                Body = GenerateEmailBody(parent.FirstName, parent.LastName, child.ProfileImage, child.PIN, child.FirstName, child.LastName, child.DateOfBirth, child.Sex, child.Adress, child.Nationality, child.DevelopmentStatus, child.MedicalInformation, child.BirthPlace)
+                Body = GenerateEmailBody(parent.FirstName, parent.LastName, child)
             };
 
             message.To.Add(new MailAddress(parent.Email));
@@ -61,29 +61,24 @@ namespace BusinessLogicLayer.EmailServices
         }
 
 
-        private string GenerateEmailBody(string parentFirstName, string parentLastName, byte[] profileImage, string pin, string firstName, string lastName, string dateOfBirth, string gender, string address, string nationality, string developmentStatus, string medicalInformation, string birthPlace)
+        private string GenerateEmailBody(string parentFirstName, string parentLastName, Child child)
         {
-            string imageBase64 = Convert.ToBase64String(profileImage);
-            string imageSource = $"data:image/png;base64,{imageBase64}";
-
             return $@"
             <html>
             <body>
                 <p>Poštovani/a {parentFirstName} {parentLastName}</p>
-                <p>Vaše dijete {firstName} {lastName} je uspješno registrirano u naš sustav.</p>
+                <p>Vaše dijete <strong>{child.FirstName} {child.LastName}</strong> je uspješno registrirano u naš sustav.</p>
                 <p>Ovdje su detalji registracije:</p>
-                <p>Profilna slika:</p>
-                <img src='{imageSource}' alt='Profilna slika' />
                 <ul>
-                    <li><strong>Ime i prezime:</strong> {firstName} {lastName}</li>
-                    <li><strong>OIB:</strong> {pin}</li>
-                    <li><strong>Datum rođenja:</strong> {dateOfBirth}</li>
-                    <li><strong>Spol:</strong> {gender}</li>
-                    <li><strong>Adresa:</strong> {address}</li>
-                    <li><strong>Nacionalnost:</strong> {nationality}</li>
-                    <li><strong>Status razvoja:</strong> {developmentStatus}</li>
-                    <li><strong>Medicinske informacije:</strong> {medicalInformation}</li>
-                    <li><strong>Mjesto rođenja:</strong> {birthPlace}</li>
+                    <li><strong>Ime i prezime:</strong> {child.FirstName} {child.LastName}</li>
+                    <li><strong>OIB:</strong> {child.PIN}</li>
+                    <li><strong>Datum rođenja:</strong> {child.DateOfBirth}</li>
+                    <li><strong>Spol:</strong> {child.Sex}</li>
+                    <li><strong>Adresa:</strong> {child.Adress}</li>
+                    <li><strong>Mjesto rođenja:</strong> {child.BirthPlace}</li>
+                    <li><strong>Nacionalnost:</strong> {child.Nationality}</li>
+                    <li><strong>Status razvoja:</strong> {child.DevelopmentStatus}</li>
+                    <li><strong>Medicinske informacije:</strong> {child.MedicalInformation}</li>>
                 </ul>
                 <p>Slobodno se obratite našem timu ako imate bilo kakvih pitanja ili trebate dodatnu podršku.</p>
                 <p>S poštovanjem,</p>

@@ -51,7 +51,7 @@
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />    <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
 
                         <!-- PIN -->
@@ -85,6 +85,10 @@
                         <!-- Medical information -->
                         <TextBlock Text="Med. informacije: " Grid.Column="0" Grid.Row="7" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
                         <TextBlock x:Name="textMedicalInformation" Grid.Column="1" Grid.Row="7" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" />
+
+                        <!-- parents -->
+                        <TextBlock Text="Roditelji: " Grid.Column="0" Grid.Row="8" Style="{StaticResource normalText}" HorizontalAlignment="Right" Margin="0,0,7,7" />
+                        <TextBlock x:Name="textParents" Grid.Column="1" Grid.Row="8" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="7,0,0,7" TextAlignment="Left" />
                     </Grid>
                 </ScrollViewer>
 
