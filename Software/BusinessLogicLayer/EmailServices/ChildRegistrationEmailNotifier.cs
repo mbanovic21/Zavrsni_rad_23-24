@@ -9,6 +9,7 @@ using EntityLayer.Entities;
 using EntityLayer;
 using System.Windows.Media.Imaging;
 using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BusinessLogicLayer.EmailServices
 {
