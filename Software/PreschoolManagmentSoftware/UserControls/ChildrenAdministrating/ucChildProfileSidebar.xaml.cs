@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer;
 using EntityLayer.Entities;
+using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls.ChildrenAdministrating;
 using System;
 using System.Collections.Generic;
@@ -83,6 +84,12 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        private async void btnGeneratePDF_Click(object sender, RoutedEventArgs e)
+        {
+            var parents = await Task.Run(() => _parentServices.GetParentsByChild(_child));
+            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents)));
+        }
+
         public void refreshData()
         {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
@@ -124,5 +131,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
             return parentsBuilder.ToString();
         }
+
+        
     }
 }
