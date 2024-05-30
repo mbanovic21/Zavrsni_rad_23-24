@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -62,6 +63,7 @@
     <Compile Include="Static Classes\BitmapImageConverter.cs" />
     <Compile Include="Static Classes\LoggedInUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static Classes\ParentsNameConverter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

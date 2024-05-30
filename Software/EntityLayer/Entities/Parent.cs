@@ -15,6 +15,8 @@ namespace EntityLayer.Entities
 
         public int Id { get; set; }
 
+        public byte[] ProfileImage { get; set; }
+
         [StringLength(11)]
         public string PIN { get; set; }
 

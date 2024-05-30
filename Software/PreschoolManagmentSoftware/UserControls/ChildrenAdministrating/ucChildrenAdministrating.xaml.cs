@@ -1,5 +1,7 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer.Entities;
+using PreschoolManagmentSoftware.UserControls.ChildrenAdministrating;
+using PreschoolManagmentSoftware.UserControls.ParentAdministrating;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,8 +166,8 @@ namespace PreschoolManagmentSoftware.UserControls
                 "ProfileImage",
                 /*"Attendances",
                 "Notes",
-                "Gruop",
-                "Parents",*/
+                "Gruop",*/
+                "Parents",
 
             };
 
@@ -266,8 +268,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebarRegistration.Visibility == Visibility.Collapsed)
             {
-                /*var ucEmployeeRegistrationSidebar = new ucEmployeeRegistrationSidebar(this);
-                contentSidebarRegistration.Content = ucEmployeeRegistrationSidebar;*/
+                var ucParentRegistration = new ucParentRegistration(new List<Parent>(), null, null, false, false, null, this);
+                contentSidebarRegistration.Content = ucParentRegistration;
 
                 sidebarRegistration.Visibility = Visibility.Visible;
                 slideInAnimation.Begin(sidebarRegistration);
