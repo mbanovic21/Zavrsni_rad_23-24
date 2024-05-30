@@ -29,17 +29,48 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
         private Parent _forwardedParent { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucParentRegistration(Parent forwardedParent, ucParentRegistration ucParentRegistration, ucChildrenAdministrating ucChildrenAdministrating)
+        public ucParentRegistration _previousControl { get; set; }
+        public bool _isLeftArrowVisible { get; set; }
+        public bool _isRightArrowVisible { get; set; }
+        public ucParentRegistration(Parent forwardedParent, ucParentRegistration previousControl, bool isLeftArrowVisible, bool isRightArrowVisible, ucParentRegistration ucParentRegistration, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
             _ucParentRegistration = ucParentRegistration;
             _ucChildrenAdministrating = ucChildrenAdministrating;
             _forwardedParent = forwardedParent;
+            _previousControl = previousControl;
+            _isLeftArrowVisible = isLeftArrowVisible;
+            _isRightArrowVisible = isRightArrowVisible;
+        }
+
+        //leftArrow
+        private void btnBackToFIrstParent_Click(object sender, RoutedEventArgs e)
+        {
+            _previousControl._isRightArrowVisible = true;
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
+            _previousControl._previousControl = this;
+        }
+
+        //rightArrow
+        private void btnBackToSecondParent_Click(object sender, RoutedEventArgs e)
+        {
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
+            _previousControl = this;
         }
 
         //Profile image
-        private void ucRegistration_Loaded(object sender, RoutedEventArgs e)
+        private void ucChildRegistration_Loaded(object sender, RoutedEventArgs e)
         {
+            if (_forwardedParent != null && _isLeftArrowVisible) 
+            { 
+                btnBackToFIrstParent.Visibility = Visibility.Visible;
+            }
+            
+            if (_isRightArrowVisible)
+            {
+                btnBackToSecondParent.Visibility = Visibility.Visible;
+            }
+
             SetInitialProfileImage();
         }
 
@@ -274,7 +305,7 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
                     Telephone = telephone
                 };
 
-                var ucParentRegistration2 = new ucParentRegistration(_forwardedParent, _ucParentRegistration, _ucChildrenAdministrating);
+                var ucParentRegistration2 = new ucParentRegistration(_forwardedParent, this, true, false, _ucParentRegistration, _ucChildrenAdministrating);
                 _ucChildrenAdministrating.contentSidebarRegistration.Content = ucParentRegistration2;
             } else
             {

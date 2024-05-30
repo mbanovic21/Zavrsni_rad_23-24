@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BusinessLogicLayer.DBServices;
+using PreschoolManagmentSoftware.Static_Classes;
 
 namespace PreschoolManagmentSoftware.UserControls
 {
@@ -66,6 +67,12 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+
+        private void btnGeneratePDF_Click(object sender, RoutedEventArgs e)
+        {
+            PDFConverter.GenerateAndOpenEmployeeReport(_user);
+        }
+
         public void refreshData()
         {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_user.ProfileImage);
@@ -84,6 +91,6 @@ namespace PreschoolManagmentSoftware.UserControls
             textDateOfBirth.Text = _user.DateOfBirth;
             textGender.Text = _user.Sex;
             textRole.Text = _user.Id_role == 1 ? "Administrator" : "Običan";
-        }  
+        }
     }
 }

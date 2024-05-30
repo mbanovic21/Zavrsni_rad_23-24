@@ -33,7 +33,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
 
                     // Dodaj naslov
                     Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
-                    Paragraph titleParagraph = new Paragraph("Izvještaj za dijete", titleFont)
+                    Paragraph titleParagraph = new Paragraph($"Izvještaj za dijete {child.FirstName} {child.LastName}", titleFont)
                     {
                         Alignment = Element.ALIGN_CENTER
                     };
@@ -98,7 +98,72 @@ namespace PreschoolManagmentSoftware.Static_Classes
             }
         }
 
-        // Pomoćna metoda za dodavanje informacija o djetetu
+        public static void GenerateAndOpenEmployeeReport(User user)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Document document = new Document();
+
+                    PdfWriter writer = PdfWriter.GetInstance(document, ms);
+
+                    document.Open();
+
+                    Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                    Paragraph titleParagraph = new Paragraph($"Izvještaj za zaposlenika {user.FirstName} {user.LastName}", titleFont)
+                    {
+                        Alignment = Element.ALIGN_CENTER
+                    };
+                    document.Add(titleParagraph);
+
+                    document.Add(new Paragraph("\n"));
+
+                    if (user.ProfileImage != null && user.ProfileImage.Length > 0)
+                    {
+                        using (MemoryStream imageStream = new MemoryStream(user.ProfileImage))
+                        {
+                            Image childImage = Image.GetInstance(imageStream);
+                            childImage.Alignment = Element.ALIGN_CENTER;
+                            childImage.ScaleToFit(150f, 150f);
+                            document.Add(childImage);
+                        }
+                    }
+
+                    document.Add(new Paragraph("\n"));
+
+                    var fullName = $"{user.FirstName} {user.LastName}";
+                    Font boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
+                    Paragraph nameParagraph = new Paragraph(fullName, boldFont)
+                    {
+                        Alignment = Element.ALIGN_CENTER
+                    };
+                    document.Add(nameParagraph);
+
+                    document.Add(new Paragraph("\n"));
+
+                    AddChildInfo(document, "Korisničko ime: ", user.Username);
+                    AddChildInfo(document, "OIB: ", user.PIN);
+                    AddChildInfo(document, "E-pošta: ", user.Email);
+                    AddChildInfo(document, "Telefonski broj: ", user.Telephone);
+                    AddChildInfo(document, "Datum rodenja: ", user.DateOfBirth);
+                    AddChildInfo(document, "Spol: ", user.Sex);
+                    AddChildInfo(document, "Uloga: ", user.Id_role == 1 ? "Administrator" : "Običan");
+
+                    document.Close();
+                    writer.Close();
+
+                    string tempFilePath = Path.Combine(Path.GetTempPath(), "EmployeeReport.pdf");
+                    File.WriteAllBytes(tempFilePath, ms.ToArray());
+
+                    Process.Start(new ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Error generating or opening PDF: " + ex.Message);
+            }
+        }
+
         private static void AddChildInfo(Document document, string label, string info)
         {
             Font labelFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
@@ -107,7 +172,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
             paragraph.Add(new Chunk(label, labelFont));
             paragraph.Add(new Chunk(info, infoFont));
             document.Add(paragraph);
-            document.Add(new Paragraph("\n")); // Dodaj prazan red nakon svake informacije
+            document.Add(new Paragraph("\n"));
         }
     }
 }
