@@ -26,8 +26,18 @@
 
                 <!-- profil stuff -->
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                    <!-- Back -->
+                    <Button x:Name="btnBackToSecondParent" HorizontalAlignment="Left" Margin="70,10,10,10" Click="btnBackToSecondParent_Click" Visibility="Visible">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="/Media/Images/back-arrow.png" Width="25"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <!-- Profile image -->
-                    <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,10,0,7" >
+                    <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,-40,0,7" >
                         <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="20" >
                             <Grid>
                                 <Image x:Name="btnDeleteImage" Source="/Media/Images/close.png" Style="{StaticResource imgClose}" MouseDown="btnDeleteImage_MouseDown" Margin="0,-40,-40,0" Visibility="Collapsed" />

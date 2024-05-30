@@ -299,6 +299,7 @@
 
                 <!-- Gumb za slanje zahtjeva -->
                 <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Dalje" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
+                <Button x:Name="btnSave" Grid.Row="3" Grid.ColumnSpan="2" Content="Spremi promjene" Click="btnSave_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" Visibility="Collapsed" />
             </Grid>
         </Border>
     </Grid>

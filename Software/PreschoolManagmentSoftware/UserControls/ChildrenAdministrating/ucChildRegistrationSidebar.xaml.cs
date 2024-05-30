@@ -4,6 +4,7 @@ using BusinessLogicLayer.EmailServices;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Win32;
+using PreschoolManagmentSoftware.UserControls.ParentAdministrating;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
@@ -32,13 +33,22 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
+        public ucParentRegistration _previousControl { get; set; }
         private List<Parent> _parents { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, List<Parent> parents)
+        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, ucParentRegistration previousControl, List<Parent> parents)
         {
             InitializeComponent();
             _ucChildrenAdministrating = ucChildrenAdministrating;
             _parents = parents;
+            _previousControl = previousControl;
+        }
+
+        //leftArrow
+        private void btnBackToSecondParent_Click(object sender, RoutedEventArgs e)
+        {
+            _previousControl._forwardControl = this;
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
         }
 
         //Profile image
