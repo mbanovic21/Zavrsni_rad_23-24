@@ -32,6 +32,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private Child _updatedChild { get; set; }
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
         private ChildServices _childServices = new ChildServices();
+        private ParentServices _parentServices = new ParentServices();
         public ucChildEditProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
@@ -40,7 +41,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         }
 
         //OnInit
-        private void ucEditChildProfile_Loaded(object sender, RoutedEventArgs e)
+        private async void ucEditChildProfile_Loaded(object sender, RoutedEventArgs e)
         {
             var _selectedImagePath = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
 
@@ -51,6 +52,12 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             textAddress.Text = _child.Adress;
             textBirthPlace.Text = _child.BirthPlace;
             textNationality.Text = _child.Nationality;
+            var mothersButton = btnShowMothersProfile;
+            var fathersButton = btnShowFathersProfile;
+            var mothersName = GetParentsNameTextBlock(mothersButton);
+            var fathersName = GetParentsNameTextBlock(fathersButton);
+            var mother = await Task.Run(() => _parentServices.GetMotherByChild(_child));
+            var father = await Task.Run(() => _parentServices.GetFatherByChild(_child));
 
             string UserGenderWithoutSpaces = _child.Sex;
             Console.WriteLine(UserGenderWithoutSpaces);
@@ -65,10 +72,32 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             }
 
             textDevelopmentStatus.Text = _child.DevelopmentStatus;
-            textMedicalInformations.Text = _child.MedicalInformation; 
+            textMedicalInformations.Text = _child.MedicalInformation;
+            mothersName.Text = $"{mother.FirstName} {mother.LastName}";
+            fathersName.Text = $"{father.FirstName} {father.LastName}";
 
             imgProfile.Source = _selectedImagePath;
+            
             _updatedChild = _child;
+
+        }
+
+
+        // get parents by button
+        private TextBlock GetParentsNameTextBlock(Button button)
+        {
+            if (button != null)
+            {
+                if(button.Name == "btnShowMothersProfile")
+                {
+                    return button.Template.FindName("txtMothersName", button) as TextBlock;
+                }
+                else if (button.Name == "btnShowFathersProfile")
+                {
+                    return button.Template.FindName("txtFathersName", button) as TextBlock;
+                }
+            }
+            return null;
         }
 
         //Profile picture
@@ -476,23 +505,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             return true;
         }
 
-        private bool IsValidEmail(string email)
-        {
-            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
-
-            return Regex.IsMatch(email, pattern);
-        }
-
-        private bool IsValidTelephone(string telephone)
-        {
-            return Regex.IsMatch(telephone, @"^[\+0-9\s]+$");
-        }
-
-        private bool IsValidUsername(string username)
-        {
-            return Regex.IsMatch(username, @"^[a-z0-9]+$");
-        }
-
         //back to profile
         private void BtnBackToProfile_Click(object sender, RoutedEventArgs e)
         {
@@ -504,6 +516,16 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             var ucProfileSidebar = new ucChildProfileSidebar(_child, _ucChildrenAdministrating);
             ucProfileSidebar.refreshData();
             _ucChildrenAdministrating.contentSidebarProfile.Content = ucProfileSidebar;
+        }
+
+        private void btnShowMothersProfile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnShowFathersProfile_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
