@@ -97,6 +97,9 @@
     <Compile Include="UserControls\ChildrenAdministrating\ucChildProfileSidebar.xaml.cs">
       <DependentUpon>ucChildProfileSidebar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ParentAdministrating\ucParentEditProfileSidebar.xaml.cs">
+      <DependentUpon>ucParentEditProfileSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ParentAdministrating\ucParentProfileSidebar.xaml.cs">
       <DependentUpon>ucParentProfileSidebar.xaml</DependentUpon>
     </Compile>
@@ -159,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ChildrenAdministrating\ucChildProfileSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ParentAdministrating\ucParentEditProfileSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,6 +280,8 @@
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Media\Images\man-parent.png" />
+    <Resource Include="Media\Images\woman-parent.png" />
     <Resource Include="Media\Images\forward-arrow.png" />
     <Resource Include="Media\Images\boy.png" />
     <Resource Include="Media\Images\girl.png" />

@@ -131,7 +131,5 @@ namespace PreschoolManagmentSoftware.UserControls
 
             return parentsBuilder.ToString();
         }
-
-        
     }
 }

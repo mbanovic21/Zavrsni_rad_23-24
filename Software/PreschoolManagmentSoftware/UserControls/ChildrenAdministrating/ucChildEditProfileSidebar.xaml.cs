@@ -3,6 +3,7 @@ using BusinessLogicLayer.EmailServices;
 using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Win32;
+using PreschoolManagmentSoftware.UserControls.ParentAdministrating;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private Child _child { get; set; }
         private Child _updatedChild { get; set; }
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
+        private Parent _mother { get; set; }
+        private Parent _father { get; set; }
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         public ucChildEditProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
@@ -41,7 +44,12 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         }
 
         //OnInit
-        private async void ucEditChildProfile_Loaded(object sender, RoutedEventArgs e)
+        private void ucEditChildProfile_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshGUI();
+        }
+
+        public async void RefreshGUI()
         {
             var _selectedImagePath = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
 
@@ -56,8 +64,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             var fathersButton = btnShowFathersProfile;
             var mothersName = GetParentsNameTextBlock(mothersButton);
             var fathersName = GetParentsNameTextBlock(fathersButton);
-            var mother = await Task.Run(() => _parentServices.GetMotherByChild(_child));
-            var father = await Task.Run(() => _parentServices.GetFatherByChild(_child));
+            _mother = await Task.Run(() => _parentServices.GetMotherByChild(_child));
+            _father = await Task.Run(() => _parentServices.GetFatherByChild(_child));
 
             string UserGenderWithoutSpaces = _child.Sex;
             Console.WriteLine(UserGenderWithoutSpaces);
@@ -73,13 +81,12 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
 
             textDevelopmentStatus.Text = _child.DevelopmentStatus;
             textMedicalInformations.Text = _child.MedicalInformation;
-            mothersName.Text = $"{mother.FirstName} {mother.LastName}";
-            fathersName.Text = $"{father.FirstName} {father.LastName}";
+            mothersName.Text = $"{_mother.FirstName} {_mother.LastName}";
+            fathersName.Text = $"{_father.FirstName} {_father.LastName}";
 
             imgProfile.Source = _selectedImagePath;
-            
-            _updatedChild = _child;
 
+            _updatedChild = _child;
         }
 
 
@@ -520,12 +527,14 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
 
         private void btnShowMothersProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            var mothersProfile = new ucParentProfileSidebar(this, _ucChildrenAdministrating, _mother);
+            _ucChildrenAdministrating.contentSidebarProfile.Content = mothersProfile;
         }
 
         private void btnShowFathersProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            var fathersProfile = new ucParentProfileSidebar(this, _ucChildrenAdministrating, _father);
+            _ucChildrenAdministrating.contentSidebarProfile.Content = fathersProfile;
         }
     }
 }

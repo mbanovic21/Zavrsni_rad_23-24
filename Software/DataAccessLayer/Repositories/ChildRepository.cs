@@ -164,6 +164,16 @@ namespace DataAccessLayer.Repositories
             return Children.FirstOrDefault(c => c.PIN == pin);
         }
 
+        // get children by parent
+        public List<Child> GetChildrenByParent(Parent parent)
+        {
+            var children = from c in Children
+                           where c.Parents.Any(p => p.Id == parent.Id)
+                           select c;
+
+            return children.ToList();
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

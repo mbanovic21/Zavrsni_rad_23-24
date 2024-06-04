@@ -99,6 +99,28 @@ namespace DataAccessLayer.Repositories
             return father;
         }
 
+        //update parent
+        public bool updateParent(Parent parent)
+        {
+            var selectedParent = Context.Parents.FirstOrDefault(u => u.Id == parent.Id);
+            if (selectedParent != null)
+            {
+                selectedParent.ProfileImage = parent.ProfileImage;
+                selectedParent.PIN = parent.PIN;
+                selectedParent.FirstName = parent.FirstName;
+                selectedParent.LastName = parent.LastName;
+                selectedParent.DateOfBirth = parent.DateOfBirth;
+                selectedParent.Sex = parent.Sex;
+                selectedParent.Email = parent.Email;
+
+                Context.SaveChanges();
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {

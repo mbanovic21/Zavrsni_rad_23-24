@@ -63,5 +63,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetFatherByChild(child);
             }
         }
+
+        //Update parent
+        public bool isUpdated(Parent parent)
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.updateParent(parent);
+            }
+        }
     }
 }

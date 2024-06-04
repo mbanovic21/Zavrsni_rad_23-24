@@ -127,5 +127,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.getChildByPIN(pin);
             }
         }
+
+        //Get childrens by parent
+        public List<Child> GetChildrenByParent(Parent parent)
+        {
+            using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetChildrenByParent(parent);
+            }
+        }
     }
 }
