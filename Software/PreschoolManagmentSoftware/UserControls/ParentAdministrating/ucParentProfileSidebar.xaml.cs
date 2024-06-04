@@ -1,6 +1,7 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer;
 using EntityLayer.Entities;
+using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls.ChildrenAdministrating;
 using System;
 using System.Collections.Generic;
@@ -48,13 +49,13 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
             BackToProfile();
         }
 
-        public void refreshData()
+        public async void refreshData()
         {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_parent.ProfileImage);
 
             imgProfile.Source = profileImage;
             textFirstAndLastName.Text = $"{_parent.FirstName} {_parent.LastName}";
-            var children = _childServices.GetChildrenByParent(_parent);
+            var children = await Task.Run(() => _childServices.GetChildrenByParent(_parent));
 
             textPIN.Text = _parent.PIN;
             textDateOfBirth.Text = _parent.DateOfBirth;
@@ -97,9 +98,33 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
             _ucChildrenAdministrating.contentSidebarProfile.Content = ucEditProfile;
         }
 
-        private void btnGeneratePDF_Click(object sender, RoutedEventArgs e)
+        private async void btnGeneratePDF_Click(object sender, RoutedEventArgs e)
         {
+            var children = await Task.Run(() => _childServices.GetChildrenByParent(_parent));
+            await Task.Run(() => PDFConverter.GenerateAndOpenParentReport(_parent, GetParentsNames(children)));
+        }
 
+        public string GetParentsNames(List<Child> children)
+        {
+            if (children == null || children.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            StringBuilder parentsBuilder = new StringBuilder();
+
+            foreach (var parent in children)
+            {
+                parentsBuilder.Append($"{parent.FirstName} {parent.LastName}, ");
+            }
+
+            // Ukloni zadnji zarez i razmak
+            if (parentsBuilder.Length > 0)
+            {
+                parentsBuilder.Length -= 2; // ukloni zadnja dva znaka ", "
+            }
+
+            return parentsBuilder.ToString();
         }
     }
 }

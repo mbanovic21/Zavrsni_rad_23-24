@@ -14,7 +14,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
 {
     public static class PDFConverter
     {
-        // Metoda za generiranje PDF izvještaja za dijete
+        // Child
         public static void GenerateAndOpenChildReport(Child child, string parents)
         {
             try
@@ -33,7 +33,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
 
                     // Dodaj naslov
                     Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
-                    Paragraph titleParagraph = new Paragraph($"Izvještaj za dijete {child.FirstName} {child.LastName}", titleFont)
+                    Paragraph titleParagraph = new Paragraph($"Izvještaj za dijete", titleFont)
                     {
                         Alignment = Element.ALIGN_CENTER
                     };
@@ -98,6 +98,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
             }
         }
 
+        // Employee
         public static void GenerateAndOpenEmployeeReport(User user)
         {
             try
@@ -111,7 +112,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
                     document.Open();
 
                     Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
-                    Paragraph titleParagraph = new Paragraph($"Izvještaj za zaposlenika {user.FirstName} {user.LastName}", titleFont)
+                    Paragraph titleParagraph = new Paragraph($"Izvještaj za zaposlenika", titleFont)
                     {
                         Alignment = Element.ALIGN_CENTER
                     };
@@ -154,6 +155,71 @@ namespace PreschoolManagmentSoftware.Static_Classes
                     writer.Close();
 
                     string tempFilePath = Path.Combine(Path.GetTempPath(), "EmployeeReport.pdf");
+                    File.WriteAllBytes(tempFilePath, ms.ToArray());
+
+                    Process.Start(new ProcessStartInfo(tempFilePath) { UseShellExecute = true });
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Error generating or opening PDF: " + ex.Message);
+            }
+        }
+
+        //Parent
+        public static void GenerateAndOpenParentReport(Parent parent, string children)
+        {
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    Document document = new Document();
+
+                    PdfWriter writer = PdfWriter.GetInstance(document, ms);
+
+                    document.Open();
+
+                    Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                    Paragraph titleParagraph = new Paragraph($"Izvještaj za roditelja", titleFont)
+                    {
+                        Alignment = Element.ALIGN_CENTER
+                    };
+                    document.Add(titleParagraph);
+
+                    document.Add(new Paragraph("\n"));
+
+                    if (parent.ProfileImage != null && parent.ProfileImage.Length > 0)
+                    {
+                        using (MemoryStream imageStream = new MemoryStream(parent.ProfileImage))
+                        {
+                            Image childImage = Image.GetInstance(imageStream);
+                            childImage.Alignment = Element.ALIGN_CENTER;
+                            childImage.ScaleToFit(150f, 150f);
+                            document.Add(childImage);
+                        }
+                    }
+
+                    document.Add(new Paragraph("\n"));
+
+                    var fullName = $"{parent.FirstName} {parent.LastName}";
+                    Font boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 20);
+                    Paragraph nameParagraph = new Paragraph(fullName, boldFont)
+                    {
+                        Alignment = Element.ALIGN_CENTER
+                    };
+                    document.Add(nameParagraph);
+
+                    document.Add(new Paragraph("\n"));
+
+                    AddChildInfo(document, "OIB: ", parent.PIN);
+                    AddChildInfo(document, "Datum rodenja: ", parent.DateOfBirth);
+                    AddChildInfo(document, "E-pošta: ", parent.Email);
+                    AddChildInfo(document, "Spol: ", parent.Sex);
+                    AddChildInfo(document, "Djeca: ", children);
+
+                    document.Close();
+                    writer.Close();
+
+                    string tempFilePath = Path.Combine(Path.GetTempPath(), "ParentReport.pdf");
                     File.WriteAllBytes(tempFilePath, ms.ToArray());
 
                     Process.Start(new ProcessStartInfo(tempFilePath) { UseShellExecute = true });
