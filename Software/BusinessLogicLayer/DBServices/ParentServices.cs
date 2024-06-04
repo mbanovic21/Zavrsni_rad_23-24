@@ -10,12 +10,21 @@ namespace BusinessLogicLayer.DBServices
 {
     public class ParentServices
     {
-        //Add new parent
+        //Add new parents
         public bool RegistrateParents(List<Parent> parentsForRegistration)
         {
             using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.RegistrateParents(parentsForRegistration);
+            }
+        }
+
+        //Add new parent
+        public bool RegistrateParent(Parent parentForRegistration)
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RegistrateParent(parentForRegistration);
             }
         }
 

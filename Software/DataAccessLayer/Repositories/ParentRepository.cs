@@ -21,13 +21,25 @@ namespace DataAccessLayer.Repositories
             Parents = Context.Set<Parent>();
         }
 
-        //registrate new parent
+        //registrate new parents
         public bool RegistrateParents(List<Parent> parentsForRegistration)
         {
             foreach (var parent in parentsForRegistration)
             {
                 Parents.Add(parent);
             }
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+        //registrate new parent
+        public bool RegistrateParent(Parent parentForRegistration)
+        {
+            Parents.Add(parentForRegistration);
+            
             int affectedRows = 0;
 
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);

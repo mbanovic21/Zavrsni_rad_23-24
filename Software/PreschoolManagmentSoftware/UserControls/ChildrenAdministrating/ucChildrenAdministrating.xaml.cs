@@ -268,7 +268,7 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebarRegistration.Visibility == Visibility.Collapsed)
             {
-                var ucChildRegistration = new ucChildRegistrationSidebar(this, new List<Parent>());
+                var ucChildRegistration = new ucChildRegistrationSidebar(this);
                 contentSidebarRegistration.Content = ucChildRegistration;
 
                 sidebarRegistration.Visibility = Visibility.Visible;

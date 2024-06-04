@@ -33,13 +33,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
-        private List<Parent> _parents { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, List<Parent> parents)
+        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
             _ucChildrenAdministrating = ucChildrenAdministrating;
-            _parents = parents;
         }
 
         //Profile image
@@ -187,6 +185,20 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 MessageBox.Show("Prezime može sadržavati samo slova.");
                 return;
             }
+        }
+
+        //add new mother
+        private void btnAddMother_Click(object sender, RoutedEventArgs e)
+        {
+            var fatherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = fatherControl;
+        }
+
+        //add new father
+        private void btnAddFather_Click(object sender, RoutedEventArgs e)
+        {
+            var motherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = motherControl;
         }
 
         //DateOfBirth
@@ -367,7 +379,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 Nationality = nationality,
                 DevelopmentStatus = developmentStatus,
                 MedicalInformation = medicalInformation,
-                Parents = _parents
+                //Parents = _parents
             };
 
             var isAdded = await Task.Run(() => _childServices.RegistrateChild(child));
@@ -387,7 +399,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                     // Obavijesti korisnika putem e-pošte
                     var subject = "Poruka potvrde za uspješan upis djeteta u vrtić!";
                     var emailNotifier = new ChildRegistrationEmailNotifier();
-                    foreach (var parent in _parents)
+                    /*foreach (var parent in _parents)
                     {
                         var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
                         if (!isEmailSent)
@@ -399,7 +411,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                                 MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
-                    }
+                    }*/
                 }
             } else
             {
@@ -473,16 +485,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                     return false;
             }
             return true;
-        }
-
-        private void btnAddFather_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAddMother_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void btnDropdown_Click(object sender, RoutedEventArgs e)

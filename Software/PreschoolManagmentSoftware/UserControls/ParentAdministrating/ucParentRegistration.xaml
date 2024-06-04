@@ -25,9 +25,9 @@
                 <!-- <TextBlock Text="Registracija zaposlenika" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Margin="0 0 0 20"/>  -->
 
                 <!-- profil stuff -->
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                <StackPanel Panel.ZIndex="10" Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
                     <!-- Back -->
-                    <Button x:Name="btnBackToChildRegistration" Grid.Row="0" HorizontalAlignment="Left" Margin="10,-40,10,10" Click="BtnBackChildRegistration_Click" Visibility="Visible">
+                    <Button x:Name="btnBackToChildRegistration" Grid.Row="0" HorizontalAlignment="Left" Margin="10,-40,10,10" Click="BtnBackChildRegistration_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid>
@@ -284,7 +284,7 @@
                 </Grid>
 
                 <!-- Gumb za slanje zahtjeva -->
-                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Dalje" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
+                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Dodaj" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
             </Grid>
         </Border>
     </Grid>

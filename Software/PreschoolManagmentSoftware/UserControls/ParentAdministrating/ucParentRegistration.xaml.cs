@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Org.BouncyCastle.Utilities.Encoders;
 using System.Net.NetworkInformation;
+using BusinessLogicLayer.DBServices;
 
 namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
 {
@@ -29,19 +30,22 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
     {
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucParentRegistration _previousControl { get; set; }
-
-        public List<Parent> _parents { get; set; }
-        public ucParentRegistration(List<Parent> parents, ucParentRegistration previousControl, ucChildrenAdministrating ucChildrenAdministrating)
+        private ucChildRegistrationSidebar _previousControl { get; set; }
+        private ParentServices _parentServices = new ParentServices();
+        public ucParentRegistration(ucChildRegistrationSidebar previousControl, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
             _ucChildrenAdministrating = ucChildrenAdministrating;
-            _parents = parents;
             _previousControl = previousControl;
         }
 
         //leftArrow
         private void BtnBackChildRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            BackToPreviousControl();
+        }
+
+        private void BackToPreviousControl()
         {
             _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
         }
@@ -55,7 +59,7 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
         private void SetInitialProfileImage()
         {
             var gender = GetSelectedGender();
-            string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
+            string imageName = gender == "Ženski" ? "woman-parent.png" : "man-parent.png";
             string imagePath = "pack://application:,,,/Media/Images/" + imageName;
             profileImage.Source = new BitmapImage(new Uri(imagePath));
         }
@@ -243,7 +247,7 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
         }
 
         //btnRegister
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private async void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (!ValidateRegistration())
             {
@@ -264,9 +268,31 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
                 imagePathForRegistration = _selectedImagePath;
             } else
             {
-                string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
+                string imageName = gender == "Ženski" ? "woman-parent.png" : "man-parent.png";
                 //string projectPath = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\";
                 imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
+            }
+
+            var parent = new Parent()
+            {
+                PIN = PIN,
+                FirstName = firstName,
+                LastName = lastName,
+                DateOfBirth = date,
+                Sex = gender,
+                Email = email,
+                Telephone = telephone
+            };
+
+            var isAdded = await Task.Run(() => _parentServices.RegistrateParent(parent));
+            if (isAdded)
+            {
+                var ucChildRegistration = new ucChildRegistrationSidebar(_ucChildrenAdministrating);
+                _ucChildrenAdministrating.contentSidebarRegistration.Content = ucChildRegistration;
+                MessageBox.Show($"Roditelj {parent.FirstName} {parent.LastName} je uspješno dodan u sustav!");
+            } else
+            {
+                MessageBox.Show("Dogodila se greška prilikom unosa roditelja u sustav!");
             }
         }
 
