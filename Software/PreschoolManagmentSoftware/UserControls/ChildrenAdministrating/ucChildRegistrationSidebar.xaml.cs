@@ -33,28 +33,36 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
-        public ucParentRegistration _previousControl { get; set; }
         private List<Parent> _parents { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, ucParentRegistration previousControl, List<Parent> parents)
+        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, List<Parent> parents)
         {
             InitializeComponent();
             _ucChildrenAdministrating = ucChildrenAdministrating;
             _parents = parents;
-            _previousControl = previousControl;
-        }
-
-        //leftArrow
-        private void btnBackToSecondParent_Click(object sender, RoutedEventArgs e)
-        {
-            _previousControl._forwardControl = this;
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
         }
 
         //Profile image
-        private void ucRegistration_Loaded(object sender, RoutedEventArgs e)
+        private void ucChildRegistration_Loaded(object sender, RoutedEventArgs e)
         {
             SetInitialProfileImage();
+            FillComboBoxses();
+        }
+
+        private async void FillComboBoxses()
+        {
+            var mothers = await Task.Run(() => _parentServices.GetMothers());
+            var fathers = await Task.Run(() => _parentServices.GetFathers());
+
+            foreach(var mother in mothers)
+            {
+                cmbSearchMother.Items.Add(mother.ToString());
+            }
+
+            foreach (var father in fathers)
+            {
+                cmbSearchFather.Items.Add(father.ToString());
+            }
         }
 
         private void SetInitialProfileImage()
@@ -467,16 +475,6 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             return true;
         }
 
-        private void btnDropdown_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cmbSearchMother_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnAddFather_Click(object sender, RoutedEventArgs e)
         {
 
@@ -485,6 +483,16 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private void btnAddMother_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnDropdown_Click(object sender, RoutedEventArgs e)
+        {
+            cmbSearchMother.IsDropDownOpen = true;
+        }
+
+        private void btnDropdown2_Click(object sender, RoutedEventArgs e)
+        {
+            cmbSearchFather.IsDropDownOpen = true;
         }
     }
 }

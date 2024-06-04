@@ -5,6 +5,7 @@ using System.ComponentModel.Design;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,6 +77,26 @@ namespace DataAccessLayer.Repositories
                           select p;
 
             return parents.ToList();
+        }
+
+        // get mothers
+        public IQueryable<Parent> GetMothers()
+        {
+            var mothers = from p in Parents
+                          where p.Sex == "Ženski"
+                          select p;
+
+            return mothers;
+        }
+
+        // get mothers
+        public IQueryable<Parent> GetFathers()
+        {
+            var fathers = from p in Parents
+                          where p.Sex == "Muški"
+                          select p;
+
+            return fathers;
         }
 
 

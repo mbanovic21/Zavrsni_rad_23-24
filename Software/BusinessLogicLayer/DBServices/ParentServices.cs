@@ -45,5 +45,23 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetParentsByChild(child);
             }
         }
+
+        //Get mothers
+        public List<Parent> GetMothers()
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetMothers().ToList();
+            }
+        }
+
+        //Get fathers
+        public List<Parent> GetFathers()
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetFathers().ToList();
+            }
+        }
     }
 }

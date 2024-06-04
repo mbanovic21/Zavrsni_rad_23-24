@@ -27,59 +27,28 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
     /// </summary>
     public partial class ucParentRegistration : UserControl
     {
-        private ucParentRegistration _ucParentRegistration { get; set; }
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
         private string _selectedImagePath { get; set; }
         public ucParentRegistration _previousControl { get; set; }
-        public ucChildRegistrationSidebar _forwardControl { get; set; }
-        public bool _isLeftArrowVisible { get; set; }
-        public bool _isRightArrowVisible { get; set; }
-        public List<Parent> _parents = new List<Parent>();
-        public ucParentRegistration(List<Parent> parents, ucParentRegistration previousControl, ucChildRegistrationSidebar forwardControl, bool isLeftArrowVisible, bool isRightArrowVisible, ucParentRegistration ucParentRegistration, ucChildrenAdministrating ucChildrenAdministrating)
+
+        public List<Parent> _parents { get; set; }
+        public ucParentRegistration(List<Parent> parents, ucParentRegistration previousControl, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
-            _ucParentRegistration = ucParentRegistration;
             _ucChildrenAdministrating = ucChildrenAdministrating;
             _parents = parents;
             _previousControl = previousControl;
-            _forwardControl = forwardControl;
-            _isLeftArrowVisible = isLeftArrowVisible;
-            _isRightArrowVisible = isRightArrowVisible;
         }
 
         //leftArrow
-        private void btnBackToFIrstParent_Click(object sender, RoutedEventArgs e)
+        private void BtnBackChildRegistration_Click(object sender, RoutedEventArgs e)
         {
-            _previousControl._isRightArrowVisible = true;
-            _previousControl._previousControl = this;
             _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
-        }
-
-        //rightArrow
-        private void btnBackToSecondParent_Click(object sender, RoutedEventArgs e)
-        {
-            if(!_isLeftArrowVisible)
-            {
-                _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
-            } else if (_isLeftArrowVisible)
-            {
-                _ucChildrenAdministrating.contentSidebarRegistration.Content = _forwardControl;
-            }      
         }
 
         //Profile image
         private void ucChildRegistration_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_isLeftArrowVisible) 
-            { 
-                btnBackToFIrstParent.Visibility = Visibility.Visible;
-            }
-            
-            if (_isRightArrowVisible || _forwardControl != null)
-            {
-                btnBackToSecondParent.Visibility = Visibility.Visible;
-            }
-
             SetInitialProfileImage();
         }
 
@@ -299,159 +268,6 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
                 //string projectPath = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\";
                 imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
             }
-
-            if(_parents.Count < 1)
-            {
-                var forwardedParent = new Parent()
-                {
-                    ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
-                    PIN = PIN,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    DateOfBirth = date,
-                    Sex = gender,
-                    Email = email,
-                    Telephone = telephone
-                };
-
-                _parents.Add(forwardedParent);
-
-                var ucParentRegistration2 = new ucParentRegistration(_parents, this, null, true, false, _ucParentRegistration, _ucChildrenAdministrating);
-                _ucChildrenAdministrating.contentSidebarRegistration.Content = ucParentRegistration2;
-
-                HideRegisterShowSave();
-            } else
-            {
-                var nextParent = new Parent()
-                {
-                    ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
-                    PIN = PIN,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    DateOfBirth = date,
-                    Sex = gender,
-                    Email = email,
-                    Telephone = telephone
-                };
-
-                _parents.Add(nextParent);
-
-                var ucChildrenRegistration = new ucChildRegistrationSidebar(_ucChildrenAdministrating, this, _parents);
-                _ucChildrenAdministrating.contentSidebarRegistration.Content = ucChildrenRegistration;
-
-                HideRegisterShowSave();
-            }
-
-            foreach (var parent in _parents)
-            {
-                Console.WriteLine(parent.FirstName);
-            }
-        }
-
-        //spremi promjene
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            if (!ValidateRegistration())
-            {
-                return;
-            }
-
-            if (!_isLeftArrowVisible)
-            {
-                string imagePathForRegistration;
-                var PIN = txtPIN.Text;
-                var firstName = txtFirstname.Text;
-                var lastName = txtLastname.Text;
-                var date = dpDateOfBirth.Text;
-                var gender = GetSelectedGender();
-                var email = txtEmail.Text;
-                var telephone = txtTelephone.Text;
-
-                if (!string.IsNullOrEmpty(_selectedImagePath))
-                {
-                    imagePathForRegistration = _selectedImagePath;
-                } else
-                {
-                    string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
-                    imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
-                }
-
-                var parent1 = _parents[0];
-
-                parent1.ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration);
-                parent1.PIN = PIN;
-                parent1.FirstName = firstName;
-                parent1.LastName = lastName;
-                parent1.DateOfBirth = date;
-                parent1.Sex = gender;
-                parent1.Email = email;
-                parent1.Telephone = telephone;
-
-                _parents[0] = parent1;
-
-            } else
-            {
-                string imagePathForRegistration;
-                var PIN = txtPIN.Text;
-                var firstName = txtFirstname.Text;
-                var lastName = txtLastname.Text;
-                var date = dpDateOfBirth.Text;
-                var gender = GetSelectedGender();
-                var email = txtEmail.Text;
-                var telephone = txtTelephone.Text;
-
-                if (!string.IsNullOrEmpty(_selectedImagePath))
-                {
-                    imagePathForRegistration = _selectedImagePath;
-                } else
-                {
-                    string imageName = gender == "Ženski" ? "female-user-white.png" : "male-user-white.png";
-                    imagePathForRegistration = "C:\\Users\\Banek\\Desktop\\FOI\\6. semestar\\Moje\\Zavrsni rad\\Zavrsni_rad_23-24\\Software\\PreschoolManagmentSoftware\\Media\\Images\\" + imageName;
-                }
-
-                var parent2 = _parents[1];
-
-                parent2.ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration);
-                parent2.PIN = PIN;
-                parent2.FirstName = firstName;
-                parent2.LastName = lastName;
-                parent2.DateOfBirth = date;
-                parent2.Sex = gender;
-                parent2.Email = email;
-                parent2.Telephone = telephone;
-
-                _parents[1] = parent2;
-            }
-
-            // Ispis imena roditelja za provjeru
-            foreach (var parent in _parents)
-            {
-                Console.WriteLine(parent.FirstName);
-            }
-        }
-
-        private void LoadElements()
-        {
-
-        }
-
-        //hide btnRegister Show save
-        private void HideRegisterShowSave()
-        {
-            btnRegister.Visibility = Visibility.Collapsed;
-            btnSave.Visibility = Visibility.Visible;
-        }
-
-        private void ClearFields()
-        {
-            _selectedImagePath = null;
-            txtPIN.Clear();
-            txtFirstname.Clear();
-            txtLastname.Clear();
-            dpDateOfBirth.SelectedDate = null;
-            rbFemale.IsChecked = true;
-            txtEmail.Clear();
-            txtTelephone.Clear();
         }
 
         //Input validation

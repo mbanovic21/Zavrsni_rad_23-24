@@ -100,10 +100,10 @@
     <Compile Include="UserControls\ParentAdministrating\ucParentRegistration.xaml.cs">
       <DependentUpon>ucParentRegistration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucProfile.xaml.cs">
+    <Compile Include="UserControls\ParentAdministrating\ucProfile.xaml.cs">
       <DependentUpon>ucProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucRegistration.xaml.cs">
+    <Compile Include="UserControls\ParentAdministrating\ucRegistration.xaml.cs">
       <DependentUpon>ucRegistration.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucUpload.xaml.cs">
@@ -163,11 +163,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucProfile.xaml">
+    <Page Include="UserControls\ParentAdministrating\ucProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ucRegistration.xaml">
+    <Page Include="UserControls\ParentAdministrating\ucRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
