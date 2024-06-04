@@ -68,6 +68,7 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <!-- OIB -->
@@ -148,40 +149,75 @@
                         </Grid>
                     </Border>
 
-                    <!-- DateOfBirth -->
-                    <Border Grid.Column="0" Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,20,7" CornerRadius="5" Background="#ffffff" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-                        <Grid Margin="7 9">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Media/Images/calendar.png" Height="20"/>
-                            <TextBlock x:Name="textDateOfBirth" MouseLeftButtonUp="textDateOfBirth_MouseLeftButtonUp" Style="{StaticResource placeholder}" />
-                            <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource textBox}" Margin="5 0 0 0" >
-                                <DatePicker.Resources>
-                                    <Style TargetType="{x:Type DatePickerTextBox}">
-                                        <Setter Property="Text" Value="Datum rođenja"/>
-                                    </Style>
-                                </DatePicker.Resources>
-                            </DatePicker>
-                            <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
-                                <Image.ToolTip>
-                                    <ToolTip>
-                                        <StackPanel>
-                                            <TextBlock Style="{StaticResource info-required}">This field is required!</TextBlock>
-                                            <TextBlock>Enter users date of birth.</TextBlock>
-                                            <TextBlock FontWeight="Bold">Rules:</TextBlock>
-                                            <TextBlock>1. U can only write or select date in format d.m.yyyy.</TextBlock>
-                                        </StackPanel>
-                                    </ToolTip>
-                                </Image.ToolTip>
-                            </Image>
-                        </Grid>
-                    </Border>
+                    <!-- cmb za odabir načina pretraživanja Majke -->
+                    <StackPanel Grid.Column="0" Grid.Row="3" Orientation="Horizontal">
+                        <Border BorderThickness="1" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,10,7">
+                            <Grid Margin="7 9">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Media/Images/user.png" Height="20"/>
+                                <ComboBox x:Name="cmbSearchMother" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" VerticalAlignment="Center" />
+                                <Button x:Name="btnDropdown" Click="btnDropdown_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Image Source="/Media/Images/dropdown-grey.png" Width="20"  HorizontalAlignment="Right" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Grid>
+                        </Border>
+
+                        <Button x:Name="btnAddMother" Width="42" Grid.Column="1" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,0,7" Click="btnAddMother_Click" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="1" BorderBrush="#095989">
+                                        <Image Source="/Media/Images/add-white.png" Width="25"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- cmb za odabir načina pretraživanja Oca -->
+                    <StackPanel  Grid.Column="0" Grid.Row="4" Orientation="Horizontal">
+                        <Border BorderThickness="1" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,10,7">
+                            <Grid Margin="7 9">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="cmbSearchFather" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" VerticalAlignment="Center" />
+                                <Button Click="btnDropdown_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Image Source="/Media/Images/dropdown-grey.png" Width="20"  HorizontalAlignment="Right" />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Grid>
+                        </Border>
+
+                        <Button x:Name="btnAddFather" Width="42" Grid.Column="1" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,0,7" Click="btnAddFather_Click" >
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="1" BorderBrush="#095989">
+                                        <Image Source="/Media/Images/add-white.png" Width="25"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
 
                     <!-- Gender -->
-                    <Border Grid.Column="0" Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,20,7" CornerRadius="5" Background="#ffffff">
+                    <Border Grid.Column="0" Grid.Row="5" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,20,7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -227,10 +263,44 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
+
+                    <!-- DateOfBirth -->
+                    <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                        <Grid Margin="7 9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Media/Images/calendar.png" Height="20"/>
+                            <TextBlock x:Name="textDateOfBirth" MouseLeftButtonUp="textDateOfBirth_MouseLeftButtonUp" Style="{StaticResource placeholder}" />
+                            <DatePicker x:Name="dpDateOfBirth" Style="{StaticResource textBox}" Margin="5 0 0 0" >
+                                <DatePicker.Resources>
+                                    <Style TargetType="{x:Type DatePickerTextBox}">
+                                        <Setter Property="Text" Value="Datum rođenja"/>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
+                            <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
+                                <Image.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock Style="{StaticResource info-required}">This field is required!</TextBlock>
+                                            <TextBlock>Enter users date of birth.</TextBlock>
+                                            <TextBlock FontWeight="Bold">Rules:</TextBlock>
+                                            <TextBlock>1. U can only write or select date in format d.m.yyyy.</TextBlock>
+                                        </StackPanel>
+                                    </ToolTip>
+                                </Image.ToolTip>
+                            </Image>
+                        </Grid>
+                    </Border>
+
                     <!-- Adresa -->
-                    <Border Grid.Column="1" Grid.Row="0" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
+                    <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -256,7 +326,7 @@
                     </Border>
 
                     <!-- BirthPlace -->
-                    <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
+                    <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -282,7 +352,7 @@
                     </Border>
 
                     <!-- Nationality -->
-                    <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
+                    <Border Grid.Column="1" Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -308,7 +378,7 @@
                     </Border>
 
                     <!-- DevelopmentStatus -->
-                    <Border Grid.Column="1" Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
+                    <Border Grid.Column="1" Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -334,7 +404,7 @@
                     </Border>
 
                     <!-- MedicalInformation -->
-                    <Border Grid.Column="1" Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
+                    <Border Grid.Column="1" Grid.Row="5" BorderThickness="1" BorderBrush="#acb0af" Margin="20,7,70,7" CornerRadius="5" Background="#ffffff">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>

@@ -466,5 +466,25 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             }
             return true;
         }
+
+        private void btnDropdown_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cmbSearchMother_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnAddFather_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddMother_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
