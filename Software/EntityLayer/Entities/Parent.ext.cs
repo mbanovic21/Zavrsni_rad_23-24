@@ -10,7 +10,7 @@ namespace EntityLayer.Entities
     {
         public override string ToString()
         {
-            return FirstName + " " + LastName;
+            return FirstName + " " + LastName + " " + Id;
         }
     }
 }

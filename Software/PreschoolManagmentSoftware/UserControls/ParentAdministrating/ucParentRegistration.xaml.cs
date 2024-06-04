@@ -275,6 +275,7 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
 
             var parent = new Parent()
             {
+                ProfileImage = BitmapImageConverter.ConvertBitmapImageToByteArray(imagePathForRegistration),
                 PIN = PIN,
                 FirstName = firstName,
                 LastName = lastName,
@@ -294,6 +295,12 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
             {
                 MessageBox.Show("Dogodila se greška prilikom unosa roditelja u sustav!");
             }
+        }
+
+        //set father first
+        public void SetManFirst()
+        {
+            rbMale.IsChecked = true;
         }
 
         //Input validation

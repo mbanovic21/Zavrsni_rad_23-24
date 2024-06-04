@@ -111,6 +111,32 @@ namespace DataAccessLayer.Repositories
             return fathers;
         }
 
+        //set child to father
+        public bool isChildSetToFather(int fathersID, Child child)
+        {
+            var attachedFather = Parents.Include(p => p.Children).FirstOrDefault(f => f.Id == fathersID);
+            attachedFather.Children.Add(child);
+
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+        //set child to mother
+        public bool isChildSetToMother(int mothersID, Child child)
+        {
+            var attachedMother = Parents.Include(p => p.Children).FirstOrDefault(f => f.Id == mothersID);
+            attachedMother.Children.Add(child);
+
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {

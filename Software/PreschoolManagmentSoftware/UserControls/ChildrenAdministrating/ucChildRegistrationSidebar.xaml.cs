@@ -193,15 +193,16 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         //add new mother
         private void btnAddMother_Click(object sender, RoutedEventArgs e)
         {
-            var fatherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = fatherControl;
+            var motherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = motherControl;
         }
 
         //add new father
         private void btnAddFather_Click(object sender, RoutedEventArgs e)
         {
-            var motherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = motherControl;
+            var fatherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            fatherControl.SetManFirst();
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = fatherControl;
         }
 
         //DateOfBirth
@@ -358,6 +359,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             var nationality = txtNationality.Text;
             var developmentStatus = txtDevelopmentStatus.Text;
             var medicalInformation = txtMedicalInformation.Text;
+            var parents = new List<Parent>
+            {
+                cmbSearchMother.SelectedItem as Parent,
+                cmbSearchFather.SelectedItem as Parent
+            };
 
             if (!string.IsNullOrEmpty(_selectedImagePath))
             {
@@ -382,40 +388,51 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 Nationality = nationality,
                 DevelopmentStatus = developmentStatus,
                 MedicalInformation = medicalInformation,
-                //Parents = _parents
+                Parents = parents
             };
 
             var isAdded = await Task.Run(() => _childServices.RegistrateChild(child));
 
             if (isAdded)
             {
-                var caughtChild = await Task.Run(() => _childServices.GetChildByPIN(PIN));
+                var fathersID = int.Parse(cmbSearchFather.SelectedItem.ToString().Split(' ')[2]);
+                var mothersID = int.Parse(cmbSearchMother.SelectedItem.ToString().Split(' ')[2]);
+                var isChildSetToFather = await Task.Run(() => _parentServices.isChildSetToFather(fathersID, child));
+                var isChildSetToMother = await Task.Run(() => _parentServices.isChildSetToMother(mothersID, child));
 
-                _ucChildrenAdministrating.RefreshGUI();
-
-                var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
-
-                ClearFields();
-                
-                if (result == MessageBoxResult.Yes)
+                if (isChildSetToFather && isChildSetToMother)
                 {
-                    // Obavijesti korisnika putem e-pošte
-                    var subject = "Poruka potvrde za uspješan upis djeteta u vrtić!";
-                    var emailNotifier = new ChildRegistrationEmailNotifier();
-                    /*foreach (var parent in _parents)
+                    var caughtChild = await Task.Run(() => _childServices.GetChildByPIN(PIN));
+
+                    _ucChildrenAdministrating.RefreshGUI();
+
+                    var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
+
+                    ClearFields();
+
+                    if (result == MessageBoxResult.Yes)
                     {
-                        var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
-                        if (!isEmailSent)
+                        // Obavijesti korisnika putem e-pošte
+                        var subject = "Poruka potvrde za uspješan upis djeteta u vrtić!";
+                        var emailNotifier = new ChildRegistrationEmailNotifier();
+                        foreach (var parent in parents)
                         {
-                            var isRemoved = await Task.Run(() => _childServices.RemoveChild(caughtChild.Id));
-                            //var isParentRemoved = await Task.Run(() => _parentServices.RemoveParents(_parents));
-                            if (isRemoved)
+                            var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
+                            if (!isEmailSent)
                             {
-                                MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                                var isRemoved = await Task.Run(() => _childServices.RemoveChild(caughtChild.Id));
+                                //var isParentRemoved = await Task.Run(() => _parentServices.RemoveParents(_parents));
+                                if (isRemoved)
+                                {
+                                    MessageBox.Show("Došlo je do pogreške prilikom slanja e-pošte!\nMolimo vas provjerite je li unesena ispravna adresa e-pošte.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
                         }
-                    }*/
-                }
+                    }
+                } else
+                {
+                    MessageBox.Show("Došlo je do pogreške prilikom dodavanja djeta roditelju!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                }         
             } else
             {
                 MessageBox.Show("Pogreška kod registracije roditelja");

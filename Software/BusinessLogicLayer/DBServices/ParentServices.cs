@@ -72,5 +72,23 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetFathers().ToList();
             }
         }
+
+        //Add child to father
+        public bool isChildSetToFather(int fathersID, Child child)
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.isChildSetToFather(fathersID, child);
+            }
+        }
+
+        //Add child to mother
+        public bool isChildSetToMother(int mothersID, Child child)
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.isChildSetToMother(mothersID, child);
+            }
+        }
     }
 }
