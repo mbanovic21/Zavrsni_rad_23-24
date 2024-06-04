@@ -287,8 +287,8 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
             var isAdded = await Task.Run(() => _parentServices.RegistrateParent(parent));
             if (isAdded)
             {
-                var ucChildRegistration = new ucChildRegistrationSidebar(_ucChildrenAdministrating);
-                _ucChildrenAdministrating.contentSidebarRegistration.Content = ucChildRegistration;
+                _previousControl.FillComboBoxses();
+                BackToPreviousControl();
                 MessageBox.Show($"Roditelj {parent.FirstName} {parent.LastName} je uspješno dodan u sustav!");
             } else
             {

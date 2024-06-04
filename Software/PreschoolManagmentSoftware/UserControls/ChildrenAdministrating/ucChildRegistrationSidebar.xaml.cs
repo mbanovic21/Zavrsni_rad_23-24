@@ -47,10 +47,13 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             FillComboBoxses();
         }
 
-        private async void FillComboBoxses()
+        public async void FillComboBoxses()
         {
             var mothers = await Task.Run(() => _parentServices.GetMothers());
             var fathers = await Task.Run(() => _parentServices.GetFathers());
+
+            cmbSearchMother.Items.Clear();
+            cmbSearchFather.Items.Clear();
 
             foreach(var mother in mothers)
             {
