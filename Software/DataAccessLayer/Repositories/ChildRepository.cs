@@ -148,9 +148,19 @@ namespace DataAccessLayer.Repositories
         }
 
         //add child
-        public bool addChild(Child child)
+        public bool addChild(Child child, List<Parent> parents)
         {
-            Children.Add(child);
+            foreach (var parent in parents)
+            {
+                var existingParent = Context.Parents.FirstOrDefault(p => p.Id == parent.Id);
+                if (existingParent != null)
+                {
+                    child.Parents.Add(existingParent);
+                } else return false;
+            }
+
+            Context.Children.Add(child);
+
             int affectedRows = 0;
 
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);

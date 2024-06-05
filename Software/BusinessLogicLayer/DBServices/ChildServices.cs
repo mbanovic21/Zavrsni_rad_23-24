@@ -111,11 +111,11 @@ namespace BusinessLogicLayer.DBServices
         }
         
         //Add child
-        public bool RegistrateChild(Child child)
+        public bool RegistrateChild(Child child, List<Parent> parents)
         {
             using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
-                return repo.addChild(child);
+                return repo.addChild(child, parents);
             }
         }
 

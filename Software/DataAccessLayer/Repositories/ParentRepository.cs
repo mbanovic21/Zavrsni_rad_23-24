@@ -5,6 +5,7 @@ using System.ComponentModel.Design;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Security.Policy;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,25 @@ namespace DataAccessLayer.Repositories
             Parents = Context.Set<Parent>();
         }
 
-        //registrate new parent
+        //registrate new parents
         public bool RegistrateParents(List<Parent> parentsForRegistration)
         {
             foreach (var parent in parentsForRegistration)
             {
                 Parents.Add(parent);
             }
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+        //registrate new parent
+        public bool RegistrateParent(Parent parentForRegistration)
+        {
+            Parents.Add(parentForRegistration);
+            
             int affectedRows = 0;
 
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
@@ -77,6 +90,60 @@ namespace DataAccessLayer.Repositories
                           select p;
 
             return parents.ToList();
+        }
+
+        // get mothers
+        public IQueryable<Parent> GetMothers()
+        {
+            var mothers = from p in Parents
+                          where p.Sex == "Ženski"
+                          select p;
+
+            return mothers;
+        }
+
+        // get mothers
+        public IQueryable<Parent> GetFathers()
+        {
+            var fathers = from p in Parents
+                          where p.Sex == "Muški"
+                          select p;
+
+            return fathers;
+        }
+
+        //set child to father
+        public bool isChildSetToFather(int fathersID, Child child)
+        {
+            var attachedFather = Parents.Include(p => p.Children).FirstOrDefault(f => f.Id == fathersID);
+            attachedFather.Children.Add(child);
+
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+        //set child to mother
+        public bool isChildSetToMother(int mothersID, Child child)
+        {
+            var attachedMother = Parents.Include(p => p.Children).FirstOrDefault(f => f.Id == mothersID);
+            attachedMother.Children.Add(child);
+
+            int affectedRows = 0;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
+        //get parent by id
+        public Parent GetParentByID(int id)
+        {
+            var parent = Parents.FirstOrDefault(p => p.Id == id);
+
+            return parent;
         }
 
         // get mother by child

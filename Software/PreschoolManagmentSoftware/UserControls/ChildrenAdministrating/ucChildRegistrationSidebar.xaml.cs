@@ -33,28 +33,37 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
-        public ucParentRegistration _previousControl { get; set; }
-        private List<Parent> _parents { get; set; }
         private string _selectedImagePath { get; set; }
-        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating, ucParentRegistration previousControl, List<Parent> parents)
+        public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
             _ucChildrenAdministrating = ucChildrenAdministrating;
-            _parents = parents;
-            _previousControl = previousControl;
-        }
-
-        //leftArrow
-        private void btnBackToSecondParent_Click(object sender, RoutedEventArgs e)
-        {
-            _previousControl._forwardControl = this;
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
         }
 
         //Profile image
-        private void ucRegistration_Loaded(object sender, RoutedEventArgs e)
+        private void ucChildRegistration_Loaded(object sender, RoutedEventArgs e)
         {
             SetInitialProfileImage();
+            FillComboBoxses();
+        }
+
+        public async void FillComboBoxses()
+        {
+            var mothers = await Task.Run(() => _parentServices.GetMothers());
+            var fathers = await Task.Run(() => _parentServices.GetFathers());
+
+            cmbSearchMother.Items.Clear();
+            cmbSearchFather.Items.Clear();
+
+            foreach(var mother in mothers)
+            {
+                cmbSearchMother.Items.Add(mother.ToString());
+            }
+
+            foreach (var father in fathers)
+            {
+                cmbSearchFather.Items.Add(father.ToString());
+            }
         }
 
         private void SetInitialProfileImage()
@@ -179,6 +188,21 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 MessageBox.Show("Prezime može sadržavati samo slova.");
                 return;
             }
+        }
+
+        //add new mother
+        private void btnAddMother_Click(object sender, RoutedEventArgs e)
+        {
+            var motherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = motherControl;
+        }
+
+        //add new father
+        private void btnAddFather_Click(object sender, RoutedEventArgs e)
+        {
+            var fatherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            fatherControl.SetManFirst();
+            _ucChildrenAdministrating.contentSidebarRegistration.Content = fatherControl;
         }
 
         //DateOfBirth
@@ -323,6 +347,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             {
                 return;
             }
+            var fathersID = int.Parse(cmbSearchFather.SelectedItem.ToString().Split(' ')[2]);
+            var mothersID = int.Parse(cmbSearchMother.SelectedItem.ToString().Split(' ')[2]);
 
             string imagePathForRegistration;
             var PIN = txtPIN.Text;
@@ -335,6 +361,15 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             var nationality = txtNationality.Text;
             var developmentStatus = txtDevelopmentStatus.Text;
             var medicalInformation = txtMedicalInformation.Text;
+            var father = await Task.Run(() => _parentServices.GetParentByID(fathersID));
+            var mother = await Task.Run(() => _parentServices.GetParentByID(mothersID));
+            var parents = new List<Parent>
+            {
+                mother,
+                father
+            };
+
+            Console.WriteLine(parents.Count);
 
             if (!string.IsNullOrEmpty(_selectedImagePath))
             {
@@ -359,10 +394,9 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 Nationality = nationality,
                 DevelopmentStatus = developmentStatus,
                 MedicalInformation = medicalInformation,
-                Parents = _parents
             };
 
-            var isAdded = await Task.Run(() => _childServices.RegistrateChild(child));
+            var isAdded = await Task.Run(() => _childServices.RegistrateChild(child, parents));
 
             if (isAdded)
             {
@@ -373,13 +407,13 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
 
                 ClearFields();
-                
+
                 if (result == MessageBoxResult.Yes)
                 {
                     // Obavijesti korisnika putem e-pošte
                     var subject = "Poruka potvrde za uspješan upis djeteta u vrtić!";
                     var emailNotifier = new ChildRegistrationEmailNotifier();
-                    foreach (var parent in _parents)
+                    foreach (var parent in parents)
                     {
                         var isEmailSent = emailNotifier.SendRegistrationEmail(subject, parent, child);
                         if (!isEmailSent)
@@ -465,6 +499,16 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                     return false;
             }
             return true;
+        }
+
+        private void btnDropdown_Click(object sender, RoutedEventArgs e)
+        {
+            cmbSearchMother.IsDropDownOpen = true;
+        }
+
+        private void btnDropdown2_Click(object sender, RoutedEventArgs e)
+        {
+            cmbSearchFather.IsDropDownOpen = true;
         }
     }
 }

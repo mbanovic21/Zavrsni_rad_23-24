@@ -25,33 +25,19 @@
                 <!-- <TextBlock Text="Registracija zaposlenika" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Margin="0 0 0 20"/>  -->
 
                 <!-- profil stuff -->
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
-                    <!-- arrows -->
-                    <StackPanel Orientation="Horizontal">
-                        <!-- Back -->
-                        <Button x:Name="btnBackToFIrstParent" HorizontalAlignment="Left" Margin="70,10,10,10" Click="btnBackToFIrstParent_Click" Visibility="Hidden">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Image Source="/Media/Images/back-arrow.png" Width="25"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
-                        <!-- Back -->
-                        <Button x:Name="btnBackToSecondParent" HorizontalAlignment="Right" Margin="600,0,0,0" Click="btnBackToSecondParent_Click" Visibility="Hidden">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Grid>
-                                        <Image Source="/Media/Images/forward-arrow.png" Width="25"/>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </StackPanel>
+                <StackPanel Panel.ZIndex="10" Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                    <!-- Back -->
+                    <Button x:Name="btnBackToChildRegistration" Grid.Row="0" HorizontalAlignment="Left" Margin="10,-40,10,10" Click="BtnBackChildRegistration_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="/Media/Images/back-arrow.png" Width="25"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <!-- Profile image -->
-                    <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,-40,0,7" >
+                    <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,7" >
                         <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="20" >
                             <Grid>
                                 <Image x:Name="btnDeleteImage" Source="/Media/Images/close.png" Style="{StaticResource imgClose}" MouseDown="btnDeleteImage_MouseDown" Margin="0,-40,-40,0" Visibility="Collapsed" />
@@ -298,8 +284,7 @@
                 </Grid>
 
                 <!-- Gumb za slanje zahtjeva -->
-                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Dalje" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
-                <Button x:Name="btnSave" Grid.Row="3" Grid.ColumnSpan="2" Content="Spremi promjene" Click="btnSave_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" Visibility="Collapsed" />
+                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Dodaj" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
             </Grid>
         </Border>
     </Grid>
