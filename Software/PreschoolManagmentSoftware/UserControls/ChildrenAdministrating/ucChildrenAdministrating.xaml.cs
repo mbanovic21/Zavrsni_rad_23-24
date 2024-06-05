@@ -167,8 +167,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 /*"Attendances",
                 "Notes",
                 "Gruop",*/
-                "Parents",
-
+                "Parents"
             };
 
             foreach (string columnName in columnsToHide)

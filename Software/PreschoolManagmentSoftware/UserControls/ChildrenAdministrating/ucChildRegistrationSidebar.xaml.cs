@@ -347,8 +347,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             {
                 return;
             }
-            var fathersID = int.Parse(cmbSearchFather.SelectedItem.ToString().Split(' ')[2]);
-            var mothersID = int.Parse(cmbSearchMother.SelectedItem.ToString().Split(' ')[2]);
+            var fathersID = int.Parse(cmbSearchFather.SelectedItem.ToString().Split(' ')[0]);
+            var mothersID = int.Parse(cmbSearchMother.SelectedItem.ToString().Split(' ')[0]);
 
             string imagePathForRegistration;
             var PIN = txtPIN.Text;
