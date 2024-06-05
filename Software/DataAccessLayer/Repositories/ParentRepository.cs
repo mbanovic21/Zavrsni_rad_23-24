@@ -137,6 +137,14 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        //get parent by id
+        public Parent GetParentByID(int id)
+        {
+            var parent = Parents.FirstOrDefault(p => p.Id == id);
+
+            return parent;
+        }
+
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {

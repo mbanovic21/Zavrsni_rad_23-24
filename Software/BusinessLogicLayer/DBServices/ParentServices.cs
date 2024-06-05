@@ -90,5 +90,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.isChildSetToMother(mothersID, child);
             }
         }
+
+        //Get father by id
+        public Parent GetParentByID(int id)
+        {
+            using (var repo = new ParentRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetParentByID(id);
+            }
+        }
     }
 }
