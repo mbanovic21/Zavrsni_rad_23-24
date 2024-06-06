@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="PreschoolManagmentSoftware.UserControls.WeeklySchedule.ucAddEmployeeToScheduleSidebar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls.WeeklySchedule"
+             mc:Ignorable="d" 
+             x:Name="ucAddNewEmployee"
+             d:DesignHeight="728" d:DesignWidth="800" Loaded="ucAddNewEmployee_Loaded">
+    <Grid Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBlock x:Name="textHeader" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,7,0,7" VerticalAlignment="Center" />
+
+            <!--pretrtazivanje container -->
+            <StackPanel VerticalAlignment="Center" Margin="70,7,7,7" Orientation="Horizontal">
+                <!-- searchbar -->
+                <Border Width="250" BorderThickness="1" HorizontalAlignment="Left" BorderBrush="#acb0af" CornerRadius="5" Background="#ffffff">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Media/Images/search.png" Height="20" Margin="2,0,-2,0"/>
+                        <TextBlock x:Name="textSearch" MouseDown="textSearch_MouseDown" Text=" Pretraži po korisničkom imenu" Style="{StaticResource placeholder}"/>
+                        <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
+
+                <!-- cmb za odabir načina pretraživanja -->
+                <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Width="185" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#0b69a1" Margin="7,0,0,0" HorizontalAlignment="Left">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="cmbSearch" Grid.Column="0" Width="150" SelectionChanged="cmbSearch_SelectionChanged" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" VerticalAlignment="Center" />
+                        <Button x:Name="btnDropdown" Grid.Column="1" Click="btnDropdown_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <Image Source="/Media/Images/dropdown-arrow.png" Width="20"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid x:Name="dgvEmployees" Margin="70,7,70,7" Grid.Row="1"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
+            <Button x:Name="btnAddEmployeeToSchedule" Click="btnAddEmployeeToSchedule_Click" Content="Dodaj u raspored" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+            <!--<Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />   -->
+        </StackPanel>
+    </Grid>
+</UserControl>

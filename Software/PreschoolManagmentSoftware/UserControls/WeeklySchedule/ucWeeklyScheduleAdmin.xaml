@@ -134,7 +134,7 @@
             </Button>
         </StackPanel>
 
-        <ScrollViewer Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="0" Margin="70,0,70,20" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.ColumnSpan="3" Grid.Row="2" Margin="70,0,70,20" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid x:Name="scheduleGrid" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

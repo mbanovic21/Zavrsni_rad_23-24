@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace DataAccessLayer.Repositories
             Context.SaveChanges();
         }
 
-        public IQueryable<Day> getDaysByWeeklySchdule(int week)
+        public IQueryable<Day> getDaysByWeeklySchduleID(int week)
         {
             var query = from d in Days
                         where d.Id_WeeklySchedule == week
@@ -61,6 +62,75 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public bool isDateAlredyTaken(string date, string day)
+        {
+            var selectedDate = Days.FirstOrDefault(d => d.Date == date && d.Name == day);
+            return selectedDate != null ? true : false;
+        }
+
+        public Day getDayByDateAndName(string date, string day)
+        {
+            return Days.FirstOrDefault(d => d.Date == date && d.Name == day);
+        }
+
+        public bool isDayUpdated(Day updatedDay)
+        {
+            var selectedDay = Days.FirstOrDefault(d => d.Id == updatedDay.Id);
+
+            if (selectedDay != null)
+            {
+                // Obrišite postojeće korisnike
+                selectedDay.Users.Clear();
+
+                // Dodajte nove korisnike
+                foreach (var user in updatedDay.Users)
+                {
+                    // Provjerite je li korisnik već pridružen kontekstu
+                    var existingUser = Context.Users.Find(user.Id);
+                    if (existingUser != null)
+                    {
+                        // Ako je korisnik već pridružen kontekstu, preskočite dodavanje
+                        selectedDay.Users.Add(existingUser);
+                    } else
+                    {
+                        // Ako korisnik nije pridružen kontekstu, dodajte ga
+                        selectedDay.Users.Add(user);
+                    }
+                }
+
+                // Spremite promjene
+                Context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+
+
+        private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
+        {
+            try
+            {
+                affectedRows = context.SaveChanges();
+            } catch (DbEntityValidationException ex)
+            {
+                // Iterirajte kroz sve entitete koji su imali valjanosne greške
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    // Iterirajte kroz sve greške valjanosti za svaki entitet
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+
+                // Vratite false jer je došlo do greške pri spremanju
+                return false;
+            }
+
+            // Vratite true ako je barem jedan red promijenjen u bazi podataka
+            return affectedRows > 0;
+        }
 
         public void Dispose()
         {

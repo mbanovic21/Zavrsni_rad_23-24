@@ -18,11 +18,11 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
-        public List<Day> getDaysByWeeklySchdule(int week)
+        public List<Day> getDaysByWeeklySchdulesID(int id)
         {
             using (var repo = new DayRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
-                return repo.getDaysByWeeklySchdule(week).ToList();
+                return repo.getDaysByWeeklySchduleID(id).ToList();
             }
         }
 
@@ -39,6 +39,30 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new DayRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.getDaysByWeeklySchduleAndUsername(week, username.ToString()).ToList();
+            }
+        }
+
+        public bool isDateAlredyTaken(string date, string day)
+        {
+            using (var repo = new DayRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.isDateAlredyTaken(date, day);
+            }
+        }
+
+        public Day getDayByDateAndName(string date, string day)
+        {
+            using (var repo = new DayRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.getDayByDateAndName(date, day);
+            }
+        }
+
+        public bool isDayUpdated(Day updatedDay)
+        {
+            using (var repo = new DayRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.isDayUpdated(updatedDay);
             }
         }
     }

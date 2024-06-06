@@ -46,6 +46,7 @@
     <Compile Include="DBServices\DayServices.cs" />
     <Compile Include="DBServices\ParentServices.cs" />
     <Compile Include="DBServices\UserServices.cs" />
+    <Compile Include="DBServices\WeeklyScheduleServices.cs" />
     <Compile Include="EmailServices\ChildRegistrationEmailNotifier.cs" />
     <Compile Include="EmailServices\ExternalEmailService.cs" />
     <Compile Include="EmailServices\UserUpdateEmailNotifier.cs" />

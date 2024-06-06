@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.DBServices;
 using EntityLayer.Entities;
+using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -27,6 +28,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private Button _clickedButton { get; set; }
         private TextBlock _selectedDayTextBlock { get; set; }
         private DayService _dayServices = new DayService();
+        private WeeklyScheduleServices _weeklyScheduleServices = new WeeklyScheduleServices();
 
         public ucWeeklyScheduleAdmin()
         {
@@ -43,22 +45,22 @@ namespace PreschoolManagmentSoftware.UserControls
             cmbWeek.Items.Clear();
 
             // Set the year for which we want to load all weeks
-            int year = 2024;
+            int currentYear = DateTime.Now.Year;
 
             // Start with January 1st of the given year
-            DateTime startDate = new DateTime(year, 1, 1);
+            DateTime startDate = new DateTime(currentYear, 1, 1);
 
             // Adjust the start date to the first Monday of the year
             startDate = startDate.AddDays((DayOfWeek.Monday + 7 - startDate.DayOfWeek) % 7);
 
             // Loop through each week of the year
-            while (startDate.Year == year)
+            while (startDate.Year == currentYear)
             {
                 // Calculate the end date of the week
                 DateTime endDate = startDate.AddDays(6);
 
                 // Display the date range of the week in the ComboBox
-                string weekDisplay = $"{startDate:dd.MM.yyyy.} - {endDate:dd.MM.yyyy.}";
+                var weekDisplay = $"{startDate:dd.MM.yyyy.} - {endDate:dd.MM.yyyy.}";
 
                 // Create a ComboBoxItem and add it to the ComboBox
                 var comboBoxItem = new ComboBoxItem() { Content = weekDisplay, Tag = startDate };
@@ -93,11 +95,14 @@ namespace PreschoolManagmentSoftware.UserControls
         }
 
 
-        private void cmbWeek_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cmbWeek_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbWeek.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is int week)
+            await Task.Delay(100);
+            if (cmbWeek.SelectedItem is ComboBoxItem selectedItem)
             {
-                var listDay = _dayServices.getDaysByWeeklySchdule(week);
+                var weekDisplay = selectedItem.Content.ToString();
+                var weeklyScheduleId = _weeklyScheduleServices.GetWeeklySchedulesIDByDates(weekDisplay);
+                var listDay = _dayServices.getDaysByWeeklySchdulesID(weeklyScheduleId);
                 clearButtonContent();
                 fillTheSchedule(listDay);
             }
@@ -119,7 +124,6 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is DateTime selectedWeekStartDate)
             {
-                // Navigacija unazad jednog tjedna
                 DateTime previousWeekStartDate = selectedWeekStartDate.AddDays(-7);
                 SetWeekComboBoxValue(previousWeekStartDate);
                 UpdateSelectedWeekText(previousWeekStartDate);
@@ -130,7 +134,6 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag is DateTime selectedWeekStartDate)
             {
-                // Navigacija unaprijed jednog tjedna
                 DateTime nextWeekStartDate = selectedWeekStartDate.AddDays(7);
                 SetWeekComboBoxValue(nextWeekStartDate);
                 UpdateSelectedWeekText(nextWeekStartDate);
@@ -158,8 +161,10 @@ namespace PreschoolManagmentSoftware.UserControls
                     foreach (var d in listday)
                     {
                         //MessageBox.Show(d.Name + "==" + dayName + "\n");
+                        var day = dayName.Split(' ')[0];
+                        var dayFullName = GetFullDayName(day);
 
-                        if (dayName.ToString() == d.Name.ToString())
+                        if (dayFullName == d.Name)
                         {
                             Border dayBorder = scheduleGrid.Children
                                 .OfType<Border>()
@@ -172,18 +177,10 @@ namespace PreschoolManagmentSoftware.UserControls
                                 Button userButton = dayBorder.Child as Button;
                                 if (userButton != null)
                                 {
-                                    string users = "";
-                                    foreach (var user in UsersByDayId)
-                                    {
-                                        {
-                                            users += user.FirstName + " " + user.LastName + ",\n";
-                                        }
-                                        var DanDatum = d.Name + " - " + d.Date.ToString().Split(' ')[0];
-                                        userButton.Content = DanDatum + "\n" + "\n" + users;
-                                        userButton.Background = new SolidColorBrush(Color.FromRgb(2, 235, 111));
-                                        userButton.FontWeight = FontWeights.Bold;
-                                        userButton.FontSize = 25;
-                                    }
+                                    userButton.Content = GetEmployeesNames(UsersByDayId);
+                                    userButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
+                                    userButton.FontWeight = FontWeights.SemiBold;
+                                    userButton.FontSize = 15;                              
                                 }
                             }
                         }
@@ -191,6 +188,25 @@ namespace PreschoolManagmentSoftware.UserControls
                 }
             }
         }
+
+        public string GetEmployeesNames(List<User> employees)
+        {
+            StringBuilder employeesBuilder = new StringBuilder();
+
+            foreach (var employee in employees)
+            {
+                employeesBuilder.Append($"{employee.FirstName} {employee.LastName}, \n");
+            }
+
+            // Ukloni zadnji zarez ako postoji barem jedan zaposlenik
+            if (employeesBuilder.Length > 0)
+            {
+                employeesBuilder.Length--; // Ukloni zadnji znak ','
+            }
+
+            return employeesBuilder.ToString();
+        }
+
 
         private void clearButtonContent()
         {
@@ -200,12 +216,12 @@ namespace PreschoolManagmentSoftware.UserControls
                 if (userButton != null)
                 {
                     userButton.Content = "";
-                    userButton.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    userButton.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
                 }
             }
         }
 
-        private void OpenSidebar()
+        public void OpenSidebar()
         {
             // Pronalaženje animacija
             var slideInAnimation = FindResource("SlideInAnimationAddEmployeeToSchedule") as Storyboard;
@@ -214,15 +230,12 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebarAddEmployeeToSchedule.Visibility == Visibility.Collapsed)
             {
-                /*var ucAddEmployeeToScheduleSidebar =
-                contentSidebarAddEmployeeToSchedule.Content = ucAddEmployeeToScheduleSidebar;*/
-
                 sidebarAddEmployeeToSchedule.Visibility = Visibility.Visible;
                 slideInAnimation.Begin(sidebarAddEmployeeToSchedule);
             }
         }
 
-        private void CloseSidebar()
+        public void CloseSidebar()
         {
             var slideOutAnimation = FindResource("SlideOutAnimationAddEmployeeToSchedule") as Storyboard;
 
@@ -241,12 +254,12 @@ namespace PreschoolManagmentSoftware.UserControls
             CloseSidebar();
         }
 
-        private void TextBlock_Click(object sender, RoutedEventArgs e)
+        private async void TextBlock_Click(object sender, RoutedEventArgs e)
         {
             if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedItem)
             {
                 _clickedButton = sender as Button;
-                Border parentBorder = _clickedButton.Parent as Border;
+                var parentBorder = _clickedButton.Parent as Border;
 
                 if (parentBorder != null)
                 {
@@ -260,16 +273,24 @@ namespace PreschoolManagmentSoftware.UserControls
 
                         if (_selectedDayTextBlock != null)
                         {
-                            string selectedDayShort = _selectedDayTextBlock.Text.Split(' ')[0];
+                            var selectedWeek = selectedItem.Content.ToString();
+                            var selectedDayShort = _selectedDayTextBlock.Text.Split(' ')[0];
+                            var selectedDaysDate = _selectedDayTextBlock.Text.Split(' ')[1];
 
                             // Pretvaranje kratkog naziva dana u puni naziv dana
-                            string fullDayName = GetFullDayName(selectedDayShort);
+                            var fullDayName = GetFullDayName(selectedDayShort);
+                            var fullDayDate = GetFullDate(selectedDaysDate);
 
                             DateTime selectedWeekStartDate = (DateTime)selectedItem.Tag;
 
+                            var ucAddEmployeeToSchedule = new ucAddEmployeeToScheduleSidebar(fullDayName, fullDayDate, selectedWeek, _clickedButton, this);
+                            contentSidebarAddEmployeeToSchedule.Content = ucAddEmployeeToSchedule;
+
                             OpenSidebar();
 
-
+                            // Asinkrono učitavanje podataka za DataGrid
+                            await Task.Run(() => ucAddEmployeeToSchedule.RefreshGUIAsync());
+                            ucAddEmployeeToSchedule.Dispatcher.Invoke(() => ucAddEmployeeToSchedule.FillCombobox());
                         }
                     }
                 }
@@ -297,6 +318,12 @@ namespace PreschoolManagmentSoftware.UserControls
                 default:
                     return string.Empty;
             }
+        }
+
+        private string GetFullDate(string selectedDaysDate)
+        {
+            var currentYear = DateTime.Now.Year;
+            return $"{selectedDaysDate}{currentYear}.";
         }
     }
 }
