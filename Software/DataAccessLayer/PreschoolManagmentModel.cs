@@ -18,7 +18,6 @@ namespace DataAccessLayer
         public virtual DbSet<Child> Children { get; set; }
         public virtual DbSet<DailyActivity> DailyActivities { get; set; }
         public virtual DbSet<Day> Days { get; set; }
-        public virtual DbSet<Days_Users> Days_Users { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Note> Notes { get; set; }
@@ -124,14 +123,14 @@ namespace DataAccessLayer
                 .IsUnicode(false);
 
             modelBuilder.Entity<Day>()
-                .HasMany(e => e.Days_Users)
-                .WithRequired(e => e.Day)
-                .HasForeignKey(e => e.Id_Day);
-
-            modelBuilder.Entity<Day>()
                 .HasMany(e => e.DailyActivities)
                 .WithMany(e => e.Days)
                 .Map(m => m.ToTable("DailyActivities_Days").MapLeftKey("Id_Day").MapRightKey("Id_DailyActivity"));
+
+            modelBuilder.Entity<Day>()
+                .HasMany(e => e.Users)
+                .WithMany(e => e.Days)
+                .Map(m => m.ToTable("Days_Users").MapLeftKey("Id_Day").MapRightKey("Id_User"));
 
             modelBuilder.Entity<Group>()
                 .Property(e => e.Name)

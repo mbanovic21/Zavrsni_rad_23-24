@@ -50,7 +50,6 @@
     <Compile Include="Entities\Child.cs" />
     <Compile Include="Entities\DailyActivity.cs" />
     <Compile Include="Entities\Day.cs" />
-    <Compile Include="Entities\Days_Users.cs" />
     <Compile Include="Entities\ErrorLog.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Note.cs" />

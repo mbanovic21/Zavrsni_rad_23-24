@@ -11,8 +11,8 @@ namespace EntityLayer.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Day()
         {
-            Days_Users = new HashSet<Days_Users>();
             DailyActivities = new HashSet<DailyActivity>();
+            Users = new HashSet<User>();
         }
 
         public int Id { get; set; }
@@ -25,12 +25,12 @@ namespace EntityLayer.Entities
 
         public int? Id_WeeklySchedule { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Days_Users> Days_Users { get; set; }
-
         public virtual WeeklySchedule WeeklySchedule { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DailyActivity> DailyActivities { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

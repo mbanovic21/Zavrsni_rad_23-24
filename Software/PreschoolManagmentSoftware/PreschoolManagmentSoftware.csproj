@@ -115,6 +115,9 @@
     <Compile Include="UserControls\ucUpload.xaml.cs">
       <DependentUpon>ucUpload.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WeeklySchedule\ucWeeklyScheduleAdmin.xaml.cs">
+      <DependentUpon>ucWeeklyScheduleAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ForgotCredentialsWindow.xaml.cs">
       <DependentUpon>ForgotCredentialsWindow.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ucUpload.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WeeklySchedule\ucWeeklyScheduleAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

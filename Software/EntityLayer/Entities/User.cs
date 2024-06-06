@@ -7,6 +7,12 @@ namespace EntityLayer.Entities
 
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            Days = new HashSet<Day>();
+        }
+
         public int Id { get; set; }
 
         public byte[] ProfileImage { get; set; }
@@ -46,5 +52,8 @@ namespace EntityLayer.Entities
         public int? Id_Group { get; set; }
 
         public virtual Group Group { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Day> Days { get; set; }
     }
 }
