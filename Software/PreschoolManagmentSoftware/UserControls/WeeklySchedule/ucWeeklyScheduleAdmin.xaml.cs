@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -204,6 +205,42 @@ namespace PreschoolManagmentSoftware.UserControls
             }
         }
 
+        private void OpenSidebar()
+        {
+            // Pronalaženje animacija
+            var slideInAnimation = FindResource("SlideInAnimationAddEmployeeToSchedule") as Storyboard;
+
+            var sidebarAddEmployeeToSchedule = (Border)FindName("sidebarAddEmployeeToSchedule");
+
+            if (sidebarAddEmployeeToSchedule.Visibility == Visibility.Collapsed)
+            {
+                /*var ucAddEmployeeToScheduleSidebar =
+                contentSidebarAddEmployeeToSchedule.Content = ucAddEmployeeToScheduleSidebar;*/
+
+                sidebarAddEmployeeToSchedule.Visibility = Visibility.Visible;
+                slideInAnimation.Begin(sidebarAddEmployeeToSchedule);
+            }
+        }
+
+        private void CloseSidebar()
+        {
+            var slideOutAnimation = FindResource("SlideOutAnimationAddEmployeeToSchedule") as Storyboard;
+
+            var sidebarAddEmployeeToSchedule = (Border)FindName("sidebarAddEmployeeToSchedule");
+
+            if (sidebarAddEmployeeToSchedule.Visibility == Visibility.Visible)
+            {
+                // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
+                slideOutAnimation.Completed += (s, _) => sidebarAddEmployeeToSchedule.Visibility = Visibility.Collapsed;
+                slideOutAnimation.Begin(sidebarAddEmployeeToSchedule);
+            }
+        }
+
+        private void btnCloseSidebarAddEmployeeToSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            CloseSidebar();
+        }
+
         private void TextBlock_Click(object sender, RoutedEventArgs e)
         {
             if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedItem)
@@ -223,13 +260,42 @@ namespace PreschoolManagmentSoftware.UserControls
 
                         if (_selectedDayTextBlock != null)
                         {
-                            string selectedDay = _selectedDayTextBlock.Text;
+                            string selectedDayShort = _selectedDayTextBlock.Text.Split(' ')[0];
+
+                            // Pretvaranje kratkog naziva dana u puni naziv dana
+                            string fullDayName = GetFullDayName(selectedDayShort);
+
                             DateTime selectedWeekStartDate = (DateTime)selectedItem.Tag;
 
-                            //var AddEmployeeToScheduleSidebar = 
+                            OpenSidebar();
+
+
                         }
                     }
                 }
+            }
+        }
+
+        private string GetFullDayName(string day)
+        {
+            switch (day)
+            {
+                case "Pon.":
+                    return "Ponedjeljak";
+                case "Uto.":
+                    return "Utorak";
+                case "Sri.":
+                    return "Srijeda";
+                case "Čet.":
+                    return "Četvrtak";
+                case "Pet.":
+                    return "Petak";
+                case "Sub.":
+                    return "Subota";
+                case "Ned.":
+                    return "Nedjelja";
+                default:
+                    return string.Empty;
             }
         }
     }
