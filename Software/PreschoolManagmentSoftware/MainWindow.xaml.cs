@@ -64,6 +64,12 @@ namespace PreschoolManagmentSoftware
             contentControl.Content = ucChildrenAdministrating;
         }
 
+        private void btnWeeklyScheduleAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            var ucWeeklyScheduleAdmin = new ucWeeklyScheduleAdmin();
+            contentControl.Content = ucWeeklyScheduleAdmin;
+        }
+
         private void borHeader_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -71,6 +77,5 @@ namespace PreschoolManagmentSoftware
                 DragMove();
             }
         }
-        
     }
 }

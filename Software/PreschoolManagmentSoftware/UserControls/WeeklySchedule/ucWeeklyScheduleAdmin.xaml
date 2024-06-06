@@ -5,21 +5,73 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="800">
-    <DockPanel>
-        <Label Content="Weekly schedule" DockPanel.Dock="Top" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Label Content="Select week: " FontWeight="Bold"/>
-            <ComboBox x:Name="cmbWeek" Loaded="weekComboBox_Loaded" HorizontalAlignment="Center" Width="50" SelectionChanged="cmbWeek_SelectionChanged"></ComboBox>
+             d:DesignHeight="728" d:DesignWidth="1166">
+    <Grid Margin="70,0,70,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Tjedni raspored administrator" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Style="{StaticResource titleText}" Foreground="#4EB1B6" Margin="10"/>
+
+        <!-- cmb week container -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <!--left arrow-->
+            <Button x:Name="btnLeftArrow" Grid.Column="0" Click="btnLeftArrow_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Image Source="/Media/Images/left-arrow-black.png" Width="20"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--cmb weeks-->
+            <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Width="215" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#0b69a1" Margin="7,0,7,0" HorizontalAlignment="Left">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="cmbWeek" Loaded="weekComboBox_Loaded" Grid.Column="0" Width="180" SelectionChanged="cmbWeek_SelectionChanged" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" VerticalAlignment="Center">
+                        <ComboBoxItem Content="Loading..." IsSelected="True"/>
+                    </ComboBox>
+                    <Button x:Name="btnDropdown" Grid.Column="1" Click="btnDropdown_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="/Media/Images/dropdown-arrow.png" Width="20"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+            
+            <!--right arrow -->
+            <Button x:Name="btnRightArrow" Grid.Column="2" Click="btnRightArrow_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Image Source="/Media/Images/right-arrow-black.png" Width="20"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" DockPanel.Dock="Top">
+        <ScrollViewer Grid.Row="2" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <Grid x:Name="scheduleGrid" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -28,78 +80,74 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Text="Monday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black" />
-                <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="1" Text="Ponedjeljak" Style="{StaticResource DayTextBlockStyle}" />
+                <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock />
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="2" Text="Tuesday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black" />
-                <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="2" Text="Utorak" Style="{StaticResource DayTextBlockStyle}" />
+                <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="3" Text="Wednesday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black"/>
-                <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="3" Text="Srijeda" Style="{StaticResource DayTextBlockStyle}"/>
+                <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="4" Text="Thursday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black"/>
-                <Border Grid.Row="1" Grid.Column="4" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="4" Text="Četvrtak" Style="{StaticResource DayTextBlockStyle}"/>
+                <Border Grid.Row="1" Grid.Column="4" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="5" Text="Friday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black"/>
-                <Border Grid.Row="1" Grid.Column="5" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="5" Text="Petak" Style="{StaticResource DayTextBlockStyle}"/>
+                <Border Grid.Row="1" Grid.Column="5" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="6" Text="Saturday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black"/>
-                <Border Grid.Row="1" Grid.Column="6" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="6" Text="Subota" Style="{StaticResource DayTextBlockStyle}"/>
+                <Border Grid.Row="1" Grid.Column="6" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="7" Text="Sunday" HorizontalAlignment="Center" FontSize="20" FontWeight="Black"/>
-                <Border Grid.Row="1" Grid.Column="7" Grid.RowSpan="11">
-                    <Button Click="TextBlock_Click" Background="Transparent" BorderThickness="0">
+                <TextBlock Grid.Column="7" Text="Nedjelja" Style="{StaticResource DayTextBlockStyle}"/>
+                <Border Grid.Row="1" Grid.Column="7" Grid.RowSpan="14">
+                    <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Row="1" Text="06:00" VerticalAlignment="Top" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="2" Text="07:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="3" Text="08:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="4" Text="09:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="5" Text="10:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="6" Text="11:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="7" Text="12:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="8" Text="13:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="9" Text="14:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="10" Text="15:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="11" Text="16:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
-                <TextBlock Grid.Row="12" Text="17:00" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15" FontWeight="Black"/>
+
+                <TextBlock Grid.Row="1" Text="06:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="2" Text="07:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="3" Text="08:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="4" Text="09:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="5" Text="10:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="6" Text="11:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="7" Text="12:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="8" Text="13:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="9" Text="14:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="10" Text="15:00" Style="{StaticResource TimeTextBlockStyle}"/>
+                <TextBlock Grid.Row="11" Text="16:00" Style="{StaticResource TimeTextBlockStyle}"/>
             </Grid>
         </ScrollViewer>
-    </DockPanel>
+    </Grid>
 </UserControl>

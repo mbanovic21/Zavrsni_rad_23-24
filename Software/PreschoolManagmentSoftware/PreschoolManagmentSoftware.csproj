@@ -287,6 +287,8 @@
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Media\Images\left-arrow-black.png" />
+    <Resource Include="Media\Images\right-arrow-black.png" />
     <Resource Include="Media\Images\add-white.png" />
     <Resource Include="Media\Images\dropdown-grey.png" />
     <Resource Include="Media\Images\man-parent.png" />

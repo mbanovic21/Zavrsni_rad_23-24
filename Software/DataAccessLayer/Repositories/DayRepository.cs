@@ -10,10 +10,10 @@ namespace DataAccessLayer.Repositories
 {
     public class DayRepository : IDisposable
     {
-        public PMSModel Context;
+        public PreschoolManagmentModel Context;
         public DbSet<Day> Days;
 
-        public DayRepository(PMSModel context)
+        public DayRepository(PreschoolManagmentModel context)
         {
             Context = context;
             Days = Context.Set<Day>();
