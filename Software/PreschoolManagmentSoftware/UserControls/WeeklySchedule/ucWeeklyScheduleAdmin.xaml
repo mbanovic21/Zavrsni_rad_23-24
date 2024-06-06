@@ -85,43 +85,43 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="1" Text="Ponedjeljak" Style="{StaticResource DayTextBlockStyle}" />
+                <TextBlock x:Name="txtMonday" Grid.Column="1" Text="Ponedjeljak" Style="{StaticResource DayTextBlockStyle}" />
                 <Border Grid.Row="1" Grid.Column="1" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock />
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="2" Text="Utorak" Style="{StaticResource DayTextBlockStyle}" />
+                <TextBlock x:Name="txtTuesday" Grid.Column="2" Text="Utorak" Style="{StaticResource DayTextBlockStyle}" />
                 <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="3" Text="Srijeda" Style="{StaticResource DayTextBlockStyle}"/>
+                <TextBlock x:Name="txtWednesday" Grid.Column="3" Text="Srijeda" Style="{StaticResource DayTextBlockStyle}"/>
                 <Border Grid.Row="1" Grid.Column="3" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="4" Text="Četvrtak" Style="{StaticResource DayTextBlockStyle}"/>
+                <TextBlock x:Name="txtThursday" Grid.Column="4" Text="Četvrtak" Style="{StaticResource DayTextBlockStyle}"/>
                 <Border Grid.Row="1" Grid.Column="4" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="5" Text="Petak" Style="{StaticResource DayTextBlockStyle}"/>
+                <TextBlock x:Name="txtFriday" Grid.Column="5" Text="Petak" Style="{StaticResource DayTextBlockStyle}"/>
                 <Border Grid.Row="1" Grid.Column="5" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="6" Text="Subota" Style="{StaticResource DayTextBlockStyle}"/>
+                <TextBlock x:Name="txtSaturday" Grid.Column="6" Text="Subota" Style="{StaticResource DayTextBlockStyle}"/>
                 <Border Grid.Row="1" Grid.Column="6" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>
                     </Button>
                 </Border>
-                <TextBlock Grid.Column="7" Text="Nedjelja" Style="{StaticResource DayTextBlockStyle}"/>
+                <TextBlock x:Name="txtSunday" Grid.Column="7" Text="Nedjelja" Style="{StaticResource DayTextBlockStyle}"/>
                 <Border Grid.Row="1" Grid.Column="7" Grid.RowSpan="14">
                     <Button Click="TextBlock_Click" Style="{StaticResource ButtonWeeklyScheduleDayStyle}">
                         <TextBlock/>

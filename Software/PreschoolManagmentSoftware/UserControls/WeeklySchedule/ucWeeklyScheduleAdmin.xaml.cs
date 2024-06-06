@@ -72,7 +72,25 @@ namespace PreschoolManagmentSoftware.UserControls
                 // Move to the next week
                 startDate = startDate.AddDays(7);
             }
+
+            // Update the selected week text
+            if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedWeekItem && selectedWeekItem.Tag is DateTime selectedWeekStartDate)
+            {
+                UpdateSelectedWeekText(selectedWeekStartDate);
+            }
         }
+
+        private void UpdateSelectedWeekText(DateTime selectedWeekStartDate)
+        {
+            txtMonday.Text = $"Pon. {selectedWeekStartDate:dd.MM.}";
+            txtTuesday.Text = $"Uto. {selectedWeekStartDate.AddDays(1):dd.MM.}";
+            txtWednesday.Text = $"Sri. {selectedWeekStartDate.AddDays(2):dd.MM.}";
+            txtThursday.Text = $"Čet. {selectedWeekStartDate.AddDays(3):dd.MM.}";
+            txtFriday.Text = $"Pet. {selectedWeekStartDate.AddDays(4):dd.MM.}";
+            txtSaturday.Text = $"Sub. {selectedWeekStartDate.AddDays(5):dd.MM.}";
+            txtSunday.Text = $"Ned. {selectedWeekStartDate.AddDays(6):dd.MM.}";
+        }
+
 
         private void cmbWeek_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -103,6 +121,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 // Navigacija unazad jednog tjedna
                 DateTime previousWeekStartDate = selectedWeekStartDate.AddDays(-7);
                 SetWeekComboBoxValue(previousWeekStartDate);
+                UpdateSelectedWeekText(previousWeekStartDate);
             }
         }
 
@@ -113,6 +132,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 // Navigacija unaprijed jednog tjedna
                 DateTime nextWeekStartDate = selectedWeekStartDate.AddDays(7);
                 SetWeekComboBoxValue(nextWeekStartDate);
+                UpdateSelectedWeekText(nextWeekStartDate);
             }
         }
 
@@ -211,11 +231,6 @@ namespace PreschoolManagmentSoftware.UserControls
                     }
                 }
             }
-        }
-
-        private void btnDropdown_Click(object sender, RoutedEventArgs e)
-        {
-            cmbWeek.IsDropDownOpen = true;
         }
     }
 }
