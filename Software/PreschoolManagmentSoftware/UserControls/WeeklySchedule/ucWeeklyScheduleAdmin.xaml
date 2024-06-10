@@ -117,7 +117,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ComboBox x:Name="cmbWeek" Loaded="weekComboBox_Loaded" Background="#f5f5f5" Foreground="#1C1C1F" Grid.Column="0" FontSize="20" SelectionChanged="cmbWeek_SelectionChanged" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" VerticalAlignment="Center">
-                        <ComboBoxItem Content="Loading..." Background="#f0f0f0" Foreground="#1C1C1F" IsSelected="True"/>
+                        <ComboBoxItem Background="#f0f0f0" Foreground="#1C1C1F" IsSelected="True"/>
                     </ComboBox>
                 </Grid>
             </Border>

@@ -97,16 +97,62 @@ namespace PreschoolManagmentSoftware.UserControls
 
         private async void cmbWeek_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await Task.Delay(100);
-            if (cmbWeek.SelectedItem is ComboBoxItem selectedItem)
+            try
             {
-                var weekDisplay = selectedItem.Content.ToString();
-                var weeklyScheduleId = _weeklyScheduleServices.GetWeeklySchedulesIDByDates(weekDisplay);
-                var listDay = _dayServices.getDaysByWeeklySchdulesID(weeklyScheduleId);
-                clearButtonContent();
-                fillTheSchedule(listDay);
+                await Task.Delay(1000);
+
+                // Provjera je li odabrana stavka null
+                if (cmbWeek.SelectedItem is ComboBoxItem selectedItem)
+                {
+                    var weekDisplay = selectedItem.Content?.ToString();
+                    if (string.IsNullOrEmpty(weekDisplay))
+                    {
+                        // Ako je sadržaj null ili prazan, izađi iz metode
+                        return;
+                    }
+
+                    // Provjera je li _weeklyScheduleServices inicijaliziran
+                    if (_weeklyScheduleServices == null)
+                    {
+                        // Logiraj ili obradi situaciju gdje je _weeklyScheduleServices null
+                        throw new NullReferenceException("_weeklyScheduleServices nije inicijaliziran.");
+                    }
+
+                    // Dobivanje ID-a tjednog rasporeda
+                    var weeklyScheduleId = _weeklyScheduleServices.GetWeeklySchedulesIDByDates(weekDisplay);
+
+                    // Provjera je li _dayServices inicijaliziran
+                    if (_dayServices == null)
+                    {
+                        // Logiraj ili obradi situaciju gdje je _dayServices null
+                        throw new NullReferenceException("_dayServices nije inicijaliziran.");
+                    }
+
+                    // Dobivanje dana po ID-u tjednog rasporeda
+                    var listDay = _dayServices.getDaysByWeeklySchdulesID(weeklyScheduleId);
+                    if (listDay == null)
+                    {
+                        // Ako je listDay null, obradi tu situaciju
+                        throw new NullReferenceException("Nije moguće dobiti dane za navedeni ID tjednog rasporeda.");
+                    }
+
+                    // Čišćenje sadržaja gumba
+                    clearButtonContent();
+
+                    // Popunjavanje rasporeda
+                    fillTheSchedule(listDay);
+                }
+            } catch (NullReferenceException ex)
+            {
+                // Logiraj ili obradi iznimku
+                MessageBox.Show($"Dogodila se greška: {ex.Message}");
+            } catch (Exception ex)
+            {
+                // Logiraj ili obradi sve druge iznimke
+                MessageBox.Show($"Neočekivana greška: {ex.Message}");
             }
         }
+
 
         private void SetWeekComboBoxValue(DateTime selectedWeekStartDate)
         {
