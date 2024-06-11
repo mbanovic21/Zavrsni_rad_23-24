@@ -44,6 +44,25 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         public async void RefreshGUI()
         {
             dgvEmployeesActivities.ItemsSource = await Task.Run(() => _dailyActivityServices.GetAllActivitiesByDate(_date));
+            HideColumns();
+        }
+
+        private void HideColumns()
+        {
+            var columnsToHide = new List<string>
+            {
+                "Days",
+                "Resources"
+            };
+
+            foreach (string columnName in columnsToHide)
+            {
+                var column = dgvEmployeesActivities.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                if (column != null)
+                {
+                    column.Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         private async void btnAddNewActivitie_Click(object sender, RoutedEventArgs e)

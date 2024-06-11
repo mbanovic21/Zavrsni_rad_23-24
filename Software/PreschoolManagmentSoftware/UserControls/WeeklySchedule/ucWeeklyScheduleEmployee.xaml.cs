@@ -27,7 +27,6 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         private DayService _dayServices = new DayService();
         private WeeklyScheduleServices _weeklyScheduleServices = new WeeklyScheduleServices();
         private ucEmployeeActivitiesSidebar _ucEmployeeActivitiesSidebar { get; set; }
-        private List<Day> _days { get; set; } = new List<Day>();
         public ucWeeklyScheduleEmployee()
         {
             InitializeComponent();
@@ -44,14 +43,16 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 
             int currentYear = DateTime.Now.Year;
             DateTime startDate = new DateTime(currentYear, 1, 1);
+
             startDate = startDate.AddDays((DayOfWeek.Monday + 7 - startDate.DayOfWeek) % 7);
+
             while (startDate.Year == currentYear)
             {
                 DateTime endDate = startDate.AddDays(6);
                 var weekDisplay = $"{startDate:dd.MM.yyyy.} - {endDate:dd.MM.yyyy.}";
                 var comboBoxItem = new ComboBoxItem() { Content = weekDisplay, Tag = startDate };
                 cmbWeek.Items.Add(comboBoxItem);
-                
+
                 if (startDate <= DateTime.Now && DateTime.Now <= endDate)
                 {
                     comboBoxItem.IsSelected = true;
@@ -63,7 +64,6 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                     if (string.IsNullOrEmpty(weekDisplayy)) return;
 
                     var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, "admin");
-                    _days = listDay;
 
                     clearButtonContent();
                     fillTheSchedule(listDay);
@@ -77,7 +77,6 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
             }
         }
 
-
         private void UpdateSelectedWeekText(DateTime selectedWeekStartDate)
         {
             txtMonday.Text = $"Pon. {selectedWeekStartDate:dd.MM.}";
@@ -89,60 +88,23 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
             txtSunday.Text = $"Ned. {selectedWeekStartDate.AddDays(6):dd.MM.}";
         }
 
-
         private void cmbWeek_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                // Provjera je li odabrana stavka null
                 if (cmbWeek.SelectedItem is ComboBoxItem selectedItem)
                 {
                     var weekDisplay = selectedItem.Content?.ToString();
-                    if (string.IsNullOrEmpty(weekDisplay))
-                    {
-                        // Ako je sadržaj null ili prazan, izađi iz metode
-                        return;
-                    }
+                    if (string.IsNullOrEmpty(weekDisplay)) return;
 
-                    // Provjera je li _weeklyScheduleServices inicijaliziran
-                    if (_weeklyScheduleServices == null)
-                    {
-                        // Logiraj ili obradi situaciju gdje je _weeklyScheduleServices null
-                        throw new NullReferenceException("_weeklyScheduleServices nije inicijaliziran.");
-                    }
-
-                    // Dobivanje ID-a tjednog rasporeda
                     var weeklyScheduleId = _weeklyScheduleServices.GetWeeklySchedulesIDByDates(weekDisplay);
-
-                    // Provjera je li _dayServices inicijaliziran
-                    if (_dayServices == null)
-                    {
-                        // Logiraj ili obradi situaciju gdje je _dayServices null
-                        throw new NullReferenceException("_dayServices nije inicijaliziran.");
-                    }
-
-                    // Dobivanje dana po ID-u tjednog rasporeda i korisničkog imena
                     var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, "admin");
-                    _days = listDay;
-                    if (listDay == null)
-                    {
-                        // Ako je listDay null, obradi tu situaciju
-                        throw new NullReferenceException("Nije moguće dobiti dane za navedeni ID tjednog rasporeda.");
-                    }
 
-                    // Čišćenje sadržaja gumba
                     clearButtonContent();
-
-                    // Popunjavanje rasporeda
                     fillTheSchedule(listDay);
                 }
-            } catch (NullReferenceException ex)
-            {
-                // Logiraj ili obradi iznimku
-                MessageBox.Show($"Dogodila se greška: {ex.Message}");
             } catch (Exception ex)
             {
-                // Logiraj ili obradi sve druge iznimke
                 MessageBox.Show($"Neočekivana greška: {ex.Message}");
             }
         }
@@ -313,7 +275,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                 case "Sri.":
                     return "Srijeda";
                 case "Čet.":
-                    return "Četvrtak";
+                    return "Cetvrtak";
                 case "Pet.":
                     return "Petak";
                 case "Sub.":
