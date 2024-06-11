@@ -297,10 +297,7 @@ namespace PreschoolManagmentSoftware.UserControls
         //btnRegister
         private async void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidateRegistration())
-            {
-                return;
-            }
+            if (!ValidateRegistration()) return;
 
             string imagePathForRegistration;
             var PIN = txtPIN.Text;

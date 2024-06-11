@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              x:Name="ucAddNewEmployee"
              d:DesignHeight="728" d:DesignWidth="800" Loaded="ucAddNewEmployee_Loaded">
+    
+
     <Grid Width="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

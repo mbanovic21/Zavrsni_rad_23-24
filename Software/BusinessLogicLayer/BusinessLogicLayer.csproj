@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBServices\ChildServices.cs" />
+    <Compile Include="DBServices\DailyActivityServices.cs" />
     <Compile Include="DBServices\DayServices.cs" />
     <Compile Include="DBServices\ParentServices.cs" />
     <Compile Include="DBServices\UserServices.cs" />

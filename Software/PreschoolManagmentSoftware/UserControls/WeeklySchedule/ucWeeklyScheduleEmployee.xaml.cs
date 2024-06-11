@@ -26,6 +26,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
     {
         private DayService _dayServices = new DayService();
         private WeeklyScheduleServices _weeklyScheduleServices = new WeeklyScheduleServices();
+        private ucEmployeeActivitiesSidebar _ucEmployeeActivitiesSidebar { get; set; }
         private List<Day> _days { get; set; } = new List<Day>();
         public ucWeeklyScheduleEmployee()
         {
@@ -41,44 +42,41 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         {
             cmbWeek.Items.Clear();
 
-            // Set the year for which we want to load all weeks
             int currentYear = DateTime.Now.Year;
-
-            // Start with January 1st of the given year
             DateTime startDate = new DateTime(currentYear, 1, 1);
-
-            // Adjust the start date to the first Monday of the year
             startDate = startDate.AddDays((DayOfWeek.Monday + 7 - startDate.DayOfWeek) % 7);
-
-            // Loop through each week of the year
             while (startDate.Year == currentYear)
             {
-                // Calculate the end date of the week
                 DateTime endDate = startDate.AddDays(6);
-
-                // Display the date range of the week in the ComboBox
                 var weekDisplay = $"{startDate:dd.MM.yyyy.} - {endDate:dd.MM.yyyy.}";
-
-                // Create a ComboBoxItem and add it to the ComboBox
                 var comboBoxItem = new ComboBoxItem() { Content = weekDisplay, Tag = startDate };
                 cmbWeek.Items.Add(comboBoxItem);
-
-                // Check if the current week is the current week of the year
+                
                 if (startDate <= DateTime.Now && DateTime.Now <= endDate)
                 {
                     comboBoxItem.IsSelected = true;
-                }
+                    UpdateSelectedWeekText(startDate);
 
-                // Move to the next week
+                    var weekDisplayy = comboBoxItem.Content?.ToString();
+                    var weeklyScheduleId = _weeklyScheduleServices.GetWeeklySchedulesIDByDates(weekDisplayy);
+
+                    if (string.IsNullOrEmpty(weekDisplayy)) return;
+
+                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, "admin");
+                    _days = listDay;
+
+                    clearButtonContent();
+                    fillTheSchedule(listDay);
+                }
                 startDate = startDate.AddDays(7);
             }
 
-            // Update the selected week text
             if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedWeekItem && selectedWeekItem.Tag is DateTime selectedWeekStartDate)
             {
                 UpdateSelectedWeekText(selectedWeekStartDate);
             }
         }
+
 
         private void UpdateSelectedWeekText(DateTime selectedWeekStartDate)
         {
@@ -124,7 +122,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                     }
 
                     // Dobivanje dana po ID-u tjednog rasporeda i korisničkog imena
-                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, LoggedInUser.User.Username);
+                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, "admin");
                     _days = listDay;
                     if (listDay == null)
                     {
@@ -293,8 +291,8 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 
                                 if (clickedButton.Content != null)
                                 {
-                                    var ucEmployeeActivitiesSidebar = new ucEmployeeActivitiesSidebar(this, fullDayName, fullDayDate);
-                                    contentSidebarEmployeesActivities.Content = ucEmployeeActivitiesSidebar;
+                                    _ucEmployeeActivitiesSidebar = new ucEmployeeActivitiesSidebar(this, fullDayName, fullDayDate);
+                                    contentSidebarEmployeesActivities.Content = _ucEmployeeActivitiesSidebar;
                                     OpenSidebar();
                                 }
                             }
@@ -364,6 +362,16 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         private void btnCloseSidebarEmployeesActivities_Click(object sender, RoutedEventArgs e)
         {
             CloseSidebar();
+        }
+
+        private async void btnBackToEmployeeActivitiesSidebar_Click(object sender, RoutedEventArgs e)
+        {
+            if(_ucEmployeeActivitiesSidebar != null)
+            {
+                _ucEmployeeActivitiesSidebar.CloseSidebar();
+                await Task.Delay(200);
+                btnBackToEmployeeActivitiesSidebar.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
