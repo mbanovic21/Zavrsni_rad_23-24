@@ -38,6 +38,7 @@
                         <Button x:Name="btnEmployeeAdministrating" Content="Upravitelj zaposlenicima" Click="btnEmployeeAdministrating_Click" />
                         <Button x:Name="btnChildrenAdministrating" Content="Upravitelj djecom" Click="btnChildrenAdministrating_Click" />
                         <Button x:Name="btnWeeklyScheduleAdmin" Content="Tjedni raspored administrator" Click="btnWeeklyScheduleAdmin_Click" />
+                        <Button x:Name="btnWeeklyScheduleEmployee" Content="Tjedni raspored zaposlenik" Click="btnWeeklyScheduleEmployee_Click" />
                     </StackPanel>
                 </Grid>
                 

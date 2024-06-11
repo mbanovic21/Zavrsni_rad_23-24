@@ -33,10 +33,10 @@ namespace DataAccessLayer.Repositories
             Context.SaveChanges();
         }
 
-        public IQueryable<Day> getDaysByWeeklySchduleID(int week)
+        public IQueryable<Day> getDaysByWeeklySchduleID(int weeklyScheduleID)
         {
             var query = from d in Days
-                        where d.Id_WeeklySchedule == week
+                        where d.Id_WeeklySchedule == weeklyScheduleID
                         select d;
 
             return query;
@@ -53,10 +53,10 @@ namespace DataAccessLayer.Repositories
             return query.AsQueryable();
         }
 
-        public IQueryable<Day> getDaysByWeeklySchduleAndUsername(int week, string username)
+        public IQueryable<Day> getDaysByWeeklySchduleAndUsername(int weeklyScheduleID, string username)
         {
             var query = from d in Days
-                        where d.Id_WeeklySchedule == week && d.Users.Any(u => u.Username.ToString() == username.ToString())
+                        where d.Id_WeeklySchedule == weeklyScheduleID && d.Users.Any(u => u.Username == username)
                         select d;
 
             return query;

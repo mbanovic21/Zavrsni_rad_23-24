@@ -1,9 +1,8 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer;
 using EntityLayer.Entities;
-using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,19 +17,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PreschoolManagmentSoftware.UserControls
+namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 {
     /// <summary>
-    /// Interaction logic for ucWeeklyScheduleAdmin.xaml
+    /// Interaction logic for ucWeeklyScheduleEmployee.xaml
     /// </summary>
-    public partial class ucWeeklyScheduleAdmin : UserControl
+    public partial class ucWeeklyScheduleEmployee : UserControl
     {
-        private Button _clickedButton { get; set; }
-        private TextBlock _selectedDayTextBlock { get; set; }
         private DayService _dayServices = new DayService();
         private WeeklyScheduleServices _weeklyScheduleServices = new WeeklyScheduleServices();
-
-        public ucWeeklyScheduleAdmin()
+        private List<Day> _days { get; set; } = new List<Day>();
+        public ucWeeklyScheduleEmployee()
         {
             InitializeComponent();
         }
@@ -126,8 +123,9 @@ namespace PreschoolManagmentSoftware.UserControls
                         throw new NullReferenceException("_dayServices nije inicijaliziran.");
                     }
 
-                    // Dobivanje dana po ID-u tjednog rasporeda
-                    var listDay = _dayServices.getDaysByWeeklySchdulesID(weeklyScheduleId);
+                    // Dobivanje dana po ID-u tjednog rasporeda i korisničkog imena
+                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, LoggedInUser.User.Username);
+                    _days = listDay;
                     if (listDay == null)
                     {
                         // Ako je listDay null, obradi tu situaciju
@@ -224,7 +222,7 @@ namespace PreschoolManagmentSoftware.UserControls
                                     userButton.Content = GetEmployeesNames(UsersByDayId);
                                     userButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
                                     userButton.FontWeight = FontWeights.SemiBold;
-                                    userButton.FontSize = 15;                              
+                                    userButton.FontSize = 15;
                                 }
                             }
                         }
@@ -259,86 +257,51 @@ namespace PreschoolManagmentSoftware.UserControls
                 Button userButton = border.Child as Button;
                 if (userButton != null)
                 {
-                    userButton.Content = "";
+                    userButton.Content = null;
                     userButton.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
                 }
             }
-        }
-
-        public void OpenSidebar()
-        {
-            // Pronalaženje animacija
-            var slideInAnimation = FindResource("SlideInAnimationAddEmployeeToSchedule") as Storyboard;
-
-            var sidebarAddEmployeeToSchedule = (Border)FindName("sidebarAddEmployeeToSchedule");
-
-            if (sidebarAddEmployeeToSchedule.Visibility == Visibility.Collapsed)
-            {
-                sidebarAddEmployeeToSchedule.Visibility = Visibility.Visible;
-                slideInAnimation.Begin(sidebarAddEmployeeToSchedule);
-            }
-        }
-
-        public void CloseSidebar()
-        {
-            var slideOutAnimation = FindResource("SlideOutAnimationAddEmployeeToSchedule") as Storyboard;
-
-            var sidebarAddEmployeeToSchedule = (Border)FindName("sidebarAddEmployeeToSchedule");
-
-            if (sidebarAddEmployeeToSchedule.Visibility == Visibility.Visible)
-            {
-                // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
-                slideOutAnimation.Completed += (s, _) => sidebarAddEmployeeToSchedule.Visibility = Visibility.Collapsed;
-                slideOutAnimation.Begin(sidebarAddEmployeeToSchedule);
-            }
-        }
-
-        private void btnCloseSidebarAddEmployeeToSchedule_Click(object sender, RoutedEventArgs e)
-        {
-            CloseSidebar();
         }
 
         private void TextBlock_Click(object sender, RoutedEventArgs e)
         {
             if (cmbWeek.SelectedItem != null && cmbWeek.SelectedItem is ComboBoxItem selectedItem)
             {
-                _clickedButton = sender as Button;
-                var parentBorder = _clickedButton.Parent as Border;
-
-                if (parentBorder != null)
+                if (sender is Button clickedButton)
                 {
-                    int column = Grid.GetColumn(parentBorder);
-
-                    if (column > 0 && column <= 7)
+                    var parentBorder = clickedButton.Parent as Border;
+                    if (parentBorder != null)
                     {
-                        _selectedDayTextBlock = scheduleGrid.Children
-                            .OfType<TextBlock>()
-                            .FirstOrDefault(tb => Grid.GetRow(tb) == 0 && Grid.GetColumn(tb) == column);
+                        int column = Grid.GetColumn(parentBorder);
 
-                        if (_selectedDayTextBlock != null)
+                        if (column > 0 && column <= 7)
                         {
-                            var selectedWeek = selectedItem.Content.ToString();
-                            var selectedDayShort = _selectedDayTextBlock.Text.Split(' ')[0];
-                            var selectedDaysDate = _selectedDayTextBlock.Text.Split(' ')[1];
+                            var selectedDayTextBlock = scheduleGrid.Children.OfType<TextBlock>()
+                                .FirstOrDefault(tb => Grid.GetRow(tb) == 0 && Grid.GetColumn(tb) == column);
 
-                            // Pretvaranje kratkog naziva dana u puni naziv dana
-                            var fullDayName = GetFullDayName(selectedDayShort);
-                            var fullDayDate = GetFullDate(selectedDaysDate);
+                            if (selectedDayTextBlock != null)
+                            {
+                                var selectedWeek = selectedItem.Content.ToString();
+                                var selectedDayShort = selectedDayTextBlock.Text.Split(' ')[0];
+                                var selectedDaysDate = selectedDayTextBlock.Text.Split(' ')[1];
 
-                            DateTime selectedWeekStartDate = (DateTime)selectedItem.Tag;
+                                // Pretvaranje kratkog naziva dana u puni naziv dana
+                                var fullDayName = GetFullDayName(selectedDayShort);
+                                var fullDayDate = GetFullDate(selectedDaysDate);
 
-                            var ucAddEmployeeToSchedule = new ucAddEmployeeToScheduleSidebar(fullDayName, fullDayDate, selectedWeek, _clickedButton, this);
-                            contentSidebarAddEmployeeToSchedule.Content = ucAddEmployeeToSchedule;
+                                DateTime selectedWeekStartDate = (DateTime)selectedItem.Tag;
 
-                            OpenSidebar();
-
-                            // Asinkrono učitavanje podataka za DataGrid
-                            ucAddEmployeeToSchedule.RefreshGUIAsync();
-                            ucAddEmployeeToSchedule.Dispatcher.Invoke(() => ucAddEmployeeToSchedule.FillCombobox());
+                                if (clickedButton.Content != null)
+                                {
+                                    var ucEmployeeActivitiesSidebar = new ucEmployeeActivitiesSidebar(fullDayName, fullDayDate);
+                                    contentSidebarEmployeesActivities.Content = ucEmployeeActivitiesSidebar;
+                                    OpenSidebar();
+                                }
+                            }
                         }
                     }
                 }
-            }
+            }    
         }
 
         private string GetFullDayName(string day)
@@ -368,6 +331,39 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             var currentYear = DateTime.Now.Year;
             return $"{selectedDaysDate}{currentYear}.";
+        }
+
+        public void OpenSidebar()
+        {
+            // Pronalaženje animacija
+            var slideInAnimation = FindResource("SlideInAnimationEmployeeActivities") as Storyboard;
+
+            var sidebarEmployeeActivities = (Border)FindName("sidebarEmployeesActivities");
+
+            if (sidebarEmployeeActivities.Visibility == Visibility.Collapsed)
+            {
+                sidebarEmployeeActivities.Visibility = Visibility.Visible;
+                slideInAnimation.Begin(sidebarEmployeeActivities);
+            }
+        }
+
+        public void CloseSidebar()
+        {
+            var slideOutAnimation = FindResource("SlideOutAnimationEmployeeActivities") as Storyboard;
+
+            var sidebarEmployeeActivities = (Border)FindName("sidebarEmployeesActivities");
+
+            if (sidebarEmployeeActivities.Visibility == Visibility.Visible)
+            {
+                // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
+                slideOutAnimation.Completed += (s, _) => sidebarEmployeeActivities.Visibility = Visibility.Collapsed;
+                slideOutAnimation.Begin(sidebarEmployeeActivities);
+            }
+        }
+
+        private void btnCloseSidebarEmployeesActivities_Click(object sender, RoutedEventArgs e)
+        {
+            CloseSidebar();
         }
     }
 }

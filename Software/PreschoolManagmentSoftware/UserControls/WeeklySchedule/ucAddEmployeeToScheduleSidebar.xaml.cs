@@ -62,14 +62,12 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         }
 
         // Refresh GUI
-        public async Task RefreshGUIAsync()
+        public void RefreshGUIAsync()
         {
-            var users = await Task.Run(() => _userServices.GetAllUsers());
-            await Dispatcher.InvokeAsync(() =>
-            {
-                dgvEmployees.ItemsSource = users;
-                HideColumns();
-            });
+            var users = _userServices.GetAllUsers();
+            
+            dgvEmployees.ItemsSource = users;
+            HideColumns();
         }
 
         //search-selection

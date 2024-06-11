@@ -118,8 +118,14 @@
     <Compile Include="UserControls\WeeklySchedule\ucAddEmployeeToScheduleSidebar.xaml.cs">
       <DependentUpon>ucAddEmployeeToScheduleSidebar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WeeklySchedule\ucEmployeeActivitiesSidebar.xaml.cs">
+      <DependentUpon>ucEmployeeActivitiesSidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\WeeklySchedule\ucWeeklyScheduleAdmin.xaml.cs">
       <DependentUpon>ucWeeklyScheduleAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WeeklySchedule\ucWeeklyScheduleEmployee.xaml.cs">
+      <DependentUpon>ucWeeklyScheduleEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ForgotCredentialsWindow.xaml.cs">
       <DependentUpon>ForgotCredentialsWindow.xaml</DependentUpon>
@@ -199,7 +205,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\WeeklySchedule\ucEmployeeActivitiesSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\WeeklySchedule\ucWeeklyScheduleAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WeeklySchedule\ucWeeklyScheduleEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -38,7 +38,7 @@ namespace BusinessLogicLayer.DBServices
         {
             using (var repo = new DayRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
-                return repo.getDaysByWeeklySchduleAndUsername(week, username.ToString()).ToList();
+                return repo.getDaysByWeeklySchduleAndUsername(week, username).ToList();
             }
         }
 

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="PreschoolManagmentSoftware.UserControls.WeeklySchedule.ucEmployeeActivitiesSidebar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls.WeeklySchedule"
+             mc:Ignorable="d"
+             x:Name="ucEmployeeActivities"
+             d:DesignHeight="728" d:DesignWidth="800" Loaded="ucEmployeeActivities_Loaded">
+    <Grid Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--header day, date-->
+        <TextBlock Grid.Row="0" x:Name="textHeader" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,7,0,7" VerticalAlignment="Center" />
+
+        <!--dgvEmployeeActivities-->
+        <DataGrid x:Name="dgvEmployeesActivities" Margin="70,7,70,7" Grid.Row="1"/>
+
+        <!--button-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
+            <Button x:Name="btnAddNewActivitie" Click="btnAddNewActivitie_Click" Content="Dodaj novu aktivnost" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+        </StackPanel>
+    </Grid>
+</UserControl>
