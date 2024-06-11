@@ -81,7 +81,6 @@ namespace PreschoolManagmentSoftware
         }
 
         //PreschoolYearAdministrating
-
         private void btnWeeklyPreschoolYearAdministrating_Click(object sender, RoutedEventArgs e)
         {
             var ucPreschoolYearAdministrating = new ucPreschoolYearAdministrating();

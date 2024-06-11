@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogicLayer.DBServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,39 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
     /// </summary>
     public partial class ucPreschoolYearAdministrating : UserControl
     {
+        private PreschoolYearServices _preschoolYearServices = new PreschoolYearServices();
         public ucPreschoolYearAdministrating()
         {
             InitializeComponent();
+        }
+
+
+        private void cmbYears_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadAllYears();
+        }
+
+        private void LoadAllYears()
+        {
+            cmbYears.Items.Clear();
+            cmbYears.ItemsSource = _preschoolYearServices.GetAllYears();
+
+            SetCurrentYear();
+        }
+
+        private void SetCurrentYear()
+        {
+            var currentYear = DateTime.Now.Year.ToString().Substring(2);
+
+            foreach (var year in cmbYears.Items)
+            {
+                var firstYearFromCMB = year.ToString().Split('/')[0];
+                if (firstYearFromCMB == currentYear)
+                {
+                    cmbYears.SelectedItem = year;
+                    break;
+                }
+            }
         }
 
         private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
@@ -41,11 +72,6 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         private void btnRightArrow_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cmbYears_Loaded(object sender, RoutedEventArgs e)
         {
 
         }

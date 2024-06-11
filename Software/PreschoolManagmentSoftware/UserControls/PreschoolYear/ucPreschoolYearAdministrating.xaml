@@ -70,7 +70,6 @@
                 <TextBlock Text="Djeca: " Grid.Column="1" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
                 <DataGrid x:Name="dgvChildren" Grid.Column="1" Grid.Row="3" SelectionChanged="dgvChildren_SelectionChanged" Margin="35,0,70,7"/>
 
-
                 <!--buttons-->
                 <StackPanel Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0,7,0,20">
                     <Button x:Name="btnAddNewPreschoolYear" Click="btnAddNewPreschoolYear_Click" Content="Dodaj novu predškolsku godinu" Width="300" Style="{StaticResource loginButton}" Height="60"/>
