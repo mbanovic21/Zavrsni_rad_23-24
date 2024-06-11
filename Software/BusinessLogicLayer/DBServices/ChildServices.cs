@@ -136,5 +136,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetChildrenByParent(parent);
             }
         }
+
+        //Get chlidren in forwarded group
+        public List<Child> GetChildrenFromGroup(Group group)
+        {
+            using (var repo = new ChildRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetChildrenFromGroup(group).ToList();
+            }
+        }
     }
 }

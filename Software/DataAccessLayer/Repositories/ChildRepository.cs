@@ -184,6 +184,16 @@ namespace DataAccessLayer.Repositories
             return children.ToList();
         }
 
+        //Get children by forwarded group
+        public IQueryable<Child> GetChildrenFromGroup(Group group)
+        {
+            var query = from c in Children 
+                        where (c.Id_Group == @group.Id) 
+                        select c;
+
+            return query;
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try
@@ -191,21 +201,15 @@ namespace DataAccessLayer.Repositories
                 affectedRows = context.SaveChanges();
             } catch (DbEntityValidationException ex)
             {
-                // Iterirajte kroz sve entitete koji su imali valjanosne greške
                 foreach (var validationErrors in ex.EntityValidationErrors)
                 {
-                    // Iterirajte kroz sve greške valjanosti za svaki entitet
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
                         Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
                     }
                 }
-
-                // Vratite false jer je došlo do greške pri spremanju
                 return false;
             }
-
-            // Vratite true ako je barem jedan red promijenjen u bazi podataka
             return affectedRows > 0;
         }
 

@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,12 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             InitializeComponent();
         }
 
-
         private void cmbYears_Loaded(object sender, RoutedEventArgs e)
         {
             LoadAllYears();
         }
 
+        //load years into cmb
         private void LoadAllYears()
         {
             cmbYears.Items.Clear();
@@ -57,21 +58,66 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
-        private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
+        //left arrow cmb
+        private void btnLeftArrow_Click(object sender, RoutedEventArgs e)
         {
+            if (cmbYears.SelectedItem != null)
+            {
+                var currentYearFromCMB = cmbYears.SelectedValue.ToString().Split('/')[0];
 
+                if (int.TryParse(currentYearFromCMB, out int currentYear))
+                {
+                    for (int i = 0; i < cmbYears.Items.Count; i++)
+                    {
+                        var itemYear = cmbYears.Items[i].ToString().Split('/')[0];
+
+                        if (int.TryParse(itemYear, out int year))
+                        {
+                            if (year == currentYear && i > 0)
+                            {
+                                cmbYears.SelectedItem = cmbYears.Items[i - 1];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        private void dgvChildren_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //dgvGroup fill by selected year
+        private void cmbYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                if (cmbYears.SelectedItem is ComboBox selectedItem)
+                {
+                    var year = cmbYears.SelectedValue.ToString();
+                    if (string.IsNullOrEmpty(year)) return;
 
+                    GetGroupsForYear(year);
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"Neočekivana greška: {ex.Message}");
+            }
         }
 
+        private List<Group> GetGroupsForYear(string year)
+        {
+            return _preschoolYearServices.GetGroupsForYear(year);
+        }
+
+        //dgvChildren fill by selected group
         private void dgvGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var selectedGroup = dgvGroups.SelectedItem as Group;
+            if (dgvGroups.SelectedItem != null && selectedGroup != null)
+            {
+                dgvChildren.ItemsSource = _childServices.GetChildrenFromGroup(dgvGroups.SelectedItem as Group);
+            }
         }
 
+        //right arrow cmb
         private void btnRightArrow_Click(object sender, RoutedEventArgs e)
         {
             if (cmbYears.SelectedItem != null)
@@ -97,34 +143,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
-        private void cmbYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnLeftArrow_Click(object sender, RoutedEventArgs e)
-        {
-            if (cmbYears.SelectedItem != null)
-            {
-                var currentYearFromCMB = cmbYears.SelectedValue.ToString().Split('/')[0];
-
-                if (int.TryParse(currentYearFromCMB, out int currentYear))
-                {
-                    for (int i = 0; i < cmbYears.Items.Count; i++)
-                    {
-                        var itemYear = cmbYears.Items[i].ToString().Split('/')[0];
-
-                        if (int.TryParse(itemYear, out int year))
-                        {
-                            if (year == currentYear && i > 0)
-                            {
-                                cmbYears.SelectedItem = cmbYears.Items[i - 1];
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
+            //napraviti sidebar s ucom za dodavnje nove predskolske godine!
         }
     }
 }
