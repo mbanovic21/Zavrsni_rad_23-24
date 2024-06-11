@@ -112,6 +112,12 @@
     <Compile Include="UserControls\ParentAdministrating\ucRegistration.xaml.cs">
       <DependentUpon>ucRegistration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PreschoolYear\ucAddPreschoolYear.xaml.cs">
+      <DependentUpon>ucAddPreschoolYear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PreschoolYear\ucPreschoolYearAdministrating.xaml.cs">
+      <DependentUpon>ucPreschoolYearAdministrating.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucUpload.xaml.cs">
       <DependentUpon>ucUpload.xaml</DependentUpon>
     </Compile>
@@ -197,6 +203,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ParentAdministrating\ucRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PreschoolYear\ucAddPreschoolYear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PreschoolYear\ucPreschoolYearAdministrating.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

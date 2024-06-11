@@ -1,5 +1,6 @@
 ﻿using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls;
+using PreschoolManagmentSoftware.UserControls.PreschoolYear;
 using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
 using SecurityLayer;
 using System;
@@ -77,6 +78,14 @@ namespace PreschoolManagmentSoftware
         {
             var ucWeeklyScheduleEmployee = new ucWeeklyScheduleEmployee();
             contentControl.Content = ucWeeklyScheduleEmployee;
+        }
+
+        //PreschoolYearAdministrating
+
+        private void btnWeeklyPreschoolYearAdministrating_Click(object sender, RoutedEventArgs e)
+        {
+            var ucPreschoolYearAdministrating = new ucPreschoolYearAdministrating();
+            contentControl.Content = ucPreschoolYearAdministrating;
         }
 
         private void borHeader_MouseDown(object sender, MouseButtonEventArgs e)
