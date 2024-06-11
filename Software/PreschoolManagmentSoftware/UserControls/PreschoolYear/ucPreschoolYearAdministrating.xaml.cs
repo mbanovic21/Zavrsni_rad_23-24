@@ -22,6 +22,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
     public partial class ucPreschoolYearAdministrating : UserControl
     {
         private PreschoolYearServices _preschoolYearServices = new PreschoolYearServices();
+        private ChildServices _childServices = new ChildServices();
         public ucPreschoolYearAdministrating()
         {
             InitializeComponent();
@@ -73,7 +74,27 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private void btnRightArrow_Click(object sender, RoutedEventArgs e)
         {
+            if (cmbYears.SelectedItem != null)
+            {
+                var currentYearFromCMB = cmbYears.SelectedValue.ToString().Split('/')[0];
 
+                if (int.TryParse(currentYearFromCMB, out int currentYear))
+                {
+                    for (int i = 0; i < cmbYears.Items.Count; i++)
+                    {
+                        var itemYear = cmbYears.Items[i].ToString().Split('/')[0];
+
+                        if (int.TryParse(itemYear, out int year))
+                        {
+                            if (year == currentYear && i < cmbYears.Items.Count - 1)
+                            {
+                                cmbYears.SelectedItem = cmbYears.Items[i + 1];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void cmbYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,7 +104,27 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private void btnLeftArrow_Click(object sender, RoutedEventArgs e)
         {
+            if (cmbYears.SelectedItem != null)
+            {
+                var currentYearFromCMB = cmbYears.SelectedValue.ToString().Split('/')[0];
 
+                if (int.TryParse(currentYearFromCMB, out int currentYear))
+                {
+                    for (int i = 0; i < cmbYears.Items.Count; i++)
+                    {
+                        var itemYear = cmbYears.Items[i].ToString().Split('/')[0];
+
+                        if (int.TryParse(itemYear, out int year))
+                        {
+                            if (year == currentYear && i > 0)
+                            {
+                                cmbYears.SelectedItem = cmbYears.Items[i - 1];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
