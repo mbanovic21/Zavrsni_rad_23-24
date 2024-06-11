@@ -23,11 +23,11 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
     {
         private string _daysName { get; set; }
         private string _date { get; set; }
-        private ucEmployeeActivitiesSidebar _ucEmployeeActivitiesSidebar { get; set; }
-        public ucEmployeeActivitiesSidebar(ucEmployeeActivitiesSidebar ucEmployeeActivitiesSidebar, string daysName, string date)
+        private ucWeeklyScheduleEmployee _ucWeeklyScheduleEmployee { get; set; }
+        public ucEmployeeActivitiesSidebar(ucWeeklyScheduleEmployee ucWeeklyScheduleEmployee, string daysName, string date)
         {
             InitializeComponent();
-            _ucEmployeeActivitiesSidebar = ucEmployeeActivitiesSidebar;
+            _ucWeeklyScheduleEmployee = ucWeeklyScheduleEmployee;
             _daysName = daysName;
             _date = date;
         }
@@ -40,7 +40,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         private void btnAddNewActivitie_Click(object sender, RoutedEventArgs e)
         {
             //var ucAddNewActivity = ucAddNewActivity();
-            //_ucEmployeeActivitiesSidebar.Content = ucAddNewActivity;
+            //_ucWeeklyScheduleEmployee.Content = ucAddNewActivity;
         }
     }
 }

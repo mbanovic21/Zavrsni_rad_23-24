@@ -62,7 +62,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         }
 
         // Refresh GUI
-        public void RefreshGUIAsync()
+        public void RefreshGUI()
         {
             var users = _userServices.GetAllUsers();
             

@@ -332,9 +332,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
                             OpenSidebar();
 
-                            // Asinkrono učitavanje podataka za DataGrid
-                            ucAddEmployeeToSchedule.RefreshGUIAsync();
-                            ucAddEmployeeToSchedule.Dispatcher.Invoke(() => ucAddEmployeeToSchedule.FillCombobox());
+                            ucAddEmployeeToSchedule.RefreshGUI();
+                            ucAddEmployeeToSchedule.FillCombobox();
                         }
                     }
                 }

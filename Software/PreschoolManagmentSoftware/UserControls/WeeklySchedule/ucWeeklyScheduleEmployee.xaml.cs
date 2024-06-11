@@ -293,7 +293,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 
                                 if (clickedButton.Content != null)
                                 {
-                                    var ucEmployeeActivitiesSidebar = new ucEmployeeActivitiesSidebar(fullDayName, fullDayDate);
+                                    var ucEmployeeActivitiesSidebar = new ucEmployeeActivitiesSidebar(this, fullDayName, fullDayDate);
                                     contentSidebarEmployeesActivities.Content = ucEmployeeActivitiesSidebar;
                                     OpenSidebar();
                                 }
