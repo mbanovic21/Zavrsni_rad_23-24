@@ -17,9 +17,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- day,date -->
-        <TextBlock Grid.Row="0" x:Name="textHeader" Text="Kreiranje grupe" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,7,0,7" VerticalAlignment="Center" />
-
         <!-- input elements -->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -27,11 +24,28 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Naziv grupe: " Grid.Row="0" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <!--header-->
+            <StackPanel Orientation="Vertical">
+                <!-- Close -->
+                <Button x:Name="btnCloseSidebarAddNewPreschoolYear" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebarAddNewPreschoolYear_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Image Source="/Media/Images/close.png" Width="25"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock x:Name="txtHeader" Text="Upravitelj grupama" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,0,0,20" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+
+            <TextBlock Text="Naziv grupe: " Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Naziv grupe -->
-            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
+            <Border Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -41,9 +55,9 @@
                 </Grid>
             </Border>
 
-            <TextBlock Text="Dobna skupina: " Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <TextBlock Text="Dobna skupina: " Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Age -->
-            <Border Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
+            <Border Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -59,8 +73,9 @@
         <DataGrid x:Name="dgvGroups" Margin="70,0,70,7" Grid.Row="3"/>
 
         <!--gumb-->
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
-            <Button x:Name="btnAddNewGroup" Click="btnAddNewGroup_Click" Content="Dodaj novu grupu" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+        <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
+            <Button x:Name="btnAddNewGroup" Click="btnAddNewGroup_Click" Content="Kreiraj novu grupu" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+            <Button x:Name="btnAddGroup" Click="btnAddGroup_Click" Content="Dodaj odabrane grupe" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

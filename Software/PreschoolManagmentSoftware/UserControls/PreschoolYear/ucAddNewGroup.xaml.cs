@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Group = EntityLayer.Entities.Group;
 
 namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 {
@@ -39,6 +41,12 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         private async void RefreshGUI()
         {
             dgvGroups.ItemsSource = await Task.Run(() => _groupServices.GetAllGroups());
+        }
+
+        //btn close sidebar
+        private void btnCloseSidebarAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
+        {
+            _prevoiusControl.CloseSidebar();
         }
 
         //Group name
@@ -123,10 +131,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             {
                 RefreshGUI();
                 _prevoiusControl.Groups.Add(group);
-                Console.WriteLine(_prevoiusControl.Groups.Count.ToString());
                 _prevoiusControl.RefreshGUI();
                
-                var result = MessageBox.Show("Grupa uspješno dodana u sustav. Želite li dodati još jednu grupu?", "Dodavanje grupe", MessageBoxButton.YesNo);
+                var result = MessageBox.Show("Grupa je uspješno kreirana i dodana u sustav. Želite li dodati još jednu grupu?", "Dodavanje grupe", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     txtGroupName.Clear();
@@ -141,6 +148,26 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
+        //btn add groups to year
+        private void btnAddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedGroups = dgvGroups.SelectedItems;
+
+            if(selectedGroups != null)
+            {
+                foreach (var selectedGroup in selectedGroups)
+                {
+                    _prevoiusControl.Groups.Add(selectedGroup as Group);
+                }
+
+                _prevoiusControl.RefreshGUI();
+                var result = MessageBox.Show("Grupa/e su uspješno dodana/e u sustav. Želite li dodati još grupa?", "Dodavanje grupe", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No) _prevoiusControl.CloseSidebar();
+            } else
+            {
+                MessageBox.Show("Molimo odabrite barem jednu grupu.");
+            }
+        }
 
         private bool isValidate()
         {

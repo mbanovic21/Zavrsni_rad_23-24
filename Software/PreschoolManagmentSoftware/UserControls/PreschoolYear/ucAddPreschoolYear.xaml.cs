@@ -24,10 +24,13 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
     public partial class ucAddPreschoolYear : UserControl
     {
         public List<Group> Groups = new List<Group>();
+        private GroupServices _groupServices = new GroupServices();
+        private ucPreschoolYearAdministrating _previousControl { get; set; }
         private PreschoolYearServices _preschoolYearServices = new PreschoolYearServices();
-        public ucAddPreschoolYear()
+        public ucAddPreschoolYear(ucPreschoolYearAdministrating ucPreschoolYearAdministrating)
         {
             InitializeComponent();
+            _previousControl = ucPreschoolYearAdministrating;
         }
 
         private void ucCreatePreschoolYear_Loaded(object sender, RoutedEventArgs e)
@@ -35,35 +38,16 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             RefreshGUI();
         }
 
-        public void RefreshGUI()
+        public async void RefreshGUI()
         {
             dgvGroups.ItemsSource = null;
             dgvGroups.ItemsSource = Groups;
+            HideColumns();
+            dgvGroupsDB.ItemsSource = await Task.Run(() => _groupServices.GetAllGroups());
         }
 
-        private void btnAddExistingGroup_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
-        {
-            var ucAddNewGroup = new ucAddNewGroup(this);
-            contentSidebarAddGroup.Content = ucAddNewGroup;
-            OpenSidebar();
-        }
-
-        private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
-        {
-            var preschoolYearName = txtPreschoolYearName.Text;
-            if (!IsValidYearFormat(preschoolYearName)) 
-            {
-                MessageBox.Show("Format mora biti 'yy/yy'!");
-                txtPreschoolYearName.Clear();
-                return;
-            }
-        }
-
+        
+        //YearsName
         private void textPreschoolYearName_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtPreschoolYearName.Focus();
@@ -91,6 +75,64 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
+        //remove group from years groups
+        private void btnDeleteGroupFromYearsGroups_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedGroups = dgvGroups.SelectedItems;
+
+            if (selectedGroups != null)
+            {
+                foreach (var selectedGroup in selectedGroups)
+                {
+                    Groups.Remove(selectedGroup as Group);
+                }
+                RefreshGUI();
+            } else
+            {
+                MessageBox.Show("Molimo odabrite barem jednu grupu.");
+            }
+        }
+
+        //add groups to years groups
+        private void btnAddGroupToYear_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedGroups = dgvGroupsDB.SelectedItems;
+
+            if (selectedGroups != null)
+            {
+                foreach (var selectedGroup in selectedGroups)
+                {
+                    Groups.Add(selectedGroup as Group);
+                }
+                RefreshGUI();
+            } else
+            {
+                MessageBox.Show("Molimo odabrite barem jednu grupu.");
+            }
+        }
+
+        //create new group
+        private void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
+        {
+            var ucAddNewGroup = new ucAddNewGroup(this);
+            contentSidebarAddGroup.Content = ucAddNewGroup;
+            txtHeader.Margin = new Thickness(7, -2, 0, 20);
+            _previousControl.btnCloseSidebarAddNewPreschoolYear.Visibility = Visibility.Collapsed;
+            OpenSidebar();
+        }
+
+        //add preschool year
+        private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
+        {
+            var preschoolYearName = txtPreschoolYearName.Text;
+            if (!IsValidYearFormat(preschoolYearName))
+            {
+                MessageBox.Show("Format mora biti 'yy/yy'!");
+                txtPreschoolYearName.Clear();
+                return;
+            }
+        }  
+
         public void OpenSidebar()
         {
             // Pronalaženje animacija
@@ -117,6 +159,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                 slideOutAnimation.Completed += (s, _) => sidebarAddGroup.Visibility = Visibility.Collapsed;
                 slideOutAnimation.Begin(sidebarAddGroup);
             }
+
+            txtHeader.Margin = new Thickness(7, -47, 0, 20);
+            _previousControl.btnCloseSidebarAddNewPreschoolYear.Visibility = Visibility.Visible;
         }
 
         private bool IsNumbersAndSlashOnly(string text)
@@ -145,6 +190,25 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
 
             return false;
+        }
+
+        private void HideColumns()
+        {
+            var columnsToHide = new List<string>
+            {
+                "Children",
+                "Users",
+                "PreeschoolYears"
+            };
+
+            foreach (string columnName in columnsToHide)
+            {
+                var column = dgvGroups.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                if (column != null)
+                {
+                    column.Visibility = Visibility.Collapsed;
+                }
+            }
         }
     }
 }
