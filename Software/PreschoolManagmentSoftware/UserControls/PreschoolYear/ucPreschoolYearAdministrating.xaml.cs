@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -35,10 +36,10 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //load years into cmb
-        private void LoadAllYears()
+        private async void LoadAllYears()
         {
             cmbYears.Items.Clear();
-            cmbYears.ItemsSource = _preschoolYearServices.GetAllYears();
+            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
 
             SetCurrentYear();
         }
@@ -143,9 +144,44 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
+        public void OpenSidebar()
+        {
+            // Pronalaženje animacija
+            var slideInAnimation = FindResource("SlideInAnimationAddNewPreschoolYear") as Storyboard;
+
+            var sidebarAddNewPreschoolYear = (Border)FindName("sidebarAddNewPreschoolYear");
+
+            if (sidebarAddNewPreschoolYear.Visibility == Visibility.Collapsed)
+            {
+                sidebarAddNewPreschoolYear.Visibility = Visibility.Visible;
+                slideInAnimation.Begin(sidebarAddNewPreschoolYear);
+            }
+        }
+
+        public void CloseSidebar()
+        {
+            var slideOutAnimation = FindResource("SlideOutAnimationAddNewPreschoolYear") as Storyboard;
+
+            var sidebarAddNewPreschoolYear = (Border)FindName("sidebarAddNewPreschoolYear");
+
+            if (sidebarAddNewPreschoolYear.Visibility == Visibility.Visible)
+            {
+                // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
+                slideOutAnimation.Completed += (s, _) => sidebarAddNewPreschoolYear.Visibility = Visibility.Collapsed;
+                slideOutAnimation.Begin(sidebarAddNewPreschoolYear);
+            }
+        }
+
         private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
         {
-            //napraviti sidebar s ucom za dodavnje nove predskolske godine!
+            var ucAddNewPreschoolYear = new ucAddPreschoolYear(new List<Group>());
+            contentSidebarAddNewPreschoolYear.Content = ucAddNewPreschoolYear;
+            OpenSidebar();
+        }
+
+        private void btnCloseSidebarAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
+        {
+            CloseSidebar();
         }
     }
 }

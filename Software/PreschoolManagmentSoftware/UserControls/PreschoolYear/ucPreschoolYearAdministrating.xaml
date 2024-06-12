@@ -6,7 +6,83 @@
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls.PreschoolYear"
              mc:Ignorable="d" 
              d:DesignHeight="728" d:DesignWidth="1166">
+    <UserControl.Resources>
+        <Storyboard x:Key="SlideInAnimationAddNewPreschoolYear">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="1200,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SlideOutAnimationAddNewPreschoolYear">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="1200,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
     <Grid>
+        <!-- Sidebar AddNewPreschoolYear -->
+        <Border x:Name="sidebarAddNewPreschoolYear" Width="800" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Right">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#3AA9AD" Offset="0"/>
+                    <GradientStop Color="#3AADA1" Offset="0"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Canvas>
+                    <Line X1="150" Y1="728" X2="1566" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+
+                    <Line X1="380" Y1="131" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+
+
+                    <Line X1="650" Y1="1666" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="450" Y1="0" X2="1070" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Polygon Points="650,0 800,0 800,100" Fill="#4EB1B6"/>
+                    <Polygon Points="0,129 0,641 730,129" Fill="#4EB1B6"/>
+                    <Polygon Points="0,641 730,641 730,129" Fill="#4EB1B6"/>
+                    <Line X1="499" Y1="130" X2="688" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="602" Y1="640" X2="730" Y2="615" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="683" Y1="640" X2="699" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="0" Y1="153.5" X2="1496" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                    <Polygon Points="450,550 600,500 550,350" Fill="#3AADA1"/>
+                    <Ellipse Margin="450 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
+
+                    <Line X1="0" Y1="660" X2="910" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="40" Y1="640" X2="456" Y2="434" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="489" Y1="417" X2="528" Y2="397" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="560" Y1="380" X2="910" Y2="200" Stroke="#3AADA1" StrokeThickness="2"/>
+
+                    <Line X1="0" Y1="230" X2="800" Y2="728" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="0" Y1="230" X2="466" Y2="520" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="491" Y1="536" X2="660" Y2="641" Stroke="#3AADA1" StrokeThickness="2"/>
+
+                    <Line X1="380" Y1="131" X2="0" Y2="300" Stroke="#3AADA1" StrokeThickness="2"/>
+                </Canvas>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Close -->
+                    <Button x:Name="btnCloseSidebarAddNewPreschoolYear" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebarAddNewPreschoolYear_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="/Media/Images/close.png" Width="25"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <ContentControl x:Name="contentSidebarAddNewPreschoolYear" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+        </Border>
+
         <Border Background="Transparent">
             <Grid>
                 <Grid.ColumnDefinitions>

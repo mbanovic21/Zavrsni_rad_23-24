@@ -55,6 +55,7 @@
     <Compile Include="Repositories\ChildRepository.cs" />
     <Compile Include="Repositories\DailyActivityRepository.cs" />
     <Compile Include="Repositories\DayRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\ParentRepository.cs" />
     <Compile Include="Repositories\PreschoolYearRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

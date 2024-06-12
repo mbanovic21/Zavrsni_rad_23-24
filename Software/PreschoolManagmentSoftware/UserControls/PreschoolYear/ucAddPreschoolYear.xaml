@@ -5,8 +5,112 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls.PreschoolYear"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             x:Name="ucCreatePreschoolYear"
+             d:DesignHeight="728" d:DesignWidth="800" Loaded="ucCreatePreschoolYear_Loaded">
+    <UserControl.Resources>
+        <Storyboard x:Key="SlideInAnimationAddGroup">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="800,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SlideOutAnimationAddGroup">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="800,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--sidebar add group-->
+        <Border Grid.RowSpan="3" x:Name="sidebarAddGroup" MaxWidth="400" Visibility="Visible" Panel.ZIndex="1" HorizontalAlignment="Right">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#3AA9AD" Offset="0"/>
+                    <GradientStop Color="#3AADA1" Offset="0"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Canvas>
+                    <Line X1="150" Y1="728" X2="1566" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+
+                    <Line X1="380" Y1="131" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+
+
+                    <Line X1="650" Y1="1666" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="450" Y1="0" X2="1070" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Polygon Points="650,0 800,0 800,100" Fill="#4EB1B6"/>
+                    <Polygon Points="0,129 0,641 730,129" Fill="#4EB1B6"/>
+                    <Polygon Points="0,641 730,641 730,129" Fill="#4EB1B6"/>
+                    <Line X1="499" Y1="130" X2="688" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="602" Y1="640" X2="730" Y2="615" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="683" Y1="640" X2="699" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="0" Y1="153.5" X2="1496" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                    <Polygon Points="450,550 600,500 550,350" Fill="#3AADA1"/>
+                    <Ellipse Margin="450 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
+
+                    <Line X1="0" Y1="660" X2="910" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="40" Y1="640" X2="456" Y2="434" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="489" Y1="417" X2="528" Y2="397" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="560" Y1="380" X2="910" Y2="200" Stroke="#3AADA1" StrokeThickness="2"/>
+
+                    <Line X1="0" Y1="230" X2="800" Y2="728" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="0" Y1="230" X2="466" Y2="520" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="491" Y1="536" X2="660" Y2="641" Stroke="#3AADA1" StrokeThickness="2"/>
+
+                    <Line X1="380" Y1="131" X2="0" Y2="300" Stroke="#3AADA1" StrokeThickness="2"/>
+                </Canvas>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ContentControl x:Name="contentSidebarAddGroup" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!--header-->
+        <TextBlock Text="Kreiranje predškolske godine" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,-47,0,20" VerticalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="Naziv godine:" Style="{StaticResource normalText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="70,7,7,0" VerticalAlignment="Center"/>
+            <!-- oreschool year name -->
+            <Border Width="250" BorderThickness="1" HorizontalAlignment="Left" BorderBrush="#acb0af" CornerRadius="5" Background="#ffffff">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="textPreschoolYearName" MouseDown="textPreschoolYearName_MouseDown" Text=" yy/yy" Style="{StaticResource placeholder}"/>
+                    <TextBox x:Name="txtPreschoolYearName" TextChanged="txtPreschoolYearName_TextChanged" Style="{StaticResource textBox}"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+        
+        <!--dgvGroups-->
+        <TextBlock Text="Grupe:" Grid.Row="2" Style="{StaticResource normalText}" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="70,0,7,0" VerticalAlignment="Center"/>
+        <DataGrid x:Name="dgvGroups" Margin="70,0,70,7" Grid.Row="3"/>
+
+        <!--Buttons-->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,70,20" >
+            <Button x:Name="btnAddExistingGroup" Click="btnAddExistingGroup_Click" Content="Dodaj postojeću grupu" FontWeight="SemiBold" Width="180" Height="40" Margin="0,0,7,7" Style="{StaticResource generatePasswordButtonTransparent}" />
+            <Button x:Name="btnAddNewGroup" Click="btnAddNewGroup_Click" Content="Dodaj novu grupu" FontWeight="SemiBold" Width="150" Height="40" Margin="0,0,0,7" Style="{StaticResource generatePasswordButtonTransparent}" />
+        </StackPanel>
+
+        <Button x:Name="btnAddNewPreschoolYear" Grid.Row="5" Click="btnAddNewPreschoolYear_Click" Content="Kreiraj novu predškolsku godinu" Grid.Column="1" Height="60" Width="280" FontWeight="SemiBold" Margin="0,0,0,20" Style="{StaticResource transparentButton}"/>
     </Grid>
 </UserControl>
