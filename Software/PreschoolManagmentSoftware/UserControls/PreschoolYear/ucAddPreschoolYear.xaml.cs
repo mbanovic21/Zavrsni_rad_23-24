@@ -48,7 +48,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
         {
-
+            var ucAddNewGroup = new ucAddNewGroup();
+            contentSidebarAddGroup.Content = ucAddNewGroup;
+            OpenSidebar();
         }
 
         private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)

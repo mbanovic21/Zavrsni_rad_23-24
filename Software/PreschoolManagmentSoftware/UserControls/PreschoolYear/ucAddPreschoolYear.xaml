@@ -33,7 +33,7 @@
         </Grid.RowDefinitions>
 
         <!--sidebar add group-->
-        <Border Grid.RowSpan="3" x:Name="sidebarAddGroup" MaxWidth="400" Visibility="Visible" Panel.ZIndex="1" HorizontalAlignment="Right">
+        <Border Grid.RowSpan="6" x:Name="sidebarAddGroup" MaxWidth="400" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Right">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#3AA9AD" Offset="0"/>
