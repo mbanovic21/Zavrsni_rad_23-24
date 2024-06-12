@@ -28,11 +28,11 @@ namespace BusinessLogicLayer.DBServices
 
         }
 
-        public void AddGroup(Group group)
+        public bool AddGroup(Group group)
         {
             using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
-                repo.AddGroup(group);
+                return repo.AddGroup(group);
             }
         }
         public int? GetGroupIdByName(string name)

@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,11 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
     public partial class ucAddNewGroup : UserControl
     {
         private GroupServices _groupServices = new GroupServices();
-        public ucAddNewGroup()
+        private ucAddPreschoolYear _prevoiusControl { get; set; }
+        public ucAddNewGroup(ucAddPreschoolYear ucAddPreschoolYear)
         {
             InitializeComponent();
+            _prevoiusControl = ucAddPreschoolYear;
         }
         
         //dgv fill
@@ -39,12 +42,13 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //Group name
-        private void txtGroupName_TextChanged(object sender, TextChangedEventArgs e)
+        private void textGroupName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+
             txtGroupName.Focus();
         }
 
-        private void textGroupName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void txtGroupName_TextChanged(object sender, TextChangedEventArgs e)
         {
             var name = txtGroupName.Text;
             var placeholderGroupName = textGroupName;
@@ -67,12 +71,13 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //Age
-        private void txtAge_TextChanged(object sender, TextChangedEventArgs e)
+        private void textAge_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+
             txtAge.Focus();
         }
 
-        private void textAge_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void txtAge_TextChanged(object sender, TextChangedEventArgs e)
         {
             var age = txtAge.Text;
             var placeholderAge = textAge;
@@ -95,10 +100,52 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //add new group btn
-
-        private void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
+        private async void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
         {
+            if (!isValidate()) return;
 
+            var gruopName = txtGroupName.Text;
+            var age = txtAge.Text;
+
+            var group = new Group
+            {
+                Name = gruopName,
+                Age = age
+            };
+
+            var isAdded = await Task.Run(() => _groupServices.AddGroup(group));
+
+            if (isAdded)
+            {
+                RefreshGUI();
+                _prevoiusControl.Groups.Add(group);
+                Console.WriteLine(_prevoiusControl.Groups.Count.ToString());
+                _prevoiusControl.RefreshGUI();
+               
+                var result = MessageBox.Show("Grupa uspješno dodana u sustav. Želite li dodati još jednu grupu?", "Dodavanje grupe", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    txtGroupName.Clear();
+                    txtAge.Clear();
+                } else
+                {
+                    _prevoiusControl.CloseSidebar();
+                }
+            } else
+            {
+                MessageBox.Show("Greška prilikom dodavanja grupe.");
+            }
+        }
+
+
+        private bool isValidate()
+        {
+            var groupName = txtGroupName.Text;
+            var age = txtAge.Text;
+
+            if (string.IsNullOrWhiteSpace(groupName) || string.IsNullOrWhiteSpace(age)) return false;
+
+            return true;
         }
 
         private bool IsNumbersAndMinusOnly(string text)

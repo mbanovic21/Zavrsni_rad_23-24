@@ -174,7 +174,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
         {
-            var ucAddNewPreschoolYear = new ucAddPreschoolYear(new List<Group>());
+            var ucAddNewPreschoolYear = new ucAddPreschoolYear();
             contentSidebarAddNewPreschoolYear.Content = ucAddNewPreschoolYear;
             OpenSidebar();
         }

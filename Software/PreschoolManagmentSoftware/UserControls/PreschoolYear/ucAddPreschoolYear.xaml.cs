@@ -23,12 +23,11 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
     /// </summary>
     public partial class ucAddPreschoolYear : UserControl
     {
-        private List<Group> _groups;
+        public List<Group> Groups = new List<Group>();
         private PreschoolYearServices _preschoolYearServices = new PreschoolYearServices();
-        public ucAddPreschoolYear(List<Group> groups)
+        public ucAddPreschoolYear()
         {
             InitializeComponent();
-            _groups = groups;
         }
 
         private void ucCreatePreschoolYear_Loaded(object sender, RoutedEventArgs e)
@@ -38,7 +37,8 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         public void RefreshGUI()
         {
-            dgvGroups.ItemsSource = _groups;
+            dgvGroups.ItemsSource = null;
+            dgvGroups.ItemsSource = Groups;
         }
 
         private void btnAddExistingGroup_Click(object sender, RoutedEventArgs e)
@@ -48,7 +48,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
         {
-            var ucAddNewGroup = new ucAddNewGroup();
+            var ucAddNewGroup = new ucAddNewGroup(this);
             contentSidebarAddGroup.Content = ucAddNewGroup;
             OpenSidebar();
         }
