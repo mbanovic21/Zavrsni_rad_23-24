@@ -102,7 +102,11 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         //add new group btn
         private async void btnAddNewGroup_Click(object sender, RoutedEventArgs e)
         {
-            if (!isValidate()) return;
+            if (!isValidate()) 
+            {
+                MessageBox.Show("Molimo popunite sva polja!");
+                return;
+            }
 
             var gruopName = txtGroupName.Text;
             var age = txtAge.Text;
