@@ -18,7 +18,7 @@ namespace EntityLayer.Entities
 
         public int Id { get; set; }
 
-        [StringLength(10)]
+        [StringLength(100)]
         public string Name { get; set; }
 
         [StringLength(5)]

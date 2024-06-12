@@ -138,9 +138,6 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                 {
                     txtGroupName.Clear();
                     txtAge.Clear();
-                } else
-                {
-                    _prevoiusControl.CloseSidebar();
                 }
             } else
             {
@@ -148,24 +145,29 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
-        //btn add groups to year
-        private void btnAddGroup_Click(object sender, RoutedEventArgs e)
+        //delete selectd group
+        private void btnDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
-            var selectedGroups = dgvGroups.SelectedItems;
+            var selectedGroup = dgvGroups.SelectedItem as Group;
 
-            if(selectedGroups != null)
+            if (selectedGroup != null)
             {
-                foreach (var selectedGroup in selectedGroups)
+                var isDeleted = _groupServices.DeleteGroup(selectedGroup);
+                if (isDeleted)
                 {
-                    _prevoiusControl.Groups.Add(selectedGroup as Group);
-                }
+                    var previousControlGroup = _prevoiusControl.Groups.FirstOrDefault(g => g.Id == selectedGroup.Id);
+                    if (previousControlGroup != null) _prevoiusControl.Groups.Remove(previousControlGroup);
 
-                _prevoiusControl.RefreshGUI();
-                var result = MessageBox.Show("Grupa/e su uspješno dodana/e u sustav. Želite li dodati još grupa?", "Dodavanje grupe", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.No) _prevoiusControl.CloseSidebar();
+                    RefreshGUI();
+                    _prevoiusControl.RefreshGUI();
+                    MessageBox.Show("Grupa je uspješno obrisana.");
+                } else
+                {
+                    MessageBox.Show("Greška prilikom brisanja grupe.");
+                }
             } else
             {
-                MessageBox.Show("Molimo odabrite barem jednu grupu.");
+                MessageBox.Show("Molimo odaberite grupu.");
             }
         }
 

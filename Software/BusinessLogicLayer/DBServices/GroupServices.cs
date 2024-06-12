@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BusinessLogicLayer.DBServices
 {
@@ -40,6 +41,15 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.GetGroupIdByName(name);
+            }
+        }
+
+        //delete group
+        public bool DeleteGroup(Group group)
+        {
+            using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.DeleteGroup(group);
             }
         }
     }

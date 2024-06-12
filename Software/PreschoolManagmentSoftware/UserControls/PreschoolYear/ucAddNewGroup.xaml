@@ -75,7 +75,7 @@
         <!--gumb-->
         <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
             <Button x:Name="btnAddNewGroup" Click="btnAddNewGroup_Click" Content="Kreiraj novu grupu" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
-            <Button x:Name="btnAddGroup" Click="btnAddGroup_Click" Content="Dodaj odabrane grupe" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+            <Button x:Name="btnDeleteGroup" Click="btnDeleteGroup_Click" Background="#d02c2c" Content="Obriši odabranu grupu" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

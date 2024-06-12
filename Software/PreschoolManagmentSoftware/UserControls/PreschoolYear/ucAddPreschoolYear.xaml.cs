@@ -42,10 +42,10 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         {
             dgvGroups.ItemsSource = null;
             dgvGroups.ItemsSource = Groups;
-            HideColumns();
+            HideColumns(dgvGroups);
             dgvGroupsDB.ItemsSource = await Task.Run(() => _groupServices.GetAllGroups());
+                        HideColumns(dgvGroupsDB);
         }
-
         
         //YearsName
         private void textPreschoolYearName_MouseDown(object sender, MouseButtonEventArgs e)
@@ -131,6 +131,8 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                 txtPreschoolYearName.Clear();
                 return;
             }
+
+            if (Groups.Count < 1) return;
         }  
 
         public void OpenSidebar()
@@ -192,7 +194,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             return false;
         }
 
-        private void HideColumns()
+        private void HideColumns(DataGrid dgv)
         {
             var columnsToHide = new List<string>
             {
@@ -203,7 +205,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
             foreach (string columnName in columnsToHide)
             {
-                var column = dgvGroups.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                var column = dgv.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
                 if (column != null)
                 {
                     column.Visibility = Visibility.Collapsed;

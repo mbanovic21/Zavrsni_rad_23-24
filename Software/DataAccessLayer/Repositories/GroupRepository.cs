@@ -12,18 +12,18 @@ namespace DataAccessLayer.Repositories
     public class GroupRepository : IDisposable
     {
         private PreschoolManagmentModel Context;
-        private DbSet<Group> Group;
+        private DbSet<Group> Groups;
 
         public GroupRepository(PreschoolManagmentModel context)
         {
             Context = context;
-            Group = Context.Set<Group>();
+            Groups = Context.Set<Group>();
         }
 
         //group id by name 
         public int? GetGroupIdByName(string name)
         {
-            var group = Group.FirstOrDefault(g => g.Name == name);
+            var group = Groups.FirstOrDefault(g => g.Name == name);
             if (group != null)
             {
                 return group.Id;
@@ -34,14 +34,14 @@ namespace DataAccessLayer.Repositories
         //group by name
         public IQueryable<Group> GetGroupByName(string name)
         {
-            var queri = from g in Group where g.Name == name select g;
+            var queri = from g in Groups where g.Name == name select g;
             return queri;
         }
 
         //add group
         public bool AddGroup(Group newGroup)
         {
-            Group.Add(newGroup);
+            Groups.Add(newGroup);
             
             int affectedRows = 0;
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
@@ -52,8 +52,20 @@ namespace DataAccessLayer.Repositories
         //get all groups
         public IQueryable<Group> GetAllGroups()
         {
-            var queri = from g in Group select g;
+            var queri = from g in Groups select g;
             return queri;
+        }
+
+        //delete group
+        public bool DeleteGroup(Group group)
+        {
+            var selectedGroup = Groups.FirstOrDefault(g => g.Id == group.Id);
+            Groups.Remove(selectedGroup);
+
+            int affectedRows = 0;
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
