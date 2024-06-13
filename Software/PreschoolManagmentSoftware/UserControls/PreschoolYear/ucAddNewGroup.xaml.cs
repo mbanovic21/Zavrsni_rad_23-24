@@ -138,7 +138,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                 {
                     txtGroupName.Clear();
                     txtAge.Clear();
-                }
+                } else _prevoiusControl.CloseSidebar();
             } else
             {
                 MessageBox.Show("Greška prilikom dodavanja grupe.");

@@ -25,6 +25,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
     {
         private PreschoolYearServices _preschoolYearServices = new PreschoolYearServices();
         private ChildServices _childServices = new ChildServices();
+        private GroupServices _groupServices = new GroupServices();
         public ucPreschoolYearAdministrating()
         {
             InitializeComponent();
@@ -38,11 +39,17 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         //load years into cmb
         public async void LoadAllYears()
         {
-            if(cmbYears.SelectedItem != null)
+            // Prvo provjerite je li ItemsSource već postavljen
+            if (cmbYears.ItemsSource != null)
             {
-                cmbYears.Items.Clear();
-                cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
-            }         
+                cmbYears.ItemsSource = null; // Oslobodite ItemsSource
+            }
+
+            // Očistite trenutne stavke
+            cmbYears.Items.Clear();
+
+            // Postavite novi ItemsSource
+            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
 
             SetCurrentYear();
         }
@@ -89,16 +96,16 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //dgvGroup fill by selected year
-        private void cmbYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cmbYears_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                if (cmbYears.SelectedItem is ComboBox selectedItem)
+                if (cmbYears.SelectedItem is string selectedItem)
                 {
                     var year = cmbYears.SelectedValue.ToString();
                     if (string.IsNullOrEmpty(year)) return;
 
-                    GetGroupsForYear(year);
+                    dgvGroups.ItemsSource = await GetGroupsForYear(year);
                 }
             } catch (Exception ex)
             {
@@ -106,9 +113,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
-        private List<Group> GetGroupsForYear(string year)
+        private async Task<List<Group>> GetGroupsForYear(string year)
         {
-            return _preschoolYearServices.GetGroupsForYear(year);
+            return await Task.Run(() => _preschoolYearServices.GetGroupsForYear(year));
         }
 
         //dgvChildren fill by selected group

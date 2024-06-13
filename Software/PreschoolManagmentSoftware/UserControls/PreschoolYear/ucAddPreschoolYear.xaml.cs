@@ -152,7 +152,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                 var lastTwoYearNumbers = preschoolYearName.Split('/')[1];
                 await SetStartAndEndDateWhenCreatingNewPreschoolYear(lastTwoYearNumbers);
                 _previousControl.LoadAllYears();
-                CloseSidebar();
+                _previousControl.CloseSidebar();
                 MessageBox.Show("Nova predškolska godina uspješno dodana u sustav!");
             } else
             {
