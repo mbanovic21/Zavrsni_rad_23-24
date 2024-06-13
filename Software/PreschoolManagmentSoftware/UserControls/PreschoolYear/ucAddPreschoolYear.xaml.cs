@@ -27,6 +27,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         private GroupServices _groupServices = new GroupServices();
         private ucPreschoolYearAdministrating _previousControl { get; set; }
         private PreschoolYearServices _preschoolYearServices = new PreschoolYearServices();
+        private WeeklyScheduleServices _weeklyScheduleServices = new WeeklyScheduleServices();
         public ucAddPreschoolYear(ucPreschoolYearAdministrating ucPreschoolYearAdministrating)
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             dgvGroups.ItemsSource = Groups;
             HideColumns(dgvGroups);
             dgvGroupsDB.ItemsSource = await Task.Run(() => _groupServices.GetAllGroups());
-                        HideColumns(dgvGroupsDB);
+            HideColumns(dgvGroupsDB);
         }
         
         //YearsName
@@ -122,7 +123,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //add preschool year
-        private void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
+        private async void btnAddNewPreschoolYear_Click(object sender, RoutedEventArgs e)
         {
             var preschoolYearName = txtPreschoolYearName.Text;
             if (!IsValidYearFormat(preschoolYearName))
@@ -132,8 +133,37 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                 return;
             }
 
-            if (Groups.Count < 1) return;
-        }  
+            if (Groups.Count < 1) 
+            {
+                MessageBox.Show("Molimo odaberite grupe koje želite u novoj akademskoj godini!");
+                return;
+            };
+
+            var newPreschoolYear = new PreeschoolYear
+            {
+                Year = preschoolYearName,
+                inProgress = false,
+            };
+
+            var isAdded = _preschoolYearServices.AddNewPreschoolYear(newPreschoolYear, Groups);
+            if (isAdded)
+            {
+                //adding start and end dates in db
+                var lastTwoYearNumbers = preschoolYearName.Split('/')[1];
+                await SetStartAndEndDateWhenCreatingNewPreschoolYear(lastTwoYearNumbers);
+                _previousControl.LoadAllYears();
+                CloseSidebar();
+                MessageBox.Show("Nova predškolska godina uspješno dodana u sustav!");
+            } else
+            {
+                MessageBox.Show("Pogreška prilikom dodavanja nove predškolske godine!");
+            }
+        }
+        
+        private async Task SetStartAndEndDateWhenCreatingNewPreschoolYear(string lastTwoYearNumbers)
+        {
+            await Task.Run(() => _weeklyScheduleServices.SetStartAndEndDateWhenCreatingNewPreschoolYear(lastTwoYearNumbers));
+        }
 
         public void OpenSidebar()
         {

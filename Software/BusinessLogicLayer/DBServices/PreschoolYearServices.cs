@@ -10,11 +10,11 @@ namespace BusinessLogicLayer.DBServices
 {
     public class PreschoolYearServices
     {
-        public void AddNewPreschoolYear(PreeschoolYear preeschoolYear, List<Group> group)
+        public bool AddNewPreschoolYear(PreeschoolYear preeschoolYear, List<Group> group)
         {
             using (var repo = new PreschoolYearRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
-                repo.AddNewPreschoolYear(preeschoolYear, group);
+                return repo.AddNewPreschoolYear(preeschoolYear, group);
             }
         }
         public List<Group> GetGroupsForYear(string year)

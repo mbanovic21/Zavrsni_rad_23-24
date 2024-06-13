@@ -55,7 +55,7 @@ namespace DataAccessLayer.Repositories
             Users.Remove(userForRemove);
 
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
-
+            
             return isSaveSuccessful;
         }
 

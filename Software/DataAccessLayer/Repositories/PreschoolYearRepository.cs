@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,16 +20,22 @@ namespace DataAccessLayer.Repositories
             PreschoolYears = Context.Set<PreeschoolYear>();
         }
 
-        public void AddNewPreschoolYear(PreeschoolYear preeschoolYear, List<Group> groups)
+        public bool AddNewPreschoolYear(PreeschoolYear preeschoolYear, List<Group> groups)
         {
+            var existingYear = PreschoolYears.Any(py => py.Year == preeschoolYear.Year);
+            if (existingYear) return false;
+
             foreach (var g in groups)
             {
                 Context.Groups.Attach(g);
                 preeschoolYear.Groups.Add(g);
             }
-
             PreschoolYears.Add(preeschoolYear);
-            Context.SaveChanges();
+            
+            int affectedRows = 0;
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
         }
 
         public IQueryable<ICollection<Group>> GetGroupsForYear(string year)
@@ -46,6 +53,31 @@ namespace DataAccessLayer.Repositories
                         select y.Year;
 
             return query;
+        }
+
+        private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
+        {
+            try
+            {
+                affectedRows = context.SaveChanges();
+            } catch (DbEntityValidationException ex)
+            {
+                // Iterirajte kroz sve entitete koji su imali valjanosne greške
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    // Iterirajte kroz sve greške valjanosti za svaki entitet
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Console.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+
+                // Vratite false jer je došlo do greške pri spremanju
+                return false;
+            }
+
+            // Vratite true ako je barem jedan red promijenjen u bazi podataka
+            return affectedRows > 0;
         }
 
         public void Dispose()

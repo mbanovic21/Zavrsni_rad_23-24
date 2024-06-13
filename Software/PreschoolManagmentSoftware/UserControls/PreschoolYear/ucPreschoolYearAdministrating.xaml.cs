@@ -36,10 +36,13 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         }
 
         //load years into cmb
-        private async void LoadAllYears()
+        public async void LoadAllYears()
         {
-            cmbYears.Items.Clear();
-            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
+            if(cmbYears.SelectedItem != null)
+            {
+                cmbYears.Items.Clear();
+                cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
+            }         
 
             SetCurrentYear();
         }
