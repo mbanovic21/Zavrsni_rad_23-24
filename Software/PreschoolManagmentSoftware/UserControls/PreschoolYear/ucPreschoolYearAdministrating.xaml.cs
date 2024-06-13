@@ -100,6 +100,13 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         {
             try
             {
+                var columnsToHide = new List<string>
+                {
+                    "Children",
+                    "Users",
+                    "PreeschoolYears"
+                };
+
                 if (cmbYears.SelectedItem is string selectedItem)
                 {
                     var year = cmbYears.SelectedValue.ToString();
@@ -107,6 +114,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
                     dgvGroups.ItemsSource = await GetGroupsForYear(year);
                 }
+                HideColumns(dgvGroups, columnsToHide);
             } catch (Exception ex)
             {
                 MessageBox.Show($"Neočekivana greška: {ex.Message}");
@@ -122,10 +130,21 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         private void dgvGroups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedGroup = dgvGroups.SelectedItem as Group;
+            var columnsToHide = new List<string>
+            {
+                "ProfileImage",
+                "Attendances",
+                "Notes",
+                "Group",
+                "Parents"
+            };
+
             if (dgvGroups.SelectedItem != null && selectedGroup != null)
             {
                 dgvChildren.ItemsSource = _childServices.GetChildrenFromGroup(dgvGroups.SelectedItem as Group);
             }
+           
+            HideColumns(dgvChildren, columnsToHide);
         }
 
         //right arrow cmb
@@ -152,6 +171,21 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
                     }
                 }
             }
+        }
+
+        private void HideColumns(DataGrid dgv, List<string> columnsToHide)
+        {
+            if(dgv is DataGrid)
+            {
+                foreach (string columnName in columnsToHide)
+                {
+                    var column = dgv.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                    if (column != null)
+                    {
+                        column.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }            
         }
 
         public void OpenSidebar()
