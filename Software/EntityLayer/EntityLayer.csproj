@@ -52,6 +52,7 @@
     <Compile Include="Entities\Day.cs" />
     <Compile Include="Entities\ErrorLog.cs" />
     <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Group.ext.cs" />
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\Parent.cs" />
     <Compile Include="Entities\Parent.ext.cs" />

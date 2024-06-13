@@ -32,6 +32,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private AutenticationManager _autenticationManager = new AutenticationManager();
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
+        private GroupServices _groupServices = new GroupServices();
         private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
         private string _selectedImagePath { get; set; }
         public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating)
@@ -51,9 +52,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         {
             var mothers = await Task.Run(() => _parentServices.GetMothers());
             var fathers = await Task.Run(() => _parentServices.GetFathers());
+            var groups = await Task.Run(() => _groupServices.GetAllGroups());
 
             cmbSearchMother.Items.Clear();
             cmbSearchFather.Items.Clear();
+            cmbSearchGroup.Items.Clear();
 
             foreach(var mother in mothers)
             {
@@ -63,6 +66,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             foreach (var father in fathers)
             {
                 cmbSearchFather.Items.Add(father.ToString());
+            }
+
+            foreach (var group in groups)
+            {
+                cmbSearchGroup.Items.Add(group.ToString());
             }
         }
 
@@ -349,6 +357,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             }
             var fathersID = int.Parse(cmbSearchFather.SelectedItem.ToString().Split(' ')[0]);
             var mothersID = int.Parse(cmbSearchMother.SelectedItem.ToString().Split(' ')[0]);
+            var groupsID = int.Parse(cmbSearchGroup.SelectedItem.ToString().Split(' ')[0]);
 
             string imagePathForRegistration;
             var PIN = txtPIN.Text;
@@ -394,6 +403,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 Nationality = nationality,
                 DevelopmentStatus = developmentStatus,
                 MedicalInformation = medicalInformation,
+                Id_Group = groupsID,
             };
 
             var isAdded = await Task.Run(() => _childServices.RegistrateChild(child, parents));
@@ -509,6 +519,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private void btnDropdown2_Click(object sender, RoutedEventArgs e)
         {
             cmbSearchFather.IsDropDownOpen = true;
+        }
+
+        private void btnDropdown3_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
