@@ -7,11 +7,28 @@
              mc:Ignorable="d" 
              x:Name="ucChildRegistration"
              d:DesignHeight="728" d:DesignWidth="800" Loaded="ucChildRegistration_Loaded">
+
+    <UserControl.Resources>
+        <!-- Definicija animacije Group-->
+        <Storyboard x:Key="SlideInAnimationGroup">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="400,0,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SlideOutAnimationGroup">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="400,0,0,0"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
     <Grid>
         <Border Background="Transparent">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="380" />
                     <ColumnDefinition Width="400" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -21,11 +38,48 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
+                <!-- Sidebar group -->
+                <Border x:Name="sidebarGroup" Width="400" Grid.RowSpan="4" Grid.Column="1" Visibility="Collapsed" Panel.ZIndex="1">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#3AA9AD" Offset="0"/>
+                            <GradientStop Color="#3AADA1" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Grid>
+                        <Canvas>
+                            <Line X1="0" Y1="680" X2="1166" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Line X1="0" Y1="121" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Line X1="250" Y1="1666" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Line X1="50" Y1="0" X2="670" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Polygon Points="250,0 400,0 400,100" Fill="#4EB1B6"/>
+                            <Polygon Points="0,129 0,641 330,129" Fill="#4EB1B6"/>
+                            <Polygon Points="0,641 330,641 330,129" Fill="#4EB1B6"/>
+                            <Line X1="99" Y1="130" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Line X1="202" Y1="640" X2="329" Y2="616" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Line X1="283" Y1="640" X2="299" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Line X1="0" Y1="153.5" X2="1096" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                            <Polygon Points="50,550 200,500 150,350" Fill="#3AADA1"/>
+                            <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
+                        </Canvas>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <ContentControl x:Name="contentSidebarGroup" Grid.Row="1"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+
                 <!-- naslov -->
                 <!-- <TextBlock Text="Registracija zaposlenika" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Margin="0 0 0 20"/>  -->
 
                 <!-- profil stuff -->
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
+                <StackPanel x:Name="spHeader" Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2">
                     <!-- Profile image -->
                     <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="10" Margin="0,0,0,7" >
                         <Border CornerRadius="100" BorderThickness="1" BorderBrush="#f5f5f5" HorizontalAlignment="Center" Padding="20" >
@@ -235,7 +289,7 @@
                                     </Grid>
                                 </Border>
 
-                                <Button x:Name="btnAddGroup" Width="42" Grid.Column="1" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,0,7" Click="btnAddFather_Click" >
+                                <Button x:Name="btnAddGroup" Width="42" Grid.Column="1" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,0,7" Click="btnAddGroup_Click" >
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderThickness="1" BorderBrush="#095989">

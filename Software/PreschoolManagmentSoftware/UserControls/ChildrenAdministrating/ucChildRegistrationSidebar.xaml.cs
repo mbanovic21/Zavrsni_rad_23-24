@@ -5,9 +5,11 @@ using EntityLayer;
 using EntityLayer.Entities;
 using Microsoft.Win32;
 using PreschoolManagmentSoftware.UserControls.ParentAdministrating;
+using PreschoolManagmentSoftware.UserControls.PreschoolYear;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,6 +20,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -33,12 +36,12 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         private GroupServices _groupServices = new GroupServices();
-        private ucChildrenAdministrating _ucChildrenAdministrating { get; set; }
+        private ucChildrenAdministrating _previousControl { get; set; }
         private string _selectedImagePath { get; set; }
         public ucChildRegistrationSidebar(ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
-            _ucChildrenAdministrating = ucChildrenAdministrating;
+            _previousControl = ucChildrenAdministrating;
         }
 
         //Profile image
@@ -201,16 +204,16 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         //add new mother
         private void btnAddMother_Click(object sender, RoutedEventArgs e)
         {
-            var motherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = motherControl;
+            var motherControl = new ucParentRegistration(this, _previousControl);
+            _previousControl.contentSidebarRegistration.Content = motherControl;
         }
 
         //add new father
         private void btnAddFather_Click(object sender, RoutedEventArgs e)
         {
-            var fatherControl = new ucParentRegistration(this, _ucChildrenAdministrating);
+            var fatherControl = new ucParentRegistration(this, _previousControl);
             fatherControl.SetManFirst();
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = fatherControl;
+            _previousControl.contentSidebarRegistration.Content = fatherControl;
         }
 
         //DateOfBirth
@@ -347,6 +350,21 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             }
         }
 
+        //group
+        private void btnAddGroup_Click(object sender, RoutedEventArgs e)
+        {
+
+            var ucAddGroupChild = new ucAddNewGroupChild(this);
+            contentSidebarGroup.Content = ucAddGroupChild;
+            _previousControl.btnCloseSidebarRegistration.Visibility = Visibility.Collapsed;
+            spHeader.Margin = new Thickness(0, 45, 0, 0);
+            OpenSidebar();
+        }
+
+        private void btnCloseSidebarGroup_Click(object sender, RoutedEventArgs e)
+        {
+            CloseSidebar();
+        }
 
         //btnRegister
         private async void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -412,7 +430,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             {
                 var caughtChild = await Task.Run(() => _childServices.GetChildByPIN(PIN));
 
-                _ucChildrenAdministrating.RefreshGUI();
+                _previousControl.RefreshGUI();
 
                 var result = MessageBox.Show("Dijete je uspješno registrirano u sustav! Želite li obavijestiti roditelje putem e-pošte?", "Obavijest", MessageBoxButton.YesNo);
 
@@ -456,6 +474,37 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             txtBirthPlace.Clear();
             txtDevelopmentStatus.Clear();
             txtMedicalInformation.Clear();
+        }
+
+        public void OpenSidebar()
+        {
+            // Pronalaženje animacija
+            var slideInAnimation = FindResource("SlideInAnimationGroup") as Storyboard;
+
+            var sidebarGroup = (Border)FindName("sidebarGroup");
+
+            if (sidebarGroup.Visibility == Visibility.Collapsed)
+            {
+                sidebarGroup.Visibility = Visibility.Visible;
+                slideInAnimation.Begin(sidebarGroup);
+            }
+        }
+
+        public void CloseSidebar()
+        {
+            var slideOutAnimation = FindResource("SlideOutAnimationGroup") as Storyboard;
+
+            var sidebarGroup = (Border)FindName("sidebarGroup");
+
+            if (sidebarGroup.Visibility == Visibility.Visible)
+            {
+                // sakrij bočnu traku uz animaciju slajdanja s lijeva na desno
+                slideOutAnimation.Completed += (s, _) => sidebarGroup.Visibility = Visibility.Collapsed;
+                slideOutAnimation.Begin(sidebarGroup);
+            }
+
+            spHeader.Margin = new Thickness(0, 0, 0, 0);
+            _previousControl.btnCloseSidebarRegistration.Visibility = Visibility.Visible;
         }
 
         //Input validation
@@ -523,7 +572,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
 
         private void btnDropdown3_Click(object sender, RoutedEventArgs e)
         {
-
+            cmbSearchGroup.IsDropDownOpen = true;
         }
     }
 }

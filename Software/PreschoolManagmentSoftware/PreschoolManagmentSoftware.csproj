@@ -73,6 +73,9 @@
     </ApplicationDefinition>
     <Compile Include="Static Classes\GuiManager.cs" />
     <Compile Include="Static Classes\PDFConverter.cs" />
+    <Compile Include="UserControls\ChildrenAdministrating\ucAddNewGroupChild.xaml.cs">
+      <DependentUpon>ucAddNewGroupChild.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ChildrenAdministrating\ucChildEditProfileSidebar.xaml.cs">
       <DependentUpon>ucChildEditProfileSidebar.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\ChildrenAdministrating\ucAddNewGroupChild.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\ChildrenAdministrating\ucChildEditProfileSidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
