@@ -15,7 +15,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
     public static class PDFConverter
     {
         // Child
-        public static void GenerateAndOpenChildReport(Child child, string parents)
+        public static void GenerateAndOpenChildReport(Child child, string parents, string groupName)
         {
             try
             {
@@ -78,6 +78,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
                     AddChildInfo(document, "Spol: ", child.Sex);
                     AddChildInfo(document, "Status razvoja: ", child.DevelopmentStatus);
                     AddChildInfo(document, "Medicinske informacije: ", child.MedicalInformation);
+                    AddChildInfo(document, "Grupa: ", groupName);
                     AddChildInfo(document, "Roditelji: ", parents);
 
                     // Zatvori dokument

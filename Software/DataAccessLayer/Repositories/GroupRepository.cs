@@ -34,8 +34,8 @@ namespace DataAccessLayer.Repositories
         //group by name
         public IQueryable<Group> GetGroupByName(string name)
         {
-            var queri = from g in Groups where g.Name == name select g;
-            return queri;
+            var query = from g in Groups where g.Name == name select g;
+            return query;
         }
 
         //add group
@@ -66,6 +66,12 @@ namespace DataAccessLayer.Repositories
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
 
             return isSaveSuccessful;
+        }
+
+        //group by id
+        public Group GetGroupById(int? id)
+        {
+            return Groups.FirstOrDefault(g => g.Id == id);
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)

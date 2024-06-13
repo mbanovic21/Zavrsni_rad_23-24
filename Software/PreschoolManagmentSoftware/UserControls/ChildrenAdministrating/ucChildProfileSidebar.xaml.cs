@@ -29,6 +29,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private ucChildrenAdministrating _ucChildrenAdministrating{ get; set; }
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
+        private GroupServices _groupServices = new GroupServices();
         public ucChildProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
@@ -87,13 +88,15 @@ namespace PreschoolManagmentSoftware.UserControls
         private async void btnGeneratePDF_Click(object sender, RoutedEventArgs e)
         {
             var parents = await Task.Run(() => _parentServices.GetParentsByChild(_child));
-            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents)));
+            var group = await Task.Run(() => _groupServices.GetGroupById(_child.Id_Group));
+            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents), GetGroupName(group)));
         }
 
-        public void refreshData()
+        public async Task refreshData()
         {
             var profileImage = BitmapImageConverter.ConvertByteArrayToBitmapImage(_child.ProfileImage);
-            var parents = _parentServices.GetParentsByChild(_child);
+            var group = await Task.Run(() => _groupServices.GetGroupById(_child.Id_Group));
+            var parents = await Task.Run(() => _parentServices.GetParentsByChild(_child));
 
             imgProfile.Source = profileImage;
             textFirstAndLastName.Text = $"{_child.FirstName} {_child.LastName}";
@@ -106,7 +109,13 @@ namespace PreschoolManagmentSoftware.UserControls
             textGender.Text = _child.Sex;
             textDevelopmentStatus.Text = _child.DevelopmentStatus;
             textMedicalInformation.Text = _child.MedicalInformation;
+            textGroup.Text = GetGroupName(group);
             textParents.Text = GetParentsNames(parents);
+        }
+
+        private string GetGroupName(Group group)
+        {
+            return group.ToString().Split(' ')[1];
         }
 
         public string GetParentsNames(List<Parent> parents)

@@ -52,5 +52,15 @@ namespace BusinessLogicLayer.DBServices
                 return repo.DeleteGroup(group);
             }
         }
+
+        //get group by id
+        public Group GetGroupById(int? id)
+        {
+            using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetGroupById(id);
+            }
+
+        }
     }
 }

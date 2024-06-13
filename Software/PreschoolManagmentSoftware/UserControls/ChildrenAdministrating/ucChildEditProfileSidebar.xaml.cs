@@ -7,6 +7,7 @@ using PreschoolManagmentSoftware.UserControls.ParentAdministrating;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -36,6 +37,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         private Parent _father { get; set; }
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
+        private GroupServices _groupServices = new GroupServices();
         public ucChildEditProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
@@ -83,6 +85,13 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             textMedicalInformations.Text = _child.MedicalInformation;
             mothersName.Text = $"{_mother.FirstName} {_mother.LastName}";
             fathersName.Text = $"{_father.FirstName} {_father.LastName}";
+
+            var groupsDB = await Task.Run(_groupServices.GetAllGroups);
+            cmbSearchGroup.ItemsSource = groupsDB;
+            foreach (var g in groupsDB)
+            {
+                if(g.Id == _child.Id_Group) cmbSearchGroup.SelectedItem = g;
+            }
 
             imgProfile.Source = _selectedImagePath;
 
@@ -408,7 +417,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             }
 
             string newImage;
-            var firstname = string.IsNullOrWhiteSpace(txtFirstname.Text) ? _child.FirstName : txtFirstname.Text;
+            string firstname = string.IsNullOrWhiteSpace(txtFirstname.Text) ? _child.FirstName : txtFirstname.Text;
             string lastName = string.IsNullOrWhiteSpace(txtLastname.Text) ? _child.LastName : txtLastname.Text;
             string PIN = string.IsNullOrWhiteSpace(txtPIN.Text) ? _child.PIN : txtPIN.Text;
             string date = dpDateOfBirth.Text ?? _child.DateOfBirth;
@@ -418,6 +427,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             string gender = GetSelectedGender();
             string developmentStatus = string.IsNullOrWhiteSpace(txtDevelopmentStatus.Text) ? _child.DevelopmentStatus : txtDevelopmentStatus.Text;
             string medicalInformations = string.IsNullOrWhiteSpace(txtMedicalInformations.Text) ? _child.MedicalInformation : txtMedicalInformations.Text;
+            int selectedGroupsID = int.Parse(cmbSearchGroup.SelectedItem.ToString().Split(' ')[0]);
 
             if (!string.IsNullOrEmpty(_selectedImagePath))
             {
@@ -443,7 +453,7 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
                 Sex = gender,
                 DevelopmentStatus = developmentStatus,
                 MedicalInformation = medicalInformations,
-                Id_Group = null
+                Id_Group = selectedGroupsID
             };
 
             var isUpdated = await Task.Run(() => _childServices.isUpdated(_updatedChild));
@@ -518,10 +528,10 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
             BackToProfile();
         }
 
-        private void BackToProfile()
+        private async void BackToProfile()
         {
             var ucProfileSidebar = new ucChildProfileSidebar(_child, _ucChildrenAdministrating);
-            ucProfileSidebar.refreshData();
+            await ucProfileSidebar.refreshData();
             _ucChildrenAdministrating.contentSidebarProfile.Content = ucProfileSidebar;
         }
 
@@ -535,6 +545,11 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
         {
             var fathersProfile = new ucParentProfileSidebar(this, _ucChildrenAdministrating, _father);
             _ucChildrenAdministrating.contentSidebarProfile.Content = fathersProfile;
+        }
+
+        private void btnDropdown3_Click(object sender, RoutedEventArgs e)
+        {
+            cmbSearchGroup.IsDropDownOpen = true;
         }
     }
 }
