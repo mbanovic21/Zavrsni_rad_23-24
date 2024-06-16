@@ -63,7 +63,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 
                     if (string.IsNullOrEmpty(weekDisplayy)) return;
 
-                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, "admin");
+                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, LoggedInUser.User.Username);
 
                     clearButtonContent();
                     fillTheSchedule(listDay);
@@ -98,7 +98,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                     if (string.IsNullOrEmpty(weekDisplay)) return;
 
                     var weeklyScheduleId = _weeklyScheduleServices.GetWeeklySchedulesIDByDates(weekDisplay);
-                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, "admin");
+                    var listDay = _dayServices.getDaysByWeeklySchduleAndUsername(weeklyScheduleId, LoggedInUser.User.Username);
 
                     clearButtonContent();
                     fillTheSchedule(listDay);
