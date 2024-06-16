@@ -67,27 +67,27 @@ namespace PreschoolManagmentSoftware.Windows
 
             if (string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Please enter your credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Molimo unesite svoje kreditacije.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(username))
             {
-                MessageBox.Show("Please enter a username.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Unesite korisničko ime.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Please enter a password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Molimo unesite lozinku.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             var areCredentialsValid = await Task.Run(() => autenticationManager.AuthenticateUser(username, password));
             if (areCredentialsValid)
             {
-                MessageBox.Show("Successfully logged in!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Uspješno ste prijavljeni!", "Uspijeh", MessageBoxButton.OK, MessageBoxImage.Information);
                 var mainWindow = new MainWindow();
                 Close();
                 mainWindow.ShowDialog();
@@ -105,7 +105,7 @@ namespace PreschoolManagmentSoftware.Windows
                 */
             } else
             {
-                MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Nevažeće kreditacije.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

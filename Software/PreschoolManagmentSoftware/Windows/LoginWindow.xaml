@@ -34,7 +34,7 @@
                 <!-- podaci za firmu kao...-->
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Preschool Management Software" Style="{StaticResource titleText}"/>
-                    <TextBlock Text="Manage your preschool effortlessly with my intuitive software" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
+                    <TextBlock Text="Upravljajte svojom predškolskom ustanovom bez napora uz moj intuitivni softver" Style="{StaticResource normalText}" Opacity="0.8" Margin="20 30"/>
                 </StackPanel>
                 <TextBlock Style="{StaticResource copyright}">
                     <Run Text="Copyright"/>
@@ -46,10 +46,10 @@
 
         <Border Background="#ffffff" Grid.Column="1">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Welcome!" Style="{StaticResource titleText}" Foreground="#4EB1B6"/>
-                <TextBlock Text="Enter your credentials and find out how Preschool Managment Software can help you save time, reduce paperwork, and improve organization in your preschool." Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Margin="20 30"/>
+                <TextBlock Text="Dobrodošli!" Style="{StaticResource titleText}" Foreground="#4EB1B6"/>
+                <TextBlock Text="Unesite svoje kreditacije i saznajte kako vam softver za upravljanje predškolskim ustanovama može pomoći uštedjeti vrijeme, smanjiti papirologiju i poboljšati organizaciju u vašoj predškolskoj ustanovi." Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Margin="20 30"/>
 
-                <TextBlock Text="Login" Style="{StaticResource titleText}" Foreground="#4EB1B6" FontSize="25" Margin="0,-20,0,10"/>
+                <TextBlock Text="Prijava" Style="{StaticResource titleText}" Foreground="#4EB1B6" FontSize="25" Margin="0,-20,0,10"/>
 
                 <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
@@ -59,7 +59,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="/Media/Images/user.png" Height="20"/>
-                        <TextBlock x:Name="textUsername" MouseDown="textUsername_MouseDown" Text=" Username" Style="{StaticResource placeholder}"/>
+                        <TextBlock x:Name="textUsername" MouseDown="textUsername_MouseDown" Text=" Korisničko ime" Style="{StaticResource placeholder}"/>
                         <TextBox x:Name="txtUsername" TextChanged="txtUsername_TextChanged" Style="{StaticResource textBox}" />
                     </Grid>
                 </Border>
@@ -72,14 +72,14 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="/Media/Images/password.png" Height="20" Margin="2,0,-2,0"/>
-                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Password" Style="{StaticResource placeholder}"/>
+                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text=" Lozinka" Style="{StaticResource placeholder}"/>
                         <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
                     </Grid>
                 </Border>
 
-                <TextBlock Text="Forgot your credentials? Click here!" Style="{StaticResource link}" MouseDown="TextBlock_MouseDown"/>
+                <TextBlock Text="Zaboravljene kreditacije? Kliknite ovdje!" Style="{StaticResource link}" MouseDown="TextBlock_MouseDown"/>
 
-                <Button Content="Login" Click="Button_Click" Style="{StaticResource loginButton}" />
+                <Button Content="Prijava" Click="Button_Click" Style="{StaticResource loginButton}" />
             </StackPanel>
         </Border>
     </Grid>

@@ -58,7 +58,7 @@ namespace PreschoolManagmentSoftware.Windows
             {
                 if (string.IsNullOrWhiteSpace(firstName)) return;
                 txtFirstname.Clear();
-                MessageBox.Show("First name can only contain letters.");
+                MessageBox.Show("Ime može sadržavati samo slova.");
                 return;
             }
         }
@@ -86,7 +86,7 @@ namespace PreschoolManagmentSoftware.Windows
             {
                 if (string.IsNullOrEmpty(lastName)) return;
                 txtLastname.Clear();
-                MessageBox.Show("Last name can only contain letters.");
+                MessageBox.Show("Prezime može sadržavati samo slova.");
                 return;
             }
         }
@@ -113,7 +113,7 @@ namespace PreschoolManagmentSoftware.Windows
             if (!AreAllDigits(ID))
             {
                 if (string.IsNullOrWhiteSpace(ID)) return;
-                MessageBox.Show("ID must be only digits.");
+                MessageBox.Show("OIB mora biti samo znamenke");
                 return;
             }
         }
@@ -202,11 +202,11 @@ namespace PreschoolManagmentSoftware.Windows
                     //MessageBox.Show("Remaining files: " + filePaths.Count.ToString());
                 } else
                 {
-                    MessageBox.Show("File path not found in the list.");
+                    MessageBox.Show("Put do datoteke nije pronađen na popisu.");
                 }
             } else
             {
-                MessageBox.Show("File path is empty or null.");
+                MessageBox.Show("Putanja datoteke je prazna ili null.");
             }
         }
 
@@ -218,45 +218,45 @@ namespace PreschoolManagmentSoftware.Windows
             var ID = txtID.Text;
             var email = txtEmail.Text;
             var description = new TextRange(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentEnd).Text;
-            var subject = "Credential Retrieval Request Your Assistance Needed";
+            var subject = "Zahtjev za dohvaćanje kreditacija. Potrebna vam je pomoć";
 
             if (string.IsNullOrWhiteSpace(firstName))
             {
-                MessageBox.Show("Please enter your first name.");
+                MessageBox.Show("Molimo napišite svoje ime.");
                 txtFirstname.Clear();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(lastName))
             {
-                MessageBox.Show("Please enter your last name.");
+                MessageBox.Show("Molimo unesite svoje prezime.");
                 txtLastname.Clear();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(ID) || ID.Length < 11 || ID.Length > 11)
             {
-                MessageBox.Show("Please eneter your ID. It must be 11 digits.");
+                MessageBox.Show("Molimo unesite svoj OIB. Mora imati 11 znamenki.");
                 txtID.Clear();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Please enter your email.");
+                MessageBox.Show("Molimo unesite svoju e-poštu.");
                 return;
             }
             
             if (!IsValidEmail(email))
             {
-                MessageBox.Show("Please enter a valid email address.");
+                MessageBox.Show("Unesite važeću adresu e-pošte.");
                 txtEmail.Clear();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(description))
             {
-                MessageBox.Show("Please enter a description.");
+                MessageBox.Show("Unesite opis.");
                 rtxtDescription.Document.Blocks.Clear();
                 rtxtDescription.Selection.Select(rtxtDescription.Document.ContentStart, rtxtDescription.Document.ContentStart);
                 return;
@@ -267,10 +267,10 @@ namespace PreschoolManagmentSoftware.Windows
             if (isIDValid)
             {
                 await Task.Run(() => new ExternalEmailService(firstName, lastName, email, subject, description, filePaths));
-                MessageBox.Show("Notification successfully sent.");
+                MessageBox.Show("Obavijest uspješno poslana.");
             } else
             {
-                MessageBox.Show("Your ID is not valid. Please ensure it is entered correctly.");
+                MessageBox.Show("Vaš OIB nije valjan. Provjerite je li ispravno unesen.");
             }
         }
 
