@@ -55,7 +55,10 @@ namespace PreschoolManagmentSoftware.UserControls
                 var comboBoxItem = new ComboBoxItem() { Content = weekDisplay, Tag = startDate };
                 cmbWeek.Items.Add(comboBoxItem);
 
-                if (startDate <= DateTime.Now && DateTime.Now <= endDate)
+                Console.WriteLine(DateTime.Now.ToString());
+                Console.WriteLine(endDate.ToString().Split(' ')[0]);
+
+                if (startDate <= DateTime.Now && DateTime.Now <= endDate.AddDays(1))
                 {
                     comboBoxItem.IsSelected = true;
 
