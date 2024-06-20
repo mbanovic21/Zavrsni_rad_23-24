@@ -1,5 +1,6 @@
 ﻿using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls;
+using PreschoolManagmentSoftware.UserControls.NotesAndAttendances;
 using PreschoolManagmentSoftware.UserControls.PreschoolYear;
 using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
 using SecurityLayer;
@@ -85,6 +86,13 @@ namespace PreschoolManagmentSoftware
         {
             var ucPreschoolYearAdministrating = new ucPreschoolYearAdministrating();
             contentControl.Content = ucPreschoolYearAdministrating;
+        }
+
+        //Notes
+        private void btnNotes_Click(object sender, RoutedEventArgs e)
+        {
+            var ucChildrenTracking = new ucChildrenTracking();
+            contentControl.Content = ucChildrenTracking;
         }
 
         private void borHeader_MouseDown(object sender, MouseButtonEventArgs e)
