@@ -103,6 +103,9 @@
     <Compile Include="UserControls\ChildrenAdministrating\ucChildProfileSidebar.xaml.cs">
       <DependentUpon>ucChildProfileSidebar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\NotesAndAttendances\ucAddAttendance.xaml.cs">
+      <DependentUpon>ucAddAttendance.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\NotesAndAttendances\ucAddNote.xaml.cs">
       <DependentUpon>ucAddNote.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ChildrenAdministrating\ucChildProfileSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NotesAndAttendances\ucAddAttendance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

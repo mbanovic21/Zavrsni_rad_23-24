@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="PreschoolManagmentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AttendanceRepository.cs" />
     <Compile Include="Repositories\ChildRepository.cs" />
     <Compile Include="Repositories\DailyActivityRepository.cs" />
     <Compile Include="Repositories\DayRepository.cs" />

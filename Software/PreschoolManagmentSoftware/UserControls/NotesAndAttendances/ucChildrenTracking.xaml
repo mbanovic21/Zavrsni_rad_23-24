@@ -149,8 +149,9 @@
                 <DataGrid x:Name="dgvChildren" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="35,0,70,7"/>
 
                 <!--buttons-->
-                <StackPanel Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="4" HorizontalAlignment="Center" Margin="0,7,0,20">
-                    <Button x:Name="btnNotes" Click="btnNotes_Click" Content="Upravljaj bilješkama" Width="300" Style="{StaticResource loginButton}" Height="60"/>
+                <StackPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="35,0,70,20">
+                    <Button x:Name="btnNotes" Click="btnNotes_Click" Content="Kreiraj novu bilješku" FontWeight="SemiBold" Width="163" Height="40" Margin="0,0,7,7" Style="{StaticResource generatePasswordButtonTransparent}" />
+                    <Button x:Name="btnAttendance" Click="btnAttendance_Click" Content="Zabilježi prisustvo" FontWeight="SemiBold" Width="163" Height="40" Margin="0,0,0,7" Style="{StaticResource generatePasswordButtonTransparent}" />
                 </StackPanel>
             </Grid>
         </Border>

@@ -230,6 +230,21 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
             }
         }
 
+        private void btnAttendance_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedChildren = dgvChildren.SelectedItems.Cast<Child>().ToList();
+            if (selectedChildren != null && selectedChildren.Count > 0)
+            {
+                var ucAttendance = new ucAddAttendance(this, selectedChildren);
+                contentSidebarNotes.Content = ucAttendance;
+                OpenSidebar();
+            } else
+            {
+                MessageBox.Show("Odaberite barem jedno dijete kako biste unijeli prisustvo!");
+            }
+        }
+
+
         private void btnCloseSidebarNotes_Click(object sender, RoutedEventArgs e)
         {
             CloseSidebar();
