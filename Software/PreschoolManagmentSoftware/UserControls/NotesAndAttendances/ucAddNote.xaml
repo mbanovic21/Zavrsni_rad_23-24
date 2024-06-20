@@ -97,7 +97,7 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="/Media/Images/write2.png" Height="20" VerticalAlignment="Top"/>
                 <TextBlock x:Name="textDescription" MouseDown="textDescription_MouseDown" Text=" Ovdje upišite bilješku..." Style="{StaticResource placeholder}" VerticalAlignment="Top" Margin="7,0,0,0"/>
-                <RichTextBox x:Name="rtxtDescription" Style="{StaticResource textBox}" Height="140" TextChanged="rtxtDescription_TextChanged" VerticalScrollBarVisibility="Auto" Margin="2,0,0,0"/>
+                <RichTextBox x:Name="rtxtDescription" Style="{StaticResource textBox}" TextChanged="rtxtDescription_TextChanged" VerticalScrollBarVisibility="Auto" Margin="2,0,0,0" VerticalAlignment="Top"/>
             </Grid>
         </Border>
         

@@ -221,7 +221,7 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
             var selectedChild = dgvChildren.SelectedItem as Child;
             if(selectedChild != null)
             {
-                var ucNotes = new ucNotes(selectedChild);
+                var ucNotes = new ucNotes(this, selectedChild);
                 contentSidebarNotes.Content = ucNotes;
                 OpenSidebar();
             } else

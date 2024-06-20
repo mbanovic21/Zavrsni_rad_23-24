@@ -164,9 +164,9 @@ namespace PreschoolManagmentSoftware.UserControls
             var columnsToHide = new List<string>
             {
                 "ProfileImage",
-                /*"Attendances",
+                "Attendances",
                 "Notes",
-                "Gruop",*/
+                "Gruop",
                 "Parents"
             };
 

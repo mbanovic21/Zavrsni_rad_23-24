@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,8 +33,23 @@ namespace DataAccessLayer.Repositories
 
         public IQueryable<Note> GetNotesByChild(Child child)
         {
-            var query = from n in Notes where n.Id_child == child.Id select n;
-            return query;
+            return Notes.Where(n => n.Id_child == child.Id);
+        }
+
+        public bool RemoveNotes(List<Note> notes)
+        {
+            int affectedRows = 0;
+
+            foreach(var note in notes)
+            {
+                var noteToRemove = Notes.Find(note.Id);
+                if (noteToRemove != null)
+                {
+                    Notes.Remove(noteToRemove);
+                }
+            }
+
+            return SaveChangesWithValidation(Context, ref affectedRows);
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)

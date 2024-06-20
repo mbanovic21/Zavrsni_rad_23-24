@@ -36,18 +36,22 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
         private void ucNotesAdministrating_Loaded(object sender, RoutedEventArgs e)
         {
             txtFirstAndLastName.Text = $"{_child.FirstName} {_child.LastName}";
-            LoadNotes();
+            RefreshGUI();
         }
 
-        private async void LoadNotes()
+        public async void RefreshGUI()
         {
-            await Task.Run(() => _noteServices.GetNotesByChild(_child));
+            dgvNotes.ItemsSource = await Task.Run(() => _noteServices.GetNotesByChild(_child));
+            dgvNotes.Columns[5].Visibility = Visibility.Collapsed;
         }
 
         private void btnAddNote_Click(object sender, RoutedEventArgs e)
         {
             var ucAddNote = new ucAddNote(this, _child);
-            contentSidebarAddNote = ucAddNote;
+            contentSidebarAddNote.Content = ucAddNote;
+            txtHeader.Margin = new Thickness(7, -2, 0, 20);
+            _previousControl.btnCloseSidebarNotes.Visibility = Visibility.Collapsed;
+            OpenSidebar();
         }
 
         public void OpenSidebar()
@@ -83,7 +87,16 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
 
         private void btnDeleteNote_Click(object sender, RoutedEventArgs e)
         {
-
+            var notes = dgvNotes.SelectedItems.Cast<Note>().ToList();
+            var areRemoved = _noteServices.RemoveNotes(notes);
+            RefreshGUI();
+            if (areRemoved)
+            {
+                MessageBox.Show("Bilješke su uspješno obrisane!");
+            } else
+            {
+                MessageBox.Show("Pogreška priliokm brisanja bilješki!");
+            }
         }
     }
 }

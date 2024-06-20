@@ -100,7 +100,7 @@
                 </Grid.RowDefinitions>
 
                 <!--header-->
-                <TextBlock Text="Aktivnost djece" Style="{StaticResource titleText}" Grid.ColumnSpan="4" Foreground="#4EB1B6" Margin="10"/>
+                <TextBlock Text="Bilješke i aktivnost djece" Style="{StaticResource titleText}" Grid.ColumnSpan="4" Foreground="#4EB1B6" Margin="10"/>
 
                 <!-- cmb week container -->
                 <StackPanel Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="70,0,70,7">

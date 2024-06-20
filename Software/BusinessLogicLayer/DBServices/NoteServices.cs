@@ -10,6 +10,7 @@ namespace BusinessLogicLayer
 {
     public class NoteServices
     {
+        //add notes
         public bool AddNote(Note note)
         {
             using (var repo = new NoteRepository(new DataAccessLayer.PreschoolManagmentModel()))
@@ -18,11 +19,21 @@ namespace BusinessLogicLayer
             }
         }
 
+        //get notes by child id
         public List<Note> GetNotesByChild(Child child)
         {
             using (var repo = new NoteRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.GetNotesByChild(child).ToList();
+            }
+        }
+
+        //remove notes
+        public bool RemoveNotes(List<Note> notes)
+        {
+            using (var repo = new NoteRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RemoveNotes(notes);
             }
         }
     }
