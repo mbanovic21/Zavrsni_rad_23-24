@@ -15,7 +15,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
     public static class PDFConverter
     {
         // Child
-        public static void GenerateAndOpenChildReport(Child child, string parents, string groupName)
+        public static void GenerateAndOpenChildReport(Child child, string parents, string groupName, List<Note> notes)
         {
             try
             {
@@ -80,6 +80,9 @@ namespace PreschoolManagmentSoftware.Static_Classes
                     AddChildInfo(document, "Medicinske informacije: ", child.MedicalInformation);
                     AddChildInfo(document, "Grupa: ", groupName);
                     AddChildInfo(document, "Roditelji: ", parents);
+
+                    // Dodaj bilješke
+                    AddNotesInfo(document, notes);
 
                     // Zatvori dokument
                     document.Close();
@@ -166,7 +169,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
             }
         }
 
-        //Parent
+        // Parent
         public static void GenerateAndOpenParentReport(Parent parent, string children)
         {
             try
@@ -241,6 +244,41 @@ namespace PreschoolManagmentSoftware.Static_Classes
             document.Add(paragraph);
             document.Add(new Paragraph("\n"));
         }
+
+        private static void AddNotesInfo(Document document, List<Note> notes)
+        {
+            Font noteTitleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            Font noteInfoFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+
+            if (notes != null && notes.Count > 0)
+            {
+                document.Add(new Paragraph("Bilješke:", noteTitleFont));
+                document.Add(new Paragraph("\n"));
+
+                foreach (var note in notes)
+                {
+                    Paragraph noteParagraph = new Paragraph
+                    {
+                        new Chunk("ID bilješke: ", noteTitleFont),
+                        new Chunk(note.Id.ToString(), noteInfoFont),
+                        new Chunk("\n"),
+                        new Chunk("Datum: ", noteTitleFont),
+                        new Chunk(note.Date, noteInfoFont),
+                        new Chunk("\n"),
+                        new Chunk("Ponašanje: ", noteTitleFont),
+                        new Chunk(note.Behaviour, noteInfoFont),
+                        new Chunk("\n"),
+                        new Chunk("Opis: ", noteTitleFont),
+                        new Chunk(note.Description, noteInfoFont),
+                        new Chunk("\n")
+                    };
+
+                    document.Add(noteParagraph);
+                }
+            } else
+            {
+                document.Add(new Paragraph("Nema bilješki.", noteInfoFont));
+            }
+        }
     }
 }
-

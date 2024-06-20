@@ -166,7 +166,7 @@ namespace PreschoolManagmentSoftware.UserControls
                 "ProfileImage",
                 "Attendances",
                 "Notes",
-                "Gruop",
+                "Group",
                 "Parents"
             };
 

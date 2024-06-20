@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer.DBServices;
+﻿using BusinessLogicLayer;
+using BusinessLogicLayer.DBServices;
 using EntityLayer;
 using EntityLayer.Entities;
 using PreschoolManagmentSoftware.Static_Classes;
@@ -30,6 +31,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private ChildServices _childServices = new ChildServices();
         private ParentServices _parentServices = new ParentServices();
         private GroupServices _groupServices = new GroupServices();
+        private NoteServices _noteServices = new NoteServices();
         public ucChildProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
@@ -89,7 +91,8 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             var parents = await Task.Run(() => _parentServices.GetParentsByChild(_child));
             var group = await Task.Run(() => _groupServices.GetGroupById(_child.Id_Group));
-            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents), GetGroupName(group)));
+            var notes = await Task.Run(() => _noteServices.GetNotesByChild(_child));
+            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents), GetGroupName(group), notes));
         }
 
         public async Task refreshData()
