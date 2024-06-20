@@ -8,6 +8,9 @@ namespace EntityLayer.Entities
     public partial class Note
     {
         public int Id { get; set; }
+        
+        [StringLength(12)]
+        public string Date { get; set; }
 
         [StringLength(1000)]
         public string Description { get; set; }

@@ -218,12 +218,21 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
 
         private void btnNotes_Click(object sender, RoutedEventArgs e)
         {
-
+            var selectedChild = dgvChildren.SelectedItem as Child;
+            if(selectedChild != null)
+            {
+                var ucNotes = new ucNotes(selectedChild);
+                contentSidebarNotes.Content = ucNotes;
+                OpenSidebar();
+            } else
+            {
+                MessageBox.Show("Odaberite dijete za koje želite vidjeti bilješke!");
+            }
         }
 
         private void btnCloseSidebarNotes_Click(object sender, RoutedEventArgs e)
         {
-
+            CloseSidebar();
         }
 
         private void btnDropdown_Click(object sender, RoutedEventArgs e)

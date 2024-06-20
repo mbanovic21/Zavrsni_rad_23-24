@@ -61,6 +61,7 @@
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\WeeklySchedule.cs" />
+    <Compile Include="Enums\Behaviours.cs" />
     <Compile Include="Enums\Location.cs" />
     <Compile Include="Static Classes\BitmapImageConverter.cs" />
     <Compile Include="Static Classes\LoggedInUser.cs" />
