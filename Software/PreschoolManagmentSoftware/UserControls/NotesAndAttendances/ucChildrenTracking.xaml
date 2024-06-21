@@ -22,7 +22,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <!-- Sidebar AddNewPreschoolYear -->
+        <!-- Sidebar Notes -->
         <Border x:Name="sidebarNotes" Width="800" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Right">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -150,7 +150,7 @@
 
                 <!--buttons-->
                 <StackPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="35,0,70,20">
-                    <Button x:Name="btnNotes" Click="btnNotes_Click" Content="Kreiraj novu bilješku" FontWeight="SemiBold" Width="163" Height="40" Margin="0,0,7,7" Style="{StaticResource generatePasswordButtonTransparent}" />
+                    <Button x:Name="btnNotes" Click="btnNotes_Click" Content="Upravljaj bilješkama" FontWeight="SemiBold" Width="163" Height="40" Margin="0,0,7,7" Style="{StaticResource generatePasswordButtonTransparent}" />
                     <Button x:Name="btnAttendance" Click="btnAttendance_Click" Content="Zabilježi prisustvo" FontWeight="SemiBold" Width="163" Height="40" Margin="0,0,0,7" Style="{StaticResource generatePasswordButtonTransparent}" />
                 </StackPanel>
             </Grid>

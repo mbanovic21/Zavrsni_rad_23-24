@@ -36,5 +36,14 @@ namespace BusinessLogicLayer
                 return repo.RemoveNotes(notes);
             }
         }
+
+        //update note
+        public bool UpdateNote(Note note)
+        {
+            using (var repo = new NoteRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.UpdateNote(note);
+            }
+        }
     }
 }

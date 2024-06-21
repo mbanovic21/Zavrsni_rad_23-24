@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer;
 using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,9 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
 
         private void RefreshGUI()
         {
+            dgvChildren.ItemsSource = null;
             dgvChildren.ItemsSource = _children;
+            HideColumns();
         }
 
         //Date
@@ -63,11 +66,19 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
             var attendance = new Attendance
             {
                 Date = date,
-                isPresent = true
+                isPresent = true,
+                Id_User = LoggedInUser.User.Id
             };
 
-            _attendanceServices.AddAttendance(_children, attendance);
-
+            var isAdded = _attendanceServices.AddAttendance(_children, attendance);
+            if (isAdded)
+            {
+                MessageBox.Show("Prisustvo je uspješno dodano i dodijeljeno svoj odabranoj djeci!");
+            } else
+            {
+                MessageBox.Show("Pogreška kod dodavanja i dodjeljivanja prisustva djeci!");
+            }
+            _previousControl.CloseSidebar();
         }
 
         private void btnDeleteChild_Click(object sender, RoutedEventArgs e)
@@ -97,12 +108,34 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
                 return false;
             }
 
+            if (_children.Count < 1)
+            {
+                MessageBox.Show("Morate imati barem jedno dijete u listi!");
+                return false;
+            }
+
             return true;
         }
 
-        private void btnCloseSidebarAttendance_Click(object sender, RoutedEventArgs e)
+        private void HideColumns()
         {
+            var columnsToHide = new List<string>
+            {
+                "ProfileImage",
+                "Attendances",
+                "Notes",
+                "Group",
+                "Parents"
+            };
 
+            foreach (string columnName in columnsToHide)
+            {
+                var column = dgvChildren.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                if (column != null)
+                {
+                    column.Visibility = Visibility.Collapsed;
+                }
+            }
         }
     }
 }

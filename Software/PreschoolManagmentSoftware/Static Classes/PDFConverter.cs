@@ -15,7 +15,7 @@ namespace PreschoolManagmentSoftware.Static_Classes
     public static class PDFConverter
     {
         // Child
-        public static void GenerateAndOpenChildReport(Child child, string parents, string groupName, List<Note> notes)
+        public static void GenerateAndOpenChildReport(Child child, string parents, string groupName, List<Note> notes, List<string> attendances)
         {
             try
             {
@@ -80,6 +80,9 @@ namespace PreschoolManagmentSoftware.Static_Classes
                     AddChildInfo(document, "Medicinske informacije: ", child.MedicalInformation);
                     AddChildInfo(document, "Grupa: ", groupName);
                     AddChildInfo(document, "Roditelji: ", parents);
+
+                    // Dodaj prisustva
+                    AddAttendancesInfo(document, attendances);
 
                     // Dodaj bilješke
                     AddNotesInfo(document, notes);
@@ -245,6 +248,29 @@ namespace PreschoolManagmentSoftware.Static_Classes
             document.Add(new Paragraph("\n"));
         }
 
+        private static void AddAttendancesInfo(Document document, List<string> attendances)
+        {
+            Font attendanceTitleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            Font attendanceInfoFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+
+            if (attendances != null && attendances.Count > 0)
+            {
+                document.Add(new Paragraph("Prisustva:", attendanceTitleFont));
+
+                // Kreiraj string sa svim datumima prisustva odvojenim zarezom
+                string attendancesString = string.Join(", ", attendances);
+
+                // Dodaj prisustva u paragraf
+                document.Add(new Paragraph(attendancesString, attendanceInfoFont));
+                document.Add(new Paragraph("\n"));
+            } else
+            {
+                document.Add(new Paragraph("Prisustva: ", attendanceTitleFont));
+                document.Add(new Paragraph("Nema prisustva.", attendanceInfoFont));
+                document.Add(new Paragraph("\n"));
+            }
+        }
+
         private static void AddNotesInfo(Document document, List<Note> notes)
         {
             Font noteTitleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
@@ -255,29 +281,34 @@ namespace PreschoolManagmentSoftware.Static_Classes
                 document.Add(new Paragraph("Bilješke:", noteTitleFont));
                 document.Add(new Paragraph("\n"));
 
+                // Kreiraj tablicu sa 4 kolone
+                PdfPTable table = new PdfPTable(4)
+                {
+                    WidthPercentage = 100
+                };
+
+                // Dodaj zaglavlja kolona
+                table.AddCell(new PdfPCell(new Phrase("ID bilješke", noteTitleFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Datum", noteTitleFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Ponašanje", noteTitleFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Opis", noteTitleFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+
+                // Dodaj podatke
                 foreach (var note in notes)
                 {
-                    Paragraph noteParagraph = new Paragraph
-                    {
-                        new Chunk("ID bilješke: ", noteTitleFont),
-                        new Chunk(note.Id.ToString(), noteInfoFont),
-                        new Chunk("\n"),
-                        new Chunk("Datum: ", noteTitleFont),
-                        new Chunk(note.Date, noteInfoFont),
-                        new Chunk("\n"),
-                        new Chunk("Ponašanje: ", noteTitleFont),
-                        new Chunk(note.Behaviour, noteInfoFont),
-                        new Chunk("\n"),
-                        new Chunk("Opis: ", noteTitleFont),
-                        new Chunk(note.Description, noteInfoFont),
-                        new Chunk("\n")
-                    };
-
-                    document.Add(noteParagraph);
+                    table.AddCell(new PdfPCell(new Phrase(note.Id.ToString(), noteInfoFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                    table.AddCell(new PdfPCell(new Phrase(note.Date, noteInfoFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                    table.AddCell(new PdfPCell(new Phrase(note.Behaviour, noteInfoFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                    table.AddCell(new PdfPCell(new Phrase(note.Description, noteInfoFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
                 }
+
+                document.Add(table);
+                document.Add(new Paragraph("\n"));
             } else
             {
+                document.Add(new Paragraph("Bilješke: ", noteTitleFont));
                 document.Add(new Paragraph("Nema bilješki.", noteInfoFont));
+                document.Add(new Paragraph("\n"));
             }
         }
     }

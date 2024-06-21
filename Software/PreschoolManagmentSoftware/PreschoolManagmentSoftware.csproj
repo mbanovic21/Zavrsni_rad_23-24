@@ -112,6 +112,9 @@
     <Compile Include="UserControls\NotesAndAttendances\ucChildrenTracking.xaml.cs">
       <DependentUpon>ucChildrenTracking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\NotesAndAttendances\ucEditNote.xaml.cs">
+      <DependentUpon>ucEditNote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\NotesAndAttendances\ucNotes.xaml.cs">
       <DependentUpon>ucNotes.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\NotesAndAttendances\ucChildrenTracking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NotesAndAttendances\ucEditNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

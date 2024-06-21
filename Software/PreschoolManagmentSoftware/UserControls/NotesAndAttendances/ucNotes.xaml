@@ -101,8 +101,9 @@
         <DataGrid x:Name="dgvNotes" Margin="70,0,70,7" Grid.Row="3" Grid.ColumnSpan="3"/>
         
         <!-- Butons -->
-        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="35,0,70,20">
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="35,0,70,20">
             <Button x:Name="btnDeleteNote" Click="btnDeleteNote_Click" Content="Obriši bilješku" Background="#d02c2c" FontWeight="SemiBold" Width="125" Height="40" Margin="0,0,7,7" Style="{StaticResource generatePasswordButtonTransparent}" />
+            <Button x:Name="btnEditNote" Click="btnEditNote_Click" Content="Uredi bilješku" FontWeight="SemiBold" Width="125" Height="40" Margin="0,0,7,7" Style="{StaticResource generatePasswordButtonTransparent}" />
             <Button x:Name="btnAddNote" Click="btnAddNote_Click" Content="Kreiraj novu bilješku" FontWeight="SemiBold" Width="163" Height="40" Margin="0,0,0,7" Style="{StaticResource generatePasswordButtonTransparent}" />
         </StackPanel>
     </Grid>

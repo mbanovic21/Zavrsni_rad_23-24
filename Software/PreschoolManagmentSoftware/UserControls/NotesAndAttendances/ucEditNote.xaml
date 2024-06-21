@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="PreschoolManagmentSoftware.UserControls.NotesAndAttendances.ucEditNote"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PreschoolManagmentSoftware.UserControls.NotesAndAttendances"
+             mc:Ignorable="d" 
+             x:Name="ucEditNotee"
+             d:DesignHeight="800" d:DesignWidth="400" Loaded="ucEditNotee_Loaded">
+    <Grid Width="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- input elements -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--header-->
+            <StackPanel Orientation="Vertical">
+                <!-- Close -->
+                <Button x:Name="btnCloseSidebarNote" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebarNote_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Image Source="/Media/Images/close.png" Width="25"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <TextBlock x:Name="txtHeader" Text="Uređivanje bilješke" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,0,0,20" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <TextBlock Text="Datum: " Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <!-- Naziv grupe -->
+            <!-- Date -->
+            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff" MouseLeftButtonUp="Border_MouseLeftButtonDown">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Media/Images/calendar.png" Height="20"/>
+                    <TextBlock x:Name="textDate" MouseLeftButtonUp="textDate_MouseLeftButtonUp" Style="{StaticResource placeholder}" />
+                    <DatePicker x:Name="dpDate" Style="{StaticResource textBox}" Margin="5 0 0 0" >
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Text" Value="Datum bilješke"/>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                </Grid>
+            </Border>
+
+            <TextBlock Text="Ponašanje: " Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <!-- Behaviour -->
+            <Border BorderThickness="1" Grid.Row="4" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,70,7">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="cmbBehaviour" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
+                    <Button x:Name="btnDropdown" Click="btnDropdown_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <Image Source="/Media/Images/dropdown-grey.png" Width="20"  HorizontalAlignment="Right" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!--Description-->
+        <TextBlock Text="Bilješka: " Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,0" VerticalAlignment="Center" />
+        <Border BorderThickness="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70,0,73,10" CornerRadius="5" Background="#ffffff">
+            <Grid Margin="7 9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Image Source="/Media/Images/write2.png" Height="20" VerticalAlignment="Top"/>
+                <TextBlock x:Name="textDescription" MouseDown="textDescription_MouseDown" Text=" Ovdje upišite bilješku..." Style="{StaticResource placeholder}" VerticalAlignment="Top" Margin="7,0,0,0"/>
+                <RichTextBox x:Name="rtxtDescription" Style="{StaticResource textBox}" TextChanged="rtxtDescription_TextChanged" VerticalScrollBarVisibility="Auto" Margin="2,0,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </Border>
+
+        <!--button-->
+        <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
+            <Button x:Name="btnAddNewNote" Click="btnAddNewNote_Click" Content="Uredi bilješku" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

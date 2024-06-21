@@ -54,6 +54,30 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
             OpenSidebar();
         }
 
+        private void btnEditNote_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedNote = dgvNotes.SelectedItem as Note;
+            var ucEditNote = new ucEditNote(this, selectedNote);
+            contentSidebarAddNote.Content = ucEditNote;
+            txtHeader.Margin = new Thickness(7, -2, 0, 20);
+            _previousControl.btnCloseSidebarNotes.Visibility = Visibility.Collapsed;
+            OpenSidebar();
+        }
+
+        private void btnDeleteNote_Click(object sender, RoutedEventArgs e)
+        {
+            var notes = dgvNotes.SelectedItems.Cast<Note>().ToList();
+            var areRemoved = _noteServices.RemoveNotes(notes);
+            RefreshGUI();
+            if (areRemoved)
+            {
+                MessageBox.Show("Bilješke su uspješno obrisane!");
+            } else
+            {
+                MessageBox.Show("Pogreška priliokm brisanja bilješki!");
+            }
+        }
+
         public void OpenSidebar()
         {
             // Pronalaženje animacija
@@ -83,20 +107,6 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
 
             txtHeader.Margin = new Thickness(7, -47, 0, 20);
             _previousControl.btnCloseSidebarNotes.Visibility = Visibility.Visible;
-        }
-
-        private void btnDeleteNote_Click(object sender, RoutedEventArgs e)
-        {
-            var notes = dgvNotes.SelectedItems.Cast<Note>().ToList();
-            var areRemoved = _noteServices.RemoveNotes(notes);
-            RefreshGUI();
-            if (areRemoved)
-            {
-                MessageBox.Show("Bilješke su uspješno obrisane!");
-            } else
-            {
-                MessageBox.Show("Pogreška priliokm brisanja bilješki!");
-            }
         }
     }
 }

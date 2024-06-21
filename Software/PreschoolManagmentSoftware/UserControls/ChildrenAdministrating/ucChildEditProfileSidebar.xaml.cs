@@ -83,8 +83,8 @@ namespace PreschoolManagmentSoftware.UserControls.ChildrenAdministrating
 
             textDevelopmentStatus.Text = _child.DevelopmentStatus;
             textMedicalInformations.Text = _child.MedicalInformation;
-            mothersName.Text = $"{_mother.FirstName} {_mother.LastName}";
-            fathersName.Text = $"{_father.FirstName} {_father.LastName}";
+            if(mothersName != null) mothersName.Text = $"{_mother.FirstName} {_mother.LastName}";
+            if(fathersName != null) fathersName.Text = $"{_father.FirstName} {_father.LastName}";
 
             var groupsDB = await Task.Run(_groupServices.GetAllGroups);
             cmbSearchGroup.ItemsSource = groupsDB;

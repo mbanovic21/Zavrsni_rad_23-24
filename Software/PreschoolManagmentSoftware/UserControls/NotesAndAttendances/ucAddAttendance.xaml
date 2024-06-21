@@ -28,16 +28,6 @@
 
             <!--header-->
             <StackPanel Orientation="Vertical">
-                <!-- Close -->
-                <Button x:Name="btnCloseSidebarAttendance" Grid.Row="0" HorizontalAlignment="Right" Margin="10" Click="btnCloseSidebarAttendance_Click">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Grid>
-                                <Image Source="/Media/Images/close.png" Width="25"/>
-                            </Grid>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
                 <TextBlock x:Name="txtHeader" Text="Bilježenje prisustva" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,0,0,20" VerticalAlignment="Center"/>
             </StackPanel>
 
@@ -56,7 +46,7 @@
                     <DatePicker x:Name="dpDate" Style="{StaticResource textBox}" Margin="5 0 0 0" >
                         <DatePicker.Resources>
                             <Style TargetType="{x:Type DatePickerTextBox}">
-                                <Setter Property="Text" Value="Datum bilješke"/>
+                                <Setter Property="Text" Value="Datum prisustva"/>
                             </Style>
                         </DatePicker.Resources>
                     </DatePicker>

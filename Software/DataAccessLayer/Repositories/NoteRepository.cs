@@ -52,6 +52,31 @@ namespace DataAccessLayer.Repositories
             return SaveChangesWithValidation(Context, ref affectedRows);
         }
 
+        public bool UpdateNote(Note note)
+        {
+            int affectedRows = 0;
+
+            var noteForUpdate = Context.Notes.FirstOrDefault(n => n.Id == note.Id);
+
+            if (noteForUpdate != null)
+            {
+                noteForUpdate.Date = note.Date;
+                noteForUpdate.Behaviour = note.Behaviour;
+                noteForUpdate.Description = note.Description;
+
+                bool success = SaveChangesWithValidation(Context, ref affectedRows);
+                if (!success)
+                {
+                    Console.WriteLine("Failed to save changes.");
+                }
+                return success;
+            } else
+            {
+                Console.WriteLine($"Note with Id {note.Id} not found.");
+                return false;
+            }
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

@@ -45,7 +45,18 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        //Get attendances by child id
+        public IQueryable<string> GetAttendancesByChildID(int childID)
+        {
+            var attendances = Attendances
+                              .Where(a => a.Id_Child == childID)
+                              .Select(a => a.Date);
 
+            return attendances.AsQueryable();
+        }
+
+
+        //SaveChanges()
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

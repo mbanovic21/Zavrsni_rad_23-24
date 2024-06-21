@@ -18,5 +18,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.AddAttendance(children, attendance);
             }
         }
+
+        //get attendance by child id
+        public List<string> GetAttendancesByChildID(int id)
+        {
+            using (var repo = new AttendanceRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetAttendancesByChildID(id).ToList();
+            }
+        }
     }
 }

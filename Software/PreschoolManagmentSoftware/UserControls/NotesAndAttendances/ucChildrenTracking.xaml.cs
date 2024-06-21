@@ -223,6 +223,7 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
             {
                 var ucNotes = new ucNotes(this, selectedChild);
                 contentSidebarNotes.Content = ucNotes;
+                sidebarNotes.Width = 800;
                 OpenSidebar();
             } else
             {
@@ -237,6 +238,7 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
             {
                 var ucAttendance = new ucAddAttendance(this, selectedChildren);
                 contentSidebarNotes.Content = ucAttendance;
+                sidebarNotes.Width = 400;
                 OpenSidebar();
             } else
             {

@@ -32,6 +32,7 @@ namespace PreschoolManagmentSoftware.UserControls
         private ParentServices _parentServices = new ParentServices();
         private GroupServices _groupServices = new GroupServices();
         private NoteServices _noteServices = new NoteServices();
+        private AttendanceServices _attendanceServices = new AttendanceServices();
         public ucChildProfileSidebar(Child child, ucChildrenAdministrating ucChildrenAdministrating)
         {
             InitializeComponent();
@@ -39,9 +40,9 @@ namespace PreschoolManagmentSoftware.UserControls
             _ucChildrenAdministrating = ucChildrenAdministrating;
         }
 
-        private void ucChildSIdebarProfile_Loaded(object sender, RoutedEventArgs e)
+        private async void ucChildSIdebarProfile_Loaded(object sender, RoutedEventArgs e)
         {
-            refreshData();
+            await refreshData();
         }
 
         private void btnEditProfile_Click(object sender, RoutedEventArgs e)
@@ -92,7 +93,8 @@ namespace PreschoolManagmentSoftware.UserControls
             var parents = await Task.Run(() => _parentServices.GetParentsByChild(_child));
             var group = await Task.Run(() => _groupServices.GetGroupById(_child.Id_Group));
             var notes = await Task.Run(() => _noteServices.GetNotesByChild(_child));
-            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents), GetGroupName(group), notes));
+            var attendances = await Task.Run(() => _attendanceServices.GetAttendancesByChildID(_child.Id));
+            await Task.Run(() => PDFConverter.GenerateAndOpenChildReport(_child, GetParentsNames(parents), GetGroupName(group), notes, attendances));
         }
 
         public async Task refreshData()
