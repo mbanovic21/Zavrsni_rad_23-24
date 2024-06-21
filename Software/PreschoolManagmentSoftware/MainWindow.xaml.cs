@@ -1,5 +1,6 @@
 ﻿using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls;
+using PreschoolManagmentSoftware.UserControls.EmailNotifier;
 using PreschoolManagmentSoftware.UserControls.NotesAndAttendances;
 using PreschoolManagmentSoftware.UserControls.PreschoolYear;
 using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
@@ -93,6 +94,13 @@ namespace PreschoolManagmentSoftware
         {
             var ucChildrenTracking = new ucChildrenTracking();
             contentControl.Content = ucChildrenTracking;
+        }
+
+        //Email notofier
+        private void btnEmailNotifier_Click(object sender, RoutedEventArgs e)
+        {
+            var ucEmailNotifier = new ucEmailNotifier();
+            contentControl.Content = ucEmailNotifier;
         }
 
         private void borHeader_MouseDown(object sender, MouseButtonEventArgs e)

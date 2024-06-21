@@ -41,6 +41,7 @@
                         <Button x:Name="btnWeeklyScheduleEmployee" Content="Tjedni raspored zaposlenik" Click="btnWeeklyScheduleEmployee_Click" />
                         <Button x:Name="btnWeeklyPreschoolYearAdministrating" Content="Upravitelj predškolskom godinom" Click="btnWeeklyPreschoolYearAdministrating_Click" />
                         <Button x:Name="btnNotes" Content="Bilješke i aktivnost djece" Click="btnNotes_Click" />
+                        <Button x:Name="btnEmailNotifier" Content="E-mail obavijestitelj" Click="btnEmailNotifier_Click" />
                         
                     </StackPanel>
                 </Grid>
