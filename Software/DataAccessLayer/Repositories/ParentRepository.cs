@@ -188,6 +188,11 @@ namespace DataAccessLayer.Repositories
             }
         }
 
+        //get all parents
+        public IQueryable<Parent> GetAllParents()
+        {
+            return Parents;
+        }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
