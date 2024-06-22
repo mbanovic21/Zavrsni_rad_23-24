@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -41,7 +42,9 @@ namespace PreschoolManagmentSoftware.UserControls.EmailNotifier
         private async void RefreshGUI()
         {
             dgvParents.ItemsSource = await Task.Run(() => _parentServices.GetAllParents());
+            HideColumnsParents();
             dgvEmployees.ItemsSource = await Task.Run(() => _userServices.GetAllUsers());
+            HideColumnsEmployees();
         }
 
         //naslov
@@ -113,7 +116,7 @@ namespace PreschoolManagmentSoftware.UserControls.EmailNotifier
         }
 
         //btnNotify
-        private void btnNotify_Click(object sender, RoutedEventArgs e)
+        private async void btnNotify_Click(object sender, RoutedEventArgs e)
         {
             var selectedParents = new List<Parent>();
             var selectedEmployees = new List<User>();
@@ -137,17 +140,79 @@ namespace PreschoolManagmentSoftware.UserControls.EmailNotifier
             if (!isValidate()) return;
 
             var subject = txtSubject.Text;
-            var message = new TextRange(rtxtMessage.Document.ContentStart, rtxtMessage.Document.ContentEnd).Text;
+            var message = GetRichTextBoxContent(rtxtMessage);
 
             try
             {
-                var emailNotifier = new BusinessLogicLayer.EmailServices.EmailNotifier(subject, message, selectedEmployees, selectedParents, filePaths);
+                var emailNotifier = await Task.Run(() => new BusinessLogicLayer.EmailServices.EmailNotifier(subject, message, selectedEmployees, selectedParents, filePaths));
                 MessageBox.Show("Email uspješno poslan!", "Obavijest", MessageBoxButton.OK, MessageBoxImage.Information);
             } catch (Exception ex)
             {
                 MessageBox.Show($"Došlo je do greške prilikom slanja emaila: {ex.Message}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void HideColumnsParents()
+        {
+            var columnsToHide = new List<string>
+            {
+                "Id",
+                "PIN",
+                "ProfileImage",
+                "DateOfBirth",
+                "Sex",
+                "Children",
+            };
+
+            HideColumns(dgvParents, columnsToHide);
+        }
+
+        private void HideColumnsEmployees()
+        {
+            var columnsToHide = new List<string>
+            {
+                "Id",
+                "PIN",
+                "ProfileImage",
+                "DateOfBirth",
+                "Sex",
+                "Password",
+                "Salt",
+                "Id_role",
+                "Id_Group",
+                "Group",
+                "Days"
+            };
+
+            HideColumns(dgvEmployees, columnsToHide);
+        }
+
+        private void HideColumns(DataGrid dgv, List<string> columnsToHide)
+        {
+            if (dgv is DataGrid)
+            {
+                foreach (string columnName in columnsToHide)
+                {
+                    var column = dgv.Columns.FirstOrDefault(c => c.Header.ToString() == columnName);
+                    if (column != null)
+                    {
+                        column.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        private string GetRichTextBoxContent(RichTextBox rtb)
+        {
+            TextRange textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+            string plainText = textRange.Text;
+
+            // Replace new lines with <br/>
+            string htmlText = plainText.Replace("\n", "<br/>").Replace(" ", "&nbsp;");
+
+            return htmlText;
+        }
+
 
         private bool isValidate()
         {

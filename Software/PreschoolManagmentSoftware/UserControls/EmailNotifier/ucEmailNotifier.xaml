@@ -91,7 +91,7 @@
 
                 <!--poruka-->
                 <TextBlock Text="Poruka: " Grid.Column="0" Grid.Row="3" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
-                <Border BorderThickness="1" Grid.Row="4" Grid.ColumnSpan="2" BorderBrush="#acb0af" Margin="70,0,35,10" CornerRadius="5" Background="#ffffff">
+                <Border BorderThickness="1" Grid.Row="4" Grid.ColumnSpan="1" BorderBrush="#acb0af" Margin="70,0,-50,10" CornerRadius="5" Background="#ffffff">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -101,17 +101,18 @@
                         <Image Source="/Media/Images/write2.png" Height="20" VerticalAlignment="Top"/>
                         <TextBlock x:Name="textMessageUp" Text=" Poštovani {ime} {prezime}," Style="{StaticResource placeholder}" VerticalAlignment="Top" Margin="7,0,0,0"/>
                         <TextBlock x:Name="textMessage" MouseDown="textMessage_MouseDown" Text=" Ovdje upišite poruku..." Style="{StaticResource placeholder}" VerticalAlignment="Top" Margin="7,40,0,0"/>
-                        <TextBlock x:Name="textMessageDown" Text=" Slobodno se obratite našem timu ako imate bilo kakvih" Style="{StaticResource placeholder}" VerticalAlignment="Bottom" Margin="7,40,0,80"/>
-                        <TextBlock x:Name="textMessageDown1" Text=" pitanja ili trebate dodatnu podršku." Style="{StaticResource placeholder}" VerticalAlignment="Bottom" Margin="7,40,0,60"/>
+                        <TextBlock x:Name="textMessageDown" Text=" Slobodno se obratite našem timu ako imate bilo" Style="{StaticResource placeholder}" VerticalAlignment="Bottom" Margin="7,40,0,80"/>
+                        <TextBlock x:Name="textMessageDown1" Text=" kakvih pitanja ili trebate dodatnu podršku." Style="{StaticResource placeholder}" VerticalAlignment="Bottom" Margin="7,40,0,60"/>
                         <TextBlock x:Name="textMessageDown2" Text=" S poštovanjem," Style="{StaticResource placeholder}" VerticalAlignment="Bottom" Margin="7,40,0,20"/>
                         <TextBlock x:Name="textMessageDown3" Text=" Vaš Administrator" Style="{StaticResource placeholder}" VerticalAlignment="Bottom" Margin="7,40,0,0"/>
-                        <RichTextBox x:Name="rtxtMessage" Style="{StaticResource textBox}" TextChanged="rtxtMessage_TextChanged" VerticalScrollBarVisibility="Auto" Margin="2,0,0,0" VerticalAlignment="Top"/>
+                        <RichTextBox x:Name="rtxtMessage" Foreground="#676969" Style="{StaticResource textBox}" TextChanged="rtxtMessage_TextChanged" VerticalScrollBarVisibility="Hidden" Margin="6,40,0,120" VerticalAlignment="Top"/>
                     </Grid>
                 </Border>
 
                 <!-- Upload -->
-                <TextBlock Text="Dokumenit: " Grid.Column="0" Grid.Row="5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
-                <Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="#ffffff" Margin="70,0,35,7">
+                <TextBlock Text="Dokumenti: " Grid.Column="1" Grid.Row="3" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                <Border Grid.Column="1" Grid.ColumnSpan="1
+                        " Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="#ffffff" Margin="70,0,35,47">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -121,7 +122,7 @@
 
                         <Image x:Name="imgUpload" Grid.Column="0" Source="/Media/Images/photo.png" Height="20" VerticalAlignment="Top"/>
                         <TextBlock Grid.Column="1" x:Name="textImageDescription" TextWrapping="Wrap" Text="Ovdje možete učitati snimke ekrana ili pdf dokumente..." Style="{StaticResource placeholder}" VerticalAlignment="Top" Margin="7,0,0,0"/>
-                        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" Height="120">
+                        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top">
                             <ItemsControl x:Name="UploadingFileList"/>
                         </ScrollViewer>
                     </Grid>
@@ -129,7 +130,7 @@
 
                 <!-- gumb za upload -->
                 <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                    <Button x:Name="btnUpload" Height="30" Width="80" Margin="0,0,35,10" Content="Učitaj" Click="btnUpload_Click" Style="{StaticResource whiteButton}"/>
+                    <Button x:Name="btnUpload" Height="30" Width="80" Margin="0,-40,35,10" Content="Učitaj" Click="btnUpload_Click" Style="{StaticResource whiteButton}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="8" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,7,0,20">
