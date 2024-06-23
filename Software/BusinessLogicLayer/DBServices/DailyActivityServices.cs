@@ -25,5 +25,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.AddDailyActivity(activity, day);
             }
         }
+
+        public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivities()
+        {
+            using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetEmployeeActivities();
+            }
+        }
+
     }
 }

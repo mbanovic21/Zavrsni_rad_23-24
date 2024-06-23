@@ -80,8 +80,8 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
 
         private void LoadDaysActivitiesChart()
         {
-            /*var ucDA = new ucDayActivityChart();
-            contentControlDAchart.Content = ucDA;*/
+            var ucDA = new ucDayActivityChart();
+            contentControlDAchart.Content = ucDA;
         }
 
         private void LoadChildrenAttendanceNumber()

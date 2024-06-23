@@ -41,6 +41,25 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        //Days activity chart
+        public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivities()
+        {
+            var activities = Context.Days
+            .Include(d => d.Users)
+            .Include(d => d.DailyActivities)
+            .SelectMany(d => d.Users, (d, u) => new
+            {
+                Day = d.Name,
+                Employee = u.FirstName + " " + u.LastName,
+                ActivityCount = d.DailyActivities.Count
+            })
+            .ToList()
+            .Select(x => (x.Employee, x.Day, x.ActivityCount))
+            .ToList();
+
+            return activities;
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try
