@@ -433,10 +433,16 @@
     <Resource Include="Media\Images\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\Images\activity.png" />
+    <Resource Include="Media\Images\location-pin.png" />
+    <Resource Include="Media\Images\time-alarm.png" />
+    <Resource Include="activity.png" />
+    <Resource Include="location-pin.png" />
     <Content Include="Media\Animations\loading_animation.wmv" />
     <Content Include="Media\Animations\loading_animation.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="time-alarm.png" />
     <Resource Include="Media\Images\dropdown-arrow-black.png" />
     <Resource Include="Media\Images\left-arrow-black.png" />
     <Resource Include="Media\Images\right-arrow-black.png" />
