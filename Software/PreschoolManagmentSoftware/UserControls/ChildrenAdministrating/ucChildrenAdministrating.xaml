@@ -98,6 +98,7 @@
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
+
                                 <ContentControl x:Name="contentSidebarProfile" Grid.Row="1"/>
                             </Grid>
                         </Grid>
@@ -159,6 +160,18 @@
                                         </ControlTemplate>
                                     </Button.Template>
                                 </Button>
+
+                                <!-- Back -->
+                                <Button x:Name="btnBackToChildRegistration" Grid.Row="0" HorizontalAlignment="left" Visibility="Collapsed" Margin="10" Click="btnBackToChildRegistration_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Image Source="/Media/Images/back-arrow.png" Width="25"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
                                 <ContentControl x:Name="contentSidebarRegistration" Grid.Row="1"/>
                             </Grid>
                         </Grid>

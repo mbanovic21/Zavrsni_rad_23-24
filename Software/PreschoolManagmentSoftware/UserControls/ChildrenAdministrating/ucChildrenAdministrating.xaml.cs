@@ -26,6 +26,7 @@ namespace PreschoolManagmentSoftware.UserControls
     public partial class ucChildrenAdministrating : UserControl
     {
         private ChildServices _childServices = new ChildServices();
+        private ucChildRegistrationSidebar _childRegistrationSidebar;
         public ucChildrenAdministrating()
         {
             InitializeComponent();
@@ -267,8 +268,8 @@ namespace PreschoolManagmentSoftware.UserControls
 
             if (sidebarRegistration.Visibility == Visibility.Collapsed)
             {
-                var ucChildRegistration = new ucChildRegistrationSidebar(this);
-                contentSidebarRegistration.Content = ucChildRegistration;
+                _childRegistrationSidebar = new ucChildRegistrationSidebar(this);
+                contentSidebarRegistration.Content = _childRegistrationSidebar;
 
                 sidebarRegistration.Visibility = Visibility.Visible;
                 slideInAnimation.Begin(sidebarRegistration);
@@ -280,6 +281,19 @@ namespace PreschoolManagmentSoftware.UserControls
         {
             dgvChildren.ItemsSource = await Task.Run(() => _childServices.GetAllChildren());
             HideColumns();
+        }
+
+
+        //leftArrow
+        private void btnBackToChildRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            BackToPreviousControl();
+        }
+        public void BackToPreviousControl()
+        {
+            _childRegistrationSidebar.FillComboBoxses();
+            contentSidebarRegistration.Content = _childRegistrationSidebar;
+            btnBackToChildRegistration.Visibility = Visibility.Collapsed;
         }
     }
 }

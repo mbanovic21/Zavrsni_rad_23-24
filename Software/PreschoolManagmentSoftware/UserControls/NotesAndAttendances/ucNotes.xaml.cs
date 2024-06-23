@@ -57,24 +57,36 @@ namespace PreschoolManagmentSoftware.UserControls.NotesAndAttendances
         private void btnEditNote_Click(object sender, RoutedEventArgs e)
         {
             var selectedNote = dgvNotes.SelectedItem as Note;
-            var ucEditNote = new ucEditNote(this, selectedNote);
-            contentSidebarAddNote.Content = ucEditNote;
-            txtHeader.Margin = new Thickness(7, -2, 0, 20);
-            _previousControl.btnCloseSidebarNotes.Visibility = Visibility.Collapsed;
-            OpenSidebar();
+            if(selectedNote != null)
+            {
+                var ucEditNote = new ucEditNote(this, selectedNote);
+                contentSidebarAddNote.Content = ucEditNote;
+                txtHeader.Margin = new Thickness(7, -2, 0, 20);
+                _previousControl.btnCloseSidebarNotes.Visibility = Visibility.Collapsed;
+                OpenSidebar();
+            } else
+            {
+                MessageBox.Show("Odaberite bilješku koju želite urediti!");
+            }
         }
 
         private void btnDeleteNote_Click(object sender, RoutedEventArgs e)
         {
             var notes = dgvNotes.SelectedItems.Cast<Note>().ToList();
-            var areRemoved = _noteServices.RemoveNotes(notes);
-            RefreshGUI();
-            if (areRemoved)
+            if(notes.Count > 0)
             {
-                MessageBox.Show("Bilješke su uspješno obrisane!");
+                var areRemoved = _noteServices.RemoveNotes(notes);
+                RefreshGUI();
+                if (areRemoved)
+                {
+                    MessageBox.Show("Bilješke su uspješno obrisane!");
+                } else
+                {
+                    MessageBox.Show("Pogreška priliokm brisanja bilješki!");
+                }
             } else
             {
-                MessageBox.Show("Pogreška priliokm brisanja bilješki!");
+                MessageBox.Show("Odaberite bilješke koje želite obrisati!");
             }
         }
 

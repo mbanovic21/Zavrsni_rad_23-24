@@ -39,20 +39,10 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
             _previousControl = previousControl;
         }
 
-        //leftArrow
-        private void BtnBackChildRegistration_Click(object sender, RoutedEventArgs e)
-        {
-            BackToPreviousControl();
-        }
-
-        private void BackToPreviousControl()
-        {
-            _ucChildrenAdministrating.contentSidebarRegistration.Content = _previousControl;
-        }
-
         //Profile image
         private void ucChildRegistration_Loaded(object sender, RoutedEventArgs e)
         {
+            _ucChildrenAdministrating.btnBackToChildRegistration.Visibility = Visibility.Visible;
             SetInitialProfileImage();
         }
 
@@ -289,7 +279,7 @@ namespace PreschoolManagmentSoftware.UserControls.ParentAdministrating
             if (isAdded)
             {
                 _previousControl.FillComboBoxses();
-                BackToPreviousControl();
+                _ucChildrenAdministrating.BackToPreviousControl();
                 MessageBox.Show($"Roditelj {parent.FirstName} {parent.LastName} je uspješno dodan u sustav!");
             } else
             {
