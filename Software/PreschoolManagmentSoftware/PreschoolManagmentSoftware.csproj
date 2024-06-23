@@ -433,6 +433,8 @@
     <Resource Include="Media\Images\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\Images\age-0.png" />
+    <Resource Include="Media\Images\group.png" />
     <Resource Include="Media\Images\activity.png" />
     <Resource Include="Media\Images\location-pin.png" />
     <Resource Include="Media\Images\time-alarm.png" />
