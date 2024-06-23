@@ -433,6 +433,11 @@
     <Resource Include="Media\Images\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\Images\medical-record.png" />
+    <Resource Include="Media\Images\man-user.png" />
+    <Resource Include="Media\Images\address.png" />
+    <Resource Include="Media\Images\flag.png" />
+    <Resource Include="Media\Images\graph-up.png" />
     <Resource Include="Media\Images\age-0.png" />
     <Resource Include="Media\Images\group.png" />
     <Resource Include="Media\Images\activity.png" />

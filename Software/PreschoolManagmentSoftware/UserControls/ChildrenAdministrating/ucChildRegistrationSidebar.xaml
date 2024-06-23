@@ -182,18 +182,6 @@
                                     <Image Source="/Media/Images/user.png" Height="20"/>
                                     <TextBlock x:Name="textLastname" MouseLeftButtonUp="textLastname_MouseDown" Text="Prezime" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtLastname" TextChanged="txtLastname_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
-                                    <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
-                                        <Image.ToolTip>
-                                            <ToolTip>
-                                                <StackPanel>
-                                                    <TextBlock Style="{StaticResource info-required}">This field is required!</TextBlock>
-                                                    <TextBlock>Enter your last name.</TextBlock>
-                                                    <TextBlock FontWeight="Bold">Rules:</TextBlock>
-                                                    <TextBlock>1. The last name may only contain letters and spaces or '-' if you have two or more last names.</TextBlock>
-                                                </StackPanel>
-                                            </ToolTip>
-                                        </Image.ToolTip>
-                                    </Image>
                                 </Grid>
                             </Border>
 
@@ -208,8 +196,9 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="auto" />
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox x:Name="cmbSearchMother" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
-                                        <Button x:Name="btnDropdown" Click="btnDropdown_Click">
+                                        <Image Grid.Column="0" Source="/Media/Images/female-user.png" Height="20"/>
+                                        <ComboBox Grid.Column="1" x:Name="cmbSearchMother" Width="195" HorizontalAlignment="Left" Margin="7,0,0,0" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
+                                        <Button Grid.Column="3" x:Name="btnDropdown" Click="btnDropdown_Click">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Grid>
@@ -242,8 +231,9 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox x:Name="cmbSearchFather" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
-                                        <Button x:Name="btnDropdown2" Click="btnDropdown2_Click">
+                                        <Image Grid.Column="0" Source="/Media/Images/male-user.png" Height="20"/>
+                                        <ComboBox Grid.Column="1" x:Name="cmbSearchFather" Width="195" Margin="7,0,0,0" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
+                                        <Button Grid.Column="2" x:Name="btnDropdown2" Click="btnDropdown2_Click">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Grid>
@@ -276,12 +266,13 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox x:Name="cmbSearchGroup" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
-                                        <Button x:Name="btnDropdown3" Click="btnDropdown3_Click">
+                                        <Image Grid.Column="0" Source="/Media/Images/group.png" Height="20"/>
+                                        <ComboBox Grid.Column="1" x:Name="cmbSearchGroup" Margin="7,0,0,0" Width="195" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
+                                        <Button Grid.Column="2" x:Name="btnDropdown3" Click="btnDropdown3_Click">
                                             <Button.Template>
                                                 <ControlTemplate TargetType="Button">
                                                     <Grid>
-                                                        <Image Source="/Media/Images/dropdown-grey.png" Width="20"  HorizontalAlignment="Right" />
+                                                        <Image Source="/Media/Images/dropdown-grey.png" Width="20" HorizontalAlignment="Right" />
                                                     </Grid>
                                                 </ControlTemplate>
                                             </Button.Template>
@@ -391,7 +382,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Media/Images/user.png" Height="20"/>
+                                    <Image Source="/Media/Images/address.png" Height="20"/>
                                     <TextBlock x:Name="textAddress" MouseLeftButtonUp="textAddress_MouseDown" Text="Adresa" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtAddress" TextChanged="txtAddress_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -417,7 +408,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Media/Images/user.png" Height="20"/>
+                                    <Image Source="/Media/Images/location-pin.png" Height="20"/>
                                     <TextBlock x:Name="textBirthPlace" MouseLeftButtonUp="textBirthPlace_MouseDown" Text="Mjesto rođenja" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtBirthPlace" TextChanged="txtBirthPlace_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -443,7 +434,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Media/Images/user.png" Height="20"/>
+                                    <Image Source="/Media/Images/flag.png" Height="20" VerticalAlignment="Top"/>
                                     <TextBlock x:Name="textNationality" MouseLeftButtonUp="textNationality_MouseDown" Text="Nacionalnost" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtNationality" TextChanged="txtNationality_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -469,7 +460,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Media/Images/user.png" Height="20"/>
+                                    <Image Source="/Media/Images/graph-up.png" Height="20"/>
                                     <TextBlock x:Name="textDevelopmentStatus" MouseLeftButtonUp="textDevelopmentStatus_MouseDown" Text="Status razvoja" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtDevelopmentStatus" TextChanged="txtDevelopmentStatus_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
@@ -495,7 +486,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="/Media/Images/user.png" Height="20"/>
+                                    <Image Source="/Media/Images/medical-record.png" Height="20"/>
                                     <TextBlock x:Name="textMedicalInformation" MouseLeftButtonUp="textMedicalInformation_MouseDown" Text="Medicinske informacije" Style="{StaticResource placeholder}"/>
                                     <TextBox x:Name="txtMedicalInformation" TextChanged="txtMedicalInformation_TextChanged"  Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                                     <Image Grid.Column="2" Source="/Media/Images/information.png" Height="20">
