@@ -59,7 +59,8 @@
 
         <DataGrid x:Name="dgvEmployees" Margin="70,7,70,7" Grid.Row="1"/>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
+        <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
+            <Button x:Name="btnClearSelectedDay" Click="btnClearSelectedDay_Click" Content="Ukloni sve" Background="#d02c2c" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
             <Button x:Name="btnAddEmployeeToSchedule" Click="btnAddEmployeeToSchedule_Click" Content="Dodaj u raspored" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
             <!--<Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />   -->
         </StackPanel>
