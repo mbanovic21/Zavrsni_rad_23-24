@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ValueConverter.cs" />
     <Compile Include="Static Classes\GuiManager.cs" />
     <Compile Include="Static Classes\PDFConverter.cs" />
     <Compile Include="UserControls\ChildrenAdministrating\ucAddNewGroupChild.xaml.cs">
