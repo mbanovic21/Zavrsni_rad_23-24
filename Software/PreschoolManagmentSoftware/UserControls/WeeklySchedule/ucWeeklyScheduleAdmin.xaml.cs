@@ -159,13 +159,8 @@ namespace PreschoolManagmentSoftware.UserControls
                 if (dayTextBlock != null)
                 {
                     string dayName = dayTextBlock.Text;
-                    //MessageBox.Show(dayName);
-
-                    //Day matchingDay = listday.Find(d => d.Name == dayName);
-                    //var strr = "";
                     foreach (var d in listday)
                     {
-                        //MessageBox.Show(d.Name + "==" + dayName + "\n");
                         var day = dayName.Split(' ')[0];
                         var dayFullName = GetFullDayName(day);
 
@@ -178,14 +173,22 @@ namespace PreschoolManagmentSoftware.UserControls
                             if (dayBorder != null)
                             {
                                 var UsersByDayId = _dayServices.getUsersByDayId(d.Id);
-                                //MessageBox.Show(UsersByDayId.ToString() + "\n");
                                 Button userButton = dayBorder.Child as Button;
                                 if (userButton != null)
                                 {
-                                    userButton.Content = GetEmployeesNames(UsersByDayId);
-                                    userButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
-                                    userButton.FontWeight = FontWeights.SemiBold;
-                                    userButton.FontSize = 15;                              
+                                    if (UsersByDayId.Any())
+                                    {
+                                        userButton.Content = GetEmployeesNames(UsersByDayId);
+                                        userButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
+                                        userButton.FontWeight = FontWeights.SemiBold;
+                                        userButton.FontSize = 15;
+                                    } else
+                                    {
+                                        userButton.Content = string.Empty;
+                                        userButton.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+                                        userButton.FontWeight = FontWeights.Normal;
+                                        userButton.FontSize = 12;
+                                    }
                                 }
                             }
                         }
