@@ -31,6 +31,7 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
             LoadActivities();
             LoadGroupsChildrenChart();
             LoadDaysActivitiesChart();
+            LoadChildrenAttendanceNumber();
         }
 
         private void LoadWeeklySchedule()
@@ -80,6 +81,12 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
         {
             var ucDA = new ucDayActivityChart();
             contentControlDAchart.Content = ucDA;
+        }
+
+        private void LoadChildrenAttendanceNumber()
+        {
+            var ucCAN = new ucChildrenAttendanceNumber();
+            contentControlNumber.Content = ucCAN;
         }
     }
 }
