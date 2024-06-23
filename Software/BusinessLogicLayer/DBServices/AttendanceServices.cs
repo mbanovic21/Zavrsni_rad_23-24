@@ -27,5 +27,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetAttendancesByChildID(id).ToList();
             }
         }
+
+        //get attendances by date
+        public int GetAttendancesCountByDate(string date)
+        {
+            using (var repo = new AttendanceRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetAttendancesCountByDate(date);
+            }
+        }
     }
 }

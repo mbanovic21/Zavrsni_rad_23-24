@@ -86,8 +86,8 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
 
         private void LoadChildrenAttendanceNumber()
         {
-            /*var ucCAN = new ucChildrenAttendanceNumber();
-            contentControlNumber.Content = ucCAN;*/
+            var ucCAN = new ucChildrenAttendanceNumber();
+            contentControlNumber.Content = ucCAN;
         }
     }
 }

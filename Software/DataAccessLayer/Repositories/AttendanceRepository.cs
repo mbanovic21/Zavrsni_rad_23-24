@@ -55,6 +55,14 @@ namespace DataAccessLayer.Repositories
             return attendances.AsQueryable();
         }
 
+        //get attendances by date
+        public int GetAttendancesCountByDate(string date)
+        {
+            var attendances = Attendances.Where(a => a.Date == date)
+                              .Select(a => a.Date).Count();
+
+            return attendances;
+        }
 
         //SaveChanges()
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
