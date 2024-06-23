@@ -91,6 +91,9 @@
     <Compile Include="UserControls\ChildrenAdministrating\ucChildRegistrationSidebar.xaml.cs">
       <DependentUpon>ucChildRegistrationSidebar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\DashboardAndCharts\ucActivities.xaml.cs">
+      <DependentUpon>ucActivities.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\DashboardAndCharts\ucDashboard.xaml.cs">
       <DependentUpon>ucDashboard.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ChildrenAdministrating\ucChildRegistrationSidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DashboardAndCharts\ucActivities.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

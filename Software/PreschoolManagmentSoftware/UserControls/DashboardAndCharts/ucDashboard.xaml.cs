@@ -28,12 +28,44 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
         private void Dashboard_Loaded(object sender, RoutedEventArgs e)
         {
             LoadWeeklySchedule();
+            LoadActivities();
         }
 
         private void LoadWeeklySchedule()
         {
             var ucWeeklyScheduleDashboard = new ucWeeklyScheduleDashboard();
             contentControlWeek.Content = ucWeeklyScheduleDashboard;
+        }
+
+        private void LoadActivities()
+        {
+            string todayName = GetDayNameInCroatian(DateTime.Now.DayOfWeek);
+            string todayDate = DateTime.Now.ToString("dd.MM.yyyy.");
+            var ucActivities = new ucActivities(todayName, todayDate);
+            contentControlActivities.Content = ucActivities;
+        }
+
+        private string GetDayNameInCroatian(DayOfWeek dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    return "Ponedjeljak";
+                case DayOfWeek.Tuesday:
+                    return "Utorak";
+                case DayOfWeek.Wednesday:
+                    return "Srijeda";
+                case DayOfWeek.Thursday:
+                    return "Četvrtak";
+                case DayOfWeek.Friday:
+                    return "Petak";
+                case DayOfWeek.Saturday:
+                    return "Subota";
+                case DayOfWeek.Sunday:
+                    return "Nedjelja";
+                default:
+                    return "";
+            }
         }
     }
 }
