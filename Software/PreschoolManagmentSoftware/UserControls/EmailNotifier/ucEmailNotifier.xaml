@@ -55,19 +55,22 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
-                                <RowDefinition Height="100"/>
                             </Grid.RowDefinitions>
 
+                            <!--header-->
+                            <TextBlock Text="Kontakti" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Foreground="#f5f5f5" Margin="10"/>
+
                             <!--roditelji-->
-                            <TextBlock Text="Roditelji: " Grid.Row="0" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,75,70,7" VerticalAlignment="Center" />
-                            <DataGrid x:Name="dgvParents" Margin="35,0,35,7" Grid.Row="1" Grid.ColumnSpan="3"/>
+                            <TextBlock Text="Roditelji: " Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
+                            <DataGrid x:Name="dgvParents" Margin="35,0,35,7" Grid.Row="2" Grid.ColumnSpan="3"/>
                             
                             <!--zaposlenici-->
-                            <TextBlock Text="Zaposlenici: " Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
-                            <DataGrid x:Name="dgvEmployees" Margin="35,0,35,7" Grid.Row="3" Grid.ColumnSpan="3"/>
+                            <TextBlock Text="Zaposlenici: " Grid.Row="3" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
+                            <DataGrid x:Name="dgvEmployees" Margin="35,0,35,20" Grid.Row="4" Grid.ColumnSpan="3"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -76,21 +79,23 @@
                 <TextBlock Text="E-mail obavijestitelj" Style="{StaticResource titleText}" Grid.ColumnSpan="2" Foreground="#4EB1B6" Margin="10"/>
 
                 <!--naslov-->
-                <TextBlock Text="Naslov: " Grid.Column="0" Grid.Row="1" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,0" VerticalAlignment="Center" />
+                <TextBlock Text="Naslov: " Grid.Column="0" Grid.Row="1" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,0" VerticalAlignment="Center" />
 
                 <!-- Ime -->
                 <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,35,7" CornerRadius="5" Background="#ffffff">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/Media/Images/email.png" Height="20"/>
                         <TextBlock x:Name="textSubject" MouseLeftButtonUp="textSubject_MouseLeftButtonUp" Text="Naslov" Style="{StaticResource placeholder}"/>
                         <TextBox x:Name="txtSubject" TextChanged="txtSubject_TextChanged" Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                     </Grid>
                 </Border>
 
                 <!--poruka-->
-                <TextBlock Text="Poruka: " Grid.Column="0" Grid.Row="3" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                <TextBlock Text="Poruka: " Grid.Column="0" Grid.Row="3" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
                 <Border BorderThickness="1" Grid.Row="4" Grid.ColumnSpan="1" BorderBrush="#acb0af" Margin="70,0,-50,10" CornerRadius="5" Background="#ffffff">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
@@ -110,7 +115,7 @@
                 </Border>
 
                 <!-- Upload -->
-                <TextBlock Text="Dokumenti: " Grid.Column="1" Grid.Row="3" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                <TextBlock Text="Dokumenti: " Grid.Column="1" Grid.Row="3" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
                 <Border Grid.Column="1" Grid.ColumnSpan="1
                         " Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="#ffffff" Margin="70,0,35,47">
                     <Grid Margin="7 9">
