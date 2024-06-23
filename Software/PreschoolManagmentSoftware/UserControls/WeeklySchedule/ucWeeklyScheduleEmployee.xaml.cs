@@ -180,6 +180,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                                 if (userButton != null)
                                 {
                                     userButton.Content = GetEmployeesNames(UsersByDayId);
+                                    userButton.Foreground = new SolidColorBrush(Color.FromRgb(245, 245, 245));
                                     userButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
                                     userButton.FontWeight = FontWeights.SemiBold;
                                     userButton.FontSize = 15;

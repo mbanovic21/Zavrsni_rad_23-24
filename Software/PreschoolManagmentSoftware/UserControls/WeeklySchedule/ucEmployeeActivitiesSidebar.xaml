@@ -25,6 +25,7 @@
     <Grid Width="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -84,10 +85,12 @@
         <TextBlock Grid.Row="0" x:Name="textHeader" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,7,0,7" VerticalAlignment="Center" />
 
         <!--dgvEmployeeActivities-->
-        <DataGrid x:Name="dgvEmployeesActivities" Margin="70,7,70,7" Grid.Row="1"/>
+        <!--searchbar-->
+        <TextBlock Text="Aktivnosti: " Grid.Column="0" Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+        <DataGrid x:Name="dgvEmployeesActivities" Margin="70,0,70,7" Grid.Row="2"/>
 
         <!--button-->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
             <Button x:Name="btnAddNewActivitie" Click="btnAddNewActivitie_Click" Content="Dodaj novu aktivnost" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
         </StackPanel>
     </Grid>

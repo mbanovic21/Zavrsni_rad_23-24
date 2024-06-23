@@ -339,7 +339,7 @@
         <Style x:Key="DayTextBlockStyle" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="DimGray"/>
             <Setter Property="Margin" Value="0,0,0,15" />
         </Style>
         
@@ -347,6 +347,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="DimGray"/>
             <Setter Property="Margin" Value="0,0,15,0"/>
         </Style>
 
