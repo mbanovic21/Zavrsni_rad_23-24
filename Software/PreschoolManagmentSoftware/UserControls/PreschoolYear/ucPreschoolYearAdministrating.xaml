@@ -109,7 +109,7 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid>
-                                    <Image Source="/Media/Images/left-arrow-black.png" Width="20"/>
+                                    <Image Source="/Media/Images/left-dimgray.png" Width="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
@@ -122,8 +122,8 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <ComboBox x:Name="cmbYears" Loaded="cmbYears_Loaded" Background="#f5f5f5" Foreground="#1C1C1F" Grid.Column="0" FontSize="20" SelectionChanged="cmbYears_SelectionChanged" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" VerticalAlignment="Center">
-                                <ComboBoxItem Background="#f0f0f0" Foreground="#1C1C1F" IsSelected="True"/>
+                            <ComboBox x:Name="cmbYears" Loaded="cmbYears_Loaded" Background="#f5f5f5" Foreground="DimGray" FontWeight="SemiBold" Grid.Column="0" FontSize="20" SelectionChanged="cmbYears_SelectionChanged" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" VerticalAlignment="Center">
+                                <ComboBoxItem Background="#f0f0f0" Foreground="DimGray" IsSelected="True"/>
                             </ComboBox>
                         </Grid>
                     </Border>
@@ -133,7 +133,7 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid>
-                                    <Image Source="/Media/Images/right-arrow-black.png" Width="20"/>
+                                    <Image Source="/Media/Images/right-dimgray.png" Width="20"/>
                                 </Grid>
                             </ControlTemplate>
                         </Button.Template>
@@ -141,11 +141,11 @@
                 </StackPanel>
 
                 <!--data grid groups-->
-                <TextBlock Text="Grupe: " Grid.Column="0" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                <TextBlock Text="Grupe: " Foreground="#4EB1B6" Grid.Column="0" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
                 <DataGrid x:Name="dgvGroups" Grid.Column="0" Grid.Row="3" SelectionChanged="dgvGroups_SelectionChanged" Margin="70,0,35,7"/>
 
                 <!--data grid children-->
-                <TextBlock Text="Djeca: " Grid.Column="1" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
+                <TextBlock Text="Djeca: " Foreground="#4EB1B6" Grid.Column="1" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
                 <DataGrid x:Name="dgvChildren" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="35,0,70,7"/>
 
                 <!--buttons-->

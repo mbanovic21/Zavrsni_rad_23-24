@@ -155,12 +155,6 @@
     <Compile Include="UserControls\ParentAdministrating\ucParentRegistration.xaml.cs">
       <DependentUpon>ucParentRegistration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ParentAdministrating\ucProfile.xaml.cs">
-      <DependentUpon>ucProfile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\ParentAdministrating\ucRegistration.xaml.cs">
-      <DependentUpon>ucRegistration.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\PreschoolYear\ucAddNewGroup.xaml.cs">
       <DependentUpon>ucAddNewGroup.xaml</DependentUpon>
     </Compile>
@@ -302,14 +296,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ParentAdministrating\ucProfile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\ParentAdministrating\ucRegistration.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\PreschoolYear\ucAddNewGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,6 +419,8 @@
     <Resource Include="Media\Images\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\Images\left-dimgray.png" />
+    <Resource Include="Media\Images\right-dimgray.png" />
     <Resource Include="Media\Images\thumbs-up-down.png" />
     <Resource Include="Media\Images\medical-record.png" />
     <Resource Include="Media\Images\man-user.png" />

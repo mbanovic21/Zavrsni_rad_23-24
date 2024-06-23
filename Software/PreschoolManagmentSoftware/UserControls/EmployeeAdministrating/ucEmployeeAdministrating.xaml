@@ -56,7 +56,7 @@
                     </Grid.RowDefinitions>
 
                     <!-- Sidebar profile -->
-                    <Border x:Name="sidebarProfile" MaxWidth="450" Grid.RowSpan="4" Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="1">
+                    <Border x:Name="sidebarProfile" MaxWidth="450" Grid.RowSpan="14" Grid.Column="2" Visibility="Collapsed" Panel.ZIndex="1">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#3AA9AD" Offset="0"/>
@@ -103,7 +103,7 @@
                     </Border>
 
                     <!-- Sidebar registration -->
-                    <Border x:Name="sidebarRegistration" MaxWidth="800" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Right">
+                    <Border x:Name="sidebarRegistration" MaxWidth="800" Grid.RowSpan="14" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Collapsed" Panel.ZIndex="1" HorizontalAlignment="Right">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#3AA9AD" Offset="0"/>

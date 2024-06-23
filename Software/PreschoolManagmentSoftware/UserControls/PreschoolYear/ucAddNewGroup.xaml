@@ -48,8 +48,10 @@
             <Border Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Image Source="/Media/Images/group.png" Height="20"/>
                     <TextBlock x:Name="textGroupName" MouseLeftButtonUp="textGroupName_MouseLeftButtonUp" Text="Naziv grupe" Style="{StaticResource placeholder}"/>
                     <TextBox x:Name="txtGroupName" TextChanged="txtGroupName_TextChanged" Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                 </Grid>
@@ -60,8 +62,10 @@
             <Border Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Image Source="/Media/Images/age-0.png" Height="20"/>
                     <TextBlock x:Name="textAge" MouseLeftButtonUp="textAge_MouseLeftButtonUp" Text="npr. 3-5" Style="{StaticResource placeholder}"/>
                     <TextBox x:Name="txtAge" TextChanged="txtAge_TextChanged" Style="{StaticResource textBox}" Margin="5 0 0 0"/>
                 </Grid>
