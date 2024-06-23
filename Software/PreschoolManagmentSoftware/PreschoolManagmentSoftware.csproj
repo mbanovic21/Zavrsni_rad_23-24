@@ -97,6 +97,12 @@
     <Compile Include="UserControls\DashboardAndCharts\ucDashboard.xaml.cs">
       <DependentUpon>ucDashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\DashboardAndCharts\ucDayActivityChart.xaml.cs">
+      <DependentUpon>ucDayActivityChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DashboardAndCharts\ucGroupsChildrenChart.xaml.cs">
+      <DependentUpon>ucGroupsChildrenChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\DashboardAndCharts\ucWeeklyScheduleDashboard.xaml.cs">
       <DependentUpon>ucWeeklyScheduleDashboard.xaml</DependentUpon>
     </Compile>
@@ -213,6 +219,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DashboardAndCharts\ucDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DashboardAndCharts\ucDayActivityChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DashboardAndCharts\ucGroupsChildrenChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

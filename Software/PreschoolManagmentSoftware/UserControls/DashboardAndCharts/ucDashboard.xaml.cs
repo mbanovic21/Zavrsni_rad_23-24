@@ -29,11 +29,13 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
         {
             LoadWeeklySchedule();
             LoadActivities();
+            LoadGroupsChildrenChart();
+            LoadDaysActivitiesChart();
         }
 
         private void LoadWeeklySchedule()
         {
-            var ucWeeklyScheduleDashboard = new ucWeeklyScheduleDashboard();
+            var ucWeeklyScheduleDashboard = new ucWeeklyScheduleDashboard(this);
             contentControlWeek.Content = ucWeeklyScheduleDashboard;
         }
 
@@ -66,6 +68,18 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
                 default:
                     return "";
             }
+        }
+
+        private void LoadGroupsChildrenChart()
+        {
+            var ucGC = new ucGroups_childrenChart();
+            contentControlGCchart.Content = ucGC;
+        }
+
+        private void LoadDaysActivitiesChart()
+        {
+            var ucDA = new ucDayActivityChart();
+            contentControlDAchart.Content = ucDA;
         }
     }
 }

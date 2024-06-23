@@ -26,9 +26,11 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
     {
         private DayService _dayServices = new DayService();
         private WeeklyScheduleServices _weeklyScheduleServices = new WeeklyScheduleServices();
-        public ucWeeklyScheduleDashboard()
+        private ucDashboard _ucDashboard { get; set; }
+        public ucWeeklyScheduleDashboard(ucDashboard ucDashboard)
         {
             InitializeComponent();
+            _ucDashboard = ucDashboard;
         }
 
         private void WeekDashboard_Loaded(object sender, RoutedEventArgs e)
@@ -123,7 +125,7 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
                                 Button userButton = dayBorder.Child as Button;
                                 if (userButton != null)
                                 {
-                                    //userButton.Content = GetEmployeesNames(UsersByDayId);
+                                    userButton.Content = "";
                                     userButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
                                     userButton.FontWeight = FontWeights.SemiBold;
                                     userButton.FontSize = 15;
@@ -192,10 +194,8 @@ namespace PreschoolManagmentSoftware.UserControls.DashboardAndCharts
                             var fullDayName = GetFullDayName(selectedDayShort);
                             var fullDayDate = GetFullDate(selectedDaysDate);
 
-                            if (clickedButton.Content != null)
-                            {
-                                // Implementirajte potrebnu funkcionalnost ovdje
-                            }
+                                var ucActivities = new ucActivities(fullDayName, fullDayDate);
+                                _ucDashboard.contentControlActivities.Content = ucActivities;
                         }
                     }
                 }

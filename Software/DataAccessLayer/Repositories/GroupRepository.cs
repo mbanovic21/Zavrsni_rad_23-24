@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -72,6 +73,19 @@ namespace DataAccessLayer.Repositories
         public Group GetGroupById(int? id)
         {
             return Groups.FirstOrDefault(g => g.Id == id);
+        }
+
+        //get group children.count()
+        public int GetGroupsMembersByGroupId(int id)
+        {
+            var group = Groups.Include(g => g.Children).FirstOrDefault(g => g.Id == id);
+
+            if (group != null)
+            {
+                return group.Children.Count;
+            }
+
+            return 0;
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)

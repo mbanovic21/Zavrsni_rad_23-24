@@ -28,13 +28,19 @@
                 <TextBlock Text="Nadzorna ploča" Style="{StaticResource titleText}" Grid.ColumnSpan="4" Foreground="#4EB1B6" Margin="10"/>
 
                 <!--uvodni tekst-->
-                <TextBlock Grid.Row="1" Text="''Svaki dan je prilika za rast i učenje. Uz PreschoolManagementSoftware, zajedno stvaramo budućnost, korak po korak.''" Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Grid.ColumnSpan="4" Margin="10,10,10,40"/>
+                <TextBlock Grid.Row="1" Text="''Svaki dan je prilika za rast i učenje. Uz PreschoolManagementSoftware, zajedno stvaramo budućnost, korak po korak.''" Style="{StaticResource normalText}" Foreground="DimGray" Opacity="0.8" Grid.ColumnSpan="4" Margin="10,10,10,42"/>
                 
                 <!--weeklySchedule-->
                 <ContentControl x:Name="contentControlWeek" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,-140,0" />
                 
                 <!--activities-->
                 <ContentControl x:Name="contentControlActivities" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="160,0,0,0" />
+                
+                <!--gruops children chart-->
+                <ContentControl x:Name="contentControlGCchart" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,0" />
+
+                <!--days activities chart-->
+                <ContentControl x:Name="contentControlDAchart" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0" />
             </Grid>
         </Border>
     </Grid>

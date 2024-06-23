@@ -1,9 +1,11 @@
 ﻿using EntityLayer.Entities;
+using PreschoolManagmentSoftware.Static_Classes;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +41,25 @@ namespace DataAccessLayer.Repositories
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
 
             return isSaveSuccessful;
+        }
+
+        //Days activity chart
+        public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivities()
+        {
+            var activities = Context.Days
+            .Include(d => d.Users)
+            .Include(d => d.DailyActivities)
+            .SelectMany(d => d.Users, (d, u) => new
+            {
+                Day = d.Name,
+                Employee = u.FirstName + " " + u.LastName,
+                ActivityCount = d.DailyActivities.Count
+            })
+            .ToList()
+            .Select(x => (x.Employee, x.Day, x.ActivityCount))
+            .ToList();
+
+            return activities;
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)

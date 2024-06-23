@@ -3,6 +3,7 @@ using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,14 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.AddDailyActivity(activity, day);
+            }
+        }
+
+        public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivities()
+        {
+            using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetEmployeeActivities();
             }
         }
     }
