@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -28,10 +29,15 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <TextBlock Text="Naziv aktivnosti: " Grid.Row="0" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Naziv aktivnosti -->
-            <Border Grid.Row="0" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
+            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -41,8 +47,9 @@
                 </Grid>
             </Border>
 
+            <TextBlock Text="Početno vrijeme: " Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Početno vrijeme -->
-            <Border Grid.Row="1" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
+            <Border Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -52,8 +59,9 @@
                 </Grid>
             </Border>
 
+            <TextBlock Text="Završno vrijeme: " Grid.Row="4" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Završno vrijeme -->
-            <Border Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
+            <Border Grid.Row="5" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -63,9 +71,9 @@
                 </Grid>
             </Border>
 
-            <TextBlock Text="Lokacija: " Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <TextBlock Text="Lokacija: " Grid.Row="6" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- cmb location -->
-            <Border Grid.Row="4" BorderThickness="1" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,70,7">
+            <Border Grid.Row="7" BorderThickness="1" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,70,7">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -85,31 +93,11 @@
                 </Grid>
             </Border>
 
-            <TextBlock Text="Resursi: " Grid.Row="5" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
-            <!-- cmb resource -->
-            <Border Grid.Row="6" BorderThickness="1" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,70,7">
-                <Grid Margin="7 9">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <ComboBox x:Name="cmbResources" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
-                    <Button x:Name="btnDropdown2" Click="btnDropdown2_Click">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Image Source="/Media/Images/dropdown-grey.png" Width="20"  HorizontalAlignment="Right" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
-            </Border>
         </Grid>
         
+        <TextBlock Text="Opis: " Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
         <!--opis aktivnosti -->
-        <Border Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
+        <Border Grid.Row="3" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff">
             <Grid Margin="7 9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -123,7 +111,7 @@
         </Border>
         
         <!--gumb-->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,20" >
             <Button x:Name="btnAddNewActivity" Click="btnAddNewActivity_Click" Content="Dodaj novu aktivnost" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
             <!--<Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />   -->
         </StackPanel>

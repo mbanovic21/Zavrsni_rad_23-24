@@ -244,10 +244,6 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
             return regex.IsMatch(input);
         }
 
-        private void btnDropdown2_Click(object sender, RoutedEventArgs e)
-        {
-            cmbResources.IsDropDownOpen = true;
-        }
 
         private void btnDropdown_Click(object sender, RoutedEventArgs e)
         {
