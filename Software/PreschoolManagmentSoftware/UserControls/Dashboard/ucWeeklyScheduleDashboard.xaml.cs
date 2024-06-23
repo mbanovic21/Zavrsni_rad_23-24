@@ -53,6 +53,7 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
                 if (currentWeekStartDate <= DateTime.Now && DateTime.Now <= currentWeekEndDate.AddDays(1))
                 {
                     var weekDisplay = $"{currentWeekStartDate:dd.MM.yyyy.} - {currentWeekEndDate:dd.MM.yyyy.}";
+                    Console.WriteLine(weekDisplay.ToString());
 
                     // Update TextBlock with the week display
                     txtCurrentWeek.Text = weekDisplay;

@@ -41,12 +41,6 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
                 return;
             }
 
-            // Ispis podataka na konzolu
-            foreach (var activity in activities)
-            {
-                System.Diagnostics.Debug.WriteLine($"Zaposlenik: {activity.EmployeeName}, Dan: {activity.DayOfWeek}, Broj aktivnosti: {activity.ActivityCount}");
-            }
-
             // Grupiranje podataka po zaposleniku i danu
             var employeeGroups = activities
                 .GroupBy(a => a.EmployeeName)
