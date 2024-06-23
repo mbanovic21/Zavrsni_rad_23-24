@@ -188,6 +188,56 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
             }
         }
 
+        //remove all
+        private async void btnClearSelectedDay_Click(object sender, RoutedEventArgs e)
+        {
+            // Provjeri je li dan već zauzet
+            var isDateAlreadyTaken = await Task.Run(() => _dayService.isDateAlredyTaken(_date, _name));
+
+            if (isDateAlreadyTaken)
+            {
+                // Dohvati dan prema datumu i imenu
+                _day = await Task.Run(() => _dayService.getDayByDateAndName(_date, _name));
+
+                if (_day != null)
+                {
+                    // Ažuriraj dan tako da obrišeš sve radnike
+                    var updatedDay = new Day
+                    {
+                        Id = _day.Id,
+                        Name = _day.Name,
+                        Date = _day.Date,
+                        Users = new List<User>() // prazna lista radnika
+                    };
+
+                    // Ažuriraj dan u bazi
+                    var isDayUpdated = await Task.Run(() => _dayService.isDayUpdated(updatedDay));
+
+                    if (isDayUpdated)
+                    {
+                        _day = updatedDay;
+                        MessageBox.Show("Svi radnici su uspješno uklonjeni s odabranog dana!");
+
+                        // Osvježi gumb i zatvori bočnu traku
+                        _clickedButton.Content = string.Empty;
+                        _clickedButton.Background = new SolidColorBrush(Color.FromRgb(240, 240, 240)); // Postavi boju na bijelu
+                        _clickedButton.FontWeight = FontWeights.Normal;
+                        _clickedButton.FontSize = 12;
+                        _ucWeeklyScheduleAdmin.CloseSidebar();
+                    } else
+                    {
+                        MessageBox.Show("Pogreška kod ažuriranja dana!");
+                    }
+                } else
+                {
+                    MessageBox.Show("Dan nije pronađen!");
+                }
+            } else
+            {
+                MessageBox.Show("Dan nije zauzet!");
+            }
+        }
+
         public string GetEmployeesNames(List<User> employees)
         {
             StringBuilder employeesBuilder = new StringBuilder();
