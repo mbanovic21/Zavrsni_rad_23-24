@@ -34,7 +34,7 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
 
         private async void LoadNumber()
         {
-            var currentDate = DateTime.Now.ToString("dd.MM.yyyy.");
+            var currentDate = DateTime.Now.ToString("dd.M.yyyy.");
             txtNumber.Text = await Task.Run(() => _attendanceServices.GetAttendancesCountByDate(currentDate).ToString());
         }
     }

@@ -56,12 +56,11 @@ namespace DataAccessLayer.Repositories
         }
 
         //get attendances by date
-        public int GetAttendancesCountByDate(string date)
+        public IQueryable<Attendance> GetAttendancesCountByDate(string date)
         {
-            var attendances = Attendances.Where(a => a.Date == date)
-                              .Select(a => a.Date).Count();
+            var attendances = Attendances.Where(a => a.Date == date);
 
-            return attendances;
+            return attendances.AsQueryable();
         }
 
         //SaveChanges()

@@ -33,7 +33,7 @@ namespace BusinessLogicLayer.DBServices
         {
             using (var repo = new AttendanceRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
-                return repo.GetAttendancesCountByDate(date);
+                return repo.GetAttendancesCountByDate(date).ToList().Count();
             }
         }
     }
