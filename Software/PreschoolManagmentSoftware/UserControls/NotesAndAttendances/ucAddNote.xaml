@@ -72,8 +72,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
-                    <ComboBox x:Name="cmbBehaviour" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
-                    <Button x:Name="btnDropdown" Click="btnDropdown_Click">
+                    <Image Grid.Column="0" Source="/Media/Images/thumbs-up-down.png" Height="20"/>
+                    <ComboBox Grid.Column="1" Margin="7,0,0,0" x:Name="cmbBehaviour" Width="242" HorizontalAlignment="Left" Height="30" Style="{StaticResource combobox}" Background="#ffffff" Foreground="#acb0af" VerticalAlignment="Center" />
+                    <Button Grid.Column="2" x:Name="btnDropdown" Click="btnDropdown_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid>
@@ -88,7 +89,7 @@
 
         <!--Description-->
         <TextBlock Text="Bilješka: " Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,0" VerticalAlignment="Center" />
-        <Border BorderThickness="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70,0,73,10" CornerRadius="5" Background="#ffffff">
+        <Border BorderThickness="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70,0,70,10" CornerRadius="5" Background="#ffffff">
             <Grid Margin="7 9">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
