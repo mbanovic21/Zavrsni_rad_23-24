@@ -1,5 +1,6 @@
 ﻿using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls;
+using PreschoolManagmentSoftware.UserControls.Dashboard;
 using PreschoolManagmentSoftware.UserControls.EmailNotifier;
 using PreschoolManagmentSoftware.UserControls.NotesAndAttendances;
 using PreschoolManagmentSoftware.UserControls.PreschoolYear;
@@ -109,6 +110,12 @@ namespace PreschoolManagmentSoftware
             {
                 DragMove();
             }
+        }
+
+        private void btnDashboard_Click(object sender, RoutedEventArgs e)
+        {
+            var ucDashboard = new ucDashboard();
+            contentControl.Content = ucDashboard;
         }
     }
 }
