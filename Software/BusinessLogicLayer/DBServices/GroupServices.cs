@@ -62,5 +62,13 @@ namespace BusinessLogicLayer.DBServices
             }
 
         }
+
+        public int GetGruopsMembersByGroupId(int id)
+        {
+            using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetGroupsMembersByGroupId(id);
+            }
+        }
     }
 }

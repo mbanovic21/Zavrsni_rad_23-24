@@ -97,6 +97,9 @@
     <Compile Include="UserControls\Dashboard\ucDashboard.xaml.cs">
       <DependentUpon>ucDashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Dashboard\ucDayActivityChart.xaml.cs">
+      <DependentUpon>ucDayActivityChart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Dashboard\ucGroupsChildrenChart.xaml.cs">
       <DependentUpon>ucGroupsChildrenChart.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Dashboard\ucDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Dashboard\ucDayActivityChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

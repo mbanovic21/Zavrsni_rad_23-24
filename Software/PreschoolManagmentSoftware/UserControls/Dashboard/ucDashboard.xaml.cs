@@ -74,8 +74,8 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
 
         private void LoadGroupsChildrenChart()
         {
-            /*var ucGC = new ucGroups_childrenChart();
-            contentControlGCchart.Content = ucGC;*/
+            var ucGC = new ucGroupsChildrenChart();
+            contentControlGCchart.Content = ucGC;
         }
 
         private void LoadDaysActivitiesChart()

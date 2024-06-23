@@ -74,6 +74,18 @@ namespace DataAccessLayer.Repositories
             return Groups.FirstOrDefault(g => g.Id == id);
         }
 
+        //get group children.count()
+        public int GetGroupsMembersByGroupId(int id)
+        {
+            var group = Groups.Include(g => g.Children).FirstOrDefault(g => g.Id == id);
+
+            if (group != null)
+            {
+                return group.Children.Count;
+            }
+
+            return 0;
+        }
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try
