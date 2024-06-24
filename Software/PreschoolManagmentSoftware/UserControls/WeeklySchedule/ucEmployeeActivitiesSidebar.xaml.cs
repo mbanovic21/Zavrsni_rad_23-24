@@ -74,6 +74,27 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
             _ucWeeklyScheduleEmployee.btnBackToEmployeeActivitiesSidebar.Visibility = Visibility.Visible;
         }
 
+        private async void btnEditActivitie_Click(object sender, RoutedEventArgs e)
+        {
+            var activity = dgvEmployeesActivities.SelectedItem as DailyActivity;
+            if (activity != null)
+            {
+                var ucEditActivity = new ucEditActivity(this, _daysName, _date, activity);
+                contentSidebarAddNewActivity.Content = ucEditActivity;
+                OpenSidebar();
+                await Task.Delay(500);
+                _ucWeeklyScheduleEmployee.btnBackToEmployeeActivitiesSidebar.Visibility = Visibility.Visible;
+            } else
+            {
+                MessageBox.Show("Odaberite dnevnu aktivnost!");
+            }
+        }
+
+        private void btnDeleteActivitie_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void btnCloseSidebarAddNewActivity_Click(object sender, RoutedEventArgs e)
         {
             _ucWeeklyScheduleEmployee.btnBackToEmployeeActivitiesSidebar.Visibility = Visibility.Collapsed;

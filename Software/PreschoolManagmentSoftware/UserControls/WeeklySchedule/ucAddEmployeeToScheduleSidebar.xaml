@@ -62,7 +62,7 @@
 
         <!--searchbar-->
         <TextBlock Text="Zaposlenici: " Grid.Column="0" Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
-        <DataGrid x:Name="dgvEmployees" Margin="70,7,70,7" Grid.Row="2"/>
+        <DataGrid x:Name="dgvEmployees" Margin="70,0,70,7" Grid.Row="2"/>
 
         <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
             <Button x:Name="btnClearSelectedDay" Click="btnClearSelectedDay_Click" Content="Ukloni sve" Background="#d02c2c" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />

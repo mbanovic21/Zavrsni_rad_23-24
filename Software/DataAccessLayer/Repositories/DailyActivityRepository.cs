@@ -60,6 +60,31 @@ namespace DataAccessLayer.Repositories
             return activities;
         }
 
+        public bool UpdateDailyActivity(DailyActivity dailyActivity, Day day)
+        {
+            int affectedRows = 0;
+
+            var existingActivity = DailyActivity
+                    .Include(da => da.Days)
+                    .FirstOrDefault(da => da.Id == dailyActivity.Id && da.Days.Any(d => d.Id == day.Id));
+
+            if (existingActivity == null)
+            {
+                return false;
+            }
+
+            existingActivity.Name = dailyActivity.Name;
+            existingActivity.StartTime = dailyActivity.StartTime;
+            existingActivity.EndTime = dailyActivity.EndTime;
+            existingActivity.Location = dailyActivity.Location;
+            existingActivity.Description = dailyActivity.Description;
+
+            Context.Entry(existingActivity).State = EntityState.Modified;
+
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+            return isSaveSuccessful;
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

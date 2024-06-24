@@ -79,13 +79,27 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 
         private void UpdateSelectedWeekText(DateTime selectedWeekStartDate)
         {
-            txtMonday.Text = $"Pon. {selectedWeekStartDate:dd.MM.}";
-            txtTuesday.Text = $"Uto. {selectedWeekStartDate.AddDays(1):dd.MM.}";
-            txtWednesday.Text = $"Sri. {selectedWeekStartDate.AddDays(2):dd.MM.}";
-            txtThursday.Text = $"Čet. {selectedWeekStartDate.AddDays(3):dd.MM.}";
-            txtFriday.Text = $"Pet. {selectedWeekStartDate.AddDays(4):dd.MM.}";
-            txtSaturday.Text = $"Sub. {selectedWeekStartDate.AddDays(5):dd.MM.}";
-            txtSunday.Text = $"Ned. {selectedWeekStartDate.AddDays(6):dd.MM.}";
+            DateTime today = DateTime.Today;
+
+            UpdateTextBlock(txtMonday, $"Pon. {selectedWeekStartDate:dd.MM.}", selectedWeekStartDate == today);
+            UpdateTextBlock(txtTuesday, $"Uto. {selectedWeekStartDate.AddDays(1):dd.MM.}", selectedWeekStartDate.AddDays(1) == today);
+            UpdateTextBlock(txtWednesday, $"Sri. {selectedWeekStartDate.AddDays(2):dd.MM.}", selectedWeekStartDate.AddDays(2) == today);
+            UpdateTextBlock(txtThursday, $"Čet. {selectedWeekStartDate.AddDays(3):dd.MM.}", selectedWeekStartDate.AddDays(3) == today);
+            UpdateTextBlock(txtFriday, $"Pet. {selectedWeekStartDate.AddDays(4):dd.MM.}", selectedWeekStartDate.AddDays(4) == today);
+            UpdateTextBlock(txtSaturday, $"Sub. {selectedWeekStartDate.AddDays(5):dd.MM.}", selectedWeekStartDate.AddDays(5) == today);
+            UpdateTextBlock(txtSunday, $"Ned. {selectedWeekStartDate.AddDays(6):dd.MM.}", selectedWeekStartDate.AddDays(6) == today);
+        }
+
+        private void UpdateTextBlock(TextBlock textBlock, string text, bool isToday)
+        {
+            textBlock.Text = text;
+            if (isToday)
+            {
+                textBlock.FontWeight = FontWeights.SemiBold;
+            } else
+            {
+                textBlock.FontWeight = FontWeights.Normal;
+            }
         }
 
         private void cmbWeek_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -325,6 +339,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
         private void btnCloseSidebarEmployeesActivities_Click(object sender, RoutedEventArgs e)
         {
             CloseSidebar();
+            btnBackToEmployeeActivitiesSidebar.Visibility = Visibility.Collapsed;
         }
 
         private async void btnBackToEmployeeActivitiesSidebar_Click(object sender, RoutedEventArgs e)

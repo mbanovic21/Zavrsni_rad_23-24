@@ -173,6 +173,9 @@
     <Compile Include="UserControls\WeeklySchedule\ucAddNewActivity.xaml.cs">
       <DependentUpon>ucAddNewActivity.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WeeklySchedule\ucEditActivity.xaml.cs">
+      <DependentUpon>ucEditActivity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\WeeklySchedule\ucEmployeeActivitiesSidebar.xaml.cs">
       <DependentUpon>ucEmployeeActivitiesSidebar.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\WeeklySchedule\ucAddNewActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WeeklySchedule\ucEditActivity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

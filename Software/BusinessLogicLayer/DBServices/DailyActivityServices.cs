@@ -34,5 +34,12 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
+        public bool UpdateDailyActivity(DailyActivity dailyActivity, Day day)
+        {
+            using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.UpdateDailyActivity(dailyActivity, day);
+            }
+        }
     }
 }
