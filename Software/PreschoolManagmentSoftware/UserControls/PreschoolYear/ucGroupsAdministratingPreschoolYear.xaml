@@ -99,7 +99,7 @@
 
         <!--Buttons grops-->
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="70,0,35,20" >
-            <Button x:Name="btnDeleteGroupFromYearsGroups" Click="btnDeleteGroupFromYearsGroups_Click" Content="Obriši" Background="#d02c2c" FontWeight="SemiBold" Width="90" Height="40" Margin="0,0,0,7" Style="{StaticResource generatePasswordButtonTransparent}" />
+            <Button x:Name="btnDeleteGroupFromYearsGroups" Click="btnDeleteGroupFromYearsGroups_Click" Content="Ukloni" Background="#d02c2c" FontWeight="SemiBold" Width="90" Height="40" Margin="0,0,0,7" Style="{StaticResource generatePasswordButtonTransparent}" />
         </StackPanel>
 
         <!-- Butons groups DB -->

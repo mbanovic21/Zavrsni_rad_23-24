@@ -150,9 +150,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
             if (isUpdated)
             {
-                MessageBox.Show("Grupe su uspješno uklonjene iz predškolske godine.");
                 RefreshGUI(); // Osvježavanje GUI-a
                 _previousControl.RefreshGUI();
+                MessageBox.Show("Grupe su uspješno uklonjene iz predškolske godine.");
             } else
             {
                 MessageBox.Show("Uklanjanje grupa iz predškolske godine nije uspjelo.");
@@ -180,9 +180,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
             if (isUpdated)
             {
-                MessageBox.Show("Grupe su uspješno dodane u predškolsku godinu.");
                 RefreshGUI(); // Osvježavanje GUI-a
                 _previousControl.RefreshGUI();
+                MessageBox.Show("Grupe su uspješno dodane u predškolsku godinu.");
             } else
             {
                 MessageBox.Show("Dodavanje grupa u predškolsku godinu nije uspjelo.");
