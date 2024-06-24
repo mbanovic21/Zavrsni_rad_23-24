@@ -60,7 +60,6 @@ namespace BusinessLogicLayer.DBServices
             {
                 return repo.GetGroupById(id);
             }
-
         }
 
         public int GetGruopsMembersByGroupId(int id)
@@ -68,6 +67,14 @@ namespace BusinessLogicLayer.DBServices
             using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.GetGroupsMembersByGroupId(id);
+            }
+        }
+
+        public List<Group> GetAllGroupsExceptForYear(int yearId)
+        {
+            using (var repo = new GroupRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetAllGroupsExceptForYear(yearId).ToList();
             }
         }
     }

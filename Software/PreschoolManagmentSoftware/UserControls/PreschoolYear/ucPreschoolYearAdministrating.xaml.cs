@@ -49,9 +49,14 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             cmbYears.Items.Clear();
 
             // Postavite novi ItemsSource
-            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
+            RefreshGUI();
 
             SetCurrentYear();
+        }
+
+        public async void RefreshGUI()
+        {
+            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
         }
 
         private void SetCurrentYear()
@@ -230,7 +235,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private void btnGroupAdministrating_Click(object sender, RoutedEventArgs e)
         {
-            
+            var ucGAPY = new ucGroupsAdministratingPreschoolYear(this);
+            contentSidebarAddNewPreschoolYear.Content = ucGAPY;
+            OpenSidebar();
         }
     }
 }

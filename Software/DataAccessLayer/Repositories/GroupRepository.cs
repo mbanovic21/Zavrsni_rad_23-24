@@ -86,6 +86,19 @@ namespace DataAccessLayer.Repositories
 
             return 0;
         }
+
+        //get all groups except those in the specified year
+        public IQueryable<Group> GetAllGroupsExceptForYear(int yearId)
+        {
+            var groupsInYear = Context.PreeschoolYears
+                                      .Where(py => py.Id == yearId)
+                                      .SelectMany(py => py.Groups)
+                                      .Select(g => g.Id);
+
+            var query = Groups.Where(g => !groupsInYear.Contains(g.Id));
+            return query;
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

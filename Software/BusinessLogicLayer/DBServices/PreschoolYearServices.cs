@@ -32,5 +32,21 @@ namespace BusinessLogicLayer.DBServices
                 return repo.GetAllYearsName().ToList();
             }
         }
+
+        public PreeschoolYear GetPreschoolYearByYear(string year)
+        {
+            using (var repo = new PreschoolYearRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetPreschoolYearByName(year);
+            }
+        }
+
+        public bool UpdateYearWithNewGroups(int yearId, List<Group> newGroups)
+        {
+            using (var repo = new PreschoolYearRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.UpdateYearWithNewGroups(yearId, newGroups);
+            }
+        }
     }
 }

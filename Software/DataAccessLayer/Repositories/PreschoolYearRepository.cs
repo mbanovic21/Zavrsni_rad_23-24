@@ -55,6 +55,38 @@ namespace DataAccessLayer.Repositories
             return query;
         }
 
+        public PreeschoolYear GetPreschoolYearByName(string year)
+        {
+            var preschoolYear = PreschoolYears.FirstOrDefault(py => py.Year == year);
+            return preschoolYear;
+        }
+
+        public bool UpdateYearWithNewGroups(int yearId, List<Group> newGroups)
+        {
+            // Pronaći postojeću godinu po ID-u
+            var existingYear = PreschoolYears.Include(py => py.Groups).FirstOrDefault(py => py.Id == yearId);
+            if (existingYear == null)
+            {
+                return false;
+            }
+
+            // Dodavanje novih grupa na postojeće grupe
+            foreach (var group in newGroups)
+            {
+                // Proveriti da li grupa već postoji da ne bi došlo do duplikata
+                if (!existingYear.Groups.Any(g => g.Id == group.Id))
+                {
+                    Context.Groups.Attach(group);
+                    existingYear.Groups.Add(group);
+                }
+            }
+
+            int affectedRows = 0;
+            bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
+
+            return isSaveSuccessful;
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try

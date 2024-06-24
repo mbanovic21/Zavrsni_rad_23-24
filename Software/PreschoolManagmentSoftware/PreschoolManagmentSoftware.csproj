@@ -158,6 +158,12 @@
     <Compile Include="UserControls\PreschoolYear\ucAddNewGroup.xaml.cs">
       <DependentUpon>ucAddNewGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\PreschoolYear\ucAddNewGroupIntoExistingPreschoolYear.xaml.cs">
+      <DependentUpon>ucAddNewGroupIntoExistingPreschoolYear.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PreschoolYear\ucGroupsAdministratingPreschoolYear.xaml.cs">
+      <DependentUpon>ucGroupsAdministratingPreschoolYear.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PreschoolYear\ucAddPreschoolYear.xaml.cs">
       <DependentUpon>ucAddPreschoolYear.xaml</DependentUpon>
     </Compile>
@@ -300,6 +306,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\PreschoolYear\ucAddNewGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PreschoolYear\ucAddNewGroupIntoExistingPreschoolYear.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\PreschoolYear\ucGroupsAdministratingPreschoolYear.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

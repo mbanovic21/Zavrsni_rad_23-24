@@ -1,4 +1,5 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -195,5 +196,4 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             return !string.IsNullOrEmpty(value) && value.All(c => char.IsLetter(c) || char.IsWhiteSpace(c) || c == '-');
         }
     }
-}
 }

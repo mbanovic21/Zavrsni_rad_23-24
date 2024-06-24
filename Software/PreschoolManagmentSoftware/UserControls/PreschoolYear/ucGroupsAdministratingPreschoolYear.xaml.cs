@@ -42,10 +42,13 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         public async void RefreshGUI()
         {
+            var year = txtHeaderYear.Text;
+            var yearId = await Task.Run(() => _preschoolYearServices.GetPreschoolYearByYear(year));
             dgvGroups.ItemsSource = null;
-            dgvGroups.ItemsSource = Groups;
+            dgvGroups.ItemsSource = await Task.Run(() => _preschoolYearServices.GetGroupsForYear(year));
             HideColumns(dgvGroups);
-            dgvGroupsDB.ItemsSource = await Task.Run(() => _groupServices.GetAllGroups());
+            dgvGroupsDB.ItemsSource = null;
+            dgvGroupsDB.ItemsSource = await Task.Run(() => _groupServices.GetAllGroupsExceptForYear(yearId.Id));
             HideColumns(dgvGroupsDB);
         }
 
@@ -142,9 +145,34 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         }
 
-        private void btnAddGroupToYear_Click(object sender, RoutedEventArgs e)
+        private async void btnAddGroupToYear_Click(object sender, RoutedEventArgs e)
         {
+            var year = txtHeaderYear.Text;
 
+            // Dobivanje godine predškolske ustanove na temelju godine (u tekstualnom formatu)
+            var preschoolYear = await Task.Run(() => _preschoolYearServices.GetPreschoolYearByYear(year));
+
+            if (preschoolYear == null)
+            {
+                MessageBox.Show("Predškolska godina nije pronađena.");
+                return;
+            }
+
+            // Prikupljanje odabranih grupa iz DataGrid-a
+            var groups = dgvGroupsDB.SelectedItems.Cast<Group>().ToList();
+
+            // Ažuriranje predškolske godine s novim grupama
+            var isUpdated = await Task.Run(() => _preschoolYearServices.UpdateYearWithNewGroups(preschoolYear.Id, groups));
+
+            if (isUpdated)
+            {
+                MessageBox.Show("Grupe su uspješno dodane u predškolsku godinu.");
+                RefreshGUI(); // Osvježavanje GUI-a
+                _previousControl.RefreshGUI();
+            } else
+            {
+                MessageBox.Show("Dodavanje grupa u predškolsku godinu nije uspjelo.");
+            }
         }
     }
 }
