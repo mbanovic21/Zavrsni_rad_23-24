@@ -26,12 +26,15 @@
                         <Ellipse Margin="0 500 0 200" Width="40" Height="40" Fill="#4EB1B6"/>
                         <Rectangle Width="100" Height="100" Fill="#4EB1B6" Canvas.Left="50" Canvas.Top="570"/>
                         <Rectangle Width="20" Height="20" Fill="#4EB1B6" Canvas.Left="510" Canvas.Top="490"/>
-                        <Line X1="100" Y1="100" X2="200" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="130" Y1="100" X2="240" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
                         <Line X1="50" Y1="50" X2="150" Y2="150" Stroke="#4EB1B6" StrokeThickness="2"/>
-                        <Line X1="0" Y1="500" X2="350" Y2="350" Stroke="#4EB1B6" StrokeThickness="2"/>
-                        <Line X1="50" Y1="0" X2="200" Y2="718" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="500" X2="350" Y2="375" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="50" Y1="0" X2="240" Y2="1080" Stroke="#4EB1B6" StrokeThickness="2"/>
                         <Line X1="100" Y1="100" X2="200" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
-                        <Line X1="0" Y1="300" X2="200" Y2="300" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="300" X2="240" Y2="300" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="800" X2="240" Y2="728" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="875" X2="240" Y2="828" Stroke="#4EB1B6" StrokeThickness="2"/>
+                        <Line X1="0" Y1="1190" X2="240" Y2="1080" Stroke="#4EB1B6" StrokeThickness="2"/>
                     </Canvas>
 
                     <StackPanel>
@@ -157,15 +160,16 @@
                 </Border.Background>
                 <Grid>
                     <Canvas>
-                        <Line X1="0" Y1="200" X2="528" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="300" X2="1166" Y2="300" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="200" X2="2528" Y2="2160" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="300" X2="4096" Y2="300" Stroke="#e9ecef" StrokeThickness="2"/>
                         <Line X1="0" Y1="415" X2="1081" Y2="1" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="0" X2="1166" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="528" Y1="728" X2="1166" Y2="600" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="0" Y1="728" X2="1166" Y2="460" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="250" Y1="728" X2="1166" Y2="260" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="396" Y1="0" X2="440" Y2="728" Stroke="#e9ecef" StrokeThickness="2"/>
-                        <Line X1="528" Y1="728" X2="900" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="0" X2="4096" Y2="2160" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="828" X2="4096" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="728" X2="2596" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="1080" X2="2166" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="396" Y1="0" X2="440" Y2="2160 " Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="2160 " X2="900" Y2="0" Stroke="#e9ecef" StrokeThickness="2"/>
+                        <Line X1="0" Y1="1080 " X2="180" Y2="2160" Stroke="#e9ecef" StrokeThickness="2"/>
                     </Canvas>
                     <ContentControl x:Name="contentControl" />
                 </Grid>
