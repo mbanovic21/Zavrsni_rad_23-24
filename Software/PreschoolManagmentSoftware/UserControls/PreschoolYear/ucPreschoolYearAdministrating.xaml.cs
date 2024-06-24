@@ -49,14 +49,15 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             cmbYears.Items.Clear();
 
             // Postavite novi ItemsSource
-            RefreshGUI();
+            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
 
             SetCurrentYear();
         }
 
         public async void RefreshGUI()
         {
-            cmbYears.ItemsSource = await Task.Run(() => _preschoolYearServices.GetAllYears());
+            var year = cmbYears.SelectedValue.ToString();
+            await GetGroupsForYear(year);
         }
 
         private void SetCurrentYear()
@@ -128,6 +129,7 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private async Task<List<Group>> GetGroupsForYear(string year)
         {
+            dgvGroups.ItemsSource = null;
             return await Task.Run(() => _preschoolYearServices.GetGroupsForYear(year));
         }
 
