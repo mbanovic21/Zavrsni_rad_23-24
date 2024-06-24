@@ -90,10 +90,10 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
-                        <Button x:Name="btnEditProfile" Click="btnEditProfile_Click" Height="50" Width="150" Content="Uredi profil" Style="{StaticResource transparentButton}" Margin="0,10,8,0" />
-                        <Button x:Name="btnDeleteProfile" Click="btnDeleteProfile_Click" Height="50" Width="150" Content="Obriši profil" Style="{StaticResource transparentButton}" />
+                        <Button x:Name="btnEditProfile" FontWeight="SemiBold" Click="btnEditProfile_Click" Height="50" Width="150" Content="Uredi profil" Style="{StaticResource transparentButton}" Margin="0,10,8,0" />
+                        <Button x:Name="btnDeleteProfile" FontWeight="SemiBold" Click="btnDeleteProfile_Click" Height="50" Width="150" Content="Obriši profil" Style="{StaticResource transparentButton}" />
                     </StackPanel>
-                    <Button x:Name="btnGeneratePDF" Click="btnGeneratePDF_Click" Grid.Row="1" Width="308" Content="Spremi profil kao PDF" Style="{StaticResource transparentButton}" Margin="0,10,0,30"  />
+                    <Button x:Name="btnGeneratePDF" FontWeight="SemiBold" Click="btnGeneratePDF_Click" Grid.Row="1" Width="308" Content="Spremi profil kao PDF" Style="{StaticResource transparentButton}" Margin="0,10,0,30"  />
                 </Grid>
             </Grid>
         </Border>

@@ -167,7 +167,7 @@
                     <TextBlock Text="Upravitelj zaposlenicima" Style="{StaticResource titleText}" Grid.ColumnSpan="3" Foreground="#4EB1B6" Margin="10"/>
                     
                     <!--searchbar-->
-                    <TextBlock Text="Traka za pretraživanje: " Grid.Column="0" Grid.Row="1" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                    <TextBlock Text="Traka za pretraživanje: " FontWeight="SemiBold" Grid.Column="0" Grid.Row="1" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
                     <Border BorderThickness="1" Grid.Column="0" Grid.Row="2" BorderBrush="#acb0af"  CornerRadius="5"  Background="#ffffff" Margin="70,0,7,7">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
@@ -183,7 +183,7 @@
                     </Border>
                     
                     <!-- cmb za odabir načina pretraživanja -->
-                    <TextBlock Text="Zaposlenici: " Grid.Column="0" Grid.Row="3" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                    <TextBlock Text="Zaposlenici: " FontWeight="SemiBold" Grid.Column="0" Grid.Row="3" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
                     <Border BorderThickness="1" Grid.Column="1" Grid.Row="2" Width="185" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#0b69a1" Margin="7,-7,0,0" HorizontalAlignment="Left">
                         <Grid Margin="7 9">
                             <Grid.ColumnDefinitions>
@@ -207,8 +207,8 @@
                     <DataGrid x:Name="dgvEmployees" SelectionChanged="dgvEmployees_SelectionChanged" Margin="70,0,70,7" Grid.Row="4" Grid.ColumnSpan="3"/>
 
                     <StackPanel Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Right" Margin="0,20,70,20" >
-                        <Button x:Name="btnAddNewEmployee" Click="btnAddNewEmployee_Click" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
-                        <Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
+                        <Button x:Name="btnAddNewEmployee" FontWeight="SemiBold" Click="btnAddNewEmployee_Click" Content="Dodaj" Width="100" Style="{StaticResource generatePasswordButton}" Height="40" />
+                        <Button x:Name="btnShowProfile" FontWeight="SemiBold" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />
                     </StackPanel>
                 </Grid>
             </Border>

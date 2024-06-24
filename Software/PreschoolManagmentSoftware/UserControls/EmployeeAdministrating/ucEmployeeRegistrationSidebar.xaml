@@ -222,7 +222,7 @@
                         </Border>
 
                         <!-- Gumb za slanje zahtjeva -->
-                        <Button x:Name="btnGeneratePassword" Grid.Column="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,70,7" Click="btnGeneratePassword_Click" />
+                        <Button x:Name="btnGeneratePassword" FontWeight="SemiBold" Grid.Column="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButtonTransparent}" Margin="0,7,70,7" Click="btnGeneratePassword_Click" />
                     </Grid>
 
                     <!-- Role -->
@@ -246,7 +246,7 @@
                 </Grid>
 
                 <!-- Gumb za slanje zahtjeva -->
-                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Registriraj" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
+                <Button x:Name="btnRegister" FontWeight="SemiBold" Grid.Row="3" Grid.ColumnSpan="2" Content="Registriraj" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,40,0,0" />
             </Grid>  
         </Border>           
     </Grid>

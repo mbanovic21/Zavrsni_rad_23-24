@@ -141,7 +141,7 @@
                 </StackPanel>
 
                 <!--data grid groups-->
-                <TextBlock Text="Grupe: " Foreground="#4EB1B6" Grid.Column="0" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                <TextBlock Text="Grupe: " FontWeight="SemiBold" Foreground="#4EB1B6" Grid.Column="0" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
                 <Grid Grid.Column="0" Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -152,12 +152,12 @@
                 </Grid>
 
                 <!--data grid children-->
-                <TextBlock Text="Djeca: " Foreground="#4EB1B6" Grid.Column="1" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
+                <TextBlock Text="Djeca: " FontWeight="SemiBold" Foreground="#4EB1B6" Grid.Column="1" Grid.Row="2" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />
                 <DataGrid x:Name="dgvChildren" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="35,0,70,7"/>
 
                 <!--buttons-->
                 <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="4" HorizontalAlignment="Center" Margin="0,7,0,20">
-                    <Button x:Name="btnAddNewPreschoolYear" Click="btnAddNewPreschoolYear_Click" Content="Dodaj novu predškolsku godinu" Width="300" Style="{StaticResource loginButton}" Height="60"/>
+                    <Button x:Name="btnAddNewPreschoolYear" FontWeight="SemiBold" Click="btnAddNewPreschoolYear_Click" Content="Dodaj novu predškolsku godinu" Width="300" Style="{StaticResource loginButton}" Height="60"/>
                 </StackPanel>
             </Grid>
         </Border>

@@ -141,8 +141,8 @@
                 </StackPanel>
 
                 <!--data grid groups-->
-                <TextBlock Text="Grupe: " Grid.Column="0" Grid.Row="2" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
-                <DataGrid x:Name="dgvGroups" Grid.Column="0" Grid.Row="3" SelectionChanged="dgvGroups_SelectionChanged" Margin="70,0,35,7"/>
+                <TextBlock Text="Grupe: " FontWeight="SemiBold" Grid.Column="0" Grid.Row="2" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+                <DataGrid x:Name="dgvGroups" FontWeight="SemiBold" Grid.Column="0" Grid.Row="3" SelectionChanged="dgvGroups_SelectionChanged" Margin="70,0,35,7"/>
 
                 <!--data grid children-->
                 <TextBlock Text="Djeca: " Grid.Column="1" Grid.Row="2" Foreground="#4EB1B6" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="35,7,70,7" VerticalAlignment="Center" />

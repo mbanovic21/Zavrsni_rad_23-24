@@ -23,7 +23,7 @@
         <TextBlock Text="Broj prisutne djece" Style="{StaticResource normalText}" Foreground="#4EB1B6" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Margin="70,20,0,7"/>
 
         <!--broj prisutnih-->
-        <TextBlock x:Name="txtNumber" Style="{StaticResource titleText}" Foreground="#4EB1B6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontSize="70" Margin="70,0,0,40" ToolTip="Broj prisutne djece danas" 
+        <TextBlock x:Name="txtNumber" Style="{StaticResource titleText}" Foreground="#4EB1B6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" FontSize="70" Margin="15,0,0,60" ToolTip="Broj prisutne djece danas" 
                    Text="{Binding AnimatedNumber, Converter={StaticResource DoubleToIntConverter}, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
     </Grid>
 </UserControl>

@@ -224,14 +224,14 @@
                             </Border>
 
                             <!-- Gumb za slanje zahtjeva -->
-                            <Button x:Name="btnGeneratePassword" Grid.Row="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButtonTransparent}" Margin="7,2,7,7" Click="btnGeneratePassword_Click" />
+                            <Button x:Name="btnGeneratePassword" FontWeight="SemiBold" Grid.Row="1" Content="Generiraj lozinku" Style="{StaticResource generatePasswordButtonTransparent}" Margin="7,2,7,7" Click="btnGeneratePassword_Click" />
                         </Grid>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
             
             <StackPanel Orientation="Vertical" Grid.Row="2">
-                <Button x:Name="btnSave" Content="Spremi" Click="btnSave_Click" Style="{StaticResource transparentButton}" Margin="0,30,0,30"/>
+                <Button x:Name="btnSave" FontWeight="SemiBold" Content="Spremi" Click="btnSave_Click" Style="{StaticResource transparentButton}" Margin="0,30,0,30"/>
             </StackPanel>
         </Grid>
     </Border>

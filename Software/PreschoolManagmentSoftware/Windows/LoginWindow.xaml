@@ -79,7 +79,7 @@
 
                 <TextBlock Text="Zaboravljene kreditacije? Kliknite ovdje!" Style="{StaticResource link}" MouseDown="TextBlock_MouseDown"/>
 
-                <Button Content="Prijava" Click="Button_Click" Style="{StaticResource loginButton}" />
+                <Button Content="Prijava" FontWeight="SemiBold" Click="Button_Click" Style="{StaticResource loginButton}" />
             </StackPanel>
         </Border>
     </Grid>

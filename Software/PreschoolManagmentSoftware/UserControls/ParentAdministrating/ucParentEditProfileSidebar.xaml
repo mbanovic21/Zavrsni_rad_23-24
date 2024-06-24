@@ -162,7 +162,7 @@
             </ScrollViewer>
 
             <StackPanel Orientation="Vertical" Grid.Row="2">
-                <Button x:Name="btnSave" Content="Spremi" Click="btnSave_Click" Style="{StaticResource transparentButton}" Margin="0,30,0,30"/>
+                <Button x:Name="btnSave" FontWeight="SemiBold" Content="Spremi" Click="btnSave_Click" Style="{StaticResource transparentButton}" Margin="0,30,0,30"/>
             </StackPanel>
         </Grid>
     </Border>

@@ -41,7 +41,7 @@
                 <TextBlock x:Name="txtHeader" Text="Kreiranje bilješke" Style="{StaticResource titleText}" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="7,0,0,20" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <TextBlock Text="Datum: " Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <TextBlock Text="Datum: " FontWeight="SemiBold" Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Naziv grupe -->
             <!-- Date -->
             <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="#acb0af" Margin="70,7,70,7" CornerRadius="5" Background="#ffffff" MouseLeftButtonUp="Border_MouseLeftButtonDown">
@@ -63,7 +63,7 @@
                 </Grid>
             </Border>
 
-            <TextBlock Text="Ponašanje: " Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
+            <TextBlock Text="Ponašanje: " FontWeight="SemiBold" Grid.Row="3" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,-7" VerticalAlignment="Center" />
             <!-- Behaviour -->
             <Border BorderThickness="1" Grid.Row="4" BorderBrush="#acb0af"  CornerRadius="5" Height="40"  Background="#ffffff" Margin="70,7,70,7">
                 <Grid Margin="7 9">
@@ -88,7 +88,7 @@
         </Grid>
 
         <!--Description-->
-        <TextBlock Text="Bilješka: " Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,0" VerticalAlignment="Center" />
+        <TextBlock Text="Bilješka: " FontWeight="SemiBold" Grid.Row="2" Style="{StaticResource normalText}" HorizontalAlignment="Left" Margin="70,0,7,0" VerticalAlignment="Center" />
         <Border BorderThickness="1" Grid.Row="3" BorderBrush="#acb0af" Margin="70,0,70,10" CornerRadius="5" Background="#ffffff">
             <Grid Margin="7 9">
                 <Grid.ColumnDefinitions>
@@ -104,7 +104,7 @@
         
         <!--button-->
         <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
-            <Button x:Name="btnAddNewNote" Click="btnAddNewNote_Click" Content="Kreiraj novu bilješku" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+            <Button x:Name="btnAddNewNote" FontWeight="SemiBold" Click="btnAddNewNote_Click" Content="Kreiraj novu bilješku" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

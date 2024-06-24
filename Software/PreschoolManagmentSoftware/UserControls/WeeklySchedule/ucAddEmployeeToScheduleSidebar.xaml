@@ -22,7 +22,7 @@
 
             <!--pretrtazivanje container -->
             <!--searchbar-->
-            <TextBlock Text="Traka za pretraživanje: " Grid.Column="0" Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+            <TextBlock Text="Traka za pretraživanje: " FontWeight="SemiBold" Grid.Column="0" Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
             <StackPanel VerticalAlignment="Center" Margin="70,0,7,7" Orientation="Horizontal">
                 <!-- searchbar -->
                 <Border Width="250" BorderThickness="1" HorizontalAlignment="Left" BorderBrush="#acb0af" CornerRadius="5" Background="#ffffff">
@@ -61,12 +61,12 @@
         </StackPanel>
 
         <!--searchbar-->
-        <TextBlock Text="Zaposlenici: " Grid.Column="0" Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
+        <TextBlock Text="Zaposlenici: " Grid.Column="0" FontWeight="SemiBold" Grid.Row="1" Foreground="#f5f5f5" Style="{StaticResource DayTextBlockStyle}" HorizontalAlignment="Left"  Margin="70,7,70,7" VerticalAlignment="Center" />
         <DataGrid x:Name="dgvEmployees" Margin="70,0,70,7" Grid.Row="2"/>
 
         <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,20" >
-            <Button x:Name="btnClearSelectedDay" Click="btnClearSelectedDay_Click" Content="Ukloni sve" Background="#d02c2c" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
-            <Button x:Name="btnAddEmployeeToSchedule" Click="btnAddEmployeeToSchedule_Click" Content="Dodaj u raspored" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+            <Button x:Name="btnClearSelectedDay" FontWeight="SemiBold" Click="btnClearSelectedDay_Click" Content="Ukloni sve" Background="#d02c2c" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
+            <Button x:Name="btnAddEmployeeToSchedule" FontWeight="SemiBold" Click="btnAddEmployeeToSchedule_Click" Content="Dodaj u raspored" Margin="0,0,0,7" Style="{StaticResource transparentButton}" />
             <!--<Button x:Name="btnShowProfile" Click="btnShowProfile_Click" Content="Prikaži profil" Width="130" Style="{StaticResource generatePasswordButton}" Margin="7,0,0,0" Height="40" />   -->
         </StackPanel>
     </Grid>
