@@ -227,5 +227,10 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         {
             CloseSidebar();
         }
+
+        private void btnGroupAdministrating_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
