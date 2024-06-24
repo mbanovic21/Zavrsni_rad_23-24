@@ -92,7 +92,26 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
 
         private void btnDeleteActivitie_Click(object sender, RoutedEventArgs e)
         {
-
+            var activity = dgvEmployeesActivities.SelectedItem as DailyActivity;
+            if (activity != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Jeste li sigurni da želite obrisati ovu aktivnost?", "Potvrda brisanja", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    bool isDeleted = _dailyActivityServices.DeleteDailyActivity(activity.Id);
+                    if (isDeleted)
+                    {
+                        MessageBox.Show("Aktivnost je uspješno obrisana.");
+                        RefreshGUI();
+                    } else
+                    {
+                        MessageBox.Show("Došlo je do greške prilikom brisanja aktivnosti.");
+                    }
+                }
+            } else
+            {
+                MessageBox.Show("Odaberite dnevnu aktivnost!");
+            }
         }
 
         private void btnCloseSidebarAddNewActivity_Click(object sender, RoutedEventArgs e)

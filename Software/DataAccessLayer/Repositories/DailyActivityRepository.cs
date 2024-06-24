@@ -60,6 +60,7 @@ namespace DataAccessLayer.Repositories
             return activities;
         }
 
+        //update daily activity
         public bool UpdateDailyActivity(DailyActivity dailyActivity, Day day)
         {
             int affectedRows = 0;
@@ -83,6 +84,18 @@ namespace DataAccessLayer.Repositories
 
             bool isSaveSuccessful = SaveChangesWithValidation(Context, ref affectedRows);
             return isSaveSuccessful;
+        }
+
+        public bool DeleteDailyActivity(int activityId)
+        {
+            var activity = DailyActivity.FirstOrDefault(a => a.Id == activityId);
+            if (activity != null)
+            {
+                DailyActivity.Remove(activity);
+                Context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
