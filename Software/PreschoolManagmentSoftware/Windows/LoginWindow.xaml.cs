@@ -87,22 +87,22 @@ namespace PreschoolManagmentSoftware.Windows
             var areCredentialsValid = await Task.Run(() => autenticationManager.AuthenticateUser(username, password));
             if (areCredentialsValid)
             {
-                MessageBox.Show("Uspješno ste prijavljeni!", "Uspijeh", MessageBoxButton.OK, MessageBoxImage.Information);
                 var mainWindow = new MainWindow();
-                Close();
-                mainWindow.ShowDialog();
-                /*
-                var role = authorizationManager.GetRole();
+                var role = await Task.Run(() => authorizationManager.GetRole());
+                MessageBox.Show("Uspješno ste prijavljeni!", "Uspijeh", MessageBoxButton.OK, MessageBoxImage.Information); 
                 if(role)
                 {
-                    var mainWindow = new MainWindow();
                     Close();
                     mainWindow.ShowDialog();
                 } else 
                 {
-                    MessageBox.Show("nije admin!");
+                    mainWindow.btnEmployeeAdministrating.Visibility = Visibility.Collapsed;
+                    mainWindow.btnChildrenAdministrating.Visibility = Visibility.Collapsed;
+                    mainWindow.btnWeeklyScheduleAdmin.Visibility = Visibility.Collapsed;
+                    mainWindow.btnWeeklyPreschoolYearAdministrating.Visibility = Visibility.Collapsed;
+                    Close();
+                    mainWindow.ShowDialog();
                 }   
-                */
             } else
             {
                 MessageBox.Show("Nevažeće kreditacije.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);

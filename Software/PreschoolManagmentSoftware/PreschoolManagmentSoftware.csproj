@@ -440,6 +440,14 @@
     <Resource Include="Media\Images\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\Images\PMS-logo.png" />
+    <Resource Include="Media\Images\email-notifier.png" />
+    <Resource Include="Media\Images\notes.png" />
+    <Resource Include="Media\Images\preschool-year-administration.png" />
+    <Resource Include="Media\Images\schedule-calendar.png" />
+    <Resource Include="Media\Images\children.png" />
+    <Resource Include="Media\Images\employee-administration.png" />
+    <Resource Include="Media\Images\dashboard.png" />
     <Resource Include="Media\Images\left-dimgray.png" />
     <Resource Include="Media\Images\right-dimgray.png" />
     <Resource Include="Media\Images\thumbs-up-down.png" />

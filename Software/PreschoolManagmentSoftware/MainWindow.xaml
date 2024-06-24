@@ -39,7 +39,7 @@
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/dashboard.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/dashboard.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Nadzorna ploča" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -49,27 +49,29 @@
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/employees.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/employee-administration.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Upravitelj zaposlenicima" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </Button.ContentTemplate>
                         </Button>
+                        
                         <Button x:Name="btnChildrenAdministrating" Style="{StaticResource SidebarButtonStyle}" Click="btnChildrenAdministrating_Click">
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/children.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/children.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Upravitelj djecom" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </Button.ContentTemplate>
                         </Button>
+                        
                         <Button x:Name="btnWeeklyScheduleAdmin" Style="{StaticResource SidebarButtonStyle}" Click="btnWeeklyScheduleAdmin_Click">
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/schedule.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/schedule-calendar.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Tjedni raspored administrator" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -79,7 +81,7 @@
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/schedule_employee.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/schedule-calendar.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Tjedni raspored zaposlenik" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -89,7 +91,7 @@
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/school_year.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/preschool-year-administration.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Upravitelj predškolskom godinom" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -99,7 +101,7 @@
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/notes.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/notes.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="Bilješke i aktivnost djece" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -109,7 +111,7 @@
                             <Button.ContentTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Media/Icons/email.png" Width="16" Height="16" Margin="5"/>
+                                        <Image Source="/Media/Images/email-notifier.png" Width="16" Height="16" Margin="5"/>
                                         <TextBlock Text="E-mail obavijestitelj" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -124,7 +126,11 @@
             <Border x:Name="borHeader" MouseDown="borHeader_MouseDown" Background="#4EB1B6" Height="40" DockPanel.Dock="Top" Margin="-240,0,0,0">
                 <DockPanel VerticalAlignment="Center">
                     <!-- Naslov -->
-                    <TextBlock Text="Preschool Managment Software" VerticalAlignment="Center" DockPanel.Dock="Left" Style="{StaticResource normalText}" FontSize="20" Margin="15,0,0,0"/>
+                    <StackPanel Margin="0,0,0,0" Orientation="Horizontal"  DockPanel.Dock="Left" VerticalAlignment="Center" >
+                        <Image Source="/Media/Images/PMS-logo.png" Width="40" Height="40"/>
+                        <TextBlock Text="Preschool Managment Software" FontWeight="SemiBold" DockPanel.Dock="Left" Style="{StaticResource normalText}" FontSize="20" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
 
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Right">
                         <Button x:Name="btnMinimize" Style="{StaticResource btnMRC}" Click="btnMinimize_Click">
