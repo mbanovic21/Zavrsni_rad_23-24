@@ -48,5 +48,13 @@ namespace BusinessLogicLayer.DBServices
                 return repo.UpdateYearWithNewGroups(yearId, newGroups);
             }
         }
+
+        public bool RemoveGroupsFromYear(int yearId, List<Group> groupsToRemove)
+        {
+            using (var repo = new PreschoolYearRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.RemoveGroupsFromYear(yearId, groupsToRemove);
+            }
+        }
     }
 }

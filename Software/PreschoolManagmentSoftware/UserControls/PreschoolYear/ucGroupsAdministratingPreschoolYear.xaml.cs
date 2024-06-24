@@ -140,9 +140,23 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
             }
         }
 
-        private void btnDeleteGroupFromYearsGroups_Click(object sender, RoutedEventArgs e)
+        private async void btnDeleteGroupFromYearsGroups_Click(object sender, RoutedEventArgs e)
         {
+            var groups = dgvGroups.SelectedItems.Cast<Group>().ToList();
 
+            var year = txtHeaderYear.Text;
+            var preschoolYear = await Task.Run(() => _preschoolYearServices.GetPreschoolYearByYear(year));
+            var isUpdated = await Task.Run(() => _preschoolYearServices.RemoveGroupsFromYear(preschoolYear.Id, groups));
+
+            if (isUpdated)
+            {
+                MessageBox.Show("Grupe su uspješno uklonjene iz predškolske godine.");
+                RefreshGUI(); // Osvježavanje GUI-a
+                _previousControl.RefreshGUI();
+            } else
+            {
+                MessageBox.Show("Uklanjanje grupa iz predškolske godine nije uspjelo.");
+            }
         }
 
         private async void btnAddGroupToYear_Click(object sender, RoutedEventArgs e)

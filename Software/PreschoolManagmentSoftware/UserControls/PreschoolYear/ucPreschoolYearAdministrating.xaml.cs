@@ -57,7 +57,9 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
         public async void RefreshGUI()
         {
             var year = cmbYears.SelectedValue.ToString();
-            await GetGroupsForYear(year);
+            var groups = await Task.Run(() => _preschoolYearServices.GetGroupsForYear(year));
+            dgvGroups.ItemsSource = null;
+            dgvGroups.ItemsSource = groups;
         }
 
         private void SetCurrentYear()
@@ -129,7 +131,6 @@ namespace PreschoolManagmentSoftware.UserControls.PreschoolYear
 
         private async Task<List<Group>> GetGroupsForYear(string year)
         {
-            dgvGroups.ItemsSource = null;
             return await Task.Run(() => _preschoolYearServices.GetGroupsForYear(year));
         }
 

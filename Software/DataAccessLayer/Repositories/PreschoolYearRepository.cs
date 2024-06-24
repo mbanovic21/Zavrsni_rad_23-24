@@ -87,6 +87,24 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
+        public bool RemoveGroupsFromYear(int yearId, List<Group> groupsToRemove)
+        {
+            var preschoolYear = PreschoolYears.Include(py => py.Groups).FirstOrDefault(py => py.Id == yearId);
+            if (preschoolYear == null) return false;
+
+            foreach (var group in groupsToRemove)
+            {
+                var existingGroup = preschoolYear.Groups.FirstOrDefault(g => g.Id == group.Id);
+                if (existingGroup != null)
+                {
+                    preschoolYear.Groups.Remove(existingGroup);
+                }
+            }
+
+            int affectedRows = 0;
+            return SaveChangesWithValidation(Context, ref affectedRows);
+        }
+
         private bool SaveChangesWithValidation(DbContext context, ref int affectedRows)
         {
             try
