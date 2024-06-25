@@ -39,8 +39,16 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
             var activities = new List<DailyActivity>();
             if (LoggedInUser.User.Id_role == 1)
             {
-                activities = await Task.Run(() => _dailyActivityServices.GetAllActivitiesByDate(_date));
-                dgvEmployeesActivities.ItemsSource = activities;
+                radioButtons.Visibility = Visibility.Visible;
+                if (rbForAll.IsChecked == true)
+                {
+                    activities = await Task.Run(() => _dailyActivityServices.GetAllActivitiesByDate(_date));
+                    dgvEmployeesActivities.ItemsSource = activities;
+                } else
+                {
+                    activities = await Task.Run(() => _dailyActivityServices.GetDailyActivitiesByUserId(_date, LoggedInUser.User.Id));
+                    dgvEmployeesActivities.ItemsSource = activities;
+                }
             } else
             {
                 activities  = await Task.Run(() => _dailyActivityServices.GetDailyActivitiesByUserId(_date,LoggedInUser.User.Id));
@@ -77,6 +85,11 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
                     column.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+
+        private void rbView_Checked(object sender, RoutedEventArgs e)
+        {
+            RefreshGUI();
         }
     }
 }

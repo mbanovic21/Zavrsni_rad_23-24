@@ -13,6 +13,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -21,10 +22,16 @@
 
                 <!--dan i datum-->
                 <TextBlock x:Name="txtHeader" Grid.Row="1" Style="{StaticResource normalText}" HorizontalAlignment="Center" Margin="0,0,0,-7" VerticalAlignment="Center" Foreground="DimGray" FontWeight="SemiBold"/>
+                
+                <!--FOR ME FOR ALL-->
+                <StackPanel x:Name="radioButtons" Orientation="Horizontal" Grid.Row="2" Margin="10,15,0,-3" Visibility="Visible">
+                    <RadioButton x:Name="rbForAll" Content="Za sve" GroupName="View" Checked="rbView_Checked" Foreground="DimGray" FontWeight="SemiBold" Margin="0,0,10,0"/>
+                    <RadioButton x:Name="rbForMe" Content="Za mene" GroupName="View" IsChecked="True" Checked="rbView_Checked" Foreground="DimGray" FontWeight="SemiBold"/>
+                </StackPanel>
 
                 <!--dgvEmployeeActivities-->
-                <TextBlock x:Name="txtNoActivities" Text="Nema aktivnosti" Style="{StaticResource normalText}" Foreground="DimGray" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"/>
-                <DataGrid x:Name="dgvEmployeesActivities" Margin="10" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Visibility="Collapsed" Grid.Row="2"/>
+                <TextBlock x:Name="txtNoActivities" Text="Nema aktivnosti" Style="{StaticResource normalText}" Foreground="DimGray" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"/>
+                <DataGrid x:Name="dgvEmployeesActivities" Margin="10" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden" Visibility="Collapsed" Grid.Row="3"/>
             </Grid>
         </Border>
     </Grid>
