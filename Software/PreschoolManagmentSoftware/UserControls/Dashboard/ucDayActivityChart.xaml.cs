@@ -3,19 +3,12 @@ using LiveCharts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BusinessLogicLayer.DBServices;
-using LiveCharts.Definitions.Charts;
+using EntityLayer.Entities;
+using EntityLayer;
 
 namespace PreschoolManagmentSoftware.UserControls.Dashboard
 {
@@ -25,15 +18,47 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
     public partial class ucDayActivityChart : UserControl
     {
         private DailyActivityServices _activityServices = new DailyActivityServices();
+
         public ucDayActivityChart()
         {
             InitializeComponent();
+            InitializeChart();
             LoadCartesianChart();
+        }
+
+        private void InitializeChart()
+        {
+            cartesianChart.AxisX.Add(new Axis
+            {
+                Title = "Dan u tjednu",
+                Labels = new[] { "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota", "Nedjelja" }
+            });
+
+            cartesianChart.AxisY.Add(new Axis
+            {
+                Title = "Broj aktivnosti",
+                LabelFormatter = value => value.ToString()
+            });
         }
 
         private async void LoadCartesianChart()
         {
-            var activities = await Task.Run(() => _activityServices.GetEmployeeActivities());
+            var activities = new List<(string EmployeeName, string DayOfWeek, int ActivityCount)>();
+
+            if (LoggedInUser.User.Id_role == 1)
+            {
+                radioButtonsChart.Visibility = Visibility.Visible;
+                if (rbForAll.IsChecked == true)
+                {
+                    activities = await Task.Run(() => _activityServices.GetEmployeeActivities());
+                } else
+                {
+                    activities = await Task.Run(() => _activityServices.GetEmployeeActivitiesByUserId(LoggedInUser.User.Id));
+                }
+            } else
+            {
+                activities = await Task.Run(() => _activityServices.GetEmployeeActivitiesByUserId(LoggedInUser.User.Id));
+            }
 
             if (activities == null || !activities.Any())
             {
@@ -41,7 +66,15 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
                 return;
             }
 
-            // Grupiranje podataka po zaposleniku i danu
+            UpdateChart(activities);
+        }
+
+        private void UpdateChart(List<(string EmployeeName, string DayOfWeek, int ActivityCount)> activities)
+        {
+            // Clear the existing series
+            cartesianChart.Series.Clear();
+
+            // Group data by employee and day
             var employeeGroups = activities
                 .GroupBy(a => a.EmployeeName)
                 .Select(g => new
@@ -56,8 +89,8 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
             {
                 var values = new ChartValues<int>();
 
-                // Kreiranje vrijednosti za dane u tjednu (od ponedjeljka do nedjelje)
-                var daysOfWeek = new[] { "Ponedjeljak", "Utorak", "Srijeda", "Cetvrtak", "Petak", "Subota", "Nedjelja" };
+                // Create values for days of the week (from Monday to Sunday)
+                var daysOfWeek = new[] { "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota", "Nedjelja" };
                 foreach (var day in daysOfWeek)
                 {
                     var activityForDay = employee.Activities.FirstOrDefault(a => a.DayOfWeek == day);
@@ -76,19 +109,11 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
             }
 
             cartesianChart.Series = seriesCollection;
+        }
 
-            // Postavljanje osi
-            cartesianChart.AxisX.Add(new Axis
-            {
-                Title = "Dan u tjednu",
-                Labels = new[] { "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota", "Nedjelja" }
-            });
-
-            cartesianChart.AxisY.Add(new Axis
-            {
-                Title = "Broj aktivnosti",
-                LabelFormatter = value => value.ToString()
-            });
+        private void rbView_Checked(object sender, RoutedEventArgs e)
+        {
+            LoadCartesianChart();
         }
     }
 }

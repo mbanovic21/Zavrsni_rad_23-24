@@ -51,7 +51,7 @@ namespace DataAccessLayer.Repositories
             return isSaveSuccessful;
         }
 
-        //Days activity chart
+        //Days activity chart FOR ALL
         public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivities()
         {
             var activities = Context.Days
@@ -69,6 +69,27 @@ namespace DataAccessLayer.Repositories
 
             return activities;
         }
+
+        //Days activity chart FOR ME
+        public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivitiesByUserId(int userId)
+        {
+            var activities = Context.Days
+                .Include(d => d.Users)
+                .Include(d => d.DailyActivities)
+                .Where(d => d.Users.Any(u => u.Id == userId))
+                .SelectMany(d => d.Users.Where(u => u.Id == userId), (d, u) => new
+                {
+                    Day = d.Name,
+                    Employee = u.FirstName + " " + u.LastName,
+                    ActivityCount = d.DailyActivities.Count
+                })
+                .ToList()
+                .Select(x => (x.Employee, x.Day, x.ActivityCount))
+                .ToList();
+
+            return activities;
+        }
+
 
         //update daily activity
         public bool UpdateDailyActivity(DailyActivity dailyActivity, Day day)

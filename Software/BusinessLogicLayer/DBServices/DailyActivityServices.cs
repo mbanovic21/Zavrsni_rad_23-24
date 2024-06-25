@@ -29,12 +29,21 @@ namespace BusinessLogicLayer.DBServices
             }
         }
 
-        //charts da
+        //charts da FOR ALL
         public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivities()
         {
             using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
             {
                 return repo.GetEmployeeActivities();
+            }
+        }
+        
+        //charts da FOR ME
+        public List<(string EmployeeName, string DayOfWeek, int ActivityCount)> GetEmployeeActivitiesByUserId(int userId)
+        {
+            using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetEmployeeActivitiesByUserId(userId);
             }
         }
 

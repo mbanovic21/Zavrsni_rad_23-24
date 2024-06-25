@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              x:Name="ucAddNewActivityy"
              d:DesignHeight="800" d:DesignWidth="400" Loaded="ucAddNewActivityy_Loaded">
-    <Grid Width="400">
+    <Grid Width="400" Margin="-35,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

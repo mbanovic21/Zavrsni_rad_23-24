@@ -1,10 +1,12 @@
-﻿using PreschoolManagmentSoftware.Static_Classes;
+﻿using EntityLayer;
+using PreschoolManagmentSoftware.Static_Classes;
 using PreschoolManagmentSoftware.UserControls;
 using PreschoolManagmentSoftware.UserControls.Dashboard;
 using PreschoolManagmentSoftware.UserControls.EmailNotifier;
 using PreschoolManagmentSoftware.UserControls.NotesAndAttendances;
 using PreschoolManagmentSoftware.UserControls.PreschoolYear;
 using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
+using PreschoolManagmentSoftware.Windows;
 using SecurityLayer;
 using System;
 using System.Collections.Generic;
@@ -116,6 +118,14 @@ namespace PreschoolManagmentSoftware
         {
             var ucDashboard = new ucDashboard();
             contentControl.Content = ucDashboard;
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            var LogInWindow = new LoginWindow();
+            Close();
+            LoggedInUser.User = null;
+            LogInWindow.ShowDialog();
         }
     }
 }
