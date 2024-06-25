@@ -47,33 +47,19 @@
 
             <Grid>
                 <Canvas>
-                    <Line X1="150" Y1="728" X2="1566" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
-
-                    <Line X1="380" Y1="131" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
-
-
-                    <Line X1="650" Y1="1666" X2="703" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
-                    <Line X1="450" Y1="0" X2="1070" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
-                    <Polygon Points="650,0 800,0 800,100" Fill="#4EB1B6"/>
-                    <Polygon Points="0,129 0,641 730,129" Fill="#4EB1B6"/>
-                    <Polygon Points="0,641 730,641 730,129" Fill="#4EB1B6"/>
-                    <Line X1="499" Y1="130" X2="688" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
-                    <Line X1="602" Y1="640" X2="730" Y2="615" Stroke="#3AADA1" StrokeThickness="2"/>
-                    <Line X1="683" Y1="640" X2="699" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
-                    <Line X1="0" Y1="153.5" X2="1496" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
-                    <Polygon Points="450,550 600,500 550,350" Fill="#3AADA1"/>
-                    <Ellipse Margin="450 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
-
-                    <Line X1="0" Y1="660" X2="910" Y2="200" Stroke="#4EB1B6" StrokeThickness="2"/>
-                    <Line X1="40" Y1="640" X2="456" Y2="434" Stroke="#3AADA1" StrokeThickness="2"/>
-                    <Line X1="489" Y1="417" X2="528" Y2="397" Stroke="#3AADA1" StrokeThickness="2"/>
-                    <Line X1="560" Y1="380" X2="910" Y2="200" Stroke="#3AADA1" StrokeThickness="2"/>
-
-                    <Line X1="0" Y1="230" X2="800" Y2="728" Stroke="#4EB1B6" StrokeThickness="2"/>
-                    <Line X1="0" Y1="230" X2="466" Y2="520" Stroke="#3AADA1" StrokeThickness="2"/>
-                    <Line X1="491" Y1="536" X2="660" Y2="641" Stroke="#3AADA1" StrokeThickness="2"/>
-
-                    <Line X1="380" Y1="131" X2="0" Y2="300" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="0" Y1="680" X2="1166" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="0" Y1="137" X2="363" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="250" Y1="1666" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Line X1="50" Y1="0" X2="670" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
+                    <Polygon Points="250,0 400,0 400,100" Fill="#4EB1B6"/>
+                    <Polygon Points="0,196 0,641 330,196" Fill="#4EB1B6"/>
+                    <Polygon Points="0,641 330,641 330,196" Fill="#4EB1B6"/>
+                    <Line X1="123" Y1="196" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="202" Y1="640" X2="329" Y2="616" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="283" Y1="640" X2="297" Y2="196" Stroke="#3AADA1" StrokeThickness="2"/>
+                    <Line X1="0" Y1="220.5" X2="1096" Y2="220.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                    <Polygon Points="50,550 200,500 150,350" Fill="#3AADA1"/>
+                    <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
                 </Canvas>
 
                 <Grid>

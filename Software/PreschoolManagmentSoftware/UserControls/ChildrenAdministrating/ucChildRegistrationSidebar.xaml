@@ -28,18 +28,18 @@
         <Border Background="Transparent">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="380" />
+                    <ColumnDefinition Width="360" />
                     <ColumnDefinition Width="400" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="340" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="350" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!-- Sidebar group -->
-                <Border x:Name="sidebarGroup" Width="400" Grid.RowSpan="4" Grid.Column="1" Visibility="Collapsed" Panel.ZIndex="1">
+                <Border x:Name="sidebarGroup" Width="400" Grid.RowSpan="8" Grid.Column="1" Visibility="Collapsed" Panel.ZIndex="1">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                             <GradientStop Color="#3AA9AD" Offset="0"/>
@@ -50,16 +50,16 @@
                     <Grid>
                         <Canvas>
                             <Line X1="0" Y1="680" X2="1166" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
-                            <Line X1="0" Y1="121" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Line X1="0" Y1="137" X2="363" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
                             <Line X1="250" Y1="1666" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
                             <Line X1="50" Y1="0" X2="670" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
                             <Polygon Points="250,0 400,0 400,100" Fill="#4EB1B6"/>
-                            <Polygon Points="0,129 0,641 330,129" Fill="#4EB1B6"/>
-                            <Polygon Points="0,641 330,641 330,129" Fill="#4EB1B6"/>
-                            <Line X1="99" Y1="130" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Polygon Points="0,196 0,641 330,196" Fill="#4EB1B6"/>
+                            <Polygon Points="0,641 330,641 330,196" Fill="#4EB1B6"/>
+                            <Line X1="123" Y1="196" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
                             <Line X1="202" Y1="640" X2="329" Y2="616" Stroke="#3AADA1" StrokeThickness="2"/>
-                            <Line X1="283" Y1="640" X2="299" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
-                            <Line X1="0" Y1="153.5" X2="1096" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                            <Line X1="283" Y1="640" X2="297" Y2="196" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Line X1="0" Y1="220.5" X2="1096" Y2="220.5" Stroke="#3AADA1" StrokeThickness="1"/>
                             <Polygon Points="50,550 200,500 150,350" Fill="#3AADA1"/>
                             <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
                         </Canvas>
@@ -401,7 +401,7 @@
                 
 
                 <!-- Gumb za slanje zahtjeva -->
-                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Registriraj" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,0,0" />
+                <Button x:Name="btnRegister" Grid.Row="3" Grid.ColumnSpan="2" Content="Registriraj" Click="btnRegister_Click" Style="{StaticResource transparentButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,20" />
             </Grid>
         </Border>
     </Grid>

@@ -38,16 +38,17 @@
 
                     <Grid>
                         <Canvas>
-                            <Line X1="0" Y1="680" X2="1166" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
-                            <Line X1="0" Y1="121" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Line X1="0" Y1="676" X2="1166" Y2="452" Stroke="#4EB1B6" StrokeThickness="2"/>
+                            <Line X1="0" Y1="127" X2="363" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
                             <Line X1="250" Y1="1666" X2="303" Y2="0" Stroke="#4EB1B6" StrokeThickness="2"/>
                             <Line X1="50" Y1="0" X2="670" Y2="1666" Stroke="#4EB1B6" StrokeThickness="2"/>
-                            <Polygon Points="0,129 0,641 330,129" Fill="#4EB1B6"/>
-                            <Polygon Points="0,641 330,641 330,129" Fill="#4EB1B6"/>
-                            <Line X1="99" Y1="130" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Polygon Points="250,0 400,0 400,100" Fill="#4EB1B6"/>
+                            <Polygon Points="0,196 0,641 330,196" Fill="#4EB1B6"/>
+                            <Polygon Points="0,641 330,641 330,196" Fill="#4EB1B6"/>
+                            <Line X1="123" Y1="196" X2="288" Y2="640" Stroke="#3AADA1" StrokeThickness="2"/>
                             <Line X1="202" Y1="640" X2="329" Y2="616" Stroke="#3AADA1" StrokeThickness="2"/>
-                            <Line X1="283" Y1="640" X2="299" Y2="130" Stroke="#3AADA1" StrokeThickness="2"/>
-                            <Line X1="0" Y1="153.5" X2="1096" Y2="153.5" Stroke="#3AADA1" StrokeThickness="1"/>
+                            <Line X1="283" Y1="640" X2="297" Y2="196" Stroke="#3AADA1" StrokeThickness="2"/>
+                            <Line X1="0" Y1="220.5" X2="1096" Y2="220.5" Stroke="#3AADA1" StrokeThickness="1"/>
                             <Polygon Points="50,550 200,500 150,350" Fill="#3AADA1"/>
                             <Ellipse Margin="50 400 0 0" Width="40" Height="40" Fill="#3AADA1"/>
                         </Canvas>
