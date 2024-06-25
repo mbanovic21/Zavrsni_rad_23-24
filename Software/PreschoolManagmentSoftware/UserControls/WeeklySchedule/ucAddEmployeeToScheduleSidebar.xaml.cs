@@ -146,11 +146,6 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                         Users = userList
                     };
 
-                    foreach (var u in userList)
-                    {
-                        MessageBox.Show(u.FirstName);
-                    }
-
                     var isDayUpdated = _dayService.isDayUpdated(updatedDay);
                     if (isDayUpdated)
                     {
@@ -177,6 +172,7 @@ namespace PreschoolManagmentSoftware.UserControls.WeeklySchedule
                 var updatedUsers = await Task.Run(() => _dayService.getUsersByDayId(_day.Id));
                 var employees = GetEmployeesNames(updatedUsers);
                 _clickedButton.Content = employees;
+                _clickedButton.Foreground = new SolidColorBrush(Color.FromRgb(245, 245, 245));
                 _clickedButton.Background = new SolidColorBrush(Color.FromRgb(78, 177, 182));
                 _clickedButton.FontWeight = FontWeights.SemiBold;
                 _clickedButton.FontSize = 15;

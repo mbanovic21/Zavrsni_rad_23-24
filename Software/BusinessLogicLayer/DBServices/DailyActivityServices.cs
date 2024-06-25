@@ -55,5 +55,14 @@ namespace BusinessLogicLayer.DBServices
                 return repo.DeleteDailyActivity(dailyActivityId);
             }
         }
+
+        //Get activities for user
+        public List<DailyActivity> GetDailyActivitiesByUserId(string date, int id)
+        {
+            using (var repo = new DailyActivityRepository(new DataAccessLayer.PreschoolManagmentModel()))
+            {
+                return repo.GetAllActivitiesByDateAndUserId(date, id).ToList();
+            }
+        }
     }
 }

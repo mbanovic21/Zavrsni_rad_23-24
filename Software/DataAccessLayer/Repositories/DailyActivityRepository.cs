@@ -28,6 +28,16 @@ namespace DataAccessLayer.Repositories
 
             return query;
         }
+
+        public IQueryable<DailyActivity> GetAllActivitiesByDateAndUserId(string date, int userId)
+        {
+            var query = from a in DailyActivity
+                        where a.Days.Any(d => d.Date == date && d.Users.Any(u => u.Id == userId))
+                        select a;
+
+            return query;
+        }
+
         public bool AddDailyActivity(DailyActivity activity, Day day)
         {
             int affectedRows = 0;

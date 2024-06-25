@@ -1,4 +1,6 @@
 ﻿using BusinessLogicLayer.DBServices;
+using EntityLayer;
+using EntityLayer.Entities;
 using PreschoolManagmentSoftware.UserControls.WeeklySchedule;
 using System;
 using System.Collections.Generic;
@@ -34,8 +36,17 @@ namespace PreschoolManagmentSoftware.UserControls.Dashboard
 
         public async void RefreshGUI()
         {
-            var activities = await Task.Run(() => _dailyActivityServices.GetAllActivitiesByDate(_date));
-            dgvEmployeesActivities.ItemsSource = activities;
+            var activities = new List<DailyActivity>();
+            if (LoggedInUser.User.Id_role == 1)
+            {
+                activities = await Task.Run(() => _dailyActivityServices.GetAllActivitiesByDate(_date));
+                dgvEmployeesActivities.ItemsSource = activities;
+            } else
+            {
+                activities  = await Task.Run(() => _dailyActivityServices.GetDailyActivitiesByUserId(_date,LoggedInUser.User.Id));
+                dgvEmployeesActivities.ItemsSource = activities;
+            }
+           
 
             if (activities == null || !activities.Any())
             {

@@ -17,6 +17,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+	<ApplicationIcon>Media\Images\PMS-Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -437,6 +438,7 @@
     <Resource Include="Media\Images\email.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Media\Images\PMS-Icon.ico" />
     <Resource Include="Media\Images\PMS-logo.png" />
     <Resource Include="Media\Images\email-notifier.png" />
     <Resource Include="Media\Images\notes.png" />
